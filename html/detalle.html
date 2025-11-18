@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="detail-title">Cargando Película...</title> 
+    
+    <link rel="stylesheet" href="../css/styles.css"> 
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><a href="index.html">Cine<span>Puma</span></a></h1>
+            </div>
+            <form id="form">
+                <input type="text" id="search" class="search" placeholder="Buscar películas...">
+            </form>
+        </div>
+    </header>
+    
+    <main id="movie-details" class="detail-container">
+        </main>
+
+    <div class="reviews-section container">
+        <h3>Opiniones de la comunidad</h3>
+        
+        <div id="user-reviews-list">
+            <div class="user-review">
+                <strong>ComunidadPuma:</strong> <p>¡Déjanos tu primera opinión!</p>
+            </div>
+        </div>
+        
+        <textarea id="review-input" placeholder="Escribe tu opinión aquí..."></textarea>
+        <button id="send-review-btn" class="btn-review">Enviar Opinión</button>
+    </div>
+
+    <script src="../js/detalle.js"></script> 
+</body>
+</html>
