@@ -15,3 +15,4 @@
     object-fit: cover; /* Esta es la clave: la imagen se recortará para cubrir el espacio sin distorsionarse */
     /* object-position: center; */ /* Opcional: centra la imagen si se recorta */
 }
+
