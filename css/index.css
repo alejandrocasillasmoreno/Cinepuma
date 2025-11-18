@@ -1,0 +1,17 @@
+.carousel-inner {
+    /* Opcional: Si quieres controlar la altura máxima del carrusel */
+    /* max-height: 500px; */ /* Ajusta este valor según tus necesidades */
+    /* overflow: hidden; */ /* Asegura que no haya desbordamiento si las imágenes son más grandes */
+}
+
+.carousel-item {
+    /* Define una altura fija para cada elemento del carrusel */
+    height: 450px; /* Puedes ajustar esta altura a tu gusto, por ejemplo, 350px, 400px, 500px */
+    background-color: #000; /* Fondo negro para rellenar los huecos si la imagen no cubre todo */
+}
+
+.carousel-item img {
+    height: 100%; /* La imagen ocupará el 100% de la altura del .carousel-item */
+    object-fit: cover; /* Esta es la clave: la imagen se recortará para cubrir el espacio sin distorsionarse */
+    /* object-position: center; */ /* Opcional: centra la imagen si se recorta */
+}
