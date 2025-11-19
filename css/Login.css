@@ -1,19 +1,176 @@
-main{
-    background-color: #ff6b35;
-}
-h1{
+/* 1. Fondo principal y texto base */
+body {
+    /* Fondo azul oscuro global */
+    background-color: #1E3C72; 
     text-align: center;
-    color: #ff6b35;
-    font-size: 1.8rem;
-    margin-bottom: 30px;
+    /* Fuente por defecto, usa la que prefieras */
+    font-family: Arial, sans-serif; 
+    margin: 0;
+    padding: 0;
+}
+
+/* Restablece el fondo de todos los elementos para que no hereden el * { background-color } anterior */
+* {
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
+}
+
+/* 2. Estilo de la Cabecera */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    color: white;
+}
+
+/* Estilo para los botones de navegación (Géneros, Mejor valoradas, Help) */
+.nav-button {
+    background-color: #ff6b35;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 20px;
+    margin: 0 5px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 3. Estilo de la Caja de Búsqueda */
+.search-bar {
+    /* Mantiene position: relative del .input-group */
+    flex-grow: 1; /* Permite que ocupe espacio entre el logo y los botones */
+    max-width: 300px;
+    margin: 0 20px;
+}
+
+.search-input {
+    /* **¡Clave para el look de la barra de búsqueda!** */
+    
+    /* 1. Fondo Transparente */
+    background-color: transparent; 
+    
+    /* 2. Borde Negro */
+    border: 2px solid black; 
+    
+    /* 3. Forma Redonda */
+    border-radius: 20px; /* Un valor alto para hacerlo ovalado/redondo */
+    
+    /* Ajustes de tamaño y espaciado */
+    width: 100%;
+    height: 35px;
+    color: white; /* Para que el texto que se escriba sea visible */
+    padding: 5px 10px 5px 35px; /* Más padding izquierdo para dejar espacio a la lupa */
+    font-size: 1rem;
+    outline: none;
+}
+
+/* Estilo del placeholder de búsqueda */
+.search-input::placeholder {
+    color: #cccccc;
+    font-style: italic;
+    /* No centramos el texto de búsqueda */
+    text-align: left; 
+}
+
+
+/* 4. Posicionamiento del Ícono de la Lupa */
+.icon-search {
+    /* Posiciona la imagen respecto al elemento .search-bar (que ahora tiene .input-group) */
+    position: absolute; 
+    
+    /* Mueve la imagen al lado izquierdo del input */
+    left: 10px; 
+    
+    /* Centra verticalmente */
+    top: 50%;
+    transform: translateY(-50%); 
+    
+    /* Reduce el tamaño */
+    width: 20px; 
+    height: auto; 
+    
+    pointer-events: none; 
+}
+
+
+/* 5. Estilo del Contenedor del Formulario (Login) */
+div.container {
+    /* Color de fondo Naranja */
+    background-color: #ff6b35; 
+    border-radius: 10px;
+    padding: 20px;
+    width: 90%; 
+    max-width: 400px; 
+    margin: 50px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra más fuerte */
+}
+
+/* 6. Estilo del Título Principal */
+h1 {
+    color: white; /* El texto del título es blanco en la imagen */
     font-weight: 700;
+    margin-bottom: 20px;
     font-size: 1.8rem;
 }
 
-label{
-    font-weight: 600;
-    color: #ff6b35;
-    font-size: 0.9rem;
-    margin-bottom: 5px; 
-    display: block;
+/* 7. Estilos del Input de Login/Contraseña */
+.input-group {
+    position: relative; /* Clave para el posicionamiento del ícono */
+    margin-bottom: 15px;
+}
+
+input[type="email"], 
+input[type="password"] {
+    width: 100%;
+    padding: 10px 40px 10px 10px; /* Padding derecho para el ícono de correo */
+    margin-bottom: 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    
+    /* Centra el texto de entrada y el placeholder */
+    text-align: center; 
+}
+
+/* Estilo del placeholder del Login/Contraseña */
+input::placeholder {
+    color: #999999; 
+    font-style: italic;
+    text-align: center; /* Centra el placeholder */
+}
+
+/* Posicionamiento de ícono de Correo */
+.icon-email {
+    position: absolute; 
+    right: 10px; 
+    top: 50%;
+    transform: translateY(-50%); /* Centrado vertical correcto */
+    width: 20px; 
+    height: auto; 
+    pointer-events: none; 
+}
+
+/* Estilo para el botón "Siguiente" */
+.submit-button {
+    background-color: #ff6b35; 
+    color: white;
+    border: 2px solid white; 
+    padding: 12px 0;
+    width: 100%;
+    border-radius: 30px; 
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para el enlace de contraseña olvidada */
+.forgot-password {
+    color: #ff6b35; 
+    font-size: 0.8rem;
+    margin-top: 15px;
+    text-decoration: none;
 }
