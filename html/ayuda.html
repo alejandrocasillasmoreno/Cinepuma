@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayuda y Soporte - CinePuma</title>
+    <link rel="stylesheet" href="../css/ayuda.css"> 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><a href="index.html">Cine<span>Puma</span></a></h1>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="mejorValoradas.html" class="nav-link">Mejores Valoradas</a>
+            </nav>
+            <div class="search-placeholder"></div>
+        </div>
+    </header>
+    
+    <div class="help-container">
+        <h1>¿Podemos ayudarte?</h1>
+        <p>Selecciona una sección para ver la información detallada.</p>
+
+        <button class="accordion-header">
+             1. ¿Qúe somos?
+            <span class="icon material-icons">chevron_right</span>
+        </button>
+        <div class="accordion-content">
+            <h3>CinePuma</h3>
+            <p>PLorem ipsum dolor sit amet consectetur adipiscing elit, cubilia tristique a diam justo ridiculus consequat tortor, penatibus laoreet interdum sollicitudin tincidunt inceptos. Cum proin aptent turpis velit lectus litora est arcu, orci sagittis eget lobortis tincidunt nunc magnis conubia parturient, hendrerit habitant nascetur nibh tortor felis mi. Turpis est sagittis platea rhoncus tristique tincidunt non, potenti vitae laoreet conubia orci congue primis, maecenas per viverra eget nascetur consequat.</p>
+            <div class="api-key-box">
+                <p>La clave debe estar en la variable <code>API_KEY</code> al inicio de **todos tus archivos JavaScript** (<code>detalle.js</code>, <code>top-rated.js</code>, etc.):</p>
+                <pre>const API_KEY = 'TU_CLAVE_V3_AQUÍ';</pre>
+                <p><strong>¡Advertencia!</strong> Si ves el error **"Código: 401 (Unauthorized)"**, tu clave es incorrecta o debe ser regenerada.</p>
+            </div>
+        </div>
+        <button class="accordion-header">
+            2¿Que te puedes encontrar?
+            <span class="icon material-icons">chevron_right</span>
+        </button>
+        <div class="accordion-content">
+            <h3>Problema: La página no tiene estilos (CSS) o las películas no cargan.</h3>
+            <ul>
+                <li><strong>Error 404 o MIME Type:</strong> Esto es un error de ruta. Debes usar el prefijo <code>../</code> si tus HTML están en una carpeta anidada.</li>
+                <li><strong>Solución:</strong> Cambia <code>href="css/styles.css"</code> a <code>href="../css/styles.css"</code> en tu HTML.</li>
+            </ul>
+
+            <h3>Problema: No puedo enviar reseñas.</h3>
+            <ul>
+                <li><strong>Causa:</strong> El botón no está conectado (no tiene un <code>onclick</code>) o la variable <code>sendReviewBtn</code> es nula.</li>
+                <li><strong>Solución:</strong> Asegúrate de que en <code>detalle.js</code>, dentro de <code>fetchMovieDetails</code>, exista el siguiente código para conectar el botón:
+<pre>
+if (sendReviewBtn) {
+    sendReviewBtn.onclick = () => handleReviewSubmission(id); 
+}
+</pre>
+                </li>
+            </ul>
+
+            <h3>Problema: Veo un error "Cannot set properties of null".</h3>
+            <ul>
+                <li><strong>Causa:</strong> El script intenta modificar un elemento (ej., <code>main.innerHTML</code>) que no existe.</li>
+                <li><strong>Solución:</strong> Confirma que la etiqueta <code>&lt;main id="main"&gt;&lt;/main&gt;</code> está en tu HTML y que todas las variables DOM están bien escritas.</li>
+            </ul>
+        </div>
+        <button class="accordion-header">
+            3. ¿Con qué peliculas trabajamos?
+            <span class="icon material-icons">chevron_right</span>
+        </button>
+        <div class="accordion-content">
+            <p>La funcionalidad de reseñas de CinePuma es una **simulación** para este proyecto. </p>
+            <ul>
+                <li>Las reseñas se guardan en el objeto <code>MOCK_REVIEWS</code> en la **memoria de tu navegador**.</li>
+                <li>Si cierras y vuelves a abrir la aplicación, las reseñas que publicaste **se borrarán** porque no están conectadas a una base de datos persistente (backend).</li>
+            </ul>
+        </div>
+        <button class="accordion-header">
+             4. ¿Cuál es nuestro objetivo?
+            <span class="icon material-icons">chevron_right</span>
+        </button>
+        <div class="accordion-content">
+            <h3>Clave de API de TMDb</h3>
+            <p>Para que CinePuma muestre datos, debes asegurar que tu **Clave de API de TMDb** (v3) esté correctamente configurada.</p>
+            <div class="api-key-box">
+                <p>La clave debe estar en la variable <code>API_KEY</code> al inicio de **todos tus archivos JavaScript** (<code>detalle.js</code>, <code>top-rated.js</code>, etc.):</p>
+                <pre>const API_KEY = 'TU_CLAVE_V3_AQUÍ';</pre>
+                <p><strong>¡Advertencia!</strong> Si ves el error **"Código: 401 (Unauthorized)"**, tu clave es incorrecta o debe ser regenerada.</p>
+            </div>
+        </div>
+    </div>
+        
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    this.classList.toggle('active'); // Activa/desactiva el estilo de encabezado
+                    const content = this.nextElementSibling; // Selecciona el contenido que sigue
+
+                    if (content.style.maxHeight) {
+                        // Si está abierto, ciérralo (pone max-height a 0)
+                        content.style.maxHeight = null;
+                    } else {
+                        // Si está cerrado, ábrelo (ajusta max-height al tamaño del contenido)
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } 
+                });
+            });
+        });
+    </script>
+</body>
+</html>
