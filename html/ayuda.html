@@ -3,22 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayuda y Soporte - CinePuma</title>
+    <title>Ayuda - CinePuma</title>
     <link rel="stylesheet" href="../css/ayuda.css"> 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 
+
     <header>
-        <div class="container">
-            <div class="logo">
+        <div class="Encabezado">
+            <div class="Logo">
+                <img src="../img/Logo2.png" alt="Logo Cinepuma" class="logo-img" width="100">
                 <h1><a href="index.html">CinePuma</a></h1>
             </div>
-            <nav class="main-nav">
-                <a href="index.html" class="nav-link">Inicio</a>
-                <a href="mejorValoradas.html" class="nav-link">Mejores Valoradas</a>
+            <nav>
+                <ul>
+                    <li><a href="Generos.html" class="button">Géneros</a></li>
+                    <li><a href="mejorValoradas.html" class="button">Mejor valoradas</a></li>
+                    <li><a href="ayuda.html" class="button">Ayuda</a></li>
+                    <li><a href="detalle.html" class="button">Reseñas</a></li>
+                </ul>
             </nav>
-            <div class="search-placeholder"></div>
+            <form>
+                <input type="text" id="busqueda" placeholder="Buscar películas...">
+            </form>
         </div>
     </header>
     
