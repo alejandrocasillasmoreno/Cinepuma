@@ -5,36 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cinepuma</title>
-    <link rel="stylesheet" href="../css/index.css">
+    <!-- Incluimos Bootstrap para el carrusel y las clases como 'mt-4', 'text-center', etc. -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Incluimos nuestros estilos personalizados (donde está todo lo de la cabecera y el carrusel) -->
+    <link rel="stylesheet" href="../css/index.css"> 
 </head>
 
 <body>
 
     <header>
-        <div class="Encabezado">
-            <div class="Logo">
-                <img src="../img/Logo2.png" alt="Logo Cinepuma" class="logo-img" width="100">
-                <h1><a href="index.html">CinePuma</a></h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="Generos.html" class="button">Géneros</a></li>
-                    <li><a href="mejorValoradas.html" class="button">Mejor valoradas</a></li>
-                    <li><a href="ayuda.html" class="button">Ayuda</a></li>
-                    <li><a href="detalle.html" class="button">Reseñas</a></li>
-                </ul>
-            </nav>
-            <form>
-                <input type="text" id="busqueda" placeholder="Buscar películas...">
-            </form>
+        <div class="logo">
+            <img src="../img/Logo2.png" alt="CinePuma Logo">
+            <span>Cinepuma</span>
         </div>
+        <div class="search-bar"> 
+            <input type="text" placeholder="Buscar" class="search-input">
+            <img src="../img/imagen_lupa.png" alt="Icono búsqueda" class="icon-search">
+        </div>
+        <nav>
+            <a href="../html/Generos.html" class="nav-button">Géneros</a>
+            <a href="../html/mejorValoradas.html" class="nav-button">Mejor valoradas</a>
+            <a href="../html/ayuda.html" class="nav-button help-button">Help</a>
+        </nav>
     </header>
+    
     <main class="container mt-4">
-        <h2 class="text-center mb-4">Estrenos Destacados</h2>
+        <h2 class="text-center mb-4 main-title">Estrenos Destacados</h2>
 
+        <!-- CARRUSEL GRANDE DE ESTRENOS -->
         <div id="carruselCinepuma" class="carousel slide" data-bs-ride="carousel">
 
+            <!-- 🔑 CORRECCIÓN AQUÍ: AÑADIMOS EL CUARTO INDICADOR (data-bs-slide-to="3") -->
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carruselCinepuma" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
@@ -42,11 +43,13 @@
                     aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#carruselCinepuma" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carruselCinepuma" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button> <!-- NUEVO INDICADOR -->
             </div>
 
             <div class="carousel-inner rounded-4 shadow-lg">
                 <div class="carousel-item active" data-bs-interval="4000">
-                    <img src="https://m.media-amazon.com/images/M/MV5BNWYxN2Q3MzktZmYwOS00MWU3LTkyNGUtNGY4MGQ4OTMxZmM2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                    <img src="https://portalgeek.co/wp-content/uploads/2025/04/el-contador-2.webp"
                         class="d-block w-100 imagen-carrusel" alt="El Contador 2">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>El Contador 2</h5>
@@ -55,7 +58,7 @@
                 </div>
 
                 <div class="carousel-item" data-bs-interval="4000">
-                    <img src="https://m.media-amazon.com/images/M/MV5BM2RmYmVmMzctMzc5Ny00MmNiLTgxMGUtYjk1ZDRhYjA2YTU0XkEyXkFqcGc@._V1_.jpg"
+                    <img src="https://img.pccomponentes.com/pcblog/7571/oppenheimer-portada-pelicula.jpg"
                         class="d-block w-100 imagen-carrusel" alt="Oppenheimer">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Oppenheimer</h5>
@@ -64,13 +67,26 @@
                 </div>
 
                 <div class="carousel-item" data-bs-interval="4000">
-                    <img src="https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg"
+                    <img src="https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/dfa50804-e6f6-4fa2-a732-693dbc50527b/37082735-6715-11ef-96ad-02805d6a02df?host=wbd-images.prod-vod.h264.io&partner=beamcom&w=500"
                         class="d-block w-100 imagen-carrusel" alt="The Batman">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>The Batman</h5>
                         <p>La venganza llega a Gotham.</p>
                     </div>
                 </div>
+
+                <!-- Esta es tu nueva película (Slide 4) -->
+                <div class="carousel-item" data-bs-interval="4000">
+                    <img src="https://img.asmedia.epimg.net/resizer/v2/JQICFOMJHJBVTJR4VLEKL655DE.jpg?auth=0ab8fe8c6b795be44361cc7f4d113dbe6d62a02c7ea6555dd8ff35c18053e675&width=1472&height=828&smart=true"
+                        class="d-block w-100 imagen-carrusel" alt="Chainsaw Man El arco de Reze">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Chainsawman El arco de Reze</h5>
+                        <p>El amor fugaz de Deji y la lucha contra el demonio bomba</p>
+                    </div>
+                </div>
+                <!-- Fin de tu nueva película -->
+
+
             </div>
 
             <button class="carousel-control-prev" type="button" data-bs-target="#carruselCinepuma" data-bs-slide="prev">
@@ -82,6 +98,33 @@
                 <span class="visually-hidden">Siguiente</span>
             </button>
         </div>
+        
+        <!-- SECCIÓN DE PELÍCULAS POPULARES (scrollable/mini-posters) -->
+        <section class="movie-section">
+            <h2>Películas Populares</h2>
+            <div class="movie-row-container">
+                <!-- Película 1 -->
+                <div class="movie-card">
+                    <img src="../img/NOVOCAINESindolor.png" alt="Póster de Película 1">
+                    <div class="movie-title">NOVOCAINES NO SIENTE DOLOR!!</div>
+                </div>
+                <!-- Película 2 -->
+                <div class="movie-card">
+                    <img src="../img/NOBODY2.png" alt="Póster de Película 2">
+                    <div class="movie-title">Nadie sabrá nada...</div>
+                </div>
+                <!-- Película 3 -->
+                <div class="movie-card">
+                    <img src="../img/Pelicula1Ejemploo.png" alt="Póster de Película 3">
+                    <div class="movie-title">Pelea por los mejores del ring</div>
+                </div>
+                <!-- Película 4 -->
+                <div class="movie-card">
+                    <img src="../img/PosterBallerina(John Wick).png" alt="Póster de Película 4">
+                    <div class="movie-title">Acompaña a John wick en nueva aventura</div>
+                </div>
+            </div>
+        </section> 
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,13 +1,5 @@
 /* 1. Fondo principal y texto base */
-body {
-    /* Fondo azul oscuro global */
-    background-color: #1E3C72; 
-    text-align: center;
-    /* Fuente por defecto, usa la que prefieras */
-    font-family: Arial, sans-serif; 
-    margin: 0;
-    padding: 0;
-}
+
 
 /* Restablece el fondo de todos los elementos para que no hereden el * { background-color } anterior */
 * {

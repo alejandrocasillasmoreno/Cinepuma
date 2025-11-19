@@ -1,2 +1,265 @@
+/* 1. Fondo principal y texto base */
+body {
+    /* Fondo azul oscuro global */
+    background-color: #1E3C72; 
+    text-align: center;
+    /* Fuente por defecto, usa la que prefieras */
+    font-family: Arial, sans-serif; 
+    margin: 0;
+    padding: 0;
+    /* Aseguramos el layout del footer */
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column;
+}
+
+/* Restablece el fondo de todos los elementos para que no hereden el * { background-color } anterior */
+* {
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
+}
+
+/* 2. Estilo de la Cabecera */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    color: white;
+}
+
+/* --- ESTILOS DEL LOGO --- */
+.logo {
+    display: flex; /* Alinea los elementos internos (imagen y span) horizontalmente */
+    align-items: center; /* Centra verticalmente la imagen y el texto */
+    gap: 8px; /* Espacio entre la imagen y el texto */
+}
+
+.logo img {
+    /* Altura aumentada a 60px según tu última solicitud */
+    height: 60px; 
+    width: auto;
+}
+
+.logo span {
+    color: #ff6b35; /* Tono Naranja */
+    font-size: 20px; /* Tamaño 20px, alineado con el texto de los botones */
+    font-weight: bold;
+}
+/* ------------------------ */
 
 
+/* 3. Estilo para los elementos de navegación (enlaces estilizados como botones) */
+.nav-button {
+    background-color: #ff6b35;
+    color: white; 
+    border: none;
+    padding: 5px 15px;
+    border-radius: 20px;
+    margin: 0 5px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px; 
+    transition: background-color 0.2s;
+}
+
+.nav-button:hover {
+    background-color: #e05c2d; /* Color ligeramente más oscuro al pasar el ratón */
+}
+
+/* 4. Estilo de la Caja de Búsqueda */
+.search-bar {
+    /* **CRÍTICO:** Esto hace que la lupa se posicione respecto a esta caja */
+    position: relative; 
+    flex-grow: 1; 
+    max-width: 300px;
+    margin: 0 20px;
+}
+
+.search-input {
+    /* 1. Fondo Transparente */
+    background-color: transparent; 
+    
+    /* 2. Borde Negro */
+    border: 2px solid black; 
+    
+    /* 3. Forma Redonda */
+    border-radius: 20px; 
+    
+    /* Ajustes de tamaño y espaciado */
+    width: 100%;
+    height: 35px;
+    color: white; 
+    /* **CRÍTICO:** Dejamos 35px de padding izquierdo para que quepa el ícono de 20px */
+    padding: 5px 10px 5px 35px; 
+    font-size: 1rem;
+    outline: none;
+}
+
+/* Estilo del placeholder de búsqueda */
+.search-input::placeholder {
+    color: #cccccc;
+    font-style: italic;
+    text-align: left; 
+}
+
+
+/* 5. Posicionamiento del Ícono de la Lupa */
+.icon-search {
+    /* **CRÍTICO:** Esto coloca la imagen sobre el input */
+    position: absolute; 
+    
+    /* Posicionamos la lupa 10px desde el borde izquierdo del .search-bar */
+    left: 10px; 
+    top: 50%;
+    /* Asegura el centrado vertical perfecto */
+    transform: translateY(-50%); 
+    
+    width: 20px; 
+    height: auto; 
+    pointer-events: none; /* Para que el clic pase al input */
+}
+
+/* Estilo del Título Principal */
+h2.main-title, h1 {
+    color: white; 
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+
+/* ================================================= */
+/* 🔑 ESTILOS PARA EL CARRUSEL DE PELÍCULAS ESTILO NETFLIX (Scrollable Row) */
+/* ================================================= */
+
+/* Empuja el main content hacia arriba y el footer hacia abajo */
+main {
+    flex-grow: 1; 
+}
+
+.movie-section {
+    padding: 30px 0;
+    color: white;
+}
+
+.movie-section h2 {
+    font-size: 1.5rem;
+    padding-left: 0; 
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-align: center; /* Título centrado */
+}
+
+/* Contenedor que permite el desplazamiento horizontal */
+.movie-row-container {
+    display: flex; 
+    /* 🔑 CAMBIO CLAVE 1: Centra el contenido solo si cabe todo en la pantalla */
+    justify-content: center; 
+    overflow-x: scroll; 
+    
+    /* Centrado del contenedor de desplazamiento */
+    width: 95%; 
+    max-width: 1400px; 
+    margin: 0 auto; 
+    
+    padding: 0 10px 20px 10px; 
+    scroll-snap-type: x mandatory; 
+    -webkit-overflow-scrolling: touch; 
+}
+
+/* Ocultar la barra de desplazamiento (webkits como Chrome/Safari) */
+.movie-row-container::-webkit-scrollbar {
+    display: none;
+}
+/* Ocultar la barra de desplazamiento (Firefox) */
+.movie-row-container {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* 1. Recortar el tamaño de las películas */
+.movie-card {
+    position: relative;
+    flex: 0 0 auto; 
+    width: 150px; 
+    height: 220px; 
+    /* Mantenemos el margen derecho para separarlas */
+    margin-right: 15px;
+    border-radius: 5px;
+    overflow: hidden; 
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+    scroll-snap-align: start; 
+}
+
+/* 🔑 TRUCO PARA CENTRADO: Eliminamos el margin-right de la última tarjeta si es necesario para centrar */
+.movie-card:last-child {
+    margin-right: 0;
+}
+
+
+/* **Clave para el recorte:** la imagen se ajusta al tamaño de la tarjeta */
+.movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta la imagen para que cubra todo el área */
+    display: block;
+}
+
+/* Contenedor del título (inicialmente invisible) */
+.movie-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 5px;
+    background: rgba(0, 0, 0, 0.8); /* Fondo semi-transparente oscuro */
+    color: white;
+    font-size: 0.9rem;
+    text-align: center;
+    
+    /* 🔑 Oculto por defecto: Lo deslizamos fuera de la vista */
+    transform: translateY(100%); 
+    transition: transform 0.3s ease; /* Transición suave */
+    pointer-events: none; /* Asegura que no interfiera con el hover de la tarjeta */
+}
+
+/* 2. Efecto de pasar el ratón (hover) */
+.movie-card:hover {
+    transform: scale(1.05); /* Hace que la tarjeta crezca ligeramente */
+    z-index: 10; /* Asegura que la tarjeta esté encima de las otras al hacer hover */
+}
+
+/* 3. Mostrar el título al pasar el ratón (SIN pulsar) */
+.movie-card:hover .movie-title {
+    transform: translateY(0); /* Desliza el título hacia arriba, haciéndolo visible */
+}
+
+
+/* ================================================= */
+/* 🔑 ESTILOS DEL FOOTER */
+/* ================================================= */
+
+footer {
+    background-color: #0d274c; /* Un azul más oscuro que el fondo principal */
+    color: white;
+    padding: 20px 5%;
+    text-align: left;
+    margin-top: 30px;
+    border-top: 2px solid #ff6b35; /* Borde naranja para separarlo */
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
