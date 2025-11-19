@@ -1,33 +1,63 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Una pantalla de login que usaremos para autenticar a los usuarios">
-        <title>Pantalla de login</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    </head>
-    <body>
-        <div class="container mt-4">
-            <main>
-                <h1>Formulario de Login</h1>
-                <form method="POST" action="autentificacion.php">
-                    <ul>
-                        <li class="col-6 mb-3">
-                        <!-- Campo de usuario -->
-                            <label for="usuario">Usuario:</label>
-                            <input type="text" id="usuario" name="usuario" required><br>
-                        </li>
-                        <li class="col-6 mb-3">
-                            <!-- Campo de contraseña -->
-                            <label for="contrasena">Contraseña:</label>
-                            <input type="password" id="contrasena" name="contrasena" required><br>
-                        </li>
-                    </ul>
-                    <!-- Botón de envío -->
-                    <input type="submit" value="Iniciar sesión">
-                </form>
-            </main>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinePuma - Iniciar Sesión</title>
+    <link rel="stylesheet" href="../css/Login.css"> 
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../img/Logo2.png" alt="CinePuma Logo">
+            <span>Cinepuma</span>
         </div>
-    </body>
+        <!-- Contenedor principal de la barra de búsqueda -->
+        <div class="search-bar input-group"> 
+            <!-- Campo de texto (la caja) -->
+            <input type="text" placeholder="Buscar" class="search-input">
+            <!-- Ícono de la lupa (posicionado absolutamente) -->
+            <img src="../img/imagen_lupa.png" alt="Icono búsqueda" class="icon-search">
+        </div>
+        <nav>
+            <button class="nav-button">Géneros</button>
+            <button class="nav-button">Mejor valoradas</button>
+            <button class="nav-button help-button">Help</button>
+        </nav>
+    </header>
+
+    <h1>Inicia Sesión o Regístrate</h1>
+
+    <div class="container"> 
+        <form>
+            <!-- Campo de Correo Electrónico -->
+            <div class="input-group">
+                <input type="email" id="email" 
+                       placeholder="Correo Electrónico" 
+                       required
+                       style="text-align: center;" 
+                       >
+                <img src="../img/icono_del_correo-.png" alt="Icono correo" class="icon-email">
+            </div>
+            
+            <!-- Campo de Contraseña -->
+            <div class="input-group">
+                <input type="password" id="password" 
+                       placeholder="Contraseña" 
+                       required
+                       style="text-align: center;"
+                       >
+            </div>
+
+            <button type="submit" class="submit-button">Siguiente</button>
+        </form>
+    </div>
+
+    <p class="forgot-password">¿Has olvidado tu contraseña?</p>
+</body>
 </html>
+
+
+
+
+
