@@ -1,0 +1,70 @@
+.help-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .help-container h1 {
+            color: #ffc107;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        /* Estilo del Título del Acordeón (Botón) */
+        .accordion-header {
+            background-color: #ffc107;
+            color: #343a40;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+            font-size: 1.2em;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        /* Estilo al pasar el mouse por encima */
+        .accordion-header:hover {
+            background-color: #e0ac05;
+        }
+
+        /* Contenido Oculto del Acordeón */
+        .accordion-content {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+            margin-bottom: 10px;
+        }
+        .accordion-content p, .accordion-content li {
+            padding: 10px 0;
+            font-size: 1em;
+            line-height: 1.5;
+            color: #555;
+        }
+        .icon {
+            transition: transform 0.3s;
+            font-size: 1.5em;
+        }
+        /* Icono de flecha girando cuando está activo */
+        .active .icon {
+            transform: rotate(90deg);
+        }
+        .api-key-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
