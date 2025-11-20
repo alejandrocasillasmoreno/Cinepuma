@@ -22,32 +22,33 @@ body {
 /* ================================================= */
 
 header {
-    background-color: transparent; /* No queremos color de fondo extra */
+    background-color: transparent; 
     padding: 15px 5%;
     color: white;
-    /* Usamos flexbox para que el header controle la alineación de su contenido */
     display: flex; 
-    justify-content: center; /* Centra horizontalmente todo el contenido del header */
+    justify-content: center; 
     width: 100%;
     flex-wrap: wrap; 
 }
 
-/* El div Encabezado que contiene el logo, título, nav y form */
+/* El div Encabezado contiene logo y el nuevo contenedor (header-right) */
 .Encabezado {
-    /* 🔑 CAMBIO CLAVE: Usamos flexbox para centrar y distribuir los elementos internos */
+    /* Disposición Horizontal principal */
     display: flex;
-    align-items: center;
-    justify-content: space-between; /* Distribuye espacio entre Logo, Nav y Form */
-    gap: 20px;
+    flex-direction: row; 
+    align-items: flex-start; /* 🔑 CLAVE 1: Alinea elementos en la parte superior (para subir el logo) */
+    justify-content: space-between; 
+    gap: 15px; 
     width: 100%;
-    max-width: 1200px; /* Limitamos el ancho para que no se estire demasiado en pantallas gigantes */
+    max-width: 1200px; 
 }
 
-/* --- Estilos del Logo y Título --- */
+/* --- Estilos del Logo y Título (Alineado a la Izquierda y Arriba) --- */
 .Logo {
     display: flex;
     align-items: center;
     gap: 8px;
+    justify-content: flex-start; 
 }
 
 .logo-img {
@@ -56,17 +57,63 @@ header {
 }
 
 .Logo h1 {
-    color: #ff6b35; /* Tono Naranja */
+    color: #ff6b35; 
     font-size: 24px;
     font-weight: bold;
     margin: 0;
 }
 
+/* 🔑 CLAVE 2: Contenedor para la parte derecha (Búsqueda + Nav) */
+.header-right {
+    display: flex;
+    flex-direction: column; /* Apilamos búsqueda y navegación verticalmente */
+    align-items: flex-end; /* 🔑 CLAVE 3: Alineamos la búsqueda y nav a la derecha */
+    gap: 10px;
+}
+
+/* --- Estilo de Búsqueda --- */
+form {
+    position: relative; 
+    max-width: 250px; 
+    width: 100%; 
+    margin: 0; 
+}
+
+#busqueda {
+    background-color: transparent; 
+    border: 2px solid #000000; 
+    border-radius: 20px; 
+    width: 100%;
+    height: 35px;
+    color: white; 
+    padding: 5px 10px; 
+    font-size: 1rem;
+    outline: none;
+    padding-left: 40px; 
+    text-align: left;
+}
+
+#busqueda::placeholder {
+    color: #cccccc;
+    font-style: italic;
+}
+
+/* --- Estilo para la Lupa dentro del Input --- */
+.icon-search {
+    position: absolute; 
+    left: 10px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    width: 20px; 
+    height: auto; 
+    pointer-events: none; 
+}
+
+
 /* --- Estilos de Navegación (Botones) --- */
 nav {
-    /* 🔑 CAMBIO CLAVE: Quitamos flex-grow: 1 para que Nav solo ocupe el espacio necesario */
     display: flex;
-    justify-content: center; /* Centra los botones dentro de Nav */
+    justify-content: flex-end; /* Asegura que los botones internos se peguen a la derecha */
     align-items: center;
 }
 
@@ -97,32 +144,6 @@ nav ul {
     background-color: #e05c2d;
 }
 
-/* --- Estilo de Búsqueda --- */
-form {
-    position: relative;
-    max-width: 250px;
-    margin-left: 0; /* Ya no es necesario auto, ya que justify-content: space-between lo gestiona */
-}
-
-#busqueda {
-    background-color: transparent; 
-    border: 2px solid white; 
-    border-radius: 20px; 
-    width: 100%;
-    height: 35px;
-    color: white; 
-    padding: 5px 10px; 
-    font-size: 1rem;
-    outline: none;
-    padding-left: 35px; 
-}
-
-#busqueda::placeholder {
-    color: #cccccc;
-    font-style: italic;
-}
-
-
 /* ================================================= */
 /* 3. ESTILOS DE RECUPERACIÓN DE CONTRASEÑA (MAIN CONTENT) */
 /* ================================================= */
@@ -138,13 +159,12 @@ h1 {
 
 /* Contenedor central del formulario */
 .container {
-    /* El margen 'auto' asegura que el contenedor se centre horizontalmente */
     background-color: #ff6b35; 
     border-radius: 10px;
     padding: 30px; 
     width: 90%; 
     max-width: 450px; 
-    margin: 20px auto; /* 🔑 CLAVE: Centrado horizontal */
+    margin: 20px auto; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
     display: flex;
     flex-direction: column;
@@ -157,7 +177,7 @@ p.instructions {
     font-size: 1rem;
     line-height: 1.4;
     margin-bottom: 20px;
-    text-align: center; /* Centrado del texto */
+    text-align: center; 
 }
 
 
@@ -211,22 +231,28 @@ p.instructions {
     transform: translateY(-1px);
 }
 
-/* Media Query para mejorar la adaptación en pantallas pequeñas */
+/* Media Query: Manejo Responsivo (para móviles) */
 @media (max-width: 900px) {
+    /* En pantallas pequeñas, todo debe apilarse y centrarse para ser legible */
     .Encabezado {
-        /* Permite que la navegación y la búsqueda se apilen debajo del logo en pantallas medianas */
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         gap: 15px;
     }
-    nav {
-        /* Asegura que la navegación también se centre */
-        width: 100%;
-        justify-content: center;
+    .Logo {
+        justify-content: center; /* Centra el logo cuando está apilado */
+    }
+    .header-right {
+        width: 100%; /* El contenedor de la derecha ocupa el ancho completo */
+        align-items: center; /* Centra la búsqueda y nav apiladas */
+        gap: 10px;
     }
     form {
-        /* Centra la barra de búsqueda debajo de la navegación */
-        max-width: 90%;
-        margin: 0 auto;
+        max-width: 90%; /* La barra de búsqueda ocupa más espacio */
+    }
+    nav ul {
+        flex-wrap: wrap; 
+        justify-content: center;
     }
 }
