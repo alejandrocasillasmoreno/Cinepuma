@@ -1,4 +1,4 @@
-/* 1. Fondo principal y texto base */
+
 body {
     /* Fondo azul oscuro global */
     background-color: #1E3C72; 
@@ -24,7 +24,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 15px 5%;
-    color: white;
+    color: #1E3C72;
 }
 
 /* --- ESTILOS DEL LOGO --- */
@@ -135,9 +135,10 @@ h2.main-title, h1 {
 /* 🔑 ESTILOS PARA EL CARRUSEL DE PELÍCULAS ESTILO NETFLIX (Scrollable Row) */
 /* ================================================= */
 
-/* Empuja el main content hacia arriba y el footer hacia abajo */
 main {
     flex-grow: 1; 
+    /* Opcional: Para asegurar que no haya blancos */
+    background-color: #1E3C72; 
 }
 
 .movie-section {
