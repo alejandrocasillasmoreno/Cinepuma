@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="Descripcion" content="">
+    <meta name="Descripcion" content="Cinepuma: Estrenos y películas populares.">
     <title>Cinepuma</title>
-    <link rel="stylesheet" href="../css/index.css">
+    <!-- Hoja de estilo personalizada -->
+    <link rel="stylesheet" href="../css/index.css"> 
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -14,12 +16,15 @@
 
     <header>
         <div class="logo">
-            <img src="../img/Logo2.png" alt="CinePuma Logo">
+            <!-- NOTA: La imagen del logo podría no cargar si usa ruta relativa sin archivos -->
+            <img src="../img/Logo2.png" alt="CinePuma Logo" style="width: 50px; height: 50px;">
             <span>Cinepuma</span>
         </div>
-        <div class="search-bar"> 
-            <input type="text" placeholder="Buscar" class="search-input">
-            <img src="../img/imagen_lupa.png" alt="Icono búsqueda" class="icon-search">
+        <div class="search-bar">
+            <!-- ID para el input de búsqueda -->
+            <input type="text" placeholder="Buscar películas..." class="search-input" id="searchInput">
+            <!-- NOTA: La imagen de la lupa podría no cargar si usa ruta relativa sin archivos -->
+            <img src="https://placehold.co/20x20/555555/FFFFFF?text=L" alt="Icono búsqueda" class="icon-search" style="width: 20px; height: 20px; margin-left: -25px;">
         </div>
         <nav>
             <a href="../html/Generos.html" class="nav-button">Géneros</a>
@@ -27,14 +32,13 @@
             <a href="../html/ayuda.html" class="nav-button help-button">Help</a>
         </nav>
     </header>
-    
-    <main class="container mt-4">
+
+    <main class="container-fluid mt-4">
         <h2 class="text-center mb-4 main-title">Estrenos Destacados</h2>
 
         <!-- CARRUSEL GRANDE DE ESTRENOS -->
         <div id="carruselCinepuma" class="carousel slide" data-bs-ride="carousel">
 
-            <!-- 🔑 CORRECCIÓN AQUÍ: AÑADIMOS EL CUARTO INDICADOR (data-bs-slide-to="3") -->
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carruselCinepuma" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
@@ -43,7 +47,7 @@
                 <button type="button" data-bs-target="#carruselCinepuma" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
                 <button type="button" data-bs-target="#carruselCinepuma" data-bs-slide-to="3"
-                    aria-label="Slide 4"></button> <!-- NUEVO INDICADOR -->
+                    aria-label="Slide 4"></button>
             </div>
 
             <div class="carousel-inner rounded-4 shadow-lg">
@@ -74,7 +78,6 @@
                     </div>
                 </div>
 
-                <!-- Esta es tu nueva película (Slide 4) -->
                 <div class="carousel-item" data-bs-interval="4000">
                     <img src="https://img.asmedia.epimg.net/resizer/v2/JQICFOMJHJBVTJR4VLEKL655DE.jpg?auth=0ab8fe8c6b795be44361cc7f4d113dbe6d62a02c7ea6555dd8ff35c18053e675&width=1472&height=828&smart=true"
                         class="d-block w-100 imagen-carrusel" alt="Chainsaw Man El arco de Reze">
@@ -83,9 +86,6 @@
                         <p>El amor fugaz de Deji y la lucha contra el demonio bomba</p>
                     </div>
                 </div>
-                <!-- Fin de tu nueva película -->
-
-
             </div>
 
             <button class="carousel-control-prev" type="button" data-bs-target="#carruselCinepuma" data-bs-slide="prev">
@@ -97,52 +97,46 @@
                 <span class="visually-hidden">Siguiente</span>
             </button>
         </div>
-        
-        <!-- SECCIÓN DE PELÍCULAS POPULARES (scrollable/mini-posters) -->
+
+        <!-- SECCIÓN DE PELÍCULAS POPULARES/RESULTADOS DE BÚSQUEDA -->
         <section class="movie-section">
-            <h2>Películas Populares</h2>
-            <div class="movie-row-container">
-                <!-- Película 1 -->
-                <div class="movie-card">
-                    <img src="../img/NOVOCAINESindolor.png" alt="Póster de Película 1">
-                    <div class="movie-title">NOVOCAINES NO SIENTE DOLOR!!</div>
-                </div>
-                <!-- Película 2 -->
-                <div class="movie-card">
-                    <img src="../img/NOBODY2.png" alt="Póster de Película 2">
-                    <div class="movie-title">Nadie sabrá nada...</div>
-                </div>
-                <!-- Película 3 -->
-                <div class="movie-card">
-                    <img src="../img/Pelicula1Ejemploo.png" alt="Póster de Película 3">
-                    <div class="movie-title">Pelea por los mejores del ring</div>
-                </div>
-                <!-- Película 4 -->
-                <div class="movie-card">
-                    <img src="../img/PosterBallerina(John Wick).png" alt="Póster de Película 4">
-                    <div class="movie-title">Acompaña a John wick en nueva aventura</div>
-                </div>
+            <!-- ID para actualizar el título dinámicamente -->
+            <h2 id="movieSectionTitle">Películas Populares</h2>
+            <!-- ID para actualizar los resultados de la búsqueda -->
+            <div class="movie-row-container" id="movieRowContainer">
+                <!-- Contenido de las tarjetas de películas se llenará con JavaScript -->
             </div>
-        </section> 
+        </section>
     </main>
 
+    <footer>
+        <ul>
+            <li>
+                <!-- Placeholder de icono -->
+                <img src="../img/icono_del_telefono-remove.png" alt="icono telefono"
+                    style="vertical-align: middle; width: 36px; height: 36px;">
+                Teléfono: 123-456-7890
+            </li>
+
+            <li>
+                <!-- Placeholder de icono -->
+                <img src="../img/icono_del_correo-.png" alt="icono correo"
+                    style="vertical-align: middle; width: 36px; height: 36px;">
+                Email: CinePuma@gmail.com
+            </li>
+            <li>
+                <!-- Placeholder para contenido futuro del footer -->
+            </li>
+        </ul>
+    </footer>
+
+
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Incluir el archivo JavaScript externo -->
+    <script type="module" src="../js/index.js"></script> 
 
 </body>
-<footer>
-    <ul>
-        <li>
-            <img src="../img/icono_del_telefono-remove.png" alt="icono telefono"
-                style="vertical-align: middle; width: 36px; height: 36px;">
-            Teléfono: 123-456-7890
-        </li>
 
-        <li>
-            <img src="../img/icono_del_correo-.png" alt="icono correo"
-                style="vertical-align: middle; width: 36px; height: 36px;">
-            Email: CinePuma@gmail.com
-        </li>
-    </ul>
-</footer>
 
 </html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Descripcion" content="Pagina de ayuda de CinePuma">
+    <title>CinePuma - Ayuda</title>
+    <link rel="stylesheet" href="../css/ayuda.css">
+</head>
+<body>
+
+
+    <!--Encabezado-->
+    <header>
+        <!--Logo Cinepuma-->
+        <div class="logo">
+            <img src="../img/Logo2.png" alt="CinePuma Logo">
+            <h1><a href="index.html">CinePuma</a></h1>
+        </div>
+
+        <!--Barra de búsqueda-->
+        <div class="barra-busqueda">
+            <input type="text" placeholder="Buscar" class="search-input">
+            <img src="../img/imagen_lupa.png" alt="Icono búsqueda" class="icon-search">
+        </div>
+
+        <!--Navegador de navegación principal-->
+        <nav>
+            <a href="../html/generos.html" class="nav-boton">G&eacute;neros</a>
+            <a href="../html/mejorValoradas.html" class="nav-boton">Mejor valoradas</a>
+            <a href="../html/ayuda.html" class="nav-boton help-button">Help</a>
+        </nav>
+    </header>
+    
+    <div class="help-container">
+        <h1>¿Podemos ayudarte?</h1>
+        <img src="../img/cinepuma.png" alt="Imagen Cinepuma" class="cinepuma-image" style="width: 500px; height: 400px; float: right; " >
+        <button class="accordion-header">
+             1. ¿Qúe somos?
+        </button>
+        <div class="accordion-content">
+            <h3>CinePuma</h3>
+            <div class="api-key-box">
+                <p>
+                    En CinePuma podrás encontrar innumerables películas catalogadas por géneros , así como las reseñas propias de los usuarios y las puntuaciones de cada película.Nos basamos en la transparencia y la voz de la comunidad.  En CinePuma, nuestra prioridad eres tú. Nuestra tarea será sugerirles las películas más adecuadas para ellos y las más destacadas de cada tipo. </p>
+            </div>
+        </div>
+        <button class="accordion-header">
+            2¿Que te puedes encontrar?
+        </button>
+        <div class="accordion-content">
+            <h3>En la aplicación web CinePuma, los usuarios se podrán encontrar con lo siguiente:</h3>
+            <ul>
+                <li>Películas catalogadas por géneros: Una amplia variedad de películas organizadas por categorías.</li>
+                <li>Reseñas y Puntuaciones de Usuarios: La posibilidad de encontrar reseñas propias de la comunidad de usuarios y las puntuaciones que cada uno ha dado a las películas.</li>
+                <li>Transparencia y Comunidad: El proyecto se basa en la transparencia y la voz de la comunidad.</li>
+                <li>Apartado de Ayuda: Una sección dedicada a asistir a los usuarios con cualquier duda que tengan.</li>
+                <li>Sugerencias de Películas: El sistema sugerirá las películas más adecuadas y destacadas para los usuarios, especialmente el público joven.</li>
+            </ul>
+        </div>
+        <button class="accordion-header">
+            3. ¿Con qué peliculas trabajamos?
+        </button>
+        <div class="accordion-content">
+            <p> Para garantizar un catálogo amplio y actualizado, CinePuma trabajará directamente con la API de <a href="https://www.themoviedb.org/">themoviedb </a>. Esto nos permite acceder a innumerables películas catalogadas por géneros y obtener datos fiables y en tiempo real, incluyendo puntuaciones y detalles. La información extraída de TMDb será fundamental para sugerir las películas más adecuadas y destacadas a nuestro público joven y para alimentar nuestro sistema de búsqueda y filtrado de contenido.  </p>
+        </div>
+        <button class="accordion-header">
+             4. ¿Cuál es nuestro objetivo?
+        </button>
+        <div class="accordion-content">
+            <h3>Nuestros objetivos son:</h3>
+            <ul>
+                <h3>Objetivo del proyecto:</h3>
+                <li>Crear una interfaz que no solo sea atractiva a la vista, sino que también sea muy práctica y sencilla de manejar, para asegurar el triunfo del proyecto.</li>
+
+                <h3>Objetivos Principales de la Interfaz:</h3>
+                <li>Facilitar el descubrimiento de nuevo contenido a través de críticas.</li>
+                <li>Proporcionar una aplicación web fácil, clara e intuitiva para que los usuarios puedan usarla con facilidad.</li>
+            </ul>
+    </div>
+        
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    this.classList.toggle('active'); // Activa/desactiva el estilo de encabezado
+                    const content = this.nextElementSibling; // Selecciona el contenido que sigue
+
+                    if (content.style.maxHeight) {
+                        // Si está abierto, ciérralo (pone max-height a 0)
+                        content.style.maxHeight = null;
+                    } else {
+                        // Si está cerrado, ábrelo (ajusta max-height al tamaño del contenido)
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } 
+                });
+            });
+        });
+    </script>
+</body>
+<footer>
+    <ul>
+        <li>
+            <!--Teléfono de contacto-->
+            <img src="../img/icono_del_telefono-remove.png" alt="icono telefono" width="36" height="36">
+            <p>Tel&eacute;fono: 123-456-7890</p>
+        </li>
+
+        <li>
+            <!--Correo de contacto-->
+            <img src="../img/icono_del_correo-.png" alt="icono correo" width="36" height="36">
+            <p>Email: CinePuma@gmail.com</p>
+        </li>
+    </ul>
+</footer>
+</html>
