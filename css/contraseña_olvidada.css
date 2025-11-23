@@ -9,7 +9,7 @@ body {
     min-height: 100vh; 
     display: flex; 
     flex-direction: column;
-    color: #ffffff; /* Texto principal blanco */
+    color: #ffffff; 
 }
 
 /* Reinicio de estilos */
@@ -17,9 +17,9 @@ body {
     box-sizing: border-box;
 }
 
-/* ================================================= */
-/* 2. ESTILOS DE LA CABECERA (HEADER) */
-/* ================================================= */
+
+/* 2. Estilos del header */
+
 
 header {
     background-color: transparent; 
@@ -33,17 +33,16 @@ header {
 
 /* El div Encabezado contiene logo y el nuevo contenedor (header-right) */
 .Encabezado {
-    /* Disposición Horizontal principal */
     display: flex;
     flex-direction: row; 
-    align-items: flex-start; /* 🔑 CLAVE 1: Alinea elementos en la parte superior (para subir el logo) */
+    align-items: flex-start; 
     justify-content: space-between; 
     gap: 15px; 
     width: 100%;
     max-width: 1200px; 
 }
 
-/* --- Estilos del Logo y Título (Alineado a la Izquierda y Arriba) --- */
+/* Estilos del logo y título */
 .Logo {
     display: flex;
     align-items: center;
@@ -63,15 +62,15 @@ header {
     margin: 0;
 }
 
-/* 🔑 CLAVE 2: Contenedor para la parte derecha (Búsqueda + Nav) */
+/* Contenedor para la parte derecha (Búsqueda + Nav) */
 .header-right {
     display: flex;
-    flex-direction: column; /* Apilamos búsqueda y navegación verticalmente */
-    align-items: flex-end; /* 🔑 CLAVE 3: Alineamos la búsqueda y nav a la derecha */
+    flex-direction: column;
+    align-items: flex-end; 
     gap: 10px;
 }
 
-/* --- Estilo de Búsqueda --- */
+/* Estilo de búsqueda */
 form {
     position: relative; 
     max-width: 250px; 
@@ -98,7 +97,7 @@ form {
     font-style: italic;
 }
 
-/* --- Estilo para la Lupa dentro del Input --- */
+/* Estilo para la lupa dentro del input */
 .icon-search {
     position: absolute; 
     left: 10px; 
@@ -110,10 +109,10 @@ form {
 }
 
 
-/* --- Estilos de Navegación (Botones) --- */
+/* Estilos de Navegación*/
 nav {
     display: flex;
-    justify-content: flex-end; /* Asegura que los botones internos se peguen a la derecha */
+    justify-content: flex-end; 
     align-items: center;
 }
 
@@ -144,9 +143,9 @@ nav ul {
     background-color: #e05c2d;
 }
 
-/* ================================================= */
-/* 3. ESTILOS DE RECUPERACIÓN DE CONTRASEÑA (MAIN CONTENT) */
-/* ================================================= */
+
+/* 3. Estilos de recuperación de contraseña */
+
 
 h1 {
     color: #ff6b35; 
@@ -171,7 +170,7 @@ h1 {
     align-items: center; 
 }
 
-/* Estilo para el texto de instrucciones que se ve en la captura */
+/* Estilo para el texto de instrucciones*/
 p.instructions {
     color: white;
     font-size: 1rem;
@@ -181,7 +180,7 @@ p.instructions {
 }
 
 
-/* Estilos del Input de Correo */
+/* Estilos del input de correo */
 .input-group {
     position: relative; 
     margin-bottom: 15px;
@@ -199,7 +198,7 @@ p.instructions {
     text-align: left; 
 }
 
-/* Posicionamiento de ícono de Correo */
+/* Posicionamiento de icono de correo */
 .icon-email {
     position: absolute; 
     right: 10px; 
@@ -210,7 +209,7 @@ p.instructions {
     pointer-events: none; 
 }
 
-/* Estilo para el botón "Enviar Instrucciones" */
+/* Estilo para el botón de "Enviar Instrucciones" */
 .submit-button {
     background: linear-gradient(to bottom, #ff9660, #ff6b35); 
     color: white;
@@ -233,7 +232,7 @@ p.instructions {
 
 /* Media Query: Manejo Responsivo (para móviles) */
 @media (max-width: 900px) {
-    /* En pantallas pequeñas, todo debe apilarse y centrarse para ser legible */
+    
     .Encabezado {
         flex-direction: column;
         align-items: center;
@@ -241,15 +240,15 @@ p.instructions {
         gap: 15px;
     }
     .Logo {
-        justify-content: center; /* Centra el logo cuando está apilado */
+        justify-content: center; 
     }
     .header-right {
-        width: 100%; /* El contenedor de la derecha ocupa el ancho completo */
-        align-items: center; /* Centra la búsqueda y nav apiladas */
+        width: 100%; 
+        align-items: center; 
         gap: 10px;
     }
     form {
-        max-width: 90%; /* La barra de búsqueda ocupa más espacio */
+        max-width: 90%;
     }
     nav ul {
         flex-wrap: wrap; 

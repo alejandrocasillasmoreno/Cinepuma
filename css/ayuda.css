@@ -30,7 +30,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        /* Estilo al pasar el mouse por encima */
+        /* Estilo al pasar el raton por encima */
         .accordion-header:hover {
             background-color: #e0ac05;
         }

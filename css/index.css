@@ -1,21 +1,18 @@
-
+/* 1. Estilos globales y fondo*/
 body {
-    /* Fondo azul oscuro global */
     background-color: #1E3C72; 
     text-align: center;
-    /* Fuente por defecto, usa la que prefieras */
     font-family: Arial, sans-serif; 
     margin: 0;
     padding: 0;
-    /* Aseguramos el layout del footer */
     min-height: 100vh; 
     display: flex; 
     flex-direction: column;
 }
 
-/* Restablece el fondo de todos los elementos para que no hereden el * { background-color } anterior */
+
 * {
-    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
+    box-sizing: border-box; 
 }
 
 /* 2. Estilo de la Cabecera */
@@ -27,28 +24,25 @@ header {
     color: #1E3C72;
 }
 
-/* --- ESTILOS DEL LOGO --- */
+/* Estilos del logo */
 .logo {
-    display: flex; /* Alinea los elementos internos (imagen y span) horizontalmente */
-    align-items: center; /* Centra verticalmente la imagen y el texto */
-    gap: 8px; /* Espacio entre la imagen y el texto */
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
 }
 
 .logo img {
-    /* Altura aumentada a 60px según tu última solicitud */
     height: 60px; 
     width: auto;
 }
 
 .logo span {
-    color: #ff6b35; /* Tono Naranja */
-    font-size: 20px; /* Tamaño 20px, alineado con el texto de los botones */
+    color: #ff6b35; 
+    font-size: 20px; 
     font-weight: bold;
 }
-/* ------------------------ */
 
-
-/* 3. Estilo para los elementos de navegación (enlaces estilizados como botones) */
+/* 3. Estilo para los elementos de navegación */
 .nav-button {
     background-color: #ff6b35;
     color: white; 
@@ -66,12 +60,11 @@ header {
 }
 
 .nav-button:hover {
-    background-color: #e05c2d; /* Color ligeramente más oscuro al pasar el ratón */
+    background-color: #e05c2d; 
 }
 
 /* 4. Estilo de la Caja de Búsqueda */
 .search-bar {
-    /* **CRÍTICO:** Esto hace que la lupa se posicione respecto a esta caja */
     position: relative; 
     flex-grow: 1; 
     max-width: 300px;
@@ -79,20 +72,12 @@ header {
 }
 
 .search-input {
-    /* 1. Fondo Transparente */
     background-color: transparent; 
-    
-    /* 2. Borde Negro */
     border: 2px solid black; 
-    
-    /* 3. Forma Redonda */
     border-radius: 20px; 
-    
-    /* Ajustes de tamaño y espaciado */
     width: 100%;
     height: 35px;
     color: white; 
-    /* **CRÍTICO:** Dejamos 35px de padding izquierdo para que quepa el ícono de 20px */
     padding: 5px 10px 5px 35px; 
     font-size: 1rem;
     outline: none;
@@ -106,20 +91,16 @@ header {
 }
 
 
-/* 5. Posicionamiento del Ícono de la Lupa */
+/* 5. Posicionamiento del icono de la lupa */
 .icon-search {
-    /* **CRÍTICO:** Esto coloca la imagen sobre el input */
     position: absolute; 
-    
-    /* Posicionamos la lupa 10px desde el borde izquierdo del .search-bar */
     left: 10px; 
     top: 50%;
-    /* Asegura el centrado vertical perfecto */
     transform: translateY(-50%); 
     
     width: 20px; 
     height: auto; 
-    pointer-events: none; /* Para que el clic pase al input */
+    pointer-events: none; 
 }
 
 /* Estilo del Título Principal */
@@ -130,14 +111,11 @@ h2.main-title, h1 {
     font-size: 1.8rem;
 }
 
+/* Estilos para el carrusel de películas*/
 
-/* ================================================= */
-/* 🔑 ESTILOS PARA EL CARRUSEL DE PELÍCULAS ESTILO NETFLIX (Scrollable Row) */
-/* ================================================= */
 
 main {
     flex-grow: 1; 
-    /* Opcional: Para asegurar que no haya blancos */
     background-color: #1E3C72; 
 }
 
@@ -151,17 +129,15 @@ main {
     padding-left: 0; 
     margin-bottom: 15px;
     font-weight: bold;
-    text-align: center; /* Título centrado */
+    text-align: center; 
 }
 
-/* Contenedor que permite el desplazamiento horizontal */
+/* Contenedor para el desplazamiento horizontal */
 .movie-row-container {
     display: flex; 
-    /* 🔑 CAMBIO CLAVE 1: Centra el contenido solo si cabe todo en la pantalla */
     justify-content: center; 
     overflow-x: scroll; 
-    
-    /* Centrado del contenedor de desplazamiento */
+
     width: 95%; 
     max-width: 1400px; 
     margin: 0 auto; 
@@ -177,7 +153,7 @@ main {
 }
 /* Ocultar la barra de desplazamiento (Firefox) */
 .movie-row-container {
-    -ms-overflow-style: none;  /* IE and Edge */
+    -ms-overflow-style: none;  /* IE y Edge */
     scrollbar-width: none;  /* Firefox */
 }
 
@@ -187,7 +163,6 @@ main {
     flex: 0 0 auto; 
     width: 150px; 
     height: 220px; 
-    /* Mantenemos el margen derecho para separarlas */
     margin-right: 15px;
     border-radius: 5px;
     overflow: hidden; 
@@ -197,17 +172,14 @@ main {
     scroll-snap-align: start; 
 }
 
-/* 🔑 TRUCO PARA CENTRADO: Eliminamos el margin-right de la última tarjeta si es necesario para centrar */
 .movie-card:last-child {
     margin-right: 0;
 }
 
-
-/* **Clave para el recorte:** la imagen se ajusta al tamaño de la tarjeta */
 .movie-card img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Recorta la imagen para que cubra todo el área */
+    object-fit: cover;
     display: block;
 }
 
@@ -223,35 +195,33 @@ main {
     font-size: 0.9rem;
     text-align: center;
     
-    /* 🔑 Oculto por defecto: Lo deslizamos fuera de la vista */
     transform: translateY(100%); 
-    transition: transform 0.3s ease; /* Transición suave */
-    pointer-events: none; /* Asegura que no interfiera con el hover de la tarjeta */
+    transition: transform 0.3s ease;
+    pointer-events: none;
 }
 
-/* 2. Efecto de pasar el ratón (hover) */
+/* 2. Efecto de pasar el ratón*/
 .movie-card:hover {
-    transform: scale(1.05); /* Hace que la tarjeta crezca ligeramente */
-    z-index: 10; /* Asegura que la tarjeta esté encima de las otras al hacer hover */
+    transform: scale(1.05); 
+    z-index: 10;
 }
 
-/* 3. Mostrar el título al pasar el ratón (SIN pulsar) */
+/* 3. Mostrar el título al pasar el ratón*/
 .movie-card:hover .movie-title {
-    transform: translateY(0); /* Desliza el título hacia arriba, haciéndolo visible */
+    transform: translateY(0); 
 }
 
 
-/* ================================================= */
-/* 🔑 ESTILOS DEL FOOTER */
-/* ================================================= */
+/* 6. Estilos del footer */
+
 
 footer {
-    background-color: #0d274c; /* Un azul más oscuro que el fondo principal */
+    background-color: #0d274c; 
     color: white;
     padding: 20px 5%;
     text-align: left;
     margin-top: 30px;
-    border-top: 2px solid #ff6b35; /* Borde naranja para separarlo */
+    border-top: 2px solid #ff6b35; 
 }
 
 footer ul {
