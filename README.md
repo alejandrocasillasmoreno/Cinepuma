@@ -1,6 +1,3 @@
-a
-
-
 # Cinepuma
 ## ¿Qué es?
 Este documento trata sobre el plan de diseño de la interfaz de un sitio web dirigido a jóvenes amantes del cine. 
