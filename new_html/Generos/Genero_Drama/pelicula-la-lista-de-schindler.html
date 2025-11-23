@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Descripcion" content="Página de géneros de películas en CinePuma">
+    <title>Cinepuma - La Lista de Schindler</title>
+</head>
+
+<body>
+
+    <!--Encabezado-->
+    <header>
+        <!--Logo Cinepuma-->
+        <div class="logo">
+            <img src="../img/Logo_Cinepuma.png" alt="CinePuma Logo">
+            <h1><a href="../../index.html">CinePuma</a></h1>
+        </div>
+
+        <!--Barra de búsqueda-->
+        <div class="barra-busqueda">
+            <input type="text" placeholder="Buscar">
+            <img src="../img/imagen_lupa.png" alt="Icono búsqueda" class="icono-busqueda">
+        </div>
+
+        <!--Navegador de navegación principal-->
+        <nav>
+            <a href="../generos.html" class="nav-boton">G&eacute;neros</a>
+            <a href="../../../html/mejorValoradas.html" class="nav-boton">Mejor valoradas</a>
+            <a href="../../../html/ayuda.html" class="nav-boton help-button">Help</a>
+        </nav>
+    </header>
+    <!--Contenido principal-->
+    <main>
+            <main>
+        <section>
+            <h2>La Lista de Schindler</h2>
+            <img src="../img/Poster_La_Lista_de_Schindler.jpg" alt="Poster La Lista de Schindler" width="300">
+        </section>
+
+        <section>
+            <h2>Sinopsis</h2>
+            <p>
+                En 1971, los investigadores paranormales Ed y Lorraine Warren son llamados a ayudar a la familia Perron,
+                que está siendo aterrorizada por una presencia oscura en su granja de Rhode Island. A medida que los
+                Warren profundizan en el misterio, descubren que la casa tiene un pasado siniestro y deben enfrentarse a
+                fuerzas malignas para salvar a la familia.
+            </p>    
+            <h2>Opiniones de usuarios</h2>
+            <div>
+                <form> <!--Hay que poner el action="comentarios.php" y method="post" cuando lo tengamos disponible-->
+                    <label for="cajaComentarios">Comenta</label><br>
+                    <textarea id="cajaComentarios" name="cajaComentarios" rows="7" cols="99" required></textarea><br>
+                    <button id="enviarComentario">Enviar</button>
+                </form>
+            </div>
+
+            <!--Estos comentarios son puestos manualmente, nuestro plan es que aquí aparezcan los comentarios cuando alguien
+                usa la caja de texto y pulsa enviar, y que al estar logueado aparezca al lado de su mensaje su nombre-->
+            <article>
+                <p><strong>"¡Mejor que la primera!"</strong></p>
+                <p></p>
+            </article>
+            <article>
+                <p><strong>"Decepcionante"</strong></p>
+                <p></p>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <ul>
+            <li>
+                <!--Teléfono de contacto-->
+                <img src="../img/icono_del_telefono-remove.png" alt="icono telefono" width="36" height="36">
+                <p>Tel&eacute;fono: 123-456-7890</p>
+            </li>
+            <li>
+                <!--Correo de contacto-->
+                <img src="../img/icono_del_correo-.png" alt="icono correo" width="36" height="36">
+                <p>Email: CinePuma@gmail.com</p>
+            </li>
+        </ul>
+    </footer>
+</body>
+</html>

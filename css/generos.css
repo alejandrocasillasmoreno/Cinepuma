@@ -1,0 +1,100 @@
+/* 1. Fondo principal y texto base */
+
+
+/* Restablece el fondo de todos los elementos para que no hereden el * { background-color } anterior */
+* {
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
+}
+
+/* 2. Estilo de la Cabecera */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    color: #1E3C72; ;
+}
+
+/* --- ESTILOS DEL LOGO --- */
+.logo {
+    display: flex; /* Alinea los elementos internos (imagen y span) horizontalmente */
+    align-items: center; /* Centra verticalmente la imagen y el texto */
+    gap: 8px; /* Espacio entre la imagen y el texto */
+}
+
+.logo img {
+    /* Ajusta el tamaño de la imagen del logo si es necesario */
+    height: 110px; 
+    width: auto;
+}
+
+.logo span {
+    color: #ff6b35; /* Tono Naranja */
+    font-size: 20px; /* Tamaño 20px, alineado con el texto de los botones */
+    font-weight: bold;
+    /* El texto ya estará al lado derecho gracias a 'display: flex' en .logo */
+}
+/* ------------------------ */
+
+
+/* 3. Estilo para los elementos de navegación (ahora son <a> tags estilizados como botones) */
+.nav-button {
+    background-color: #ff6b35;
+    color: white; 
+    border: none;
+    padding: 5px 15px;
+    border-radius: 20px;
+    margin: 0 5px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px; /* Asegura un tamaño consistente, aunque pediste 20px, 16px es más común para botones. */
+    /* Si quieres que los botones tengan 20px de texto, cambia este valor a 20px */
+}
+
+/* 4. Estilo de la Caja de Búsqueda */
+.search-bar {
+    flex-grow: 1; 
+    max-width: 300px;
+    margin: 0 20px;
+}
+
+.search-input {
+    /* 1. Fondo Transparente */
+    background-color: transparent; 
+    
+    /* 2. Borde Negro */
+    border: 2px solid black; 
+    
+    /* 3. Forma Redonda */
+    border-radius: 20px; 
+    
+    /* Ajustes de tamaño y espaciado */
+    width: 100%;
+    height: 35px;
+    color: white; 
+    padding: 5px 10px 5px 35px; /* Más padding izquierdo para dejar espacio a la lupa */
+    font-size: 1rem;
+    outline: none;
+}
+
+/* Estilo del placeholder de búsqueda */
+.search-input::placeholder {
+    color: #cccccc;
+    font-style: italic;
+    text-align: left; 
+}
+
+
+/* 5. Posicionamiento del Ícono de la Lupa */
+.icon-search {
+    position: absolute; 
+    left: 10px; 
+    top: 50%;
+    transform: translateY(-50%); 
+    width: 20px; 
+    height: auto; 
+    pointer-events: none; 
+}
