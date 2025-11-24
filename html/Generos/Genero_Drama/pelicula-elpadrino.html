@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Descripcion" content="Página de géneros de películas en CinePuma">
+    <title>Cinepuma - El Padrino</title>
+</head>
+
+<body>
+
+    <!--Encabezado-->
+    <header>
+        <!--Logo Cinepuma-->
+        <div class="logo">
+            <img src="../img/Logo_Cinepuma.png" alt="CinePuma Logo">
+            <h1><a href="../../index.html">CinePuma</a></h1>
+        </div>
+
+        <!--Barra de búsqueda-->
+        <div class="barra-busqueda">
+            <input type="text" placeholder="Buscar">
+            <img src="../img/imagen_lupa.png" alt="Icono búsqueda" class="icono-busqueda">
+        </div>
+
+        <!--Navegador de navegación principal-->
+        <nav>
+            <a href="../generos.html" class="nav-boton">G&eacute;neros</a>
+            <a href="../../../html/mejorValoradas.html" class="nav-boton">Mejor valoradas</a>
+            <a href="../../../html/ayuda.html" class="nav-boton help-button">Help</a>
+        </nav>
+    </header>
+    <main>
+        <!--Contenido principal-->
+        <section>
+            <h2>El Padrino</h2>
+            <img src="../img/Poster_El_Padrino.jpg" alt="Poster El Padrino" width="300">
+        </section>
+
+        <section>
+            <h2>Sinopsis</h2>
+            <p>
+                La historia de la familia Corleone, una poderosa dinastía mafiosa en Nueva York, liderada por Vito Corleone. A medida que su hijo Michael se ve envuelto en el mundo del crimen, la película explora temas de poder, lealtad y traición en el contexto de la mafia italiana.
+            </p>    
+            <h2>Opiniones de usuarios</h2>
+            <div>
+                <form> <!--Hay que poner el action="comentarios.php" y method="post" cuando lo tengamos disponible-->
+                    <label for="cajaComentarios">Comenta</label><br>
+                    <textarea id="cajaComentarios" name="cajaComentarios" rows="7" cols="99" required></textarea><br>
+                    <button id="enviarComentario">Enviar</button>
+                </form>
+            </div>
+
+            <!--Estos comentarios son puestos manualmente, nuestro plan es que aquí aparezcan los comentarios cuando alguien
+                usa la caja de texto y pulsa enviar, y que al estar logueado aparezca al lado de su mensaje su nombre-->
+            <article>
+                <p><strong>"¡Mejor que la primera!"</strong></p>
+                <p></p>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <ul>
+            <li>
+                <!--Teléfono de contacto-->
+                <img src="../../../img/icono del telefono.png" alt="icono telefono" width="36" height="36">
+                <p>Tel&eacute;fono: 123-456-7890</p>
+            </li>
+            <li>
+                <!--Correo de contacto-->
+                <img src="../../../img/icono_del_correo.png" alt="icono correo" width="36" height="36">
+                <p>Email: CinePuma@gmail.com</p>
+            </li>
+        </ul>
+    </footer>
+</body>
+</html>
