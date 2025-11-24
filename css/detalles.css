@@ -1,0 +1,279 @@
+body {
+    background-color: #1E3C72; 
+    font-family: Arial, sans-serif; 
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column;
+}
+
+* {
+    box-sizing: border-box; 
+}
+
+/* 2. Cabecera (Header) - Consistente */
+header {
+    background-color: #0d274c; 
+    padding: 15px 5%;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    border-bottom: 3px solid #0d274c; 
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo img {
+    height: 60px;
+    width: auto;
+    border: 3px solid #1E3C72; 
+    border-radius: 5px; 
+}
+
+.logo span { 
+    color: #ff6b35; 
+    font-size: 24px; 
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* 3. Navegación */
+nav {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+}
+
+nav a {
+    color: #cccccc; 
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 5px 0;
+    transition: color 0.2s;
+}
+
+/* Enlace activo: 'Reseñas' (cuarto enlace) - ESTO CAMBIA RESPECTO A LA PÁGINA DE GÉNEROS */
+nav a:nth-child(4) { 
+    color: white; 
+    font-weight: bold;
+    border-bottom: 2px solid white;
+}
+
+nav a:hover {
+    color: white;
+}
+
+/* 4. Contenido Principal - Detalles de Película (NUEVO) */
+.detail-container {
+    flex-grow: 1;
+    max-width: 1000px;
+    margin: 40px auto 20px auto;
+    padding: 20px;
+    background-color: #0d274c; /* Fondo de la caja principal */
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Encabezado y Poster (Flexbox) */
+.movie-header {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #1E3C72;
+}
+
+.poster-img {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.movie-info h1 {
+    color: white;
+    font-size: 2.2rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+/* Estilo de Puntuación */
+.rating {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #ffc107; /* Amarillo para las estrellas */
+    margin-bottom: 15px;
+}
+
+.star-icon {
+    font-size: 1.6rem;
+    margin-right: 5px;
+}
+
+.score {
+    color: white; /* El número de score en blanco */
+    font-weight: 900;
+}
+
+.meta-data p {
+    font-size: 0.9rem;
+    color: #cccccc;
+    margin: 5px 0;
+}
+
+/* Sinopsis */
+.synopsis-box {
+    padding-top: 20px;
+}
+
+.synopsis-box h2 {
+    color: #ff6b35; /* Naranja para el subtítulo */
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.synopsis-box p {
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+/* 5. Sección de Reseñas (NUEVO) */
+.reviews-section {
+    max-width: 1000px;
+    margin: 20px auto 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.reviews-section h3 {
+    color: #ff6b35;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+#user-reviews-list {
+    background-color: #0d274c; /* Fondo similar al header */
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    text-align: left;
+    min-height: 100px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.user-review {
+    padding: 10px 0;
+    border-bottom: 1px dashed #1E3C72;
+    color: white;
+}
+
+.user-review:last-child {
+    border-bottom: none;
+}
+
+.user-review strong {
+    color: #ff6b35;
+    margin-right: 8px;
+}
+
+.initial-message span {
+    color: #cccccc;
+    font-style: italic;
+}
+
+
+/* Formulario de envío de opinión */
+#review-input {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 2px solid #1E3C72;
+    background-color: #275293; 
+    color: white;
+    resize: vertical;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+#review-input::placeholder {
+    color: #cccccc;
+}
+
+.btn-review {
+    background-color: #ff6b35; /* Botón naranja */
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-review:hover {
+    background-color: #e05c2e;
+}
+
+/* 6. Pie de Página (Footer) - Consistente */
+footer {
+    background-color: #0d274c; 
+    color: white;
+    padding: 20px 5%;
+    text-align: left;
+    margin-top: auto; 
+    border-top: none; 
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; 
+}
+
+.contact-info div {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.contact-info img {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.contact-info span {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .movie-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .poster-img {
+        width: 80%;
+        max-width: 250px;
+        height: auto;
+    }
+
+    .movie-info h1 {
+        font-size: 1.8rem;
+    }
+}

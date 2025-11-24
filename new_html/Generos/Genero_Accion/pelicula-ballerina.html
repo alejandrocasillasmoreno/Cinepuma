@@ -32,27 +32,46 @@
         </nav>
     </header>
     <main>
-        <h2>Ballerina (2016)</h2>
-        <img src="../img/Genero_Accion/pelicula-ballerina.jpg" alt="Poster de la película Ballerina">
-        <p><strong>Director:</strong> Eric Summer, Éric Warin</p>
-        <p><strong>Reparto:</strong> Elle Fanning, Dane DeHaan, Carly Rae Jepsen</p>
-        <p><strong>Sinopsis:</strong> Una joven huérfana sueña con convertirse en bailarina. Para lograr su objetivo, se escapa de su orfanato y se dirige a París, donde enfrenta numerosos desafíos y descubre la importancia de la amistad y la perseverancia.</p>
-        <p><strong>Duración:</strong> 89 minutos</p>
-        <p><strong>Año de estreno:</strong> 2016</p>
-        <p><strong>Género:</strong> Animación, Aventura, Familia</p>
-    </main>
+        <!--Contenido principal-->
+        <section>
+            <h2>Ballerina</h2>
+            <img src="../img/Poster_Ballerina.jpg" alt="Poster Ballerina" width="300">
+        </section>
 
+        <section>
+            <h2>Sinopsis</h2>
+            <p>
+                Ballerina sigue la historia de una joven huérfana que sueña con convertirse en una gran bailarina. Junto a su mejor amigo, emprende un viaje a París para perseguir su sueño, enfrentándose a desafíos y descubriendo su verdadera pasión por la danza.
+            </p>    
+            <h2>Opiniones de usuarios</h2>
+            <div>
+                <form> <!--Hay que poner el action="comentarios.php" y method="post" cuando lo tengamos disponible-->
+                    <label for="cajaComentarios">Comenta</label><br>
+                    <textarea id="cajaComentarios" name="cajaComentarios" rows="7" cols="99" required></textarea><br>
+                    <button id="enviarComentario">Enviar</button>
+                </form>
+            </div>
+
+            <!--Estos comentarios son puestos manualmente, nuestro plan es que aquí aparezcan los comentarios cuando alguien
+                usa la caja de texto y pulsa enviar, y que al estar logueado aparezca al lado de su mensaje su nombre-->
+            <article>
+                <p><strong>"¡Mejor que la primera!"</strong></p>
+                <p></p>
+            </article>
     <footer>
         <ul>
             <li>
                 <!--Teléfono de contacto-->
-                <img src="../img/icono_del_telefono-remove.png" alt="icono telefono" width="36" height="36">
+                <img src="../../../img/icono del telefono.png" alt="icono telefono" width="36" height="36">
                 <p>Tel&eacute;fono: 123-456-7890</p>
             </li>
             <li>
                 <!--Correo de contacto-->
-                <img src="../img/icono_del_correo-.png" alt="icono correo" width="36" height="36">
+                <img src="../../../img/icono_del_correo.png" alt="icono correo" width="36" height="36">
                 <p>Email: CinePuma@gmail.com</p>
             </li>
         </ul>
     </footer>
+</body>
+
+</html>

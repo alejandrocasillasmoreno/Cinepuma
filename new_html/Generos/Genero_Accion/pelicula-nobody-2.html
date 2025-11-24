@@ -32,26 +32,48 @@
         </nav>
     </header>
     <main>
-        <h2>Nobody 2 (2024)</h2>
-        <img src="../img/Genero_Accion/pelicula-nobody-2.jpg" alt="Poster de la película Nobody 2">
-        <p><strong>Director:</strong> Ilya Naishuller</p>
-        <p><strong>Reparto:</strong> Bob Odenkirk, Aleksei Serebryakov, Connie Nielsen</p>
-        <p><strong>Sinopsis:</strong> Hutch Mansell, un hombre común con un pasado oculto, se ve obligado a regresar a su antigua vida cuando su familia es amenazada por una peligrosa organización criminal. Con habilidades letales y una determinación implacable, Hutch desata una ola de violencia para proteger a sus seres queridos y ajustar cuentas con su pasado.</p>
-        <p><strong>Duración:</strong> 100 minutos</p>
-        <p><strong>Año de estreno:</strong> 2024</p>
-        <p><strong>Género:</strong> Acción, Thriller</p>
-    </main>
+        <section>
+            <h2>Nobody 2 (2024)</h2>
+            <img src="../img/Genero_Accion/pelicula-nobody-2.jpg" alt="Poster de la película Nobody 2">
+        </section>
+
+        <section>
+            <h2>Sinopsis</h2>
+            <p>
+                Nobody 2 sigue la historia de Hutch Mansell, un hombre común con un pasado oculto, que se ve obligado a
+                regresar a su antigua vida cuando su familia es amenazada por una peligrosa organización criminal. Con
+                habilidades letales y una determinación implacable, Hutch desata una ola de violencia para proteger a
+                sus seres queridos y ajustar cuentas con su pasado.
+            </p>
+            <h2>Opiniones de usuarios</h2>
+            <div>
+                <form> <!--Hay que poner el action="comentarios.php" y method="post" cuando lo tengamos disponible-->
+                    <label for="cajaComentarios">Comenta</label><br>
+                    <textarea id="cajaComentarios" name="cajaComentarios" rows="7" cols="99" required></textarea><br>
+                    <button id="enviarComentario">Enviar</button>
+                </form>
+            </div>
+
+            <!--Estos comentarios son puestos manualmente, nuestro plan es que aquí aparezcan los comentarios cuando alguien
+                usa la caja de texto y pulsa enviar, y que al estar logueado aparezca al lado de su mensaje su nombre-->
+            <article>
+                <p><strong>"¡Mejor que la primera!"</strong></p>
+                <p></p>
+            </article>
+        </section>
     <footer>
         <ul>
             <li>
                 <!--Teléfono de contacto-->
-                <img src="../img/icono_del_telefono-remove.png" alt="icono telefono" width="36" height="36">
+                <img src="../../../img/icono del telefono.png" alt="icono telefono" width="36" height="36">
                 <p>Tel&eacute;fono: 123-456-7890</p>
             </li>
             <li>
                 <!--Correo de contacto-->
-                <img src="../img/icono_del_correo-.png" alt="icono correo" width="36" height="36">
+                <img src="../../../img/icono_del_correo.png" alt="icono correo" width="36" height="36">
                 <p>Email: CinePuma@gmail.com</p>
             </li>
         </ul>
     </footer>
+</body>
+</html>
