@@ -20,7 +20,7 @@ body {
 header {
     background-color: #0d274c; 
     padding: 15px 5%;
-    display: flex;
+    display: flex; /* Activa Flexbox */
     justify-content: space-between; 
     align-items: center;
     border-bottom: 3px solid #0d274c; 
@@ -77,7 +77,7 @@ nav a:hover {
 
 /* 4. Sección Principal (Main) - Título */
 main {
-    flex-grow: 1; 
+    flex-grow: 1; /* Ocupa el espacio disponible */
     padding: 30px 5% 50px;
     background-color: #1E3C72; 
     text-align: center;
@@ -114,7 +114,7 @@ h2.main-title {
 
 /* 6. Estilo de las Tarjetas de Película */
 .movie-card {
-    position: relative;
+    position: relative; /* Para posibles elementos superpuestos */
     width: 150px; /* Tamaño de tarjeta */
     height: 220px; 
     margin: 0; 

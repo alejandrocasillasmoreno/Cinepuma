@@ -42,7 +42,7 @@ header {
 
 /* El <h1> se usa en el HTML, lo tratamos como el texto del logo */
 .logo span {
-    color: white; 
+    color: #ff6b35; 
     font-size: 24px; 
     font-weight: bold;
     font-family: 'Times New Roman', Times, serif;
