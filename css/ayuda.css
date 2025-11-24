@@ -1,70 +1,233 @@
-.help-container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f7f7f7;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .help-container h1 {
-            color: #ffc107;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        /* Estilo del Título del Acordeón (Botón) */
-        .accordion-header {
-            background-color: #ffc107;
-            color: #343a40;
-            cursor: pointer;
-            padding: 18px;
-            width: 100%;
-            text-align: left;
-            border: none;
-            outline: none;
-            transition: 0.4s;
-            font-size: 1.2em;
-            margin-top: 10px;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        /* Estilo al pasar el raton por encima */
-        .accordion-header:hover {
-            background-color: #e0ac05;
-        }
+/* 1. Estilos Globales y Fondo */
 
-        /* Contenido Oculto del Acordeón */
-        .accordion-content {
-            padding: 0 18px;
-            background-color: white;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            border: 1px solid #ddd;
-            border-top: none;
-            border-radius: 0 0 5px 5px;
-            margin-bottom: 10px;
-        }
-        .accordion-content p, .accordion-content li {
-            padding: 10px 0;
-            font-size: 1em;
-            line-height: 1.5;
-            color: #555;
-        }
-        .icon {
-            transition: transform 0.3s;
-            font-size: 1.5em;
-        }
-        /* Icono de flecha girando cuando está activo */
-        .active .icon {
-            transform: rotate(90deg);
-        }
-        .api-key-box {
-            background-color: #fff3cd;
-            border: 1px solid #ffeeba;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 4px;
-        }
+body {
+    background-color: #1E3C72; /* Azul oscuro del fondo */
+    font-family: Arial, sans-serif; 
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column;
+}
+
+* {
+    box-sizing: border-box; 
+}
+
+/* 2. Cabecera (Header) - Consistente con Mejores Valoradas */
+header {
+    background-color: #0d274c; 
+    padding: 15px 5%;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    border-bottom: 3px solid #0d274c; 
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo img {
+    height: 60px;
+    width: auto;
+    border: 3px solid #1E3C72; 
+    border-radius: 5px; 
+}
+
+.logo span { 
+    color: #ff6b35; 
+    font-size: 24px; 
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* 3. Navegación */
+nav {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+}
+
+/* Estilo de los enlaces */
+nav a {
+    color: #cccccc; 
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 5px 0;
+    transition: color 0.2s;
+}
+
+/* Enlace activo: 'Ayuda' (tercer enlace) */
+nav a:nth-child(3) { 
+    color: white; 
+    font-weight: bold;
+    border-bottom: 2px solid white;
+}
+
+nav a:hover {
+    color: white;
+}
+
+/* 4. Contenido Principal - Contenedor de Ayuda */
+.help-container {
+    flex-grow: 1;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    background-color: #1E3C72;
+    color: white;
+    text-align: left;
+}
+
+.help-container h1 {
+    color: #ff6b35; /* Color naranja para el título principal */
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Estilo para la imagen principal de cinepuma (flotante) */
+.cinepuma-image {
+    width: 45%;
+    max-width: 500px;
+    height: auto;
+    float: right; /* Flota a la derecha como en tu HTML original */
+    margin: 0 0 20px 30px; /* Margen para separarlo del texto */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    object-fit: cover;
+}
+
+/* 5. Estilos del Acordeón (Botones de Pregunta) */
+.accordion-header {
+    background-color: #0d274c; /* Fondo oscuro, similar al header */
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: background-color 0.4s ease;
+    border-radius: 6px;
+    margin-top: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.accordion-header:hover {
+    background-color: #1a4a8d; /* Un poco más claro al pasar el ratón */
+}
+
+/* Estilos del Contenido del Acordeón (Respuestas) */
+.accordion-content {
+    padding: 0 18px;
+    background-color: #275293; /* Un azul ligeramente más claro que el fondo principal */
+    max-height: 0; /* Oculto por defecto */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    border-radius: 0 0 6px 6px;
+    margin-bottom: 15px;
+}
+
+/* Contenido cuando está activo (asumiendo que el JS añadirá una clase 'active' o similar al .accordion-header) */
+/* Nota: Tu JS deberá controlar el 'max-height' */
+
+.accordion-content h3 {
+    color: #ff6b35; /* Naranja para los subtítulos */
+    margin-top: 20px;
+}
+
+.accordion-content p, .accordion-content ul {
+    color: #e0e0e0;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    padding-left: 0;
+}
+
+.accordion-content ul {
+    list-style-type: none;
+}
+
+.accordion-content li {
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.accordion-content li:before {
+    content: '▶'; /* Triángulo o punto como marcador */
+    color: #ff6b35; 
+    font-size: 0.8rem;
+    position: absolute;
+    left: 0;
+    top: 2px;
+}
+
+.accordion-content a {
+    color: #ff6b35;
+    text-decoration: underline;
+}
+
+/* 6. Pie de Página (Footer) - Consistente */
+footer {
+    background-color: #0d274c; 
+    color: white;
+    padding: 20px 5%;
+    text-align: left;
+    margin-top: auto; 
+    border-top: 2px solid #000000; 
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; 
+}
+
+.contact-info div {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.contact-info img {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.contact-info span {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    nav {
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    /* La imagen flota menos en móvil */
+    .cinepuma-image {
+        float: none;
+        width: 100%;
+        max-width: 300px; /* Limita el ancho en móvil */
+        margin: 20px auto;
+        display: block;
+    }
+}

@@ -3,38 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="Descripcion" content="">
+    <meta name="Descripcion" content="Página de ayuda y preguntas frecuentes de CinePuma">
     <title>CinePuma - Ayuda</title>
     <link rel="stylesheet" href="../css/ayuda.css">
 </head>
 <body>
 
-
+    <!-- 1. HEADER (CABECERA) - Estructura ajustada para el CSS del proyecto -->
     <header>
-        <div class="Encabezado">
-            <div class="Logo">
-                <img src="../img/Logo2.png" alt="Logo Cinepuma" class="logo-img" width="100">
-                <h1><a href="index.html">CinePuma</a></h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="Generos.html" class="button">G&eacute;neros</a></li>
-                    <li><a href="mejorValoradas.html" class="button">Mejor valoradas</a></li>
-                    <li><a href="ayuda.html" class="button">Ayuda</a></li>
-                    <li><a href="detalle.html" class="button">Reseñas</a></li>
-                </ul>
-            </nav>
-            <form>
-                <input type="text" id="busqueda" placeholder="Buscar películas...">
-            </form>
+        <div class="logo">
+            <img src="../img/Logo2.png" alt="Logo Cinepuma">
+            <span>CinePuma</span> 
         </div>
+ 
+        <nav>
+            <a href="Generos.html">Género</a>
+            <a href="mejorValoradas.html">Mejores valoradas</a>
+            <a href="ayuda.html">Ayuda</a>
+            <a href="detalle.html">Reseñas</a>
+        </nav>
+
+        <!-- Eliminamos el <form> y el input de búsqueda del header para simplificar y mantener la consistencia con Mejores Valoradas -->
     </header>
-    
+
     <div class="help-container">
 
         <!--Pregunta 1-->
         <h1>¿Podemos ayudarte?</h1>
-        <img src="../img/cinepuma.png" alt="Imagen Cinepuma" class="cinepuma-image" style="width: 500px; height: 400px; float: right; " >
+        <img src="../img/cinepuma.png" alt="Imagen Cinepuma" class="cinepuma-image" > <!-- Eliminamos estilos inline -->
         <button class="accordion-header">1. ¿Qu&eacute; somos? </button>
 
         <div class="accordion-content">
@@ -42,9 +38,9 @@
             <div>
                 <p>
                     En CinePuma podr&aacute;s encontrar innumerables pel&iacute;culas catalogadas por g&eacute;neros , as&iacute; como las reseñas propias de los usuarios y 
-                    las puntuaciones de cada pel&iacute;cula.Nos basamos en la transparencia y la voz de la comunidad.  
+                    las puntuaciones de cada pel&iacute;cula.Nos basamos en la transparencia y la voz de la comunidad.  
                     En CinePuma, nuestra prioridad eres t&uacute;. Nuestra tarea ser&aacute; sugerirles las pel&iacute;culas m&aacute;s adecuadas para ellos 
-                    y las m&aacute;s destacadas de cada tipo.
+                     y las m&aacute;s destacadas de cada tipo.
                 </p>
             </div>
         </div>
@@ -64,47 +60,42 @@
         </div>
 
         <!--Pregunta 3-->
-        <button class="accordion-header">3. ¿Con qu&eacute; peliculas trabajamos?</button>
-        <div class="accordion-content">
-            <p> 
-                Para garantizar un cat&aacute;logo amplio y actualizado, CinePuma trabajar&aacute; directamente con la API de <a href="https://www.themoviedb.org/">themoviedb </a>. 
-                Esto nos permite acceder a innumerables pel&iacute;culas catalogadas por g&eacute;neros y obtener datos fiables y en tiempo real, incluyendo puntuaciones y detalles. 
-                La informaci&oacute;n extra&iacute;da de TMDb ser&aacute; fundamental para sugerir las pel&iacute;culas m&aacute;s adecuadas y destacadas a nuestro p&uacute;blico joven 
-                y para alimentar nuestro sistema de b&uacute;squeda y filtrado de contenido.
-            </p>
-        </div>
+         <button class="accordion-header">3. ¿Con qu&eacute; peliculas trabajamos?</button>
+         <div class="accordion-content">
+             <p> 
+                 Para garantizar un cat&aacute;logo amplio y actualizado, CinePuma trabajar&aacute; directamente con la API de <a href="https://www.themoviedb.org/">themoviedb </a>. 
+                 Esto nos permite acceder a innumerables pel&iacute;culas catalogadas por g&eacute;neros y obtener datos fiables y en tiempo real, incluyendo puntuaciones y detalles. 
+                 La informaci&oacute;n extra&iacute;da de TMDb ser&aacute; fundamental para sugerir las pel&iacute;culas m&aacute;s adecuadas y destacadas a nuestro p&uacute;blico joven 
+                 y para alimentar nuestro sistema de b&uacute;squeda y filtrado de contenido.
+             </p>
+         </div>
 
         <!--Pregunta 4-->
         <button class="accordion-header">4. ¿Cu&aacute;l es nuestro objetivo?</button>
         <div class="accordion-content">
-            <h3>Nuestros objetivos son:</h3>
-            <ul>
-                <h3>Objetivo del proyecto:</h3>
-                <li>Crear una interfaz que no solo sea atractiva a la vista, sino que tambi&eacute;n sea muy pr&aacute;ctica y sencilla de manejar, para asegurar el triunfo del proyecto.</li>
-                <br>
-                <h3>Objetivos Principales de la Interfaz:</h3>
-                <li>Facilitar el descubrimiento de nuevo contenido a trav&eacute;s de cr&iacute;ticas.</li>
-                <li>Proporcionar una aplicaci&oacute;n web f&aacute;cil, clara e intuitiva para que los usuarios puedan usarla con facilidad.</li>
-            </ul>
+             <h3>Nuestros objetivos son:</h3>
+             <ul>
+                    <li>Crear una interfaz que no solo sea atractiva a la vista, sino que tambi&eacute;n sea muy pr&aacute;ctica y sencilla de manejar, para asegurar el triunfo del proyecto.</li>
+                    <li>Facilitar el descubrimiento de nuevo contenido a trav&eacute;s de cr&iacute;ticas.</li>
+                    <li>Proporcionar una aplicaci&oacute;n web f&aacute;cil, clara e intuitiva para que los usuarios puedan usarla con facilidad.</li>
+             </ul>
         </div>
     </div>
 
     <!--Script para el acordeón-->
-    <script src="../js/help.js"></script>
+   <script src="../js/ayuda.js"></script>
 </body>
 <footer>
-    <ul>
-        <li>
-            <!--Teléfono de contacto-->
-            <img src="../img/icono_del_telefono-remove.png" alt="icono telefono" width="36" height="36">
-            <p>Tel&eacute;fono: 123-456-7890</p>
-        </li>
-
-        <li>
-            <!--Correo de contacto-->
-            <img src="../img/icono_del_correo-.png" alt="icono correo" width="36" height="36">
-            <p>Email: CinePuma@gmail.com</p>
-        </li>
-    </ul>
+    <div class="contact-info">
+        <div>
+            <img src="../img/icono_del_telefono-remove.png" alt="Icono Teléfono" style="width: 20px; height: 20px; margin-right: 8px;">
+            <span>Teléfono: 123-456-7890</span>
+        </div>
+        
+        <div>
+            <img src="../img/icono_del_correo-.png" alt="Icono Email" style="width: 20px; height: 20px; margin-right: 8px;">
+            <span>Email: CinePuma@gmail.com</span>
+        </div>
+    </div>
 </footer>
 </html>
