@@ -1,100 +1,183 @@
-/* 1. Fondo principal y texto base */
 
+/* 1. Estilos Globales y Fondo  */
 
-/* Restablece el fondo de todos los elementos para que no hereden el * { background-color } anterior */
+body {
+    background-color: #1E3C72; /* Azul oscuro del fondo */
+    font-family: Arial, sans-serif; 
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column;
+}
+
 * {
-    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
+    box-sizing: border-box; 
 }
 
-/* 2. Estilo de la Cabecera */
+/* 2. Estructura y Estilo de la Cabecera */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background-color: #0d274c; /* Azul oscuro de la barra superior */
     padding: 15px 5%;
-    color: #1E3C72; ;
+    display: flex;
+    justify-content: space-between; /* Espacio entre logo y nav */
+    align-items: center;
+    border-bottom: 3px solid #ff6b35; /* Separador naranja */
 }
 
-/* --- ESTILOS DEL LOGO --- */
+/* Estilos del logo*/
 .logo {
-    display: flex; /* Alinea los elementos internos (imagen y span) horizontalmente */
-    align-items: center; /* Centra verticalmente la imagen y el texto */
-    gap: 8px; /* Espacio entre la imagen y el texto */
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .logo img {
-    /* Ajusta el tamaño de la imagen del logo si es necesario */
-    height: 110px; 
+    height: 60px;
     width: auto;
+    /* Aplicar el borde azul del mockup alrededor del logo */
+    border: 3px solid #1E3C72; 
+    border-radius: 5px; 
 }
 
+/* El <h1> se usa en el HTML, lo tratamos como el texto del logo */
 .logo span {
-    color: #ff6b35; /* Tono Naranja */
-    font-size: 20px; /* Tamaño 20px, alineado con el texto de los botones */
-    font-weight: bold;
-    /* El texto ya estará al lado derecho gracias a 'display: flex' en .logo */
-}
-/* ------------------------ */
-
-
-/* 3. Estilo para los elementos de navegación (ahora son <a> tags estilizados como botones) */
-.nav-button {
-    background-color: #ff6b35;
     color: white; 
-    border: none;
-    padding: 5px 15px;
-    border-radius: 20px;
-    margin: 0 5px;
+    font-size: 24px; 
     font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    text-decoration: none; 
-    display: inline-block; 
-    font-size: 16px; /* Asegura un tamaño consistente, aunque pediste 20px, 16px es más común para botones. */
-    /* Si quieres que los botones tengan 20px de texto, cambia este valor a 20px */
+    font-family: 'Times New Roman', Times, serif;
 }
 
-/* 4. Estilo de la Caja de Búsqueda */
-.search-bar {
-    flex-grow: 1; 
-    max-width: 300px;
-    margin: 0 20px;
+/* 3. Estilos del Menú de Navegación */
+nav {
+    display: flex;
+    align-items: center;
+    /* Ajustamos el espaciado para que se vea más condensado como en el mockup */
+    gap: 15px; 
 }
 
-.search-input {
-    /* 1. Fondo Transparente */
-    background-color: transparent; 
-    
-    /* 2. Borde Negro */
-    border: 2px solid black; 
-    
-    /* 3. Forma Redonda */
-    border-radius: 20px; 
-    
-    /* Ajustes de tamaño y espaciado */
-    width: 100%;
-    height: 35px;
-    color: white; 
-    padding: 5px 10px 5px 35px; /* Más padding izquierdo para dejar espacio a la lupa */
+/* Estilo para todos los enlaces de la navegación */
+nav a {
+    color: #cccccc; /* Gris claro para los enlaces no seleccionados */
+    text-decoration: none;
+    font-weight: 500;
     font-size: 1rem;
-    outline: none;
+    padding: 5px 0;
+    transition: color 0.2s;
 }
 
-/* Estilo del placeholder de búsqueda */
-.search-input::placeholder {
-    color: #cccccc;
-    font-style: italic;
-    text-align: left; 
+/* Estilo para el enlace activo: 'Género' (primer enlace) */
+nav a:first-child { 
+    color: #ff6b35; /* Color naranja para el elemento 'Género' */
+    font-weight: bold;
+    border-bottom: 2px solid #ff6b35;
+}
+
+nav a:hover {
+    color: white;
+}
+
+/* 4. Sección Principal (Main) - Título y Contenido de Géneros */
+main {
+    flex-grow: 1; 
+    padding: 30px 5% 50px;
+    background-color: #1E3C72; 
+    text-align: center; /* Centrar el título de main */
+}
+
+/* Estilo del Título Principal "Género" */
+h2.main-title {
+    color: #ff6b35; /* Naranja */
+    font-size: 2rem;
+    margin-bottom: 40px;
+    font-weight: bold;
+}
+
+/* 5. Estructura de Rejilla para los Géneros */
+.genres-grid {
+    display: grid;
+    /* 3 columnas de igual ancho con un espacio de 20px */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px 20px; 
+    max-width: 900px; /* Ancho máximo para el contenedor de la rejilla */
+    margin: 0 auto; /* Centrar la rejilla */
+}
+
+/* Contenedor de cada género (Título h3 + Tarjeta) */
+.genre-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.genre-item h3 {
+    color: white; 
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* 6. Estilo de las Tarjetas de Película */
+.movie-card {
+    position: relative;
+    width: 150px; /* Tamaño del mockup */
+    height: 220px; 
+    margin: 0; 
+    border-radius: 5px;
+    overflow: hidden; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6); 
+    transition: transform 0.3s ease;
+    background-color: #2c2c2c; 
+    cursor: pointer;
+}
+
+.movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Efecto hover */
+.movie-card:hover {
+    transform: scale(1.05); 
+    z-index: 10;
 }
 
 
-/* 5. Posicionamiento del Ícono de la Lupa */
-.icon-search {
-    position: absolute; 
-    left: 10px; 
-    top: 50%;
-    transform: translateY(-50%); 
-    width: 20px; 
-    height: auto; 
-    pointer-events: none; 
+/* 7. Simplificar y estilizar el Footer */
+footer {
+    background-color: #0d274c; 
+    color: white;
+    padding: 20px 5%;
+    text-align: left;
+    margin-top: auto; 
+    border-top: none; 
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Espacio vertical reducido entre Teléfono y Email */
+}
+
+.contact-info div {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+
+/* Estilo para los iconos de Teléfono y Email */
+.contact-info img {
+    /* Los tamaños deben coincidir con lo que pones inline en el HTML, pero es mejor definirlo aquí */
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.contact-info span {
+    font-size: 1.1rem;
+    font-weight: 500;
 }
