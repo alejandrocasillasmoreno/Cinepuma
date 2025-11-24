@@ -17,12 +17,12 @@ body {
 
 /* 2. Estilo de la Cabecera */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 5%;
     background-color: #0d274c; 
-    color: white; 
+    padding: 15px 5%;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    border-bottom: 3px solid #0d274c; 
 }
 
 /* Estilos del logo */
@@ -44,24 +44,26 @@ header {
 }
 
 /* 3. Estilo para los elementos de navegación */
-.nav-button {
-    background-color: #ff6b35;
-    color: white; 
-    border: none;
-    padding: 5px 15px;
-    border-radius: 20px;
-    margin: 0 5px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    text-decoration: none; 
-    display: inline-block; 
-    font-size: 16px; 
-    transition: background-color 0.2s;
+nav {
+    display: flex;
+    align-items: center;
+    /* Ajustamos el espaciado para que se vea más condensado como en el mockup */
+    gap: 15px; 
 }
 
-.nav-button:hover {
-    background-color: #e05c2d; 
+/* Estilo para todos los enlaces de la navegación */
+nav a {
+    color: #cccccc; /* Gris claro para los enlaces no seleccionados */
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 5px 0;
+    transition: color 0.2s;
+}
+
+
+nav a:hover {
+    color: white;
 }
 
 /* 4. Estilo de la Caja de Búsqueda */
