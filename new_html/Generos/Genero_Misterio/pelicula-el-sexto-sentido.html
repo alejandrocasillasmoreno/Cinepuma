@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Descripcion" content="Página de géneros de películas en CinePuma">
-    <title>Cinepuma - El Sexto Sentido</title>
+    <title>Cinepuma - Perdida</title>
 </head>
 
 <body>
@@ -32,36 +32,48 @@
         </nav>
     </header>
     <main>
-        <h1>El Conjuro</h1>
-        <img src="../img/ELCONJURO.png" alt="Poster El Conjuro" width="300">
+        <!--Contenido principal-->
+        <section>
+            <h2>Perdida</h2>
+            <img src="../img/Poster_Perdida.jpg" alt="Poster Perdida" width="300">
+        </section>
 
-        <h2>Sinopsis</h2>
-        <p>Basada en hechos reales, "El Conjuro" sigue a los investigadores paranormales Ed y Lorraine Warren mientras ayudan a una familia aterrorizada por una presencia oscura en su granja de Rhode Island. A medida que los eventos sobrenaturales se intensifican, los Warren deben enfrentarse a una fuerza maligna que amenaza con destruir a la familia.</p>
+        <section>
+            <h2>Sinopsis</h2>
+            <p>
+                En 2014, Nick y Amy Dunne desaparecen en su quinto aniversario de bodas. A medida que la investigación avanza, se revelan secretos oscuros y giros inesperados que ponen en duda la verdad detrás de la desaparición de Amy.
+            </p>    
+            <h2>Opiniones de usuarios</h2>
+            <div>
+                <form> <!--Hay que poner el action="comentarios.php" y method="post" cuando lo tengamos disponible-->
+                    <label for="cajaComentarios">Comenta</label><br>
+                    <textarea id="cajaComentarios" name="cajaComentarios" rows="7" cols="99" required></textarea><br>
+                    <button id="enviarComentario">Enviar</button>
+                </form>
+            </div>
 
-        <h2>Reparto</h2>
-        <ul>
-            <li>Vera Farmiga como Lorraine Warren</li>
-            <li>Patrick Wilson como Ed Warren</li>
-            <li>Lili Taylor como Carolyn Perron</li>
-            <li>Ron Livingston como Roger Perron</li>
-        </ul>
-
-        <h2>Director</h2>
-        <p>James Wan</p>
-
-        <h2>Año de estreno</h2>
-        <p>2013</p>
-
+            <!--Estos comentarios son puestos manualmente, nuestro plan es que aquí aparezcan los comentarios cuando alguien
+                usa la caja de texto y pulsa enviar, y que al estar logueado aparezca al lado de su mensaje su nombre-->
+            <article>
+                <p><strong>"¡Mejor que la primera!"</strong></p>
+                <p></p>
+            </article>
+            <article>
+                <p><strong>"Decepcionante"</strong></p>
+                <p></p>
+            </article>
+        </section>
+    </main>
     <footer>
         <ul>
             <li>
                 <!--Teléfono de contacto-->
-                <img src="../img/icono_del_telefono-remove.png" alt="icono telefono" width="36" height="36">
+                <img src="../../../img/icono del telefono.png" alt="icono telefono" width="36" height="36">
                 <p>Tel&eacute;fono: 123-456-7890</p>
             </li>
             <li>
                 <!--Correo de contacto-->
-                <img src="../img/icono_del_correo-.png" alt="icono correo" width="36" height="36">
+                <img src="../../../img/icono_del_correo.png" alt="icono correo" width="36" height="36">
                 <p>Email: CinePuma@gmail.com</p>
             </li>
         </ul>
