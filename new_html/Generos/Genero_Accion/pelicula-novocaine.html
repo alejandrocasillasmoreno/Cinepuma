@@ -31,41 +31,45 @@
             <a href="../../../html/ayuda.html" class="nav-boton help-button">Help</a>
         </nav>
     </header>
-    <main>
-        <h1>Novocaine: Sin Dolor</h1>
-        <img src="../img/NOVOCAINESindolor.png" alt="Poster Novocaine" width="300">
+        <main>
+        <!--Contenido principal-->
+        <section>
+            <h2>Novocaine</h2>
+            <img src="../img/Poster_Novocaine.jpg" alt="Poster Novocaine" width="300">
+        </section>
 
-        <h2>Sinopsis</h2>
-        <p>Novocaine es una comedia negra que sigue la historia de un dentista exitoso cuya vida da un giro inesperado
-            cuando se ve envuelto en un complicado triángulo amoroso y una serie de eventos criminales. A medida que
-            intenta mantener su vida profesional y personal en equilibrio, se encuentra atrapado en una red de engaños,
-            mentiras y asesinatos.</p>
+        <section>
+            <h2>Sinopsis</h2>
+            <p>
+                Novocaine sigue la historia de un dentista cuya vida tranquila se ve alterada cuando una nueva paciente entra en su consultorio. A medida que se desarrolla una relación complicada entre ellos, el dentista se ve envuelto en una serie de eventos inesperados que ponen en peligro su carrera y su vida personal.    
+            </p>    
+            <h2>Opiniones de usuarios</h2>
+            <div>
+                <form> <!--Hay que poner el action="comentarios.php" y method="post" cuando lo tengamos disponible-->
+                    <label for="cajaComentarios">Comenta</label><br>
+                    <textarea id="cajaComentarios" name="cajaComentarios" rows="7" cols="99" required></textarea><br>
+                    <button id="enviarComentario">Enviar</button>
+                </form>
+            </div>
 
-        <h2>Reparto</h2>
-        <ul>
-            <li>Steve Martin como Dr. Frank Sangster</li>
-            <li>Catherine O'Hara como Susan Sangster</li>
-            <li>Helena Bonham Carter como Jean Berry</li>
-            <li>Kevin Bacon como Duane Berry</li>
-        </ul>
-
-        <h2>Director</h2>
-        <p>David Atkins</p>
-
-        <h2>Año de estreno</h2>
-        <p>2001</p>
-
-
+            <!--Estos comentarios son puestos manualmente, nuestro plan es que aquí aparezcan los comentarios cuando alguien
+                usa la caja de texto y pulsa enviar, y que al estar logueado aparezca al lado de su mensaje su nombre-->
+            <article>
+                <p><strong>"¡Mejor que la primera!"</strong></p>
+                <p></p>
+            </article>
+        </section>
+    </main>
     <footer>
         <ul>
             <li>
                 <!--Teléfono de contacto-->
-                <img src="../img/icono_del_telefono-remove.png" alt="icono telefono" width="36" height="36">
+                <img src="../../../img/icono del telefono.png" alt="icono telefono" width="36" height="36">
                 <p>Tel&eacute;fono: 123-456-7890</p>
             </li>
             <li>
                 <!--Correo de contacto-->
-                <img src="../img/icono_del_correo-.png" alt="icono correo" width="36" height="36">
+                <img src="../../../img/icono_del_correo.png" alt="icono correo" width="36" height="36">
                 <p>Email: CinePuma@gmail.com</p>
             </li>
         </ul>
