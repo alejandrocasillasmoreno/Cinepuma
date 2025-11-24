@@ -4,57 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="Descripcion" content="">
+    <meta name="Descripcion" content="Página de películas mejor valoradas de CinePuma">
     <title>CinePuma - Mejores Valoradas</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../css/mejoresValoradas.css"> 
 </head>
 
 <body>
-
     <header>
-        <div class="Encabezado">
-            <div class="Logo">
-                <img src="../img/Logo2.png" alt="Logo Cinepuma" class="logo-img" width="100">
-                <h1><a href="index.html">CinePuma</a></h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="Generos.html" class="button">Géneros</a></li>
-                    <li><a href="mejorValoradas.html" class="button">Mejor valoradas</a></li>
-                    <li><a href="ayuda.html" class="button">Ayuda</a></li>
-                    <li><a href="detalle.html" class="button">Reseñas</a></li>
-                </ul>
-            </nav>
-            <form>
-                <input type="text" id="busqueda" placeholder="Buscar películas...">
-            </form>
+        <div class="logo">
+            <img src="../img/Logo2.png" alt="Logo Cinepuma">
+            <span>CinePuma</span> 
         </div>
-    </header>
+        
+        <nav>
+            <a href="Generos.html">Género</a>
+            <a href="mejorValoradas.html">Mejores valoradas</a>
+            <a href="ayuda.html">help</a>
+            <a href="detalle.html">Reseñas</a>
+        </nav>
+        
+        </header>
 
-    <div class="container section-header">
-        <h2>Las Películas Mejor Valoradas</h2>
-    </div>
+    <main id="main">
+        <h2 class="main-title">Películas mejor valoradas</h2>
 
-    <main id="main"></main>
+        <div class="movie-list">
+            
+            <div class="movie-item">
+                <div class="movie-card">
+                    <img src="../img/jurassic_world.jpg" alt="Póster Jurassic World">
+                </div>
+            </div>
 
+            <div class="movie-item">
+                <div class="movie-card">
+                    <img src="../img/avatar_2.jpg" alt="Póster Avatar: The Way of Water">
+                </div>
+            </div>
+
+            </div>
+    </main>
+
+    <footer>
+        <ul>
+            <li>
+                <!-- Placeholder de icono -->
+                <img src="../img/icono_del_telefono-remove.png" alt="icono telefono"
+                    style="vertical-align: middle; width: 36px; height: 36px;">
+                Teléfono: 123-456-7890
+            </li>
+
+            <li>
+                <!-- Placeholder de icono -->
+                <img src="../img/icono_del_correo-.png" alt="icono correo"
+                    style="vertical-align: middle; width: 36px; height: 36px;">
+                Email: CinePuma@gmail.com
+            </li>
+        </ul>
+    </footer>
+    
     <script src="../js/top_rated.js"></script>
     <script src="../js/detalle.js"></script>
 </body>
-<footer>
-    <ul>
-        <li>
-            <img src="../img/icono_del_telefono-remove.png" alt="icono telefono"
-                style="vertical-align: middle; width: 36px; height: 36px;">
-            Teléfono: 123-456-7890
-        </li>
-
-        <li>
-            <img src="../img/icono_del_correo-.png" alt="icono correo"
-                style="vertical-align: middle; width: 36px; height: 36px;">
-            Email: CinePuma@gmail.com
-        </li>
-    </ul>
-</footer>
 
 </html>
+
