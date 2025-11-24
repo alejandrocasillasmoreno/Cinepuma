@@ -1,0 +1,224 @@
+/* ---------------------------------------------------- */
+/* 1. ESTILOS GLOBALES Y CONTENEDOR PRINCIPAL */
+/* ---------------------------------------------------- */
+
+body {
+    /* Fondo oscuro y color principal */
+    background-color: #1E3C72; 
+    font-family: Arial, sans-serif; 
+    margin: 0;
+    padding: 0;
+    
+    /* Configuración de Flexbox para ocupar toda la altura y empujar el footer al fondo */
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column;
+    text-align: center; 
+}
+
+/* Aplicar el modelo de caja a todos los elementos */
+* {
+    box-sizing: border-box; 
+}
+
+/* ---------------------------------------------------- */
+/* 2. ESTILO DE LA CABECERA (HEADER) */
+/* ---------------------------------------------------- */
+
+header {
+    display: flex;
+    /* Distribuye el espacio entre el logo y el grupo de búsqueda/nav */
+    justify-content: space-between; 
+    align-items: center;
+    padding: 15px 5%;
+    background-color: #0d274c; /* Azul oscuro de la cabecera */
+    color: white; 
+}
+
+/* Estilos del logo (Ajustado para el <h1> mantenido) */
+.logo {
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo img {
+    height: 60px; 
+    width: auto;
+}
+
+/* Ajuste para el <h1> dentro de .logo */
+.logo h1 {
+    margin: 0; /* Elimina el margen por defecto del h1 */
+}
+
+/* Estilo del texto del logo (apunta al <a> dentro del <h1>) */
+.logo h1 a {
+    color: white; 
+    font-size: 30px; 
+    font-weight: bold;
+    text-decoration: none; /* Quita el subrayado del enlace */
+}
+
+
+/* Contenedor para la barra de búsqueda y los botones (para agrupar a la derecha) */
+.nav-group {
+    display: flex;
+    align-items: center;
+    gap: 25px; /* Espacio entre la barra de búsqueda y los botones */
+}
+
+/* ---------------------------------------------------- */
+/* 3. ESTILOS DE NAVEGACIÓN (BOTONES) */
+/* ---------------------------------------------------- */
+
+/* Ajuste para mantener <ul> y <li> */
+nav ul {
+    list-style: none; /* Elimina los puntos */
+    padding: 0;
+    margin: 0;
+    display: flex; /* Muestra los elementos en línea */
+    gap: 10px; 
+}
+
+/* El <li> debe ser flexbox si queremos que los botones se comporten bien, pero con el 'gap' del <ul> es suficiente */
+nav ul li {
+    margin: 0;
+}
+
+
+.nav-button {
+    background-color: #ff6b35; /* Color Naranja */
+    color: white; 
+    border: none;
+    padding: 8px 18px; 
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px; 
+    transition: background-color 0.2s;
+}
+
+.nav-button:hover {
+    background-color: #e05c2d; /* Naranja más oscuro al pasar el ratón */
+}
+
+/* ---------------------------------------------------- */
+/* 4. ESTILO DE LA BARRA DE BÚSQUEDA */
+/* ---------------------------------------------------- */
+
+.search-bar {
+    position: relative; 
+    display: flex;
+    align-items: center;
+    width: 250px; /* Ancho fijo para la barra de búsqueda */
+}
+
+.search-input {
+    background-color: transparent; 
+    border: 2px solid white; /* Borde blanco */
+    border-radius: 20px; 
+    width: 100%;
+    height: 40px; 
+    color: white; 
+    /* Padding izquierdo para dejar espacio al ícono de la lupa */
+    padding: 5px 15px 5px 40px; 
+    font-size: 1rem;
+    outline: none;
+}
+
+/* Estilo del texto del placeholder */
+.search-input::placeholder {
+    color: #cccccc;
+    font-style: italic;
+    text-align: left; 
+}
+
+/* Posicionamiento del Ícono de la Lupa */
+.icon-search {
+    position: absolute; 
+    left: 15px; 
+    top: 50%;
+    transform: translateY(-50%); 
+    width: 20px; 
+    height: auto; 
+    pointer-events: none; 
+}
+
+/* ---------------------------------------------------- */
+/* 5. CONTENIDO PRINCIPAL (PELÍCULAS) */
+/* ---------------------------------------------------- */
+
+main {
+    flex-grow: 1; 
+    padding-top: 50px;
+}
+
+/* Ajuste para el <h1> de la sección "Acción" */
+main h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.movies-grid {
+    display: flex;
+    justify-content: center; 
+    gap: 40px; /* Espacio entre cada póster */
+    padding-bottom: 50px;
+}
+
+.movie-card img {
+    /* Estilos para las imágenes de los pósters */
+    height: 350px; 
+    width: 220px; 
+    border-radius: 5px; 
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Sombra para que destaquen */
+}
+
+/* ---------------------------------------------------- */
+/* 6. PIE DE PÁGINA (FOOTER) */
+/* ---------------------------------------------------- */
+
+footer {
+    background-color: #0d274c; 
+    color: white; 
+    padding: 20px 5%;
+    width: 100%;
+    text-align: left; 
+    margin-top: auto; 
+}
+
+.contact-info {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 10%; 
+}
+
+/* Ajuste para mantener <ul> y <li> en el footer */
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-item {
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+/* Estilo para los iconos de contacto (para las imágenes) */
+.contact-icon {
+    width: 30px; 
+    height: 30px;
+    /* Asegúrate de que los íconos de tu HTML tengan la clase "contact-icon" */
+}

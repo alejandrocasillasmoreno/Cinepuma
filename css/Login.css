@@ -179,7 +179,7 @@ input::placeholder {
 }
 /* 1. Fondo principal y texto base */
 body {
-    /* 🔑 CAMBIO CLAVE: Fondo azul oscuro global */
+    /*Fondo azul oscuro global */
     background-color: #1E3C72; 
     text-align: center;
     font-family: Arial, sans-serif; 
@@ -291,7 +291,7 @@ header {
 
 /* 6. Estilo del Contenedor del Formulario (Login) */
 div.container {
-    /* 🔑 CAMBIO CLAVE: Fondo del recuadro naranja */
+    /*Fondo del recuadro naranja */
     background-color: #ff6b35; 
     border-radius: 10px;
     padding: 20px;
@@ -340,7 +340,6 @@ input[type="password"] {
 
 /* Estilo para el botón "Siguiente" */
 .submit-button {
-    /* 🔑 CAMBIO CLAVE: Degradado como en la imagen de referencia */
     background: linear-gradient(to bottom, #ff9660, #ff6b35); 
     color: white;
     border: none; /* Quitamos el borde blanco para que se vea el degradado */
@@ -363,10 +362,10 @@ input[type="password"] {
 
 /* Estilo para el enlace de contraseña olvidada */
 .forgot-password {
-    /* 🔑 CAMBIO CLAVE: Centrado automático (ya estaba en el body pero lo forzamos con display block) */
+    /*Centrado automático (ya estaba en el body pero lo forzamos con display block) */
     display: block; 
     text-align: center;
-    /* 🔑 CAMBIO CLAVE: Color blanco para contrastar con el fondo azul */
+    /*Color blanco para contrastar con el fondo azul */
     color: #ff6b35; 
     font-size: 0.8rem;
     margin-top: 15px;
