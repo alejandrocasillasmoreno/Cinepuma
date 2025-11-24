@@ -21,7 +21,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 15px 5%;
-    background-color: #333; 
+    background-color: #0d274c; 
     color: white; 
 }
 
@@ -231,7 +231,7 @@ footer {
     padding: 20px 5%;
     text-align: left;
     margin-top: 30px;
-    border-top: 2px solid #ff6b35; 
+    border-top: 2px solid #000000; 
 }
 
 footer ul {

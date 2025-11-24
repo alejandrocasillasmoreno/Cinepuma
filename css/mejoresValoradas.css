@@ -23,7 +23,7 @@ header {
     display: flex;
     justify-content: space-between; 
     align-items: center;
-    border-bottom: 3px solid #ff6b35; 
+    border-bottom: 3px solid #0d274c; 
 }
 
 /* Estilos del logo */
@@ -145,7 +145,7 @@ footer {
     padding: 20px 5%;
     text-align: left;
     margin-top: auto; 
-    border-top: 2px solid #1E3C72; 
+    border-top: 2px solid #000000; 
 }
 
 .contact-info {
