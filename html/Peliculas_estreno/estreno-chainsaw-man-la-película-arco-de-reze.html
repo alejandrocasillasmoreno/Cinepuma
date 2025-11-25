@@ -14,8 +14,8 @@
     <header>
         <!--Logo Cinepuma-->
         <div class="logo">
-            <img src="../img/Logo_Cinepuma.png" alt="CinePuma Logo">
-            <h1><a href="index.html">CinePuma</a></h1>
+            <img src="../../img/Logo_Cinepuma.png" alt="CinePuma Logo">
+            <h1><a href="../index.html">CinePuma</a></h1>
         </div>
 
         <!--Barra de búsqueda-->
@@ -26,24 +26,67 @@
 
         <!--Navegador de navegación principal-->
         <nav>
-            <a href="../html/generos.html" class="nav-boton">G&eacute;neros</a>
-            <a href="../html/mejorValoradas.html" class="nav-boton">Mejor valoradas</a>
-            <a href="../html/ayuda.html" class="nav-boton help-button">Help</a>
+            <a href="../Generos/generos.html" class="nav-boton">G&eacute;neros</a>
+            <a href="../../html/mejorValoradas.html" class="nav-boton">Mejor valoradas</a>
+            <a href="../../html/ayuda.html" class="nav-boton help-button">Help</a>
         </nav>
     </header>
     <main>
         <!--Contenido principal-->
+    
+        <section>
+            <h1>Chainsaw Man - la película: arco de Reze</h1>
+            <img src="../../img/chainsaw-man-la película-arco-de-Reze.jpg" alt="Poster Chainsaw Man" width="300">
+        </section>
+
+        <section>
+            <h2>Sinopsis</h2>
+            <p>
+                En esta emocionante entrega de "Chainsaw Man", el arco de Reze cobra vida con intensas batallas y giros inesperados que mantendrán a los fans al borde de sus asientos. 
+                La historia sigue a Denji mientras enfrenta nuevos desafíos y alianzas en su lucha por sobrevivir en un mundo lleno de demonios y peligros.
+            </p>
+        </section>
+        <section>
+            <h2>Opiniones de usuarios</h2>
+            <div>
+                <form> <!--Hay que poner el action="comentarios.php" y method="post" cuando lo tengamos disponible-->
+                    <label for="cajaComentarios">Comenta</label><br>
+                    <textarea id="cajaComentarios" name="cajaComentarios" rows="7" cols="99" required></textarea><br>
+                    <button id="enviarComentario">Enviar</button>
+                </form>
+            </div>
+
+            <!--Estos comentarios son puestos manualmente, nuestro plan es que aquí aparezcan los comentarios cuando alguien
+                usa la caja de texto y pulsa enviar, y que al estar logueado aparezca al lado de su mensaje su nombre-->
+            <article>
+                <p><strong>"¡Mejor que la primera!"</strong></p>
+                <p>
+                    ¡Brutal! Justo lo que esperaba. La química entre Denji y Reze es lo mejor
+                    de la película. Mucha más acción y la trama te mantiene pegado al asiento. 10/10.
+                </p>
+            </article>
+
+            <br>
+
+            <article>
+                <p><strong>"Decepcionante"</strong></p>
+                <p>
+                    No estuvo a la altura de mis expectativas.
+                </p>
+            </article>
+        </section>
+
     </main>
     <footer>
         <ul>
             <li>
                 <!--Teléfono de contacto-->
-                <img src="../img/icono_del_telefono-remove.png" alt="icono telefono" width="36" height="36">
+                <img src="../../img/icono_del_telefono-remove.png" alt="icono telefono" width="36" height="36">
                 <p>Tel&eacute;fono: 123-456-7890</p>
             </li>
             <li>
                 <!--Correo de contacto-->
-                <img src="../img/icono_del_correo-.png" alt="icono correo" width="36" height="36">
+                <img src="../../img/icono_del_correo.png" alt="icono correo" width="36" height="36">
                 <p>Email: CinePuma@gmail.com</p>
             </li>
         </ul>

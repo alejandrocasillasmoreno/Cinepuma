@@ -14,8 +14,8 @@
     <header>
         <!--Logo Cinepuma-->
         <div class="logo">
-            <img src="../img/Logo_Cinepuma.png" alt="CinePuma Logo">
-            <h1><a href="index.html">CinePuma</a></h1>
+            <img src="../../img/Logo_Cinepuma.png" alt="CinePuma Logo">
+            <h1><a href="../index.html">CinePuma</a></h1>
         </div>
 
         <!--Barra de búsqueda-->
@@ -26,24 +26,65 @@
 
         <!--Navegador de navegación principal-->
         <nav>
-            <a href="../html/generos.html" class="nav-boton">G&eacute;neros</a>
-            <a href="../html/mejorValoradas.html" class="nav-boton">Mejor valoradas</a>
-            <a href="../html/ayuda.html" class="nav-boton help-button">Help</a>
+            <a href="../Generos/generos.html" class="nav-boton">G&eacute;neros</a>
+            <a href="../../html/mejorValoradas.html" class="nav-boton">Mejor valoradas</a>
+            <a href="../../html/ayuda.html" class="nav-boton help-button">Help</a>
         </nav>
     </header>
     <main>
         <!--Contenido principal-->
+        <section>
+            <h1>The Batman</h1>
+            <img src="../../img/the-batman.jpg" alt="Poster The Batman" width="300">
+        </section>
+        <section>
+            <h2>Sinopsis</h2>
+            <p>
+                En "The Batman", el vigilante enmascarado de Gotham City se enfrenta a una serie de crímenes que revelan la corrupción profunda en la ciudad. 
+                Mientras investiga, Batman descubre una conspiración que amenaza con destruir todo lo que ha jurado proteger.
+            </p>
+        </section>
+        <section>
+            <h2>Opiniones de usuarios</h2>
+            <div>
+                <form> <!--Hay que poner el action="comentarios.php" y method="post" cuando lo tengamos disponible-->
+                    <label for="cajaComentarios">Comenta</label><br>
+                    <textarea id="cajaComentarios" name="cajaComentarios" rows="7" cols="99" required></textarea><br>
+                    <button id="enviarComentario">Enviar</button>
+                </form>
+            </div>
+
+            <!--Estos comentarios son puestos manualmente, nuestro plan es que aquí aparezcan los comentarios cuando alguien
+                usa la caja de texto y pulsa enviar, y que al estar logueado aparezca al lado de su mensaje su nombre-->
+            <article>
+                <p><strong>"¡Increíble!"</strong></p>
+                <p>
+                    La atmósfera oscura y la actuación de Robert Pattinson como Batman son excepcionales.
+                    La trama es intrigante y mantiene al espectador en vilo hasta el final. ¡Una obra maestra moderna!
+                </p>
+            </article>
+
+            <br>
+
+            <article>
+                <p><strong>"No cumplió mis expectativas"</strong></p>
+                <p>
+                    Esperaba más acción y menos enfoque en el drama. Aunque la cinematografía es impresionante,
+                    la historia se siente lenta en algunos momentos. No es la mejor versión de Batman que he visto.
+                </p>
+            </article>
+        </section>
     </main>
     <footer>
         <ul>
             <li>
                 <!--Teléfono de contacto-->
-                <img src="../img/icono_del_telefono-remove.png" alt="icono telefono" width="36" height="36">
+                <img src="../../img/icono_del_telefono-remove.png" alt="icono telefono" width="36" height="36">
                 <p>Tel&eacute;fono: 123-456-7890</p>
             </li>
             <li>
                 <!--Correo de contacto-->
-                <img src="../img/icono_del_correo-.png" alt="icono correo" width="36" height="36">
+                <img src="../../img/icono_del_correo.png" alt="icono correo" width="36" height="36">
                 <p>Email: CinePuma@gmail.com</p>
             </li>
         </ul>
