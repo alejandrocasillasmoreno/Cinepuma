@@ -1,0 +1,237 @@
+/* ---------------------------------------------------- */
+/* 1. RESET Y ESTILOS GLOBALES */
+/* ---------------------------------------------------- */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1E3C72;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* Flexbox para Sticky Footer */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* ---------------------------------------------------- */
+/* 2. LAYOUT PRINCIPAL */
+/* ---------------------------------------------------- */
+
+main {
+    flex-grow: 1; /* Ocupa el espacio restante entre header y footer */
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+main h1, main h2 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+/* ---------------------------------------------------- */
+/* 3. HEADER Y NAVEGACIÓN */
+/* ---------------------------------------------------- */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: #0d274c;
+    color: white;
+}
+
+/* --- LOGO --- */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo img {
+    height: 60px;
+    width: auto;
+}
+
+.logo h1 {
+    margin: 0;
+}
+
+.logo h1 a {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* --- MENÚ DE NAVEGACIÓN --- */
+nav a {
+    color: #cccccc;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 5px 0;
+    transition: color 0.2s;
+    margin-left: 20px;
+}
+
+/* Estado activo (ej: Home/Género) */
+nav a:first-child {
+    color: #ff6b35;
+    font-weight: bold;
+    border-bottom: 2px solid #ff6b35;
+}
+
+nav a:hover {
+    color: white;
+}
+
+/* ---------------------------------------------------- */
+/* 4. COMPONENTE: BARRA DE BÚSQUEDA */
+/* ---------------------------------------------------- */
+
+.search-bar {
+    position: relative;
+    flex-grow: 1;
+    max-width: 300px;
+    margin: 0 20px;
+}
+
+.search-input {
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 20px;
+    width: 100%;
+    height: 35px;
+    color: white;
+    padding: 5px 10px 5px 35px; /* Padding izquierdo para el icono */
+    font-size: 1rem;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: #cccccc;
+    font-style: italic;
+    text-align: left;
+}
+
+.icon-search {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: auto;
+    pointer-events: none;
+}
+
+/* ---------------------------------------------------- */
+/* 3. CONTENIDO PRINCIPAL (LISTA DE PELÍCULAS) */
+/* ---------------------------------------------------- */
+
+main {
+    flex-grow: 1; /* Empuja el footer hacia abajo */
+    padding: 40px 10%;
+    text-align: center;
+    
+    /* Configuración GRID para las películas */
+    display: flex;
+    flex-wrap: wrap; /* Permite que bajen a la siguiente línea */
+    justify-content: center; /* Centrado horizontal */
+    gap: 30px; /* Espacio entre películas */
+}
+
+/* Título de la página (El h2 suelto en el main) */
+main h2 {
+    width: 100%; /* Ocupa todo el ancho para estar arriba solo */
+    font-size: 2.5rem;
+    color: #ff6b35; /* Naranja corporativo */
+    border-bottom: 2px solid #ff6b35;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+/* --- TARJETA DE PELÍCULA (.pelicula) --- */
+.pelicula {
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo semitransparente */
+    border-radius: 10px;
+    padding: 15px;
+    width: 250px; /* Ancho fijo de la tarjeta */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto al pasar el ratón por encima */
+.pelicula:hover {
+    transform: translateY(-10px); /* Sube un poco */
+}
+
+/* Título de la película dentro de la tarjeta */
+.pelicula h3 {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+.pelicula h3 a {
+    color: white;
+    font-weight: bold;
+}
+
+.pelicula h3 a:hover {
+    color: #ff6b35;
+}
+
+/* Imagen de la película */
+.pelicula img {
+    width: 100%;
+    height: 330px; /* Altura fija para que todas se vean iguales */
+    object-fit: cover; /* Recorta la imagen si no encaja, sin deformarla */
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* ---------------------------------------------------- */
+/* 9. FOOTER */
+/* ---------------------------------------------------- */
+
+footer {
+    background-color: #0d274c;
+    color: white;
+    padding: 20px 5%;
+    width: 100%;
+    text-align: left;
+    margin-top: auto;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+.contact-icon {
+    width: 30px;
+    height: 30px;
+}
