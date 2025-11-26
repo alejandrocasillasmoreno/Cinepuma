@@ -1,80 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="Descripcion" content="Página de géneros de películas en CinePuma">
     <title>Cinepuma - Detective Chinatown</title>
-    <link rel="stylesheet" href="../css/pelicula.css">
+    <link rel="stylesheet" href="../../../css/peliculas.css">
 </head>
-
 <body>
-
-    <!--Encabezado-->
     <header>
-        <!--Logo Cinepuma-->
         <div class="logo">
-            <img src="../img/Logo_Cinepuma.png" alt="CinePuma Logo">
+            <img src="../../../img/Logo_Cinepuma.png" alt="CinePuma Logo">
             <h1><a href="../../index.html">CinePuma</a></h1>
         </div>
-
-        <!--Barra de búsqueda-->
-        <div class="barra-busqueda">
-            <input type="text" placeholder="Buscar">
-            <img src="../img/imagen_lupa.png" alt="Icono búsqueda" class="icono-busqueda">
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar" class="search-input">
+            <img src="../../../img/imagen_lupa-removebg.png" alt="Icono búsqueda" class="icon-search">
         </div>
-
-        <!--Navegador de navegación principal-->
         <nav>
-            <a href="../generos.html" class="nav-boton">G&eacute;neros</a>
-            <a href="../../../html/mejorValoradas.html" class="nav-boton">Mejor valoradas</a>
-            <a href="../../../html/ayuda.html" class="nav-boton help-button">Help</a>
+            <a href="../generos.html">Géneros</a>
+            <a href="../../../html/mejorValoradas.html">Mejor valoradas</a>
+            <a href="../../../html/ayuda.html">Help</a>
         </nav>
     </header>
-    
-    <!--Contenido principal-->
-        <main>
-        <section>
+
+    <main>
+        <section class="detalle-pelicula">
             <h2>Detective Chinatown</h2>
-            <img src="../img/Poster_Detective_Chinatown.jpg" alt="Poster Detective Chinatown" width="300">
+            <img src="../../../img/PosterDetectiveChinatown.png" class="poster-pelicula" alt="Póster Detective Chinatown">
         </section>
 
-        <section>
-            <h2>Sinopsis</h2>
-            <p>
-                "Detective Chinatown" sigue las aventuras de un joven detective llamado Tang Ren, quien viaja a Bangkok para ayudar a su primo Qin Feng a resolver un misterioso asesinato. A medida que investigan, se enfrentan a una serie de desafíos y peligros, mientras desentrañan una compleja red de conspiraciones en la vibrante ciudad.
-            </p>    
-            <h2>Opiniones de usuarios</h2>
-            <div>
+        <section class="contenedor-contenido">
+            <h2 class="titulo-seccion">Sinopsis</h2>
+            <p class="texto-sinopsis">
+                Tras ser rechazado en la academia de policía, un joven iluso viaja a Bangkok para visitar a su tío, quien resulta ser un detective de mala fama. Juntos, se ven envueltos en un misterioso caso de asesinato y deben resolverlo para limpiar sus nombres mientras huyen de la policía y de una banda de criminales.
+            </p>
+            
+            <h2 class="titulo-seccion">Opiniones de usuarios</h2>
+            <div class="formulario-wrapper">
                 <form>
-                    <label for="cajaComentarios">Comenta</label><br>
-                    <textarea id="cajaComentarios" name="cajaComentarios" rows="7" cols="99" required></textarea><br>
-                    <button id="enviarComentario">Enviar</button>
+                    <textarea id="cajaComentarios" name="cajaComentarios" class="input-comentario" placeholder="Escribe tu opinión aquí..." required></textarea>
+                    <button type="submit" id="enviarComentario" class="btn-enviar">Enviar</button>
                 </form>
             </div>
-
-            <article>
-                <p><strong>"¡Mejor que la primera!"</strong></p>
-                <p></p>
-            </article>
         </section>
-    </main>    
+    </main>
 
     <footer>
         <ul>
-            <li>
-                <!--Teléfono de contacto-->
-                <img src="../../../img/icono del telefono.png" alt="icono telefono" width="36" height="36">
-                <p>Tel&eacute;fono: 123-456-7890</p>
+            <li class="contact-item">
+                <img src="../../../img/icono_del_telefono-remove.png" alt="icono telefono" class="contact-icon">
+                <p>Teléfono: 123-456-7890</p>
             </li>
-            <li>
-                <!--Correo de contacto-->
-                <img src="../../../img/icono_del_correo.png" alt="icono correo" width="36" height="36">
+            <li class="contact-item">
+                <img src="../../../img/icono_del_correo.png" alt="icono correo" class="contact-icon">
                 <p>Email: CinePuma@gmail.com</p>
             </li>
         </ul>
     </footer>
 </body>
-
-</html>  
+</html>
