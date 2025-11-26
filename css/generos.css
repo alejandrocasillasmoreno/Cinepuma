@@ -6,7 +6,6 @@ body {
     font-family: Arial, sans-serif; 
     margin: 0;
     padding: 0;
-    min-height: 100vh; 
     display: flex; 
     flex-direction: column;
 }
@@ -146,38 +145,43 @@ h2.main-title {
 }
 
 
-/* 7. Simplificar y estilizar el Footer */
+/* ---------------------------------------------------- */
+/* 6. PIE DE PÁGINA (FOOTER) */
+/* ---------------------------------------------------- */
+
 footer {
     background-color: #0d274c; 
-    color: white;
+    color: white; 
     padding: 20px 5%;
-    text-align: left;
+    width: 100%;
+    text-align: left; 
     margin-top: auto; 
-    border-top: none; 
 }
 
 .contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 5px; /* Espacio vertical reducido entre Teléfono y Email */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 10%; 
 }
 
-.contact-info div {
-    display: flex;
-    align-items: center;
-    font-size: 1rem;
+/* Ajuste para mantener <ul> y <li> en el footer */
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-/* Estilo para los iconos de Teléfono y Email */
-.contact-info img {
-    /* Los tamaños deben coincidir con lo que pones inline en el HTML, pero es mejor definirlo aquí */
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-    vertical-align: middle;
-}
-
-.contact-info span {
+.contact-item {
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+    margin: 10px 0;
     font-size: 1.1rem;
-    font-weight: 500;
+}
+
+/* Estilo para los iconos de contacto (para las imágenes) */
+.contact-icon {
+    width: 30px; 
+    height: 30px;
+    /* Asegúrate de que los íconos de tu HTML tengan la clase "contact-icon" */
 }
