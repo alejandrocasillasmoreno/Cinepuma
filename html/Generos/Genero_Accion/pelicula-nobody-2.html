@@ -1,76 +1,58 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="Descripcion" content="Página de géneros de películas en CinePuma">
     <title>Cinepuma - Nobody 2</title>
+    <link rel="stylesheet" href="../../../css/peliculas.css">
 </head>
-
 <body>
-
-    <!--Encabezado-->
     <header>
-        <!--Logo Cinepuma-->
         <div class="logo">
             <img src="../../../img/Logo_Cinepuma.png" alt="CinePuma Logo">
             <h1><a href="../../index.html">CinePuma</a></h1>
         </div>
-
-        <!--Barra de búsqueda-->
-        <div class="barra-busqueda">
-            <input type="text" placeholder="Buscar">
-            <img src="../../../img/imagen_lupa-removebg.png" alt="Icono búsqueda" class="icono-busqueda">
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar" class="search-input">
+            <img src="../../../img/imagen_lupa-removebg.png" alt="Icono búsqueda" class="icon-search">
         </div>
-
-        <!--Navegador de navegación principal-->
         <nav>
-            <a href="../generos.html" class="nav-boton">G&eacute;neros</a>
-            <a href="../../../html/mejorValoradas.html" class="nav-boton">Mejor valoradas</a>
-            <a href="../../../html/ayuda.html" class="nav-boton help-button">Help</a>
+            <a href="../generos.html">Géneros</a>
+            <a href="../../../html/mejorValoradas.html">Mejor valoradas</a>
+            <a href="../../../html/ayuda.html">Help</a>
         </nav>
     </header>
+
     <main>
-        <section>
-            <h2>Nobody 2 (2024)</h2>
-            <img src="../../../img/NOBODY2_Pelicula.png" alt="Poster de la película Nobody 2">
+        <section class="detalle-pelicula">
+            <h2>Nobody 2</h2>
+            <img src="../../../img/PosterNobody2.png" class="poster-pelicula" alt="Póster Nobody 2">
         </section>
 
-        <section>
-            <h2>Sinopsis</h2>
-            <p>
-                Nobody 2 sigue la historia de Hutch Mansell, un hombre común con un pasado oculto, que se ve obligado a
-                regresar a su antigua vida cuando su familia es amenazada por una peligrosa organización criminal. Con
-                habilidades letales y una determinación implacable, Hutch desata una ola de violencia para proteger a
-                sus seres queridos y ajustar cuentas con su pasado.
+        <section class="contenedor-contenido">
+            <h2 class="titulo-seccion">Sinopsis</h2>
+            <p class="texto-sinopsis">
+                Hutch Mansell regresa en esta explosiva secuela. Tras haber recuperado su instinto de lucha, Hutch se enfrenta a una nueva y peligrosa amenaza que pondrá en riesgo a su familia y lo obligará a desatar todo su arsenal de habilidades letales una vez más.
             </p>
-            <h2>Opiniones de usuarios</h2>
-            <div>
-                <form> <!--Hay que poner el action="comentarios.php" y method="post" cuando lo tengamos disponible-->
-                    <label for="cajaComentarios">Comenta</label><br>
-                    <textarea id="cajaComentarios" name="cajaComentarios" rows="7" cols="99" required></textarea><br>
-                    <button id="enviarComentario">Enviar</button>
+            
+            <h2 class="titulo-seccion">Opiniones de usuarios</h2>
+            <div class="formulario-wrapper">
+                <form>
+                    <textarea id="cajaComentarios" name="cajaComentarios" class="input-comentario" placeholder="Escribe tu opinión aquí..." required></textarea>
+                    <button type="submit" id="enviarComentario" class="btn-enviar">Enviar</button>
                 </form>
             </div>
-
-            <!--Estos comentarios son puestos manualmente, nuestro plan es que aquí aparezcan los comentarios cuando alguien
-                usa la caja de texto y pulsa enviar, y que al estar logueado aparezca al lado de su mensaje su nombre-->
-            <article>
-                <p><strong>"¡Mejor que la primera!"</strong></p>
-                <p></p>
-            </article>
         </section>
+    </main>
+
     <footer>
         <ul>
-            <li>
-                <!--Teléfono de contacto-->
-                <img src="../../../img/icono del telefono.png" alt="icono telefono" width="36" height="36">
-                <p>Tel&eacute;fono: 123-456-7890</p>
+            <li class="contact-item">
+                <img src="../../../img/icono_del_telefono-remove.png" alt="icono telefono" class="contact-icon">
+                <p>Teléfono: 123-456-7890</p>
             </li>
-            <li>
-                <!--Correo de contacto-->
-                <img src="../../../img/icono_del_correo.png" alt="icono correo" width="36" height="36">
+            <li class="contact-item">
+                <img src="../../../img/icono_del_correo.png" alt="icono correo" class="contact-icon">
                 <p>Email: CinePuma@gmail.com</p>
             </li>
         </ul>
