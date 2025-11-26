@@ -1,0 +1,296 @@
+/* ==================================================== */
+/* ÍNDICE DE CONTENIDOS
+   1. Reset y Estilos Globales
+   2. Layout Principal (Body, Main)
+   3. Header y Navegación
+   4. Componente: Barra de Búsqueda
+   5. Componente: Cards y Posters (Listados)
+   6. Vista Detalle (Sinopsis y Contenedores)
+   7. Formulario y Comentarios
+   8. Componente: Botones (UI)
+   9. Footer
+/* ==================================================== */
+
+/* ---------------------------------------------------- */
+/* 1. RESET Y ESTILOS GLOBALES */
+/* ---------------------------------------------------- */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1E3C72;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* Flexbox para Sticky Footer */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* ---------------------------------------------------- */
+/* 2. LAYOUT PRINCIPAL */
+/* ---------------------------------------------------- */
+
+main {
+    flex-grow: 1; /* Ocupa el espacio restante entre header y footer */
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+main h1, main h2 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+/* ---------------------------------------------------- */
+/* 3. HEADER Y NAVEGACIÓN */
+/* ---------------------------------------------------- */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: #0d274c;
+    color: white;
+}
+
+/* --- LOGO --- */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo img {
+    height: 60px;
+    width: auto;
+}
+
+.logo h1 {
+    margin: 0;
+}
+
+.logo h1 a {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* --- MENÚ DE NAVEGACIÓN --- */
+nav a {
+    color: #cccccc;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 5px 0;
+    transition: color 0.2s;
+    margin-left: 20px;
+}
+
+/* Estado activo (ej: Home/Género) */
+nav a:first-child {
+    color: #ff6b35;
+    font-weight: bold;
+    border-bottom: 2px solid #ff6b35;
+}
+
+nav a:hover {
+    color: white;
+}
+
+/* ---------------------------------------------------- */
+/* 4. COMPONENTE: BARRA DE BÚSQUEDA */
+/* ---------------------------------------------------- */
+
+.search-bar {
+    position: relative;
+    flex-grow: 1;
+    max-width: 300px;
+    margin: 0 20px;
+}
+
+.search-input {
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 20px;
+    width: 100%;
+    height: 35px;
+    color: white;
+    padding: 5px 10px 5px 35px; /* Padding izquierdo para el icono */
+    font-size: 1rem;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: #cccccc;
+    font-style: italic;
+    text-align: left;
+}
+
+.icon-search {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: auto;
+    pointer-events: none;
+}
+
+/* ---------------------------------------------------- */
+/* 5. COMPONENTE: CARDS Y POSTERS */
+/* ---------------------------------------------------- */
+
+.movie-card img, 
+.poster-pelicula {
+    height: 350px;
+    width: 220px;
+    border-radius: 5px;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------------------------------------------------- */
+/* 6. VISTA DETALLE (SINOPSIS Y CONTENIDO) */
+/* ---------------------------------------------------- */
+
+.contenedor-contenido {
+    width: 90%;
+    max-width: 800px;
+    padding: 20px;
+    text-align: center;
+}
+
+.titulo-seccion {
+    color: #ff6b35;
+    font-size: 1.8rem;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ff6b35;
+    padding-bottom: 5px;
+}
+
+.texto-sinopsis {
+    color: #f0f0f0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 40px;
+}
+
+/* ---------------------------------------------------- */
+/* 7. FORMULARIO Y COMENTARIOS */
+/* ---------------------------------------------------- */
+
+.formulario-wrapper form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.formulario-wrapper label {
+    font-size: 1.2rem;
+    color: white;
+    font-weight: bold;
+}
+
+.input-comentario {
+    width: 100%;
+    height: 150px;
+    padding: 15px;
+    border-radius: 8px;
+    border: none;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+.comentario-item {
+    text-align: left;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    color: white;
+}
+
+/* ---------------------------------------------------- */
+/* 8. COMPONENTE: BOTONES (UI) */
+/* ---------------------------------------------------- */
+
+.btn-enviar {
+    background: linear-gradient(135deg, #ff8c61 0%, #ff6b35 100%);
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-top: 15px;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-enviar:hover {
+    background: linear-gradient(135deg, #ff9e7a 0%, #ff5514 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
+}
+
+.btn-enviar:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(255, 107, 53, 0.4);
+}
+
+/* ---------------------------------------------------- */
+/* 9. FOOTER */
+/* ---------------------------------------------------- */
+
+footer {
+    background-color: #0d274c;
+    color: white;
+    padding: 20px 5%;
+    width: 100%;
+    text-align: left;
+    margin-top: auto;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+.contact-icon {
+    width: 30px;
+    height: 30px;
+}
