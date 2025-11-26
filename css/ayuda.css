@@ -96,11 +96,14 @@ nav a:hover {
     width: 45%;
     max-width: 500px;
     height: auto;
-    float: right; /* Flota a la derecha como en tu HTML original */
-    margin: 0 0 20px 30px; /* Margen para separarlo del texto */
+    /* 1. Cambios para centrar */
+    display: block; 
+    margin: 20px auto; 
+    
+    /* Otros estilos (se mantienen) */
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     object-fit: cover;
+    object-position: center;
 }
 
 /* 5. Estilos del Acordeón (Botones de Pregunta) */
@@ -135,9 +138,6 @@ nav a:hover {
     border-radius: 0 0 6px 6px;
     margin-bottom: 15px;
 }
-
-/* Contenido cuando está activo (asumiendo que el JS añadirá una clase 'active' o similar al .accordion-header) */
-/* Nota: Tu JS deberá controlar el 'max-height' */
 
 .accordion-content h3 {
     color: #ff6b35; /* Naranja para los subtítulos */
