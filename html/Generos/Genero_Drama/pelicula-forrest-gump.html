@@ -1,81 +1,58 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="Descripcion" content="Página de géneros de películas en CinePuma">
     <title>Cinepuma - Forrest Gump</title>
-    <link rel="stylesheet" href="../css/pelicula.css">
+    <link rel="stylesheet" href="../../../css/peliculas.css">
 </head>
-
 <body>
-
-    <!--Encabezado-->
     <header>
-        <!--Logo Cinepuma-->
         <div class="logo">
             <img src="../../../img/Logo_Cinepuma.png" alt="CinePuma Logo">
             <h1><a href="../../index.html">CinePuma</a></h1>
         </div>
-
-        <!--Barra de búsqueda-->
-        <div class="barra-busqueda">
-            <input type="text" placeholder="Buscar">
-            <img src="../../../img/imagen_lupa-removebg.png" alt="Icono búsqueda" class="icono-busqueda">
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar" class="search-input">
+            <img src="../../../img/imagen_lupa-removebg.png" alt="Icono búsqueda" class="icon-search">
         </div>
-
-        <!--Navegador de navegación principal-->
         <nav>
-            <a href="../generos.html" class="nav-boton">G&eacute;neros</a>
-            <a href="../../../html/mejorValoradas.html" class="nav-boton">Mejor valoradas</a>
-            <a href="../../../html/ayuda.html" class="nav-boton help-button">Help</a>
+            <a href="../generos.html">Géneros</a>
+            <a href="../../../html/mejorValoradas.html">Mejor valoradas</a>
+            <a href="../../../html/ayuda.html">Help</a>
         </nav>
     </header>
-    <!--Contenido principal-->
+
     <main>
-        <section>
+        <section class="detalle-pelicula">
             <h2>Forrest Gump</h2>
-            <img src="../../../img/forrest-gump.jpg" alt="Poster Forrest Gump" width="300">
+            <img src="../../../img/PosterForrestGump.png" class="poster-pelicula" alt="Póster Forrest Gump">
         </section>
 
-        <section>
-            <h2>Sinopsis</h2>
-            <p>
-                Forrest Gump es un hombre con un coeficiente intelectual bajo que, a pesar de sus limitaciones, vive una vida extraordinaria. A través de sus experiencias, presencia y participa en eventos históricos importantes de Estados Unidos, mientras busca el amor y la felicidad.
-            </p>    
-            <h2>Opiniones de usuarios</h2>
-            <div>
-                <form> <!--Hay que poner el action="comentarios.php" y method="post" cuando lo tengamos disponible-->
-                    <label for="cajaComentarios">Comenta</label><br>
-                    <textarea id="cajaComentarios" name="cajaComentarios" rows="7" cols="99" required></textarea><br>
-                    <button id="enviarComentario">Enviar</button>
+        <section class="contenedor-contenido">
+            <h2 class="titulo-seccion">Sinopsis</h2>
+            <p class="texto-sinopsis">
+                Forrest Gump es un hombre con un coeficiente intelectual bajo pero con un corazón enorme. A través de su vida, Forrest se convierte en testigo y protagonista de momentos clave de la historia de los Estados Unidos en el siglo XX, todo mientras persigue a su único y verdadero amor, Jenny.
+            </p>
+            
+            <h2 class="titulo-seccion">Opiniones de usuarios</h2>
+            <div class="formulario-wrapper">
+                <form>
+                    <textarea id="cajaComentarios" name="cajaComentarios" class="input-comentario" placeholder="Escribe tu opinión aquí..." required></textarea>
+                    <button type="submit" id="enviarComentario" class="btn-enviar">Enviar</button>
                 </form>
             </div>
-
-            <!--Estos comentarios son puestos manualmente, nuestro plan es que aquí aparezcan los comentarios cuando alguien
-                usa la caja de texto y pulsa enviar, y que al estar logueado aparezca al lado de su mensaje su nombre-->
-            <article>
-                <p><strong>"¡Mejor que la primera!"</strong></p>
-                <p></p>
-            </article>
-            <article>
-                <p><strong>"Decepcionante"</strong></p>
-                <p></p>
-            </article>
         </section>
     </main>
-    </main>
+
     <footer>
         <ul>
-            <li>
-                <!--Teléfono de contacto-->
-                <img src="../../../img/icono del telefono.png" alt="icono telefono" width="36" height="36">
-                <p>Tel&eacute;fono: 123-456-7890</p>
+            <li class="contact-item">
+                <img src="../../../img/icono_del_telefono-remove.png" alt="icono telefono" class="contact-icon">
+                <p>Teléfono: 123-456-7890</p>
             </li>
-            <li>
-                <!--Correo de contacto-->
-                <img src="../../../img/icono_del_correo.png" alt="icono correo" width="36" height="36">
+            <li class="contact-item">
+                <img src="../../../img/icono_del_correo.png" alt="icono correo" class="contact-icon">
                 <p>Email: CinePuma@gmail.com</p>
             </li>
         </ul>
