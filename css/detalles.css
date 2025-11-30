@@ -106,7 +106,7 @@ nav a:hover {
     margin-bottom: 10px;
 }
 
-/* Estilo de Puntuación */
+/* Estilo de Puntuación de TMDB */
 .rating {
     font-size: 1.4rem;
     font-weight: bold;
@@ -146,6 +146,8 @@ nav a:hover {
     line-height: 1.6;
 }
 
+/* --- SECCIÓN DE VALORACIÓN Y RESEÑAS (Input del usuario) --- */
+
 /* 5. Sección de Reseñas (NUEVO) */
 .reviews-section {
     max-width: 1000px;
@@ -154,11 +156,92 @@ nav a:hover {
     text-align: center;
 }
 
-.reviews-section h3 {
-    color: #ff6b35;
+.reviews-section h3, .reviews-section h4 {
+    color: #ff6b35 !important; /* Asegura que los títulos se vean bien */
     font-size: 1.8rem;
     margin-bottom: 20px;
 }
+
+#average-rating-display {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.rating-input-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.reviews-section .rating-label {
+    color: #f0f0f0; /* Color claro para la etiqueta "Tu valoración (1-5)" */
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+/* Aseguramos que el contenedor del slider y el texto de carga sean visibles */
+#star-rating {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    margin: 15px auto;
+    padding: 10px;
+    background-color: #1E3C72; /* Color de fondo más claro que el principal para diferenciar */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    color: #f0f0f0; /* Texto claro para "Cargando selector de valoración..." */
+}
+
+/* Estilos para el control deslizable (INPUT TYPE=RANGE) inyectado por JS */
+#rating-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    max-width: 300px; /* Limitar el ancho */
+    height: 10px;
+    background: #3c5d88; /* Fondo del track del slider */
+    border-radius: 5px;
+    outline: none;
+    opacity: 1;
+    transition: opacity .2s;
+}
+
+#rating-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ff6b35; /* Color naranja del pulgar */
+    cursor: pointer;
+    border: 3px solid #f0f0f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+#rating-slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ff6b35; 
+    cursor: pointer;
+    border: 3px solid #f0f0f0; 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilo para las estrellas visuales que el JS inyecta junto al slider */
+#star-rating .star {
+    font-size: 2rem; /* Estrellas grandes para el input */
+    margin: 0 4px;
+    color: #4a4a4a; /* Gris por defecto */
+    transition: color 0.1s;
+}
+
+#star-rating .star.filled {
+    color: #ffc107; /* Amarillo de relleno */
+}
+
 
 #user-reviews-list {
     background-color: #0d274c; /* Fondo similar al header */
@@ -188,6 +271,15 @@ nav a:hover {
 .initial-message span {
     color: #cccccc;
     font-style: italic;
+}
+
+.review-rating .star {
+    font-size: 1rem;
+    color: #4a4a4a; /* Estrellas pequeñas de la lista de reseñas (vacío) */
+}
+
+.review-rating .star.filled {
+    color: #ffc107; /* Estrellas pequeñas de la lista de reseñas (relleno) */
 }
 
 

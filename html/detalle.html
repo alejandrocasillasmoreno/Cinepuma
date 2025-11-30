@@ -50,18 +50,28 @@
     </main>
 
     <div class="reviews-section container">
-        <h3>Opiniones de la comunidad</h3>
-        <div id="user-reviews-list">
-            <div class="user-review initial-message">
-                <strong>ComunidadPuma:</strong> <span>¡Déjanos tu primera opinión!</span>
+        <!-- Contenedor para mostrar la valoración media de los usuarios -->
+        <div id="average-rating-display" class="average-rating-display">
+            Cargando valoración media...
+        </div>
+        
+        <h4>Deja tu opinión</h4>
+ 
+        <!-- Área de valoración con SLIDER (entrada del usuario) -->
+        <!-- El JS inyectará el control <input type="range"> aquí dentro. -->
+        <div id="rating-input-container" class="rating-input-container">
+            <span class="rating-label">Tu valoración (1-5):</span>
+            <div id="star-rating" class="star-rating">
+                <!-- CONTENIDO DEL SLIDER INYECTADO POR JS -->
+                Cargando selector de valoración...
             </div>
-        </div> 
+        </div>
         <textarea id="review-input" placeholder="Escribe tu opinión aquí..."></textarea>
         <button id="send-review-btn" class="btn-review">Enviar Opinión</button>
     </div>
 
     <script src="../js/top_rated.js"></script> 
-    <script src="../js/detalles.js"></script>
+    <script src="../js/detalle.js"></script>
 </body>
 <footer>
     <div class="contact-info">
