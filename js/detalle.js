@@ -1,516 +1,304 @@
-// --- FIREBASE IMPORTS ---
+// 1. IMPORTACIONES DE FIREBASE (Necesarias para la funcionalidad del slider y reseñas)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { 
-    getFirestore, doc, setDoc, collection, query, where, onSnapshot, serverTimestamp
+    getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged 
+} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import { 
+    getFirestore, collection, addDoc, query, onSnapshot, doc, setLogLevel
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-// --- CONSTANTES DE LA API ---
-// NOTA: Reemplaza con tu clave de API si es necesario, aunque se usa una genérica por defecto.
-const API_KEY = '9b6940210ea6faabd174810c5889f878'; 
-const BASE_URL = 'https://api.themoviedb.org/3';
-const IMG_URL = 'https://image.tmdb.org/t/p/w500';
+// Habilitar logs para depuración de Firestore
+setLogLevel('debug');
 
-const MOVIE_DETAIL_URL = (id) => `${BASE_URL}/movie/${id}?language=es-ES&api_key=${API_KEY}`;
+// 2. CONSTANTES GLOBALES (Necesarias para Canvas/Firebase)
+const appId = typeof __app_id !== 'undefined' ? __app_id : 'cinepuma-reviews';
+const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+// Nota: initialAuthToken es manejado dentro de initializeFirebase
 
-// --- FIREBASE SETUP GLOBALES ---
-const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+// Referencias a los elementos del DOM
+const starRatingContainer = document.getElementById('star-rating');
+const reviewInput = document.getElementById('review-input');
+const sendReviewBtn = document.getElementById('send-review-btn');
+const userReviewsList = document.getElementById('user-reviews-list');
+const averageRatingDisplay = document.getElementById('average-rating-display');
 
-let db, auth;
-let currentMovieId = null;
-let currentUserId = null;
-let selectedRating = 0; // Estado para la valoración por estrellas del usuario (1-5)
+// Variable para la referencia de la base de datos y autenticación
+let db;
+let auth;
+let userId = 'anonymous';
 
-document.addEventListener('DOMContentLoaded', () => {
+// Variables para la película actual (usaremos un ID fijo de ejemplo por ahora)
+const movieId = 'ejemplo-pelicula-001'; // ID de película fijo para el ejemplo
 
-    // ----------------------------------------------------
-    // 1. FIREBASE INITIALIZATION AND AUTH
-    // ----------------------------------------------------
-    const initializeFirebase = async () => {
-        try {
-            const app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            auth = getAuth(app);
-            
-            // Autenticación con token personalizado o anónimo
-            if (typeof __initial_auth_token !== 'undefined') {
-                await signInWithCustomToken(auth, __initial_auth_token);
-            } else {
-                await signInAnonymously(auth);
-            }
-            
-            // Obtener o generar un ID de usuario único
-            currentUserId = auth.currentUser?.uid || crypto.randomUUID();
-            console.log("Firebase y autenticación inicializados. User ID:", currentUserId);
-            return true;
-        } catch (error) {
-            console.error("Error al inicializar Firebase o la autenticación:", error);
-            // Mostrar un mensaje de error visible al usuario
-            document.getElementById('average-rating-display').innerHTML = 
-                '<span style="color:red;">Error de conexión a la base de datos. Las reseñas no están disponibles.</span>';
-            return false;
-        }
-    };
-
-
-    // ----------------------------------------------------
-    // 2. OBTENER ID Y RENDERIZAR DETALLES DE TMDB
-    // ----------------------------------------------------
-
-    const getMovieIdFromUrl = () => {
-        // Obtiene el ID de la película desde el parámetro 'id' en la URL
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get('id');
-        currentMovieId = id ? parseInt(id, 10) : null;
-        return currentMovieId;
-    };
-
-    /**
-     * Obtiene los detalles de la película desde la API de TMDB.
-     */
-    async function getMovieDetails(movieId) {
-        if (!movieId) {
-             console.error("ID de película no proporcionado en la URL.");
-            return null;
-        }
-        try {
-            const url = MOVIE_DETAIL_URL(movieId);
-            const res = await fetch(url);
-            
-            if (!res.ok) {
-                throw new Error(`Error al cargar los detalles: ${res.status}`);
-            }
-            return await res.json();
-        } catch (error) {
-            console.error("Fallo en la obtención de detalles de TMDB:", error);
-            const detailsContainer = document.getElementById('movie-details');
-            detailsContainer.innerHTML = `
-                <h1 style="color: #ff6b35; text-align: center; margin-top: 50px;">
-                    Error al cargar la película desde TMDB.
-                </h1>
-            `;
-            // Ocultar la sección de reseñas si falla la carga de detalles
-            document.querySelector('.reviews-section').style.display = 'none';
-            return null;
-        }
+// 3. INICIALIZACIÓN DE FIREBASE Y AUTENTICACIÓN
+async function initializeFirebase() {
+    // Si el contenedor del slider no existe, salimos
+    if (!starRatingContainer) {
+        console.error("El contenedor '#star-rating' no existe. Deteniendo la inicialización.");
+        return; 
     }
+    
+    // Muestra el slider inmediatamente al iniciar el script, independientemente de Firebase.
+    initRatingSlider();
 
-    /**
-     * Renderiza los detalles de la película en el elemento <main>.
-     */
-    const renderMovieDetails = (movie) => {
-        const detailsContainer = document.getElementById('movie-details');
-        
-        if (!movie || movie.success === false) {
-             detailsContainer.innerHTML = `
-                <h1 style="color: #ff6b35; text-align: center; margin-top: 50px;">
-                    Película no encontrada o ID inválido.
-                </h1>
-                <p style="color: #ccc; text-align: center;">
-                    Vuelve a la página de mejores valoradas para seleccionar una película.
-                </p>
-            `;
-            document.querySelector('.reviews-section').style.display = 'none';
-            return;
+    // === CHEQUEO CRÍTICO DE CONFIGURACIÓN DE FIREBASE (El parche) ===
+    // Si la configuración no está completa (es decir, le falta el projectId),
+    // mostramos un error en la UI y detenemos el intento de inicializar la base de datos.
+    if (Object.keys(firebaseConfig).length === 0 || !firebaseConfig.projectId) {
+        console.error("Firebase Configuración de base de datos no disponible o incompleta. Funcionalidad de guardar/cargar opiniones deshabilitada.");
+        starRatingContainer.innerHTML += '<p style="color:red; margin-top: 10px; font-weight: bold;">⚠️ Error de Configuración de BD: Las opiniones no se guardarán.</p>';
+        return; 
+    }
+    // ===================================================
+
+    try {
+        const app = initializeApp(firebaseConfig);
+        db = getFirestore(app);
+        auth = getAuth(app);
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // Intenta iniciar sesión con el token personalizado o de forma anónima
+        if (initialAuthToken) {
+            await signInWithCustomToken(auth, initialAuthToken);
+        } else {
+            await signInAnonymously(auth);
         }
 
-        const genres = movie.genres.map(g => g.name).join(', ');
-        
-        // Contenido dinámico de la película
-        detailsContainer.innerHTML = `
-            <div class="movie-header">
-                <img src="${IMG_URL + movie.poster_path}" alt="Póster de ${movie.title}" class="poster-img" 
-                    onerror="this.onerror=null; this.src='https://placehold.co/200x300/0d274c/ff6b35?text=Póster+No+Disp.';">
-                
-                <div class="movie-info">
-                    <h1>${movie.title}</h1>
-                    <p class="rating">
-                        <span class="star-icon">★</span> 
-                        <!-- Nota de TMDB -->
-                        <span class="score">${movie.vote_average.toFixed(1)}</span>/10 (${movie.vote_count.toLocaleString()} votos TMDB)
-                    </p>
-                    <div class="meta-data">
-                        <p><strong>Fecha de estreno:</strong> ${movie.release_date}</p>
-                        <p><strong>Géneros:</strong> ${genres || 'No especificado'}</p>
-                        <p><strong>Duración:</strong> ${movie.runtime || 'N/A'} min</p>
-                    </div>
-                </div>
-            </div>
-            <div class="synopsis-box">
-                <h2>Sinopsis</h2>
-                <p id="synopsis">${movie.overview || 'Sin sinopsis disponible.'}</p>
-            </div>
-        `;
-        document.title = `Cinepuma - ${movie.title}`;
-    };
+        // Listener para obtener el UID del usuario una vez autenticado
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                userId = user.uid;
+                console.log("Usuario autenticado. UID:", userId);
+                loadReviews();
+            } else {
+                console.log("Usuario anónimo o no autenticado.");
+            }
+        });
 
+    } catch (error) {
+        console.error("Error al inicializar Firebase o autenticar:", error);
+        starRatingContainer.textContent = 'Error al cargar el sistema de valoración. (Revisa la consola para detalles)';
+    }
+}
 
-    // ----------------------------------------------------
-    // 3. LÓGICA DE VALORACIÓN CON DESLIZADOR (SLIDER) (FRONTEND)
-    // ----------------------------------------------------
+// 4. LÓGICA DEL SLIDER Y ESTRELLAS
+let currentRating = 0; // Valor de la valoración actual
 
-    /**
-     * Dibuja las estrellas visualmente para el valor dado (1 a 5).
-     * @param {number} value Valor de la valoración (1-5).
-     * @returns {string} HTML de las estrellas visuales.
-     */
-    const renderVisualStars = (value) => {
-        let starHtml = '';
-        const filledStars = parseInt(value, 10);
-        const emptyColor = '#4a4a4a'; // Gris oscuro
-        const filledColor = '#FFC107'; // Amarillo/Naranja
+function initRatingSlider() {
+    // 1. Limpiar el contenido de carga (¡ESTO DEBE EJECUTARSE!)
+    starRatingContainer.innerHTML = '';
+    
+    // 2. Crear el input de tipo range (el slider)
+    const slider = document.createElement('input');
+    slider.type = 'range';
+    slider.id = 'rating-slider';
+    slider.min = 1;
+    slider.max = 5;
+    slider.step = 0.5;
+    slider.value = 1;
+
+    // 3. Crear el display visual de estrellas
+    const starDisplay = document.createElement('div');
+    starDisplay.id = 'visual-stars';
+    // Utilizamos las clases de CSS que ya tienes definidas
+    starDisplay.style.display = 'flex'; 
+    starDisplay.style.alignItems = 'center'; 
+    starDisplay.style.marginLeft = '10px'; 
+
+    // Función para actualizar las estrellas visuales
+    const updateStars = (value) => {
+        starDisplay.innerHTML = ''; // Limpiar estrellas anteriores
+        currentRating = parseFloat(value);
         
         for (let i = 1; i <= 5; i++) {
-            // Relleno de estrellas basado en el valor actual del slider
-            starHtml += `<span class="star-icon" style="font-size: 2.5rem; color: ${i <= filledStars ? filledColor : emptyColor};">★</span>`;
+            const star = document.createElement('span');
+            star.className = 'star';
+            star.style.fontSize = '2rem'; // Para que las estrellas se vean grandes
+
+            // Lógica para media estrella
+            const isFilled = i <= currentRating;
+            const isHalf = i - 0.5 === currentRating;
+
+            if (isFilled && !isHalf) {
+                star.innerHTML = '★'; // Estrella completa
+                star.classList.add('filled');
+            } else if (isHalf) {
+                // Para simplificar y asegurar visibilidad, usamos estrella completa para media valoración
+                // NOTA: Si quieres media estrella, usa Unicode '½' o un SVG, pero '★' es más seguro.
+                star.innerHTML = '★'; 
+                star.classList.add('filled');
+            }
+            else {
+                star.innerHTML = '☆'; // Estrella vacía
+                star.classList.remove('filled');
+            }
+            starDisplay.appendChild(star);
         }
-        return starHtml;
+    };
+
+    // 4. Evento para el slider: actualiza el valor y las estrellas
+    slider.addEventListener('input', (e) => {
+        updateStars(e.target.value);
+    });
+
+    // 5. Añadir los elementos al contenedor
+    starRatingContainer.appendChild(slider);
+    starRatingContainer.appendChild(starDisplay);
+
+    // Inicializar las estrellas con el valor por defecto (1)
+    updateStars(slider.value);
+    console.log("Slider de valoración inicializado y visible.");
+}
+
+// 5. FUNCIÓN PARA ENVIAR LA OPINIÓN A FIRESTORE
+async function saveReview() {
+    if (!db) {
+        alertModal('Error de conexión', 'La base de datos no está inicializada. No se puede guardar la opinión.', 'error');
+        return;
     }
 
+    const reviewText = reviewInput.value.trim();
+    if (currentRating === 0 || reviewText.length < 5) {
+        alertModal('Opinión incompleta', 'Por favor, selecciona una valoración (1-5) y escribe una opinión con al menos 5 caracteres.', 'warning');
+        return;
+    }
 
-    /**
-     * Configura el deslizable (slider) para que el usuario seleccione su valoración.
-     * @param {boolean} reinitializing Indica si se está re-inicializando (por ejemplo, después de cargar de Firestore)
-     */
-    const setupRatingSlider = (reinitializing = false) => {
-        const starContainer = document.getElementById('star-rating');
-        if (!starContainer) {
-            console.error("Contenedor de estrellas #star-rating no encontrado.");
-            return;
-        }
-
-        let slider = document.getElementById('rating-slider');
-        let visualDisplay = starContainer.querySelector('.rating-visual-display');
-
-        // Si es la primera inicialización, creamos el HTML del slider y el display
-        if (!reinitializing || !slider) {
-            starContainer.innerHTML = `
-                <div class="rating-visual-display" style="text-align: center; margin-bottom: 10px;"></div>
-                <input type="range" id="rating-slider" min="0" max="5" step="1" value="${selectedRating}" 
-                       style="width: 100%; height: 20px; cursor: pointer; background: #ff6b35;">
-                <p id="slider-value-text" style="text-align: center; font-weight: bold; color: #ff6b35;">
-                    ${selectedRating === 0 ? 'Sin calificar' : selectedRating + ' estrellas'}
-                </p>
-            `;
-            
-            slider = document.getElementById('rating-slider');
-            visualDisplay = starContainer.querySelector('.rating-visual-display');
-        } else {
-             // Si ya existe, actualizamos las referencias
-             slider = document.getElementById('rating-slider');
-             visualDisplay = starContainer.querySelector('.rating-visual-display');
-        }
-
-        const updateDisplay = (value) => {
-            const displayValue = parseInt(value, 10);
-            visualDisplay.innerHTML = renderVisualStars(displayValue);
-            document.getElementById('slider-value-text').textContent = 
-                displayValue === 0 ? 'Sin calificar' : `${displayValue} estrellas`;
-        }
-
-        if (!slider.hasAttribute('data-listeners-set')) {
-            // Añadir listener de cambio (para cuando el usuario suelta el control) y click
-            slider.addEventListener('change', function changeHandler() {
-                selectedRating = parseInt(this.value, 10);
-                updateDisplay(selectedRating);
-                console.log("Valoración seleccionada:", selectedRating);
-            });
-
-            // Añadir listener de input (para actualización en tiempo real mientras desliza)
-            slider.addEventListener('input', function inputHandler() {
-                updateDisplay(parseInt(this.value, 10));
-            });
-            
-            slider.setAttribute('data-listeners-set', 'true');
-        }
-
-        // Si se está re-inicializando (por carga de Firestore), o al inicio, 
-        // actualizamos el valor del slider y el display
-        if (reinitializing) {
-             slider.value = selectedRating;
-        }
-        updateDisplay(selectedRating);
-    };
-
-
-    // ----------------------------------------------------
-    // 4. PERSISTENCIA Y CARGA DE RESEÑAS (FIRESTORE)
-    // ----------------------------------------------------
-    
-    // Ruta de la colección pública de reseñas
-    const getReviewsCollection = () => {
-        // Colección pública: /artifacts/{appId}/public/data/reviews_and_ratings
-        return collection(db, `artifacts/${appId}/public/data/reviews_and_ratings`);
-    };
-
-    /**
-     * Guarda la reseña y valoración del usuario actual en Firestore.
-     */
-    const saveUserReview = async (reviewText, ratingValue) => {
-        if (!currentMovieId || !currentUserId) {
-            console.error("No se puede guardar: ID de película o usuario faltante.");
-            return;
-        }
-        
-        // La valoración debe ser de 1 a 5 para guardar, 0 significa "Sin calificar"
-        if (ratingValue === 0) {
-            // Mismo feedback de error que al hacer clic
-            const btn = document.getElementById('send-review-btn');
-            const originalText = btn.textContent;
-            btn.textContent = "¡ERROR! Debes seleccionar una valoración (1-5).";
-            btn.style.backgroundColor = 'red';
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.style.backgroundColor = '#ff6b35';
-            }, 4000);
-            return;
-        }
-
-
+    try {
         const reviewData = {
-            movieId: currentMovieId,
-            userId: currentUserId,
-            rating: ratingValue, // 1 a 5
+            movieId: movieId,
+            userId: userId, 
+            rating: currentRating,
             reviewText: reviewText,
-            timestamp: serverTimestamp(),
-            // Usamos un nombre de usuario simplificado para mostrar
-            userName: `Usuario_${currentUserId.substring(0, 4)}`, 
+            timestamp: new Date()
         };
 
-        // Usa doc(..., movieId_userId) para que cada usuario solo pueda tener 1 review por película (o la actualiza)
-        const docRef = doc(getReviewsCollection(), `${currentMovieId}_${currentUserId}`);
+        // Ruta de colección pública: /artifacts/{appId}/public/data/{nombre_coleccion}
+        const reviewsRef = collection(db, `artifacts/${appId}/public/data/movie_reviews`);
+        await addDoc(reviewsRef, reviewData);
 
-        try {
-            await setDoc(docRef, reviewData);
-            console.log("Reseña y valoración guardada con éxito.");
-            document.getElementById('review-input').value = ''; // Limpiar el input de la reseña
-            
-            // Feedback visual sin alert()
-            const btn = document.getElementById('send-review-btn');
-            const originalText = btn.textContent;
-            btn.textContent = "¡Opinión Enviada!";
-            btn.style.backgroundColor = '#18a818'; // Verde para éxito
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.style.backgroundColor = '#ff6b35';
-            }, 3000);
+        alertModal('¡Opinión enviada!', 'Tu valoración ha sido guardada con éxito. Actualizando la lista...', 'success');
+        
+        // Limpiar el formulario
+        reviewInput.value = '';
+        document.getElementById('rating-slider').value = 1;
+        document.getElementById('rating-slider').dispatchEvent(new Event('input')); // Resetear estrellas
+        
+    } catch (error) {
+        console.error("Error al guardar la opinión:", error);
+        alertModal('Error al guardar', 'Hubo un problema al enviar tu opinión. Inténtalo de nuevo.', 'error');
+    }
+}
 
-        } catch (e) {
-            console.error("Error al añadir documento: ", e);
-            // Mensaje de error visible
-            const btn = document.getElementById('send-review-btn');
-            const originalText = btn.textContent;
-            btn.textContent = "Error al guardar (Ver consola)";
-            btn.style.backgroundColor = 'red';
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.style.backgroundColor = '#ff6b35';
-            }, 4000);
-        }
-    };
+// 6. FUNCIÓN PARA CARGAR Y MOSTRAR OPINIONES EN TIEMPO REAL
+function loadReviews() {
+    if (!db) {
+        userReviewsList.textContent = 'Base de datos no disponible.';
+        return;
+    }
 
-    /**
-     * Escucha en tiempo real las reseñas para esta película y actualiza el promedio.
-     */
-    const listenForReviews = () => {
-        if (!db || !currentMovieId) return;
+    // Crear la referencia a la colección y la consulta (solo para la película actual)
+    const reviewsRef = collection(db, `artifacts/${appId}/public/data/movie_reviews`);
+    // Usamos una query simple ya que estamos filtrando en el cliente por movieId. 
+    // Si fuera una app de producción, usaríamos where('movieId', '==', movieId)
+    const q = query(reviewsRef); 
 
-        const reviewsRef = getReviewsCollection();
-        // Consulta para solo obtener las reseñas de la película actual
-        const q = query(reviewsRef, where("movieId", "==", currentMovieId));
+    // onSnapshot escucha los cambios en tiempo real
+    onSnapshot(q, (snapshot) => {
+        const reviews = [];
+        let totalRating = 0;
+        let numReviews = 0;
 
-        // Escucha en tiempo real los cambios
-        onSnapshot(q, (snapshot) => {
-            const reviewsList = [];
-            let totalRating = 0;
-            let reviewCount = 0;
-            let userReviewFound = false; 
-            let userRating = 0; // Almacena la valoración del usuario actual
-
-            snapshot.forEach((doc) => {
-                const data = doc.data();
-                reviewsList.push(data);
-                
-                if (data.rating && data.rating >= 1 && data.rating <= 5) {
-                    totalRating += data.rating;
-                    reviewCount++;
-                }
-                
-                // LÓGICA: Comprobar si es la reseña del usuario actual para inicializar su input
-                if (data.userId === currentUserId) {
-                    userRating = data.rating;
-                    userReviewFound = true;
-                }
-            });
-
-            // Actualiza la valoración seleccionada globalmente para reflejar la última guardada por el usuario
-            if (userReviewFound) {
-                 selectedRating = userRating;
-            } else {
-                 // Si el usuario actual no tiene reseña, asegurarse de que el input esté en 0
-                 selectedRating = 0;
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            if (data.movieId === movieId) { // Filtrar solo por el ID de la película actual
+                reviews.push({ id: doc.id, ...data });
+                totalRating += data.rating;
+                numReviews++;
             }
-            
-            // Llamar a setupRatingSlider para actualizar la UI del input del usuario con el valor cargado
-            // Pasamos 'true' para indicar que solo debe actualizar el display y no re-añadir listeners
-            setupRatingSlider(true); 
-
-            // 1. Calcular y mostrar el promedio de valoración
-            const averageRating = reviewCount > 0 ? (totalRating / reviewCount) : 0;
-            updateAverageRatingDisplay(averageRating, reviewCount);
-            
-            // 2. Mostrar la lista de reseñas
-            // Ordenar por timestamp (el más nuevo primero)
-            renderReviewsList(reviewsList.sort((a, b) => {
-                const timeA = a.timestamp?.toDate ? a.timestamp.toDate().getTime() : 0;
-                const timeB = b.timestamp?.toDate ? b.timestamp.toDate().getTime() : 0;
-                return timeB - timeA;
-            })); 
-
-        }, (error) => {
-            console.error("Error al escuchar reseñas:", error);
-            document.getElementById('average-rating-display').innerHTML = 
-                '<span style="color:red;">Error al cargar valoraciones.</span>';
         });
-    };
 
-    /**
-     * Renderiza el promedio de valoración en la UI.
-     */
-    const updateAverageRatingDisplay = (avg, count) => {
-        const displayDiv = document.getElementById('average-rating-display');
-        let starHtml = '';
-        const emptyColor = '#4a4a4a'; 
-        const filledColor = '#ffc107'; 
+        // 7. Calcular y mostrar la valoración media
+        const averageRating = numReviews > 0 ? (totalRating / numReviews).toFixed(1) : 'N/A';
+        averageRatingDisplay.textContent = `Valoración Media: ${averageRating} / 5 (${numReviews} votos)`;
+
+        // 8. Renderizar la lista de reseñas
+        renderReviews(reviews.sort((a, b) => b.timestamp - a.timestamp)); // Ordenar por más reciente
+
+    }, (error) => {
+        console.error("Error al escuchar las reseñas:", error);
+        userReviewsList.textContent = 'Error al cargar las reseñas.';
+    });
+}
+
+function renderReviews(reviews) {
+    userReviewsList.innerHTML = ''; // Limpiar la lista
+    
+    if (reviews.length === 0) {
+        userReviewsList.innerHTML = `<p class="initial-message text-center p-4" style="color:#cccccc; font-style:italic;">Aún no hay opiniones. ¡Sé el primero en dejar una!</p>`;
+        return;
+    }
+
+    reviews.forEach(review => {
+        const reviewElement = document.createElement('div');
+        reviewElement.className = 'user-review';
         
-        // Estrellas basadas en el promedio (redondeado al entero más cercano)
-        const filledStars = Math.round(avg);
-        
+        // Crear las estrellas de la reseña
+        let starsHtml = '';
         for (let i = 1; i <= 5; i++) {
-            // Relleno de estrellas basado en el promedio redondeado
-            starHtml += `<span class="star-icon" style="color: ${i <= filledStars ? filledColor : emptyColor};">★</span>`;
+            if (i <= review.rating) {
+                starsHtml += `<span class="star filled">★</span>`;
+            } else if (i - 0.5 === review.rating) {
+                starsHtml += `<span class="star filled">½</span>`; // Media estrella
+            } else {
+                starsHtml += `<span class="star">☆</span>`;
+            }
         }
 
-        const avgText = avg > 0 ? avg.toFixed(1) : '0.0';
-        const countText = count === 1 ? '1 valoración' : `${count} valoraciones`;
+        // Mostrar el ID de usuario (solo los primeros 8 caracteres)
+        const displayUserId = review.userId.substring(0, 8) + '...';
         
-        displayDiv.innerHTML = `
-            Valoración Media de Usuarios: 
-            ${starHtml} 
-            (${avgText} / 5, basado en ${countText})
+        reviewElement.innerHTML = `
+            <p>
+                <strong>Usuario ID:</strong> ${displayUserId} <br>
+                <span class="review-rating">${starsHtml}</span> (${review.rating}/5)
+            </p>
+            <p>"${review.reviewText}"</p>
+            <p class="text-xs text-gray-500 mt-1">${review.timestamp ? new Date(review.timestamp.seconds * 1000).toLocaleDateString() : 'Fecha desconocida'}</p>
         `;
-    };
+        userReviewsList.appendChild(reviewElement);
+    });
+}
 
-    /**
-     * Renderiza la lista de reseñas en la UI.
-     */
-    const renderReviewsList = (reviews) => {
-        const reviewsListElement = document.getElementById('user-reviews-list');
-        reviewsListElement.innerHTML = ''; // Limpiar la lista existente
-        const emptyColor = '#4a4a4a'; 
-        const filledColor = '#ffc107'; 
+// 7. FUNCIÓN DE MODAL DE ALERTA (Para reemplazar alert())
+function alertModal(title, message, type) {
+    console.log(`[${type.toUpperCase()}] ${title}: ${message}`);
+    
+    // Implementación simple de un modal de alerta en la consola/o interfaz
+    // Para entornos sin UI, usamos la consola:
+    const alertDiv = document.createElement('div');
+    alertDiv.style.cssText = `
+        position: fixed; top: 10px; right: 10px; padding: 15px; border-radius: 5px; 
+        color: white; z-index: 1000; font-family: Arial, sans-serif;
+        background-color: ${type === 'success' ? '#28a745' : type === 'warning' ? '#ffc107' : '#dc3545'};
+        opacity: 0.9;
+        transition: opacity 0.5s;
+    `;
+    alertDiv.innerHTML = `<strong>${title}</strong>: ${message}`;
+    document.body.appendChild(alertDiv);
+    
+    setTimeout(() => {
+        alertDiv.style.opacity = 0;
+        setTimeout(() => alertDiv.remove(), 500);
+    }, 3000);
+}
 
 
-        if (reviews.length === 0) {
-             reviewsListElement.innerHTML = `
-                <div class="user-review initial-message">
-                    <strong>ComunidadPuma:</strong> <span>¡Sé el primero en opinar!</span>
-                </div>
-            `;
-            return;
-        }
-
-        reviews.forEach(review => {
-            // Asegurarse de que el rating es un número válido entre 1 y 5
-            const rating = Math.min(5, Math.max(1, review.rating || 0));
-
-            let starRatingHtml = '';
-            // Renderizar las estrellas de 1 a 5
-            for (let i = 1; i <= 5; i++) {
-                starRatingHtml += `<span class="star" style="color: ${i <= rating ? filledColor : emptyColor};">★</span>`;
-            }
-
-            const newReviewDiv = document.createElement('div');
-            newReviewDiv.classList.add('user-review');
-            
-            // Formatear el timestamp si existe
-            const timestamp = review.timestamp?.toDate ? review.timestamp.toDate().toLocaleDateString() : 'Fecha no disponible';
-
-            newReviewDiv.innerHTML = `
-                <div>
-                    <strong>${review.userName}</strong> 
-                    <span class="review-rating">${starRatingHtml}</span> 
-                    <small style="color: #999;">(${timestamp})</small>
-                </div>
-                <span>${review.reviewText}</span>
-            `;
-            reviewsListElement.appendChild(newReviewDiv);
-        });
-    };
-
-    // ----------------------------------------------------
-    // 5. INICIALIZACIÓN PRINCIPAL
-    // ----------------------------------------------------
-
-    const init = async () => {
-        const movieId = getMovieIdFromUrl();
-        
-        if (movieId) {
-            // 5.1. Cargar detalles de TMDB
-            const movieDetails = await getMovieDetails(movieId);
-            renderMovieDetails(movieDetails);
-            
-            // 5.2. Configurar el deslizable (slider) inmediatamente
-            if (document.getElementById('star-rating')) {
-                setupRatingSlider(); 
-            }
-            
-            if (movieDetails) {
-                // 5.3. Inicializar Firebase y Auth
-                const isFirebaseReady = await initializeFirebase();
-                
-                if (isFirebaseReady) {
-                    // 5.4. Iniciar escucha de reseñas en tiempo real. 
-                    // Esto cargará la valoración previa del usuario y actualizará el estado visual.
-                    listenForReviews(); 
-
-                    // 5.5. Configurar el botón de envío
-                    const sendReviewBtn = document.getElementById('send-review-btn');
-                    sendReviewBtn.addEventListener('click', () => {
-                        const reviewText = document.getElementById('review-input').value.trim();
-                        
-                        if (selectedRating === 0 || reviewText === "") {
-                            // Feedback de error para el usuario
-                            const errorMsg = selectedRating === 0 ? 
-                                "selecciona una valoración (1-5)" : 
-                                "escribe un comentario";
-                            
-                            const btn = document.getElementById('send-review-btn');
-                            const originalText = btn.textContent;
-                            btn.textContent = `¡ERROR! Debes ${errorMsg}.`;
-                            btn.style.backgroundColor = 'red';
-                            setTimeout(() => {
-                                btn.textContent = originalText;
-                                btn.style.backgroundColor = '#ff6b35';
-                            }, 4000);
-
-                            return;
-                        }
-                        
-                        saveUserReview(reviewText, selectedRating);
-                    });
-                } else {
-                    // Si Firebase falla, deshabilitar la entrada
-                    document.getElementById('review-input').disabled = true;
-                    document.getElementById('send-review-btn').disabled = true;
-                }
-            }
-        } else {
-            // Si no hay ID en la URL, mostrar la pantalla de "no encontrado"
-            renderMovieDetails(null); 
-        }
-    };
-
-    init();
+// 8. ASIGNACIÓN DE EVENTOS
+// Al ser un módulo, este código se ejecuta automáticamente, pero es buena práctica
+// usar DOMContentLoaded para asegurar que todos los elementos HTML existan.
+document.addEventListener('DOMContentLoaded', () => {
+    initializeFirebase();
+    if (sendReviewBtn) {
+        sendReviewBtn.addEventListener('click', saveReview);
+    }
 });
