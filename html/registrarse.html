@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Descripcion" content=" Página de registro de CinePuma">
+    <title>CinePuma - Registrarse</title>
+    <link rel="stylesheet" href="../css/Login.css">
+    <!-- Incluimos la lógica de Firebase -->
+    <script type="module" src="../js/app.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="../img/Logo_Cinepuma.png" alt="CinePuma Logo">
+            <h1><a href="../../html/index.html">CinePuma</a></h1>
+        </div>
+        <!-- Contenedor principal de la barra de búsqueda -->
+        <div class="search-bar input-group">
+            <!-- Campo de texto (la caja) -->
+            <input type="text" placeholder="Buscar" class="search-input">
+            <!-- Ícono de la lupa (posicionado absolutamente) -->
+            <img src="../img/imagen_lupa-removebg.png" alt="Icono búsqueda" class="icon-search">
+        </div>
+        <nav>
+            <a href="../html/Generos/generos.html" class="nav-button">Géneros</a>
+            <a href="../html/mejorValoradas.html" class="nav-button">Mejor valoradas</a>
+            <a href="../html/ayuda.html" class="nav-button help-button">Help</a>
+        </nav>
+    </header>
+
+    <h1>Regístrate</h1>
+
+    <!-- Contenedor para mensajes de Firebase (Modal) -->
+    <div id="auth-ui-messages" class="w-full max-w-sm mx-auto my-4"></div>
+
+    <div class="container">
+        <!-- Añadimos id="auth-form" para que el script lo detecte -->
+        <form id="auth-form">
+            <!-- Campo de Nombre -->
+            <div class="input-group">
+                <input type="text" id="name" placeholder="Escribe tu nombre" required style="text-align: center;">
+            </div>
+            
+            <!-- Campo de Apellidos -->
+            <div class="input-group">
+                <input type="text" id="surname" placeholder="Escribe tus apellidos" required style="text-align: center;">
+            </div>
+
+            <!-- Campo de Correo Electrónico -->
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Correo Electrónico" required style="text-align: center;">
+                <!-- Icono de Correo -->
+                <img src="../img/icono_del_correo.png" alt="Icono correo" class="icon-field icon-email">
+            </div>
+
+            <!-- Campo de Contraseña -->
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Contraseña (Mín. 6 caracteres)" required style="text-align: center;">
+            </div>
+
+            <!-- Botón de Registrarse (id="register-btn" es esencial para el script) -->
+            <button type="button" id="register-btn" class="submit-button">Registrarme</button>
+        </form>
+    </div>
+    
+    <a href="../html/login.html" class="bottom-link">¿Ya tienes una cuenta? Inicia Sesión</a>
+
+</body>
+
+</html>
