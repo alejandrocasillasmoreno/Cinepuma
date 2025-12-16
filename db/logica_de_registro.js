@@ -1,4 +1,4 @@
-/ userRoutes.js o donde manejes las rutas de autenticación
+// userRoutes.js o donde manejes las rutas de autenticación
 const express = require('express');
 const router = express.Router();
 const pool = require('./db'); // Importa la conexión
