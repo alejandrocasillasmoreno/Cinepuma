@@ -370,3 +370,35 @@ input[type="password"] {
     font-size: 0.8rem;
     margin-top: 15px;
 }
+/* Estilo para el estado de carga del botón */
+.submit-button {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Cuando el botón tiene la clase 'loading' */
+.submit-button.loading {
+    color: transparent !important; /* Esconde el texto "Iniciar Sesión" */
+    pointer-events: none;         /* Evita clics dobles */
+    opacity: 0.8;
+}
+
+/* El círculo del spinner */
+.submit-button.loading::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin: -12px 0 0 -12px; /* Centrado exacto */
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
