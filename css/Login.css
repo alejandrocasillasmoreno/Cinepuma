@@ -401,4 +401,40 @@ input[type="password"] {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+=======
+/*Estilos ojo login*/
+/* Contenedor relativo para que el ojo sepa dónde "pegarse" */
+.form-group {
+  position: relative;
+  width: 100%;
+  max-width: 350px; /* Ajusta según tu diseño */
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 12px 45px 12px 15px; /* Dejamos 45px a la derecha para que el texto no tape el ojo */
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* El botón del ojo */
+.eye-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%); /* Centrado vertical perfecto */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.eye-btn span {
+  font-size: 18px; /* Ajusta el tamaño del ojo aquí */
+
 }

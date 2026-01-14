@@ -200,5 +200,20 @@ function showModal(title, message, type) {
     `;
     setTimeout(() => { if(modal) modal.innerHTML = ''; }, 4000);
 }
+//Logica ojo
+const passwordInput = document.getElementById('password');
+const toggleBtn = document.getElementById('toggleBtn');
+const eyeIcon = document.getElementById('eyeIcon');
+
+toggleBtn.addEventListener('click', () => {
+  // Verificamos si es password o texto
+  const isPassword = passwordInput.type === 'password';
+  
+  // Cambiamos el tipo
+  passwordInput.type = isPassword ? 'text' : 'password';
+  
+  // Cambiamos el icono como feedback visual
+  eyeIcon.textContent = isPassword ? '🫣' : '👁️';
+});
 
 document.addEventListener('DOMContentLoaded', initializeFirebase);
