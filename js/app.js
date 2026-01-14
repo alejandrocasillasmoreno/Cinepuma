@@ -1,4 +1,4 @@
-// 1. IMPORTACIONES DE FIREBASE (Versión CDN para compatibilidad directa)
+// 1. IMPORTACIONES DE FIREBASE
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
 import { 
     getAuth, 
@@ -10,7 +10,8 @@ import {
 import { 
     getFirestore, 
     doc, 
-    setDoc 
+    setDoc,
+    serverTimestamp 
 } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
 // 2. CONFIGURACIÓN REAL DE CINEPUMA 2026
@@ -26,6 +27,7 @@ const firebaseConfig = {
 
 let auth;
 let db;
+const appContainer = document.getElementById('auth-form'); // Referencia para el dashboard
 
 // 3. INICIALIZACIÓN
 async function initializeFirebase() {
@@ -34,7 +36,6 @@ async function initializeFirebase() {
         auth = getAuth(app);
         db = getFirestore(app);
 
-        // Observador del estado del usuario
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 console.log("Usuario activo:", user.email);
@@ -48,105 +49,91 @@ async function initializeFirebase() {
     }
 }
 
-// 4. FUNCIONES DE AUTENTICACIÓN (CON SPINNER)
-
+// 4. FUNCIONES DE AUTENTICACIÓN
 async function handleLogin(email, password) {
     if (!auth) return;
     const loginBtn = document.getElementById('login-btn');
-    
-    // Activar estado de carga
     if (loginBtn) loginBtn.classList.add('loading');
 
     try {
         await signInWithEmailAndPassword(auth, email, password);
-        showModal('Inicio de Sesión Exitoso', 'Cargando CinePuma...', 'success');
+        showModal('Inicio de Sesión Exitoso', 'Bienvenido a CinePuma', 'success');
     } catch (error) {
-        // Desactivar estado de carga si hay error para permitir reintento
         if (loginBtn) loginBtn.classList.remove('loading');
-        showModal('Error', `Credenciales incorrectas: ${error.message}`, 'error');
+        showModal('Error', 'Credenciales incorrectas.', 'error');
     }
 }
 
-async function handleRegister(email, password, nombre, apellidos) {
+async function handleRegister(email, password, nombre_usuario) {
     if (!auth) return;
     const registerBtn = document.getElementById('register-btn');
-    
-    // Activar estado de carga
     if (registerBtn) registerBtn.classList.add('loading');
 
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        await saveUserData(userCredential.user.uid, email, nombre, apellidos);
+        // Guardamos con la estructura SQL que pediste
+        await saveUserData(userCredential.user.uid, email, nombre_usuario, password);
         showModal('Registro Exitoso', 'Cuenta creada correctamente.', 'success');
     } catch (error) {
-        // Desactivar estado de carga si hay error
         if (registerBtn) registerBtn.classList.remove('loading');
         showModal('Error de Registro', error.message, 'error');
     }
 }
 
-// 5. FUNCIÓN DE GUARDADO DE DATOS (FIRESTORE)
-async function saveUserData(uid, email, nombre = "", apellidos = "") {
+// 5. FUNCIÓN DE GUARDADO (Mapeo SQL: id, nombre_usuario, correo, contrasena, fecha_registro)
+async function saveUserData(uid, email, nombre_usuario, password) {
     if (!db) return;
-    const userProfileRef = doc(db, `artifacts/${appId}/users/${uid}/user_data`, 'profile');
+    
+    // Usamos el UID como Primary Key (id) y guardamos en la colección /usuarios
+    const userRef = doc(db, "usuarios", uid);
+    
     const dataToSave = {
-        nombre: nombre,
-        apellidos: apellidos,
-        email: email,
-        lastLogin: new Date(),
-        registrationDate: new Date(), 
-        appName: 'CinePuma App',
-        role: 'standard' 
+        nombre_usuario: nombre_usuario,      // VARCHAR(50)
+        correo: email,                       // VARCHAR(100) UNIQUE
+        contrasena: "Protegida por Auth",    // Las contraseñas reales se gestionan en Auth, no en BD
+        fecha_registro: serverTimestamp()    // DEFAULT CURRENT_TIMESTAMP
     };
 
     try {
-        await setDoc(userProfileRef, dataToSave, { merge: true });
-        console.log("Datos guardados en Firestore.");
+        await setDoc(userRef, dataToSave);
+        console.log("Usuario registrado en Base de Datos correctamente.");
     } catch (error) {
-        console.error("Error Firestore:", error);
+        console.error("Error al guardar datos restringidos:", error);
     }
 }
 
-// 6. MANEJO DE EVENTOS (CONEXIÓN CON BOTONES)
+// 6. MANEJO DE EVENTOS
 function setupFormListeners() {
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
-    const nameInput = document.getElementById('name');
-    const surnameInput = document.getElementById('surname');
+    const nameInput = document.getElementById('name'); // Este será el nombre_usuario
     
     const loginBtn = document.getElementById('login-btn');
     const registerBtn = document.getElementById('register-btn');
     const authForm = document.getElementById('auth-form');
 
     if (!authForm) return;
-
     authForm.addEventListener('submit', (e) => e.preventDefault());
 
-    // Listener para Botón de LOGIN
     if (loginBtn) {
         loginBtn.addEventListener('click', () => {
             const email = emailInput.value;
             const password = passwordInput.value;
-            if (email && password) {
-                handleLogin(email, password);
-            } else {
-                showModal('Datos incompletos', 'Email y contraseña son obligatorios.', 'warning');
-            }
+            if (email && password) handleLogin(email, password);
+            else showModal('Atención', 'Faltan datos.', 'warning');
         });
     }
 
-    // Listener para Botón de REGISTRO
     if (registerBtn) {
         registerBtn.addEventListener('click', () => {
             const email = emailInput.value;
             const password = passwordInput.value;
             const nombre = nameInput ? nameInput.value : "";
-            const apellidos = surnameInput ? surnameInput.value : "";
 
             if (email && password.length >= 6 && nombre) {
-                handleRegister(email, password, nombre, apellidos);
+                handleRegister(email, password, nombre);
             } else {
-                showModal('Datos incompletos', 'Nombre, Email y Contraseña (6+ carac.) son obligatorios.', 'warning');
+                showModal('Datos incompletos', 'Nombre, Email y Contraseña (mín. 6) son requeridos.', 'warning');
             }
         });
     }
@@ -154,50 +141,47 @@ function setupFormListeners() {
 
 // 7. UI Y MODALES
 function showDashboard(email) {
-    if (appContainer) {
-        appContainer.innerHTML = `
-            <div class="container" style="text-align:center; margin-top:50px;">
-                <h2>¡Bienvenido, ${email}!</h2>
-                <p>Tu sesión en CinePuma está activa.</p>
-                <button id="logout-btn" class="submit-button" style="background: #e74c3c; border:none; padding:10px 20px; color:white; border-radius:20px; cursor:pointer;">Cerrar Sesión</button>
-            </div>
-            <div id="auth-ui-messages"></div>
-        `;
-        document.getElementById('logout-btn').addEventListener('click', () => signOut(auth));
-    }
+    const container = document.querySelector('.main-container') || document.body;
+    container.innerHTML = `
+        <div style="text-align:center; padding: 50px; color: white; background: rgba(0,0,0,0.8); border-radius: 15px;">
+            <h1 style="color: #ff4b2b;">CinePuma</h1>
+            <h2>¡Hola, ${email}!</h2>
+            <p>Has ingresado correctamente a tu cartelera.</p>
+            <button id="logout-btn" style="background: #ff4b2b; border:none; padding:12px 25px; color:white; border-radius:25px; cursor:pointer; font-weight:bold; margin-top:20px;">Cerrar Sesión</button>
+        </div>
+    `;
+    document.getElementById('logout-btn').addEventListener('click', () => {
+        signOut(auth).then(() => window.location.reload());
+    });
 }
 
 function showModal(title, message, type) {
     const modal = document.getElementById('auth-ui-messages');
     if (!modal) return;
-
-    const colors = {
-        'success': 'background: #d4edda; color: #155724; border: 1px solid #c3e6cb;',
-        'error': 'background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;',
-        'warning': 'background: #fff3cd; color: #856404; border: 1px solid #ffeeba;'
+    const styles = {
+        'success': 'background: #28a745; color: white;',
+        'error': 'background: #dc3545; color: white;',
+        'warning': 'background: #ffc107; color: black;'
     };
-
     modal.innerHTML = `
-        <div style="padding: 15px; margin: 20px auto; max-width: 400px; border-radius: 8px; font-family: sans-serif; ${colors[type]}">
+        <div style="padding: 15px; margin: 10px auto; border-radius: 8px; text-align:center; transition: all 0.3s; ${styles[type]}">
             <strong>${title}</strong><br>${message}
         </div>
     `;
-    setTimeout(() => { if(modal) modal.innerHTML = ''; }, 4000);
+    setTimeout(() => { modal.innerHTML = ''; }, 3500);
 }
-//Logica ojo
+
+// LOGICA DEL OJO (Feedback visual)
 const passwordInput = document.getElementById('password');
 const toggleBtn = document.getElementById('toggleBtn');
 const eyeIcon = document.getElementById('eyeIcon');
 
-toggleBtn.addEventListener('click', () => {
-  // Verificamos si es password o texto
-  const isPassword = passwordInput.type === 'password';
-  
-  // Cambiamos el tipo
-  passwordInput.type = isPassword ? 'text' : 'password';
-  
-  // Cambiamos el icono como feedback visual
-  eyeIcon.textContent = isPassword ? '🫣' : '👁️';
-});
+if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+        const isPassword = passwordInput.type === 'password';
+        passwordInput.type = isPassword ? 'text' : 'password';
+        eyeIcon.textContent = isPassword ? '🫣' : '👁️';
+    });
+}
 
 document.addEventListener('DOMContentLoaded', initializeFirebase);
