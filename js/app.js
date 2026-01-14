@@ -261,6 +261,21 @@ function showModal(title, message, type) {
         modal.innerHTML = '';
     }, 5000);
 }
+//Logica ojo
+const passwordInput = document.getElementById('password');
+const toggleBtn = document.getElementById('toggleBtn');
+const eyeIcon = document.getElementById('eyeIcon');
+
+toggleBtn.addEventListener('click', () => {
+  // Verificamos si es password o texto
+  const isPassword = passwordInput.type === 'password';
+  
+  // Cambiamos el tipo
+  passwordInput.type = isPassword ? 'text' : 'password';
+  
+  // Cambiamos el icono como feedback visual
+  eyeIcon.textContent = isPassword ? '🫣' : '👁️';
+});
 
 // 9. INICIO DE LA APLICACIÓN
 document.addEventListener('DOMContentLoaded', initializeFirebase);
