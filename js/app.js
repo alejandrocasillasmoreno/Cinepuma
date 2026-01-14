@@ -27,7 +27,6 @@ const firebaseConfig = {
 
 let auth;
 let db;
-const appContainer = document.getElementById('auth-form'); // Referencia para el dashboard
 
 // 3. INICIALIZACIÓN
 async function initializeFirebase() {
@@ -38,8 +37,14 @@ async function initializeFirebase() {
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                console.log("Usuario activo:", user.email);
-                showDashboard(user.email);
+                console.log("Sesión activa detectada:", user.email);
+                // Si ya hay sesión, redireccionamos al index después de un pequeño delay
+                // para permitir que se vean los mensajes de éxito si vienen de login/registro
+                setTimeout(() => {
+                    if (window.location.pathname.includes('registro') || window.location.pathname.includes('login')) {
+                        window.location.href = 'index.html';
+                    }
+                }, 1500);
             } else {
                 setupFormListeners();
             }
@@ -57,7 +62,9 @@ async function handleLogin(email, password) {
 
     try {
         await signInWithEmailAndPassword(auth, email, password);
-        showModal('Inicio de Sesión Exitoso', 'Bienvenido a CinePuma', 'success');
+        showModal('Inicio de Sesión Exitoso', 'Redirigiendo a CinePuma...', 'success');
+        // Redirección manual inmediata por si el observer tarda
+        setTimeout(() => { window.location.href = 'index.html'; }, 1000);
     } catch (error) {
         if (loginBtn) loginBtn.classList.remove('loading');
         showModal('Error', 'Credenciales incorrectas.', 'error');
@@ -72,8 +79,10 @@ async function handleRegister(email, password, nombre_usuario) {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         // Guardamos con la estructura SQL que pediste
-        await saveUserData(userCredential.user.uid, email, nombre_usuario, password);
-        showModal('Registro Exitoso', 'Cuenta creada correctamente.', 'success');
+        await saveUserData(userCredential.user.uid, email, nombre_usuario);
+        showModal('Registro Exitoso', 'Cuenta creada. Redirigiendo...', 'success');
+        // Redirección manual inmediata
+        setTimeout(() => { window.location.href = 'index.html'; }, 1500);
     } catch (error) {
         if (registerBtn) registerBtn.classList.remove('loading');
         showModal('Error de Registro', error.message, 'error');
@@ -81,22 +90,22 @@ async function handleRegister(email, password, nombre_usuario) {
 }
 
 // 5. FUNCIÓN DE GUARDADO (Mapeo SQL: id, nombre_usuario, correo, contrasena, fecha_registro)
-async function saveUserData(uid, email, nombre_usuario, password) {
+async function saveUserData(uid, email, nombre_usuario) {
     if (!db) return;
     
-    // Usamos el UID como Primary Key (id) y guardamos en la colección /usuarios
+    // Usamos el UID como Primary Key y guardamos en la colección /usuarios
     const userRef = doc(db, "usuarios", uid);
     
     const dataToSave = {
         nombre_usuario: nombre_usuario,      // VARCHAR(50)
-        correo: email,                       // VARCHAR(100) UNIQUE
-        contrasena: "Protegida por Auth",    // Las contraseñas reales se gestionan en Auth, no en BD
+        correo: email,                       // VARCHAR(100) STRING
+        contrasena: "Protegida por Auth",    // Seguridad
         fecha_registro: serverTimestamp()    // DEFAULT CURRENT_TIMESTAMP
     };
 
     try {
         await setDoc(userRef, dataToSave);
-        console.log("Usuario registrado en Base de Datos correctamente.");
+        console.log("Datos de usuario guardados en Firestore.");
     } catch (error) {
         console.error("Error al guardar datos restringidos:", error);
     }
@@ -106,26 +115,27 @@ async function saveUserData(uid, email, nombre_usuario, password) {
 function setupFormListeners() {
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
-    const nameInput = document.getElementById('name'); // Este será el nombre_usuario
+    const nameInput = document.getElementById('name'); 
     
     const loginBtn = document.getElementById('login-btn');
     const registerBtn = document.getElementById('register-btn');
     const authForm = document.getElementById('auth-form');
 
-    if (!authForm) return;
-    authForm.addEventListener('submit', (e) => e.preventDefault());
+    if (authForm) {
+        authForm.addEventListener('submit', (e) => e.preventDefault());
+    }
 
     if (loginBtn) {
-        loginBtn.addEventListener('click', () => {
+        loginBtn.onclick = () => {
             const email = emailInput.value;
             const password = passwordInput.value;
             if (email && password) handleLogin(email, password);
             else showModal('Atención', 'Faltan datos.', 'warning');
-        });
+        };
     }
 
     if (registerBtn) {
-        registerBtn.addEventListener('click', () => {
+        registerBtn.onclick = () => {
             const email = emailInput.value;
             const password = passwordInput.value;
             const nombre = nameInput ? nameInput.value : "";
@@ -135,26 +145,11 @@ function setupFormListeners() {
             } else {
                 showModal('Datos incompletos', 'Nombre, Email y Contraseña (mín. 6) son requeridos.', 'warning');
             }
-        });
+        };
     }
 }
 
 // 7. UI Y MODALES
-function showDashboard(email) {
-    const container = document.querySelector('.main-container') || document.body;
-    container.innerHTML = `
-        <div style="text-align:center; padding: 50px; color: white; background: rgba(0,0,0,0.8); border-radius: 15px;">
-            <h1 style="color: #ff4b2b;">CinePuma</h1>
-            <h2>¡Hola, ${email}!</h2>
-            <p>Has ingresado correctamente a tu cartelera.</p>
-            <button id="logout-btn" style="background: #ff4b2b; border:none; padding:12px 25px; color:white; border-radius:25px; cursor:pointer; font-weight:bold; margin-top:20px;">Cerrar Sesión</button>
-        </div>
-    `;
-    document.getElementById('logout-btn').addEventListener('click', () => {
-        signOut(auth).then(() => window.location.reload());
-    });
-}
-
 function showModal(title, message, type) {
     const modal = document.getElementById('auth-ui-messages');
     if (!modal) return;
@@ -176,7 +171,7 @@ const passwordInput = document.getElementById('password');
 const toggleBtn = document.getElementById('toggleBtn');
 const eyeIcon = document.getElementById('eyeIcon');
 
-if (toggleBtn) {
+if (toggleBtn && passwordInput) {
     toggleBtn.addEventListener('click', () => {
         const isPassword = passwordInput.type === 'password';
         passwordInput.type = isPassword ? 'text' : 'password';
