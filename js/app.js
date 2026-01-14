@@ -1,66 +1,50 @@
-// 1. IMPORTACIONES DE FIREBASE
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+// 1. IMPORTACIONES DE FIREBASE (Versión CDN para compatibilidad directa)
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
 import { 
     getAuth, 
-    createUserWithEmailAndPassword, 
     signInWithEmailAndPassword, 
-    signOut, 
-    onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    createUserWithEmailAndPassword, 
+    onAuthStateChanged, 
+    signOut 
+} from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
 import { 
     getFirestore, 
     doc, 
-    setDoc, 
-    setLogLevel 
-} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    setDoc 
+} from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
-// Habilitar logs para depuración de Firestore
-setLogLevel('debug');
-
-// 2. CONSTANTES Y VARIABLES GLOBALES
-const appContainer = document.querySelector('body'); 
-const messageContainer = document.getElementById('auth-ui-messages'); 
-        
-const appId = typeof __app_id !== 'undefined' ? __app_id : 'cinepuma-login';
-const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-    apiKey: "TU_API_KEY",
-    authDomain: "TU_PROYECTO.firebaseapp.com",
-    projectId: "TU_PROYECTO",
-    storageBucket: "TU_PROYECTO.appspot.com",
-    messagingSenderId: "TU_ID",
-    appId: "TU_APP_ID"
+// 2. CONFIGURACIÓN REAL DE CINEPUMA 2026
+const firebaseConfig = {
+  apiKey: "AIzaSyChKzHT4ZT-z6156HacMYDdImWFrq98174",
+  authDomain: "cinepuma-2026.firebaseapp.com",
+  projectId: "cinepuma-2026",
+  storageBucket: "cinepuma-2026.firebasestorage.app",
+  messagingSenderId: "628367090771",
+  appId: "1:628367090771:web:4394f16d34a7ba130992a6",
+  measurementId: "G-VG5Z808JE5"
 };
 
 let auth;
 let db;
-let userId = null;
 
-// 3. INICIALIZACIÓN DE FIREBASE
+// 3. INICIALIZACIÓN
 async function initializeFirebase() {
-    if (Object.keys(firebaseConfig).length === 0 || !firebaseConfig.projectId) {
-        console.error("Configuración incompleta.");
-        setupFormListeners();
-        return;
-    }
-
     try {
         const app = initializeApp(firebaseConfig);
         auth = getAuth(app);
         db = getFirestore(app);
 
+        // Observador del estado del usuario
         onAuthStateChanged(auth, (user) => {
-            if (user && !user.isAnonymous) {
-                userId = user.uid;
-                console.log(`Usuario autenticado: ${user.email}`);
+            if (user) {
+                console.log("Usuario activo:", user.email);
                 showDashboard(user.email);
             } else {
-                userId = null;
                 setupFormListeners();
             }
         });
-
     } catch (error) {
-        console.error("Error al inicializar Firebase:", error);
+        console.error("Error crítico al iniciar Firebase:", error);
     }
 }
 
