@@ -231,3 +231,184 @@ footer {
         display: block;
     }
 }
+
+/* CSS PARA EL VIDEO DE FONDO DE AYUDA.CSS*/
+/* --- CONTENEDOR PRINCIPAL --- */
+.player-container {
+    position: relative;
+    width: 800px; /* Un poco más ancho para aspecto cine */
+    max-width: 100%;
+    aspect-ratio: 16/9; /* Mantiene proporción panorámica */
+    background: #000; /* Negro profundo detrás del video */
+    overflow: hidden;
+    border-radius: 8px; /* Bordes redondeados suaves */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Sombra elegante */
+    margin: 0 auto;
+}
+
+/* Pantalla completa */
+.player-container:fullscreen {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+}
+
+.player-container:-webkit-full-screen {
+    width: 100%;
+    height: 100%;
+}
+
+/* --- VIDEO --- */
+#miVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* --- BARRA DE CONTROLES --- */
+.controles {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* Degradado oscuro para que se lea bien sobre el video */
+    background: linear-gradient(to top, rgba(21, 40, 69, 0.95), transparent);
+    padding: 15px 20px; /* Más espacio para respirar */
+    box-sizing: border-box;
+    z-index: 2147483647;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+/* Ocultar controles si no hay hover (opcional, da toque pro) */
+.player-container:hover .controles {
+    opacity: 1;
+}
+
+/* --- BOTONES E ICONOS --- */
+/* Estilo base para botones */
+#playPauseBtn, #btnMute, #btnFullScreen, .icono-volumen, .icono-pantalla {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    transition: transform 0.1s;
+}
+
+/* Efecto al pulsar botón */
+#playPauseBtn:active, #btnFullScreen:active {
+    transform: scale(0.9);
+}
+
+/* SVG ICONOS: Color Blanco por defecto */
+svg {
+    fill: #ecf0f1; 
+    transition: fill 0.2s ease;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5)); /* Sombra para mejor lectura */
+}
+
+/* HOVER: Color Naranja CinePuma */
+button:hover svg, .icono-volumen:hover svg, .icono-pantalla:hover svg {
+    fill: #FF6B35; /* <--- EL NARANJA DE TU IMAGEN */
+}
+
+/* --- TEXTO DE TIEMPO --- */
+#tiempoTexto {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: 15px;
+    color: #ecf0f1;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    min-width: 100px; /* Evita saltos cuando cambian los números */
+}
+
+/* --- SLIDER DE VOLUMEN (Estilo Personalizado) --- */
+#volumenSlider {
+    -webkit-appearance: none; /* Quita estilo por defecto de navegador */
+    width: 80px;
+    height: 4px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 2px;
+    margin-left: 15px;
+    cursor: pointer;
+    outline: none;
+}
+
+/* La bolita del slider (Chrome/Safari/Edge) */
+#volumenSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #FF6B35; /* Naranja */
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+#volumenSlider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    background: #fff; /* Se vuelve blanco al tocarlo */
+}
+
+/* La bolita del slider (Firefox) */
+#volumenSlider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: 50%;
+    background: #FF6B35;
+    cursor: pointer;
+}
+
+/* --- BARRA DE PROGRESO (LINEA NARANJA) --- */
+.barra-fondo {
+    position: absolute;
+    bottom: 60px; /* Ajustada para estar justo encima de los botones */
+    left: 0; /* Que ocupe todo el ancho */
+    width: 100%; 
+    height: 5px; /* Más fina y elegante */
+    background-color: rgba(255,255,255,0.2);
+    cursor: pointer;
+    transition: height 0.1s; /* Animación suave al pasar mouse */
+}
+
+.barra-fondo:hover {
+    height: 8px; /* Crece un poco al intentar buscar minuto */
+}
+
+.barra-relleno {
+    width: 0%;
+    height: 100%;
+    min-height: 5px; 
+    /* El naranja CinePuma */
+    background-color: #FF6B35; 
+    box-shadow: 0 0 10px rgba(255, 107, 53, 0.5); /* Resplandor naranja neon suave */
+    pointer-events: none; 
+    position: relative;
+    transition: width 0.1s linear;
+}
+
+/* Bolita al final de la barra de progreso (Opcional, muy estético) */
+.barra-relleno::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    opacity: 0; /* Oculta por defecto */
+    transition: opacity 0.2s;
+}
+
+.barra-fondo:hover .barra-relleno::after {
+    opacity: 1; /* Aparece solo cuando pasas el mouse por la barra */
+}

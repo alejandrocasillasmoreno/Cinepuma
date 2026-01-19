@@ -29,6 +29,19 @@
 
         <!--Pregunta 1-->
         <h1>¿Podemos ayudarte?</h1>
+        <div class="player-container" id="videoPlayer">
+            <video id="miVideo" src="../img/videotest2.mp4" preload="metadata"></video>
+        
+            <div class="controles">
+                <button id="playPauseBtn"></button> <span id="tiempoTexto">00:00 / 00:00</span>
+                <span id="btnMute" class="icono-volumen"></span>
+                <input type="range" id="volumenSlider" min="0" max="1" step="0.05" value="1">
+                <span id="btnFullScreen" class="icono-pantalla" style="margin-left: auto; cursor: pointer;"></span>
+            </div>
+            <div id="barraContenedor" class="barra-fondo">
+                <div id="barraProgreso" class="barra-relleno"></div>
+            </div>
+        </div>
         <img src="../img/cinepuma.png" alt="Imagen Cinepuma" class="cinepuma-image" > <!-- Eliminamos estilos inline -->
         <button class="accordion-header">1. ¿Qu&eacute; somos? </button>
 
