@@ -4,7 +4,7 @@ import {
     getAuth, 
     signInWithEmailAndPassword, 
     createUserWithEmailAndPassword, 
-    sendPasswordResetEmail, // <--- Nueva importación para recuperar clave
+    sendPasswordResetEmail, 
     onAuthStateChanged, 
     signOut 
 } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
@@ -38,7 +38,7 @@ async function initializeFirebase() {
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                console.log("Sesión activa detectada:", user.email);
+                console.log("Sesión activa:", user.email);
                 setTimeout(() => {
                     const path = window.location.pathname;
                     if (path.includes('registro') || path.includes('login') || path.includes('contraseña_olvidada')) {
@@ -50,41 +50,57 @@ async function initializeFirebase() {
             }
         });
     } catch (error) {
-        console.error("Error crítico al iniciar Firebase:", error);
+        console.error("Error crítico:", error);
     }
 }
 
 // 4. FUNCIONES DE AUTENTICACIÓN
 async function handleLogin(email, password) {
     if (!auth) return;
+    const btn = document.getElementById('login-btn');
+    
+    // ACTIVA EL SÍMBOLO DE CARGA (Basado en tu CSS)
+    if (btn) btn.classList.add('loading');
+
     try {
         await signInWithEmailAndPassword(auth, email, password);
-        showModal('Inicio de Sesión Exitoso', 'Redirigiendo a CinePuma...', 'success');
+        showModal('Inicio de Sesión Exitoso', 'Bienvenido a CinePuma', 'success');
         setTimeout(() => { window.location.href = 'index.html'; }, 1000);
     } catch (error) {
+        // DESACTIVA EL SÍMBOLO DE CARGA SI HAY ERROR
+        if (btn) btn.classList.remove('loading');
         showModal('Error', 'Credenciales incorrectas.', 'error');
     }
 }
 
 async function handleRegister(email, password, nombre_usuario) {
     if (!auth) return;
+    const btn = document.getElementById('register-btn');
+    
+    if (btn) btn.classList.add('loading');
+
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         await saveUserData(userCredential.user.uid, email, nombre_usuario);
-        showModal('Registro Exitoso', 'Cuenta creada. Redirigiendo...', 'success');
+        showModal('Registro Exitoso', 'Cuenta creada correctamente.', 'success');
         setTimeout(() => { window.location.href = 'index.html'; }, 1500);
     } catch (error) {
+        if (btn) btn.classList.remove('loading');
         showModal('Error de Registro', error.message, 'error');
     }
 }
 
-// NUEVA FUNCIÓN: RECUPERAR CONTRASEÑA
 async function handleResetPassword(email) {
     if (!auth) return;
+    const btn = document.querySelector('.submit-button'); // Botón de la página de recuperación
+    if (btn) btn.classList.add('loading');
+
     try {
         await sendPasswordResetEmail(auth, email);
-        showModal('Correo Enviado', 'Revisa tu bandeja de entrada para cambiar tu clave.', 'success');
+        showModal('Correo Enviado', 'Revisa tu bandeja de entrada.', 'success');
+        if (btn) btn.classList.remove('loading');
     } catch (error) {
+        if (btn) btn.classList.remove('loading');
         let mensaje = "Error al enviar el correo.";
         if (error.code === 'auth/user-not-found') mensaje = "Este correo no está registrado.";
         showModal('Error', mensaje, 'error');
@@ -104,7 +120,7 @@ async function saveUserData(uid, email, nombre_usuario) {
     try {
         await setDoc(userRef, dataToSave);
     } catch (error) {
-        console.error("Error al guardar datos:", error);
+        console.error("Error al guardar en Firestore:", error);
     }
 }
 
@@ -116,12 +132,11 @@ function setupFormListeners() {
     
     const loginBtn = document.getElementById('login-btn');
     const registerBtn = document.getElementById('register-btn');
-    const recoveryForm = document.getElementById('recovery-form'); // El form de tu nuevo HTML
+    const recoveryForm = document.getElementById('recovery-form');
     const authForm = document.getElementById('auth-form');
 
     if (authForm) authForm.addEventListener('submit', (e) => e.preventDefault());
     
-    // Escuchador para Recuperación de Contraseña
     if (recoveryForm) {
         recoveryForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -132,7 +147,9 @@ function setupFormListeners() {
 
     if (loginBtn) {
         loginBtn.onclick = () => {
-            if (emailInput.value && passwordInput.value) handleLogin(emailInput.value, passwordInput.value);
+            const email = emailInput ? emailInput.value : '';
+            const password = passwordInput ? passwordInput.value : '';
+            if (email && password) handleLogin(email, password);
             else showModal('Atención', 'Faltan datos.', 'warning');
         };
     }
@@ -150,10 +167,7 @@ function setupFormListeners() {
 
 // 7. UI Y MODALES
 function showModal(title, message, type) {
-    // Busca el contenedor en el HTML actual (asegúrate de que exista id="auth-ui-messages")
     let modal = document.getElementById('auth-ui-messages');
-    
-    // Si no existe, lo crea dinámicamente para no romper el código
     if (!modal) {
         modal = document.createElement('div');
         modal.id = 'auth-ui-messages';
@@ -165,8 +179,9 @@ function showModal(title, message, type) {
         'error': 'background: #dc3545; color: white;',
         'warning': 'background: #ffc107; color: black;'
     };
+
     modal.innerHTML = `
-        <div style="padding: 15px; margin: 10px auto; border-radius: 8px; text-align:center; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; min-width: 300px; ${styles[type]}">
+        <div style="padding: 15px; margin: 10px auto; border-radius: 8px; text-align:center; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; min-width: 300px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); ${styles[type]}">
             <strong>${title}</strong><br>${message}
         </div>
     `;
