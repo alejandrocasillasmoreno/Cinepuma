@@ -23,7 +23,8 @@ body {
 /* ---------------------------------------------------- */
 
 main {
-    flex-grow: 1; /* Ocupa el espacio restante entre header y footer */
+    flex-grow: 1;
+    /* Ocupa el espacio restante entre header y footer */
     padding-top: 50px;
     display: flex;
     flex-direction: column;
@@ -31,7 +32,8 @@ main {
     width: 100%;
 }
 
-main h1, main h2 {
+main h1,
+main h2 {
     color: white;
     font-size: 2.5rem;
     margin-bottom: 40px;
@@ -76,6 +78,11 @@ header {
 }
 
 /* --- MENÚ DE NAVEGACIÓN --- */
+nav {
+    display: flex;
+    align-items: center;
+}
+
 nav a {
     color: #cccccc;
     text-decoration: none;
@@ -115,7 +122,8 @@ nav a:hover {
     width: 100%;
     height: 35px;
     color: white;
-    padding: 5px 10px 5px 35px; /* Padding izquierdo para el icono */
+    padding: 5px 10px 5px 35px;
+    /* Padding izquierdo para el icono */
     font-size: 1rem;
     outline: none;
 }
@@ -141,22 +149,28 @@ nav a:hover {
 /* ---------------------------------------------------- */
 
 main {
-    flex-grow: 1; /* Empuja el footer hacia abajo */
+    flex-grow: 1;
+    /* Empuja el footer hacia abajo */
     padding: 40px 10%;
     text-align: center;
-    
+
     /* Configuración GRID para las películas */
     display: flex;
-    flex-wrap: wrap; /* Permite que bajen a la siguiente línea */
-    justify-content: center; /* Centrado horizontal */
-    gap: 30px; /* Espacio entre películas */
+    flex-wrap: wrap;
+    /* Permite que bajen a la siguiente línea */
+    justify-content: center;
+    /* Centrado horizontal */
+    gap: 30px;
+    /* Espacio entre películas */
 }
 
 /* Título de la página (El h2 suelto en el main) */
 main h2 {
-    width: 100%; /* Ocupa todo el ancho para estar arriba solo */
+    width: 100%;
+    /* Ocupa todo el ancho para estar arriba solo */
     font-size: 2.5rem;
-    color: #ff6b35; /* Naranja corporativo */
+    color: #ff6b35;
+    /* Naranja corporativo */
     border-bottom: 2px solid #ff6b35;
     padding-bottom: 10px;
     margin-bottom: 30px;
@@ -165,10 +179,12 @@ main h2 {
 
 /* --- TARJETA DE PELÍCULA (.pelicula) --- */
 .pelicula {
-    background-color: rgba(255, 255, 255, 0.1); /* Fondo semitransparente */
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Fondo semitransparente */
     border-radius: 10px;
     padding: 15px;
-    width: 250px; /* Ancho fijo de la tarjeta */
+    width: 250px;
+    /* Ancho fijo de la tarjeta */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -177,7 +193,8 @@ main h2 {
 
 /* Efecto al pasar el ratón por encima */
 .pelicula:hover {
-    transform: translateY(-10px); /* Sube un poco */
+    transform: translateY(-10px);
+    /* Sube un poco */
 }
 
 /* Título de la película dentro de la tarjeta */
@@ -198,10 +215,12 @@ main h2 {
 /* Imagen de la película */
 .pelicula img {
     width: 100%;
-    height: 330px; /* Altura fija para que todas se vean iguales */
-    object-fit: cover; /* Recorta la imagen si no encaja, sin deformarla */
+    height: 330px;
+    /* Altura fija para que todas se vean iguales */
+    object-fit: cover;
+    /* Recorta la imagen si no encaja, sin deformarla */
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* ---------------------------------------------------- */
@@ -234,4 +253,53 @@ footer ul {
 .contact-icon {
     width: 30px;
     height: 30px;
+}
+
+/* --- ESTILOS BUSCADOR UNIVERSAL (Compatible con diseño Index) --- */
+#global-search-form {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+#global-search-input {
+    background-color: #222;
+    color: white;
+    border: 1px solid #444;
+    padding: 6px 12px;
+    border-radius: 4px;
+    outline: none;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    height: 38px;
+}
+
+#global-search-input::placeholder {
+    color: #bbb;
+}
+
+#global-search-input:focus {
+    border-color: #ffca2c;
+    box-shadow: 0 0 5px rgba(255, 202, 44, 0.5);
+}
+
+#global-search-form button {
+    background-color: transparent;
+    border: 1px solid #ffca2c;
+    color: #ffca2c;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-left: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#global-search-form button:hover {
+    background-color: #ffca2c;
+    color: black;
 }

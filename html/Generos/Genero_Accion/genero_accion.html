@@ -19,43 +19,54 @@
             <h1><a href="../../index.html">CinePuma</a></h1>
         </div>
 
-        <!--Barra de búsqueda-->
-        <div class="search-bar">
-            <input type="text" placeholder="Buscar">
-            <img src="../../../img/imagen_lupa-removebg.png" alt="Icono búsqueda" class="icon-search">
-        </div>
-
         <!--Navegador de navegación principal-->
         <nav>
-            <a href="../generos.html" class="nav-boton">G&eacute;neros</a>
-            <a href="../../../html/mejorValoradas.html" class="nav-boton">Mejor valoradas</a>
-            <a href="../../../html/ayuda.html" class="nav-boton help-button">Help</a>
+            <a href="../generos.html">G&eacute;neros</a>
+            <a href="../../../html/mejorValoradas.html">Mejor valoradas</a>
+            <a href="../../../html/ayuda.html">Ayuda</a>
+
+            <!-- Buscador Global -->
+            <form id="global-search-form">
+                <input id="global-search-input" type="search" placeholder="Buscar...">
+                <button type="submit">🔍</button>
+            </form>
         </nav>
     </header>
+    <!-- Removed header-search.js to allow contextual search -->
+    <!-- <script src="../../../js/header-search.js"></script> -->
 
     <!--Contenido principal-->
-<main>
-    <h2>Acci&oacute;n</h2>
+    <main>
+        <h2 style="text-align: center; color: #ff6b35; margin: 20px 0;">Acci&oacute;n</h2>
 
-    <!--- Pelicula Novocaine --->
-    <section>
-        <h3><a href="pelicula-novocaine.html">Novocaine: Sin Dolor</a></h3>
-        <img src="../../../img/NOVOCAINESindolor.png" alt="Poster Novocaine" width="250">
-    </section>
+        <!-- Contenedor Dinámico -->
+        <div id="movies-container"></div>
+    </main>
 
-    <!--- Pelicula Nobody 2 --->
-    <section>
-        <h3><a href="pelicula-nobody-2.html">Nobody 2</a></h3>
-        <img src="../../../img/NOBODY2.png" alt="Poster Nobody 2" width="250">
-    </section>
+    <!-- Script Dynamic Loader -->
+    <script type="module">
+        import { loadMoviesByGenre, searchMoviesInGenre } from "../../../js/genre-loader.js";
+        // ID 28 = Acción
+        const GENRE_ID = 28;
 
-    <!--- Pelicula Ballerina (John Wick) --->
-    <section>
-        <h3><a href="pelicula-ballerina.html">Ballerina (John Wick)</a></h3>
-        <img src="../../../img/PosterBallerina(John Wick).png" alt="Poster Ballerina" width="250">
-    </section>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMoviesByGenre(GENRE_ID, 'movies-container');
 
-</main>
+            // Handle Contextual Search
+            const searchForm = document.getElementById('global-search-form');
+            if (searchForm) {
+                searchForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const input = document.getElementById('global-search-input');
+                    const query = input.value.trim();
+                    if (query) {
+                        searchMoviesInGenre(query, GENRE_ID, 'movies-container');
+                    }
+                });
+            }
+        });
+    </script>
+
     <footer>
         <ul>
             <li>

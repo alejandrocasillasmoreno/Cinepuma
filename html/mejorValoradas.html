@@ -6,65 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Descripcion" content="Página de películas mejor valoradas de CinePuma">
     <title>CinePuma - Mejores Valoradas</title>
-    <link rel="stylesheet" href="../css/mejoresValoradas.css"> 
+    <!-- Usamos el CSS estandarizado de géneros -->
+    <link rel="stylesheet" href="../css/paginas-generos.css">
 </head>
 
 <body>
+
     <header>
+        <!--Logo Cinepuma-->
         <div class="logo">
-            <img src="../img/Logo_Cinepuma.png" alt="Logo Cinepuma">
-            <h1><a href="../../html/index.html">CinePuma</a></h1>
+            <img src="../img/Logo_Cinepuma.png" alt="CinePuma Logo">
+            <h1><a href="../html/index.html">CinePuma</a></h1>
         </div>
-        
+
+        <!--Navegador de navegación principal-->
         <nav>
-            <a href="../html/Generos/generos.html">Género</a>
-            <a href="mejorValoradas.html">Mejores valoradas</a>
+            <a href="Generos/generos.html">G&eacute;neros</a>
+            <a href="mejorValoradas.html" style="color:white; font-weight:bold; border-bottom: 2px solid #ff6b35;">Mejor
+                valoradas</a>
             <a href="ayuda.html">Ayuda</a>
+
+            <!-- Buscador Global -->
+            <form id="global-search-form">
+                <input id="global-search-input" type="search" placeholder="Buscar...">
+                <button type="submit">🔍</button>
+            </form>
         </nav>
-        
-        </header>
+    </header>
 
-    <main id="main">
-        <h2 class="main-title">Películas mejor valoradas</h2>
+    <!-- Script funcionalidad buscador global -->
+    <script src="../js/header-search.js"></script>
 
-        <div class="movie-list">
-            
-            <div class="movie-item">
-                <div class="movie-card">
-                    <img src="../img/jurassic_world.jpg" alt="Póster Jurassic World">
-                </div>
-            </div>
+    <main>
+        <h2 style="text-align: center; color: #ff6b35; margin: 20px 0;">Mejores Valoradas</h2>
 
-            <div class="movie-item">
-                <div class="movie-card">
-                    <img src="../img/avatar_2.jpg" alt="Póster Avatar: The Way of Water">
-                </div>
-            </div>
-
-            </div>
+        <!-- Contenedor Dinámico -->
+        <div id="movies-container"></div>
     </main>
 
     <footer>
         <ul>
             <li>
-                <!-- Placeholder de icono -->
-                <img src="../img/icono_del_telefono-remove.png" alt="icono telefono"
-                    style="vertical-align: middle; width: 36px; height: 36px;">
-                Teléfono: 123-456-7890
+                <!--Teléfono de contacto-->
+                <img src="../img/icono_del_telefono-remove.png" alt="icono telefono" width="36" height="36">
+                <p>Tel&eacute;fono: 123-456-7890</p>
             </li>
-
             <li>
-                <!-- Placeholder de icono -->
-                <img src="../img/icono_del_correo.png" alt="icono correo"
-                    style="vertical-align: middle; width: 36px; height: 36px;">
-                Email: CinePuma@gmail.com
+                <!--Correo de contacto-->
+                <img src="../img/icono_del_correo.png" alt="icono correo" width="36" height="36">
+                <p>Email: CinePuma@gmail.com</p>
             </li>
         </ul>
     </footer>
-    
-    <script src="../js/top_rated.js"></script>
-    <script src="../js/detalle.js"></script>
+
+    <!-- Script específico para cargar Top Rated con el nuevo diseño -->
+    <script type="module" src="../js/top_rated.js"></script>
+    <!-- Detalle bundle si es necesario para login status (opcional, index lo tiene en index.js) -->
 </body>
 
 </html>
-

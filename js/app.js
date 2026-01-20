@@ -1,42 +1,29 @@
 // 1. IMPORTACIONES DE FIREBASE
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-import { 
-    getAuth, 
-    signInWithEmailAndPassword, 
-    createUserWithEmailAndPassword, 
-    sendPasswordResetEmail, 
-    onAuthStateChanged, 
-    signOut 
+import {
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    sendPasswordResetEmail,
+    onAuthStateChanged,
+    signOut
 } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
-import { 
-    getFirestore, 
-    doc, 
+import {
+    doc,
     setDoc,
-    serverTimestamp 
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
-// 2. CONFIGURACIÓN REAL DE CINEPUMA 2026
-const firebaseConfig = {
-  apiKey: "AIzaSyChKzHT4ZT-z6156HacMYDdImWFrq98174",
-  authDomain: "cinepuma-2026.firebaseapp.com",
-  projectId: "cinepuma-2026",
-  storageBucket: "cinepuma-2026.firebasestorage.app",
-  messagingSenderId: "628367090771",
-  appId: "1:628367090771:web:4394f16d34a7ba130992a6",
-  measurementId: "G-VG5Z808JE5"
-};
+// IMPORTAR INSTANCIAS COMPARTIDAS
+import { auth, db } from "./firebase-init.js";
 
-let auth;
-let db;
+// 2. CONFIGURACIÓN YA NO ES NECESARIA AQUÍ (está en firebase-init.js)
 
 // 3. INICIALIZACIÓN
 async function initializeFirebase() {
     try {
-        const app = initializeApp(firebaseConfig);
-        auth = getAuth(app);
-        db = getFirestore(app);
+        // auth y db ya están inicializados
 
         onAuthStateChanged(auth, (user) => {
+
             if (user) {
                 console.log("Sesión activa:", user.email);
                 setTimeout(() => {
@@ -58,7 +45,7 @@ async function initializeFirebase() {
 async function handleLogin(email, password) {
     if (!auth) return;
     const btn = document.getElementById('login-btn');
-    
+
     // ACTIVA EL SÍMBOLO DE CARGA (Basado en tu CSS)
     if (btn) btn.classList.add('loading');
 
@@ -76,7 +63,7 @@ async function handleLogin(email, password) {
 async function handleRegister(email, password, nombre_usuario) {
     if (!auth) return;
     const btn = document.getElementById('register-btn');
-    
+
     if (btn) btn.classList.add('loading');
 
     try {
@@ -128,15 +115,15 @@ async function saveUserData(uid, email, nombre_usuario) {
 function setupFormListeners() {
     const emailInput = document.getElementById('email') || document.getElementById('recovery-email');
     const passwordInput = document.getElementById('password');
-    const nameInput = document.getElementById('name'); 
-    
+    const nameInput = document.getElementById('name');
+
     const loginBtn = document.getElementById('login-btn');
     const registerBtn = document.getElementById('register-btn');
     const recoveryForm = document.getElementById('recovery-form');
     const authForm = document.getElementById('auth-form');
 
     if (authForm) authForm.addEventListener('submit', (e) => e.preventDefault());
-    
+
     if (recoveryForm) {
         recoveryForm.addEventListener('submit', (e) => {
             e.preventDefault();

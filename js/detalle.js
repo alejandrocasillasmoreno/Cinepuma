@@ -1,312 +1,321 @@
-// 1. IMPORTACIONES DE FIREBASE (Necesarias para la funcionalidad del slider y reseñas)
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-import { 
-    getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged 
-} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-import { 
-    getFirestore, collection, addDoc, query, onSnapshot, doc, setLogLevel
-} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+// 1. IMPORTACIONES DE FIREBASE COMPARTIDAS
+import { auth, db } from "./firebase-init.js";
+import {
+    signInAnonymously, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
+import {
+    collection, addDoc, query, onSnapshot, orderBy, where, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
-// Habilitar logs para depuración de Firestore
-setLogLevel('debug');
+// 2. CONFIGURACIÓN API PELÍCULAS (TMDB)
+const API_KEY = '9b6940210ea6faabd174810c5889f878';
+const BASE_URL = 'https://api.themoviedb.org/3';
+const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
-// 2. CONSTANTES GLOBALES (Necesarias para Canvas/Firebase)
-const appId = typeof __app_id !== 'undefined' ? __app_id : 'cinepuma-reviews';
-const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-// Nota: initialAuthToken es manejado dentro de initializeFirebase
-
-// Referencias a los elementos del DOM
+// 3. REFERENCIAS DOM
 const starRatingContainer = document.getElementById('star-rating');
 const reviewInput = document.getElementById('review-input');
 const sendReviewBtn = document.getElementById('send-review-btn');
 const userReviewsList = document.getElementById('user-reviews-list');
 const averageRatingDisplay = document.getElementById('average-rating-display');
 
-// Variable para la referencia de la base de datos y autenticación
-let db;
-let auth;
+// Elementos de información de la película
+const movieTitle = document.getElementById('movie-title');
+const moviePoster = document.getElementById('movie-poster');
+const movieRating = document.getElementById('movie-rating');
+const movieDate = document.getElementById('movie-date');
+const movieGenres = document.getElementById('movie-genres');
+const movieSynopsis = document.getElementById('movie-synopsis');
+
+// Variables de estado
 let userId = 'anonymous';
+let currentRating = 0;
+let movieId = null; // Se obtendrá de la URL
 
-// Variables para la película actual (usaremos un ID fijo de ejemplo por ahora)
-const movieId = 'ejemplo-pelicula-001'; // ID de película fijo para el ejemplo
+// 4. INICIALIZACIÓN PRINCIPAL
+async function init() {
+    // A. Obtener ID de la película de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    movieId = urlParams.get('id');
 
-// 3. INICIALIZACIÓN DE FIREBASE Y AUTENTICACIÓN
-async function initializeFirebase() {
-    // Si el contenedor del slider no existe, salimos
-    if (!starRatingContainer) {
-        console.error("El contenedor '#star-rating' no existe. Deteniendo la inicialización.");
-        return; 
+    if (!movieId) {
+        alert("No se especificó ninguna película.");
+        window.location.href = 'index.html';
+        return;
     }
-    
-    // Muestra el slider inmediatamente al iniciar el script, independientemente de Firebase.
+
+    // B. Cargar detalles de la película
+    await loadMovieDetails(movieId);
+
+    // C. Inicializar UI de Valoración
     initRatingSlider();
 
-    // === CHEQUEO CRÍTICO DE CONFIGURACIÓN DE FIREBASE (El parche) ===
-    // Si la configuración no está completa (es decir, le falta el projectId),
-    // mostramos un error en la UI y detenemos el intento de inicializar la base de datos.
-    if (Object.keys(firebaseConfig).length === 0 || !firebaseConfig.projectId) {
-        console.error("Firebase Configuración de base de datos no disponible o incompleta. Funcionalidad de guardar/cargar opiniones deshabilitada.");
-        starRatingContainer.innerHTML += '<p style="color:red; margin-top: 10px; font-weight: bold;">⚠️ Error de Configuración de BD: Las opiniones no se guardarán.</p>';
-        return; 
-    }
-    // ===================================================
+    // D. Configurar Auth y Listeners de Firebase
+    // D. Configurar Auth y Listeners de Firebase
+    setupFirebase();
 
+    // E. Cargar Trailer
+    loadMovieTrailer(movieId);
+}
+
+// 5. CARGAR DETALLES DE LA PELÍCULA (TMDB)
+async function loadMovieDetails(id) {
     try {
-        const app = initializeApp(firebaseConfig);
-        db = getFirestore(app);
-        auth = getAuth(app);
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        const url = `${BASE_URL}/movie/${id}?language=es-ES&api_key=${API_KEY}`;
+        const res = await fetch(url);
 
-        // Intenta iniciar sesión con el token personalizado o de forma anónima
-        if (initialAuthToken) {
-            await signInWithCustomToken(auth, initialAuthToken);
-        } else {
-            await signInAnonymously(auth);
-        }
+        if (!res.ok) throw new Error('Película no encontrada');
 
-        // Listener para obtener el UID del usuario una vez autenticado
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                userId = user.uid;
-                console.log("Usuario autenticado. UID:", userId);
-                loadReviews();
-            } else {
-                console.log("Usuario anónimo o no autenticado.");
-            }
-        });
+        const data = await res.json();
+
+        // Actualizar DOM
+        document.title = `Cinepuma - ${data.title}`;
+        if (movieTitle) movieTitle.textContent = data.title;
+        if (moviePoster) moviePoster.src = data.poster_path ? `${IMG_URL}${data.poster_path}` : 'https://placehold.co/200x300?text=No+Image';
+        if (movieRating) movieRating.textContent = data.vote_average.toFixed(1);
+        if (movieDate) movieDate.textContent = data.release_date;
+        if (movieGenres) movieGenres.textContent = data.genres.map(g => g.name).join(', ');
+        if (movieSynopsis) movieSynopsis.textContent = data.overview || "Sin descripción disponible.";
 
     } catch (error) {
-        console.error("Error al inicializar Firebase o autenticar:", error);
-        starRatingContainer.textContent = 'Error al cargar el sistema de valoración. (Revisa la consola para detalles)';
+        console.error("Error al cargar película:", error);
+        if (movieTitle) movieTitle.textContent = "Error al cargar película";
+        if (movieSynopsis) movieSynopsis.textContent = "No se pudo obtener la información de la película. Verifica tu conexión.";
     }
 }
 
-// 4. LÓGICA DEL SLIDER Y ESTRELLAS
-let currentRating = 0; // Valor de la valoración actual
+// 5b. CARGAR TRAILER
+async function loadMovieTrailer(id) {
+    const container = document.getElementById('trailer-container');
+    if (!container) return;
 
-function initRatingSlider() {
-    // 1. Limpiar el contenido de carga (¡ESTO DEBE EJECUTARSE!)
-    starRatingContainer.innerHTML = '';
-    
-    // 2. Crear el input de tipo range (el slider)
-    const slider = document.createElement('input');
-    slider.type = 'range';
-    slider.id = 'rating-slider';
-    slider.min = 1;
-    slider.max = 5;
-    slider.step = 0.5;
-    slider.value = 1;
+    try {
+        const url = `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=es-ES`; // Intentar español primero
+        let res = await fetch(url);
+        let data = await res.json();
 
-    // 3. Crear el display visual de estrellas
-    const starDisplay = document.createElement('div');
-    starDisplay.id = 'visual-stars';
-    // Utilizamos las clases de CSS que ya tienes definidas
-    starDisplay.style.display = 'flex'; 
-    starDisplay.style.alignItems = 'center'; 
-    starDisplay.style.marginLeft = '10px'; 
+        let trailer = data.results.find(vid => vid.site === 'YouTube' && vid.type === 'Trailer');
 
-    // Función para actualizar las estrellas visuales
-    const updateStars = (value) => {
-        starDisplay.innerHTML = ''; // Limpiar estrellas anteriores
-        currentRating = parseFloat(value);
-        
-        for (let i = 1; i <= 5; i++) {
-            const star = document.createElement('span');
-            star.className = 'star';
-            star.style.fontSize = '2rem'; // Para que las estrellas se vean grandes
-
-            // Lógica para media estrella
-            const isFilled = i <= currentRating;
-            const isHalf = i - 0.5 === currentRating;
-
-            if (isFilled && !isHalf) {
-                star.innerHTML = '★'; // Estrella completa
-                star.classList.add('filled');
-            } else if (isHalf) {
-                // Para simplificar y asegurar visibilidad, usamos estrella completa para media valoración
-                // NOTA: Si quieres media estrella, usa Unicode '½' o un SVG, pero '★' es más seguro.
-                star.innerHTML = '★'; 
-                star.classList.add('filled');
-            }
-            else {
-                star.innerHTML = '☆'; // Estrella vacía
-                star.classList.remove('filled');
-            }
-            starDisplay.appendChild(star);
+        // Si no hay en español, intentar en inglés (idioma original)
+        if (!trailer) {
+            const urlEn = `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
+            res = await fetch(urlEn);
+            data = await res.json();
+            trailer = data.results.find(vid => vid.site === 'YouTube' && vid.type === 'Trailer');
         }
-    };
 
-    // 4. Evento para el slider: actualiza el valor y las estrellas
-    slider.addEventListener('input', (e) => {
-        updateStars(e.target.value);
+        if (trailer) {
+            container.innerHTML = `
+                <h2 style="color:white; margin-bottom:15px;">Trailer Oficial</h2>
+                <iframe width="100%" height="400" 
+                        src="https://www.youtube.com/embed/${trailer.key}" 
+                        title="YouTube video player" frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                        style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); max-width: 800px;">
+                </iframe>
+            `;
+        } else {
+            console.log("No se encontró trailer para esta película.");
+            // Opcional: container.innerHTML = '<p style="color:#ccc;">Trailer no disponible</p>';
+        }
+
+    } catch (error) {
+        console.error("Error cargando trailer:", error);
+    }
+}
+
+// 6. LOGICA FIREBASE Y COMENTARIOS
+function setupFirebase() {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            userId = user.uid;
+            console.log("Usuario autenticado:", user.email || "Anónimo", user.uid);
+        } else {
+            console.log("Usuario NO autenticado.");
+            // Login anónimo automático si se desea, o dejar como invitado
+        }
+
+        // Siempre intentamos cargar reseñas
+        loadReviewsRealtime();
     });
 
-    // 5. Añadir los elementos al contenedor
-    starRatingContainer.appendChild(slider);
-    starRatingContainer.appendChild(starDisplay);
-
-    // Inicializar las estrellas con el valor por defecto (1)
-    updateStars(slider.value);
-    console.log("Slider de valoración inicializado y visible.");
+    if (sendReviewBtn) {
+        sendReviewBtn.addEventListener('click', saveReview);
+    }
 }
 
-// 5. FUNCIÓN PARA ENVIAR LA OPINIÓN A FIRESTORE
+// Guardar reseña
 async function saveReview() {
-    if (!db) {
-        alertModal('Error de conexión', 'La base de datos no está inicializada. No se puede guardar la opinión.', 'error');
+    const reviewText = reviewInput.value.trim();
+
+    if (currentRating === 0) {
+        alert("Por favor, selecciona una valoración (estrellas).");
         return;
     }
-
-    const reviewText = reviewInput.value.trim();
-    if (currentRating === 0 || reviewText.length < 5) {
-        alertModal('Opinión incompleta', 'Por favor, selecciona una valoración (1-5) y escribe una opinión con al menos 5 caracteres.', 'warning');
+    if (reviewText.length < 3) {
+        alert("Escribe una opinión un poco más larga.");
         return;
     }
 
     try {
+        const user = auth.currentUser;
+        const userEmail = user ? user.email : "Anónimo";
+
         const reviewData = {
-            movieId: movieId,
-            userId: userId, 
+            movieId: movieId, // ID dinámico (string)
+            userId: userId,
+            userEmail: userEmail, // Nuevo campo
             rating: currentRating,
             reviewText: reviewText,
-            timestamp: new Date()
+            timestamp: serverTimestamp() // Usar timestamp del servidor
         };
 
-        // Ruta de colección pública: /artifacts/{appId}/public/data/{nombre_coleccion}
-        const reviewsRef = collection(db, `artifacts/${appId}/public/data/movie_reviews`);
+        const reviewsRef = collection(db, "movie_reviews");
         await addDoc(reviewsRef, reviewData);
 
-        alertModal('¡Opinión enviada!', 'Tu valoración ha sido guardada con éxito. Actualizando la lista...', 'success');
-        
-        // Limpiar el formulario
+        // Reset UI
         reviewInput.value = '';
-        document.getElementById('rating-slider').value = 1;
-        document.getElementById('rating-slider').dispatchEvent(new Event('input')); // Resetear estrellas
-        
+        currentRating = 0; // Reset interno
+        document.getElementById('rating-slider').value = 1; // Reset slider visual
+        document.getElementById('rating-slider').dispatchEvent(new Event('input')); // Actualizar estrellas visuales
+
+        alert("¡Opinión enviada!");
+
     } catch (error) {
-        console.error("Error al guardar la opinión:", error);
-        alertModal('Error al guardar', 'Hubo un problema al enviar tu opinión. Inténtalo de nuevo.', 'error');
+        console.error("Error al guardar reseña:", error);
+        alert("Error al enviar la opinión: " + error.message);
     }
 }
 
-// 6. FUNCIÓN PARA CARGAR Y MOSTRAR OPINIONES EN TIEMPO REAL
-function loadReviews() {
-    if (!db) {
-        userReviewsList.textContent = 'Base de datos no disponible.';
-        return;
-    }
+// Cargar reseñas (Realtime)
+function loadReviewsRealtime() {
+    if (!userReviewsList) return;
 
-    // Crear la referencia a la colección y la consulta (solo para la película actual)
-    const reviewsRef = collection(db, `artifacts/${appId}/public/data/movie_reviews`);
-    // Usamos una query simple ya que estamos filtrando en el cliente por movieId. 
-    // Si fuera una app de producción, usaríamos where('movieId', '==', movieId)
-    const q = query(reviewsRef); 
+    const reviewsRef = collection(db, "movie_reviews");
 
-    // onSnapshot escucha los cambios en tiempo real
+    // Query simple (sin orderBy explícito para evitar requerir índices compuestos complejos)
+    const q = query(
+        reviewsRef,
+        where("movieId", "==", movieId)
+    );
+
     onSnapshot(q, (snapshot) => {
         const reviews = [];
         let totalRating = 0;
-        let numReviews = 0;
 
         snapshot.forEach((doc) => {
             const data = doc.data();
-            if (data.movieId === movieId) { // Filtrar solo por el ID de la película actual
-                reviews.push({ id: doc.id, ...data });
-                totalRating += data.rating;
-                numReviews++;
-            }
+            reviews.push({ id: doc.id, ...data });
+            totalRating += data.rating;
         });
 
-        // 7. Calcular y mostrar la valoración media
-        const averageRating = numReviews > 0 ? (totalRating / numReviews).toFixed(1) : 'N/A';
-        averageRatingDisplay.textContent = `Valoración Media: ${averageRating} / 5 (${numReviews} votos)`;
+        // Ordenar en cliente (más reciente primero)
+        reviews.sort((a, b) => {
+            const tA = a.timestamp ? a.timestamp.seconds : 0;
+            const tB = b.timestamp ? b.timestamp.seconds : 0;
+            return tB - tA;
+        });
 
-        // 8. Renderizar la lista de reseñas
-        renderReviews(reviews.sort((a, b) => b.timestamp - a.timestamp)); // Ordenar por más reciente
+        // Calcular media local de Cinepuma
+        const numReviews = reviews.length;
+        const avg = numReviews > 0 ? (totalRating / numReviews).toFixed(1) : '0.0';
 
+        if (averageRatingDisplay) {
+            averageRatingDisplay.textContent = `Media de la comunidad: ${avg} / 5 (${numReviews} opiniones)`;
+        }
+
+        renderReviews(reviews);
     }, (error) => {
-        console.error("Error al escuchar las reseñas:", error);
-        userReviewsList.textContent = 'Error al cargar las reseñas.';
+        console.error("Error obteniendo reseñas:", error); // A veces falla si falta índice compuesto
+
+        // Fallback por si falta índice (orderBy + where puede requerirlo)
+        // Intentamos sin orderBy y ordenamos en cliente
+        if (error.code === 'failed-precondition') {
+            console.warn("Falta índice compuesto. Cargando sin orden estricto de servidor.");
+            const qSimple = query(reviewsRef, where("movieId", "==", movieId));
+            onSnapshot(qSimple, (snap) => {
+                const res = [];
+                snap.forEach(d => res.push(d.data()));
+                res.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+                renderReviews(res);
+            });
+        }
     });
 }
 
 function renderReviews(reviews) {
-    userReviewsList.innerHTML = ''; // Limpiar la lista
-    
+    userReviewsList.innerHTML = '';
+
     if (reviews.length === 0) {
-        userReviewsList.innerHTML = `<p class="initial-message text-center p-4" style="color:#cccccc; font-style:italic;">Aún no hay opiniones. ¡Sé el primero en dejar una!</p>`;
+        userReviewsList.innerHTML = '<p class="no-reviews">Sé el primero en opinar sobre esta película.</p>';
         return;
     }
 
     reviews.forEach(review => {
-        const reviewElement = document.createElement('div');
-        reviewElement.className = 'user-review';
-        
-        // Crear las estrellas de la reseña
-        let starsHtml = '';
-        for (let i = 1; i <= 5; i++) {
-            if (i <= review.rating) {
-                starsHtml += `<span class="star filled">★</span>`;
-            } else if (i - 0.5 === review.rating) {
-                starsHtml += `<span class="star filled">½</span>`; // Media estrella
-            } else {
-                starsHtml += `<span class="star">☆</span>`;
-            }
+        const div = document.createElement('div');
+        div.className = 'user-review';
+
+        // Estrellas HTML
+        let stars = '';
+        for (let i = 0; i < 5; i++) {
+            stars += i < review.rating ? '★' : '☆';
         }
 
-        // Mostrar el ID de usuario (solo los primeros 8 caracteres)
-        const displayUserId = review.userId.substring(0, 8) + '...';
-        
-        reviewElement.innerHTML = `
-            <p>
-                <strong>Usuario ID:</strong> ${displayUserId} <br>
-                <span class="review-rating">${starsHtml}</span> (${review.rating}/5)
-            </p>
-            <p>"${review.reviewText}"</p>
-            <p class="text-xs text-gray-500 mt-1">${review.timestamp ? new Date(review.timestamp.seconds * 1000).toLocaleDateString() : 'Fecha desconocida'}</p>
+        const date = review.timestamp ? new Date(review.timestamp.seconds * 1000).toLocaleDateString() : 'Reciente';
+
+        // Formatear nombre usuario (ej: juan@gmail.com -> Juan)
+        let authorName = "Anónimo";
+        if (review.userEmail && review.userEmail !== "Anónimo") {
+            authorName = review.userEmail.split('@')[0];
+            authorName = authorName.charAt(0).toUpperCase() + authorName.slice(1);
+        }
+
+        div.innerHTML = `
+            <div class="review-header">
+                <div>
+                    <span class="review-author" style="font-weight:bold; color:#ff6b35; margin-right:10px;">${authorName}</span>
+                    <span class="review-stars">${stars}</span>
+                </div>
+                <span class="review-date" style="font-size:0.8rem; color:#aaa;">${date}</span>
+            </div>
+            <p class="review-text" style="margin-top:5px;">"${review.reviewText}"</p>
         `;
-        userReviewsList.appendChild(reviewElement);
+        userReviewsList.appendChild(div);
     });
 }
 
-// 7. FUNCIÓN DE MODAL DE ALERTA (Para reemplazar alert())
-function alertModal(title, message, type) {
-    console.log(`[${type.toUpperCase()}] ${title}: ${message}`);
-    
-    // Implementación simple de un modal de alerta en la consola/o interfaz
-    // Para entornos sin UI, usamos la consola:
-    const alertDiv = document.createElement('div');
-    alertDiv.style.cssText = `
-        position: fixed; top: 10px; right: 10px; padding: 15px; border-radius: 5px; 
-        color: white; z-index: 1000; font-family: Arial, sans-serif;
-        background-color: ${type === 'success' ? '#28a745' : type === 'warning' ? '#ffc107' : '#dc3545'};
-        opacity: 0.9;
-        transition: opacity 0.5s;
-    `;
-    alertDiv.innerHTML = `<strong>${title}</strong>: ${message}`;
-    document.body.appendChild(alertDiv);
-    
-    setTimeout(() => {
-        alertDiv.style.opacity = 0;
-        setTimeout(() => alertDiv.remove(), 500);
-    }, 3000);
+
+// 7. UI SLIDER (Reutilizado y simplificado)
+function initRatingSlider() {
+    starRatingContainer.innerHTML = '';
+
+    const slider = document.createElement('input');
+    slider.type = 'range';
+    slider.id = 'rating-slider';
+    slider.min = "1";
+    slider.max = "5";
+    slider.step = "1";
+    slider.value = "0"; // Inicial sin valor
+
+    const display = document.createElement('div');
+    display.style.fontSize = "2rem";
+    display.style.color = "#ffd700";
+    display.style.marginLeft = "10px";
+
+    const updateDisplay = (val) => {
+        currentRating = parseInt(val);
+        let s = '';
+        for (let i = 1; i <= 5; i++) s += i <= currentRating ? '★' : '☆';
+        display.textContent = s;
+    };
+
+    slider.addEventListener('input', (e) => updateDisplay(e.target.value));
+
+    starRatingContainer.appendChild(slider);
+    starRatingContainer.appendChild(display);
+    updateDisplay(0); // init empty
 }
 
-function toggleFavorite(element) {
-    // Simulamos una petición AJAX a un archivo PHP
-    element.classList.toggle('active');
-    
-    // Feedback visual momentáneo
-    if(element.classList.contains('active')) {
-        console.log("Añadido a favoritos en la base de datos");
-    }
-}
-// 8. ASIGNACIÓN DE EVENTOS
-// Al ser un módulo, este código se ejecuta automáticamente, pero es buena práctica
-// usar DOMContentLoaded para asegurar que todos los elementos HTML existan.
-document.addEventListener('DOMContentLoaded', () => {
-    initializeFirebase();
-    if (sendReviewBtn) {
-        sendReviewBtn.addEventListener('click', saveReview);
-    }
-});
+// Arrancar
+document.addEventListener('DOMContentLoaded', init);

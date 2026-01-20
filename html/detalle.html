@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cinepuma - Detalles Pelicula</title>
     <meta name="Descripcion" content="Detalles de la película y sección de reseñas de la comunidad.">
     <!-- Usaremos detalle.css -->
-    <link rel="stylesheet" href="../css/detalles.css"> 
+    <link rel="stylesheet" href="../css/detalles.css">
 </head>
+
 <body>
 
     <!-- 1. HEADER (CABECERA) - Estructura estándar del proyecto -->
@@ -15,37 +17,46 @@
         <div class="logo">
             <img src="../img/Logo_Cinepuma.png" alt="Logo Cinepuma">
             <h1><a href="../../html/index.html">CinePuma</a></h1>
-        </div> 
+        </div>
         <nav>
             <a href="../html/Generos/generos.html">Género</a>
             <a href="mejorValoradas.html">Mejores valoradas</a>
             <a href="ayuda.html">Ayuda</a>
-            <a href="detalle.html">Reseñas</a>
+            <!-- Buscador Global -->
+            <form id="global-search-form">
+                <input id="global-search-input" type="search" placeholder="Buscar...">
+                <button type="submit">🔍</button>
+            </form>
         </nav>
     </header>
- 
+
     <main id="movie-details" class="detail-container">
-        <!-- Contenido de Ejemplo de la Película -->
+        <!-- Contenido de la Película (Dinámico) -->
         <div class="movie-header">
-            <img src="https://placehold.co/200x300/333333/FFFFFF?text=P%C3%B3ster" alt="Póster de la Película" class="poster-img">
+            <img id="movie-poster" src="" alt="Cargando..." class="poster-img">
             <div class="movie-info">
-                <h1>Título de la Película de Ejemplo</h1>
+                <h1 id="movie-title">Cargando película...</h1>
                 <p class="rating">
-                    <span class="star-icon">★</span> 
-                    <span class="score">8.5</span>/10 (12,345 votos)
+                    <span class="star-icon">★</span>
+                    <span id="movie-rating" class="score">--</span>/10
                 </p>
                 <div class="meta-data">
-                    <p><strong>Fecha de estreno:</strong> 2024-01-01</p>
-                    <p><strong>Géneros:</strong> Acción, Aventura</p>
-                    <p><strong>Duración:</strong> 120 min</p>
+                    <p><strong>Fecha de estreno:</strong> <span id="movie-date">--</span></p>
+                    <p><strong>Géneros:</strong> <span id="movie-genres">--</span></p>
+                    <!-- <p><strong>Duración:</strong> 120 min</p> -->
                 </div>
             </div>
         </div>
         <div class="synopsis-box">
             <h2>Sinopsis</h2>
-            <p id="synopsis">
-                Esta es la descripción detallada de la película. Una épica aventura que sigue a un grupo de héroes improbables en su búsqueda por salvar un reino olvidado. La sinopsis debería ser lo suficientemente larga como para ocupar varias líneas y ofrecer contexto al usuario antes de que pase a leer las reseñas.
+            <p id="movie-synopsis">
+                Cargando descripción...
             </p>
+        </div>
+
+        <!-- SECCIÓN TRAILER -->
+        <div id="trailer-container" class="trailer-box" style="margin-top: 30px; text-align: center;">
+            <!-- El iframe se cargará aquí -->
         </div>
     </main>
 
@@ -54,9 +65,9 @@
         <div id="average-rating-display" class="average-rating-display">
             Cargando valoración media...
         </div>
-        
+
         <h4>Deja tu opinión</h4>
- 
+
         <!-- Área de valoración con SLIDER (entrada del usuario) -->
         <!-- El JS inyectará el control <input type="range"> aquí dentro. -->
         <div id="rating-input-container" class="rating-input-container">
@@ -68,9 +79,19 @@
         </div>
         <textarea id="review-input" placeholder="Escribe tu opinión aquí..."></textarea>
         <button id="send-review-btn" class="btn-review">Enviar Opinión</button>
+
+        <!-- SECCIÓN DONDE SE MUESTRAN LOS COMENTARIOS -->
+        <div class="user-comments-container">
+            <h3>Comentarios de la Comunidad</h3>
+            <div id="user-reviews-list" class="reviews-list">
+                <!-- Aquí se insertarán los comentarios dinámicamente -->
+                <p style="color: #ccc;">Cargando comentarios...</p>
+            </div>
+        </div>
     </div>
 
-    <script src="../js/top_rated.js"></script> 
+    <script src="../js/top_rated.js"></script>
+    <script src="../js/header-search.js"></script>
     <script type="module" src="../js/detalle.js"></script>
 </body>
 <footer>
@@ -79,11 +100,12 @@
             <img src="../img/icono del telefono.png" alt="Icono Teléfono">
             <span>Teléfono: 123-456-7890</span>
         </div>
-        
+
         <div>
             <img src="../img/icono_del_correo.png" alt="Icono Email">
             <span>Email: CinePuma@gmail.com</span>
         </div>
     </div>
 </footer>
+
 </html>

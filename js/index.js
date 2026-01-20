@@ -1,128 +1,186 @@
-// Lógica de Búsqueda de Cinepuma
+// Lógica de Búsqueda y Películas Populares (Dinámico 100% con TMDB)
+
+const API_KEY = '9b6940210ea6faabd174810c5889f878';
+const BASE_URL = 'https://api.themoviedb.org/3';
+const IMG_URL = 'https://image.tmdb.org/t/p/original'; // Mejor calidad para carrusel
+const POSTER_URL = 'https://image.tmdb.org/t/p/w500';
+
+const POPULAR_URL = BASE_URL + '/movie/popular?language=es-ES&api_key=' + API_KEY;
+const NOW_PLAYING_URL = BASE_URL + '/movie/now_playing?language=es-ES&api_key=' + API_KEY;
+const SEARCH_URL = BASE_URL + '/search/movie?language=es-ES&api_key=' + API_KEY;
+
+let currentPage = 1;
+let currentMode = 'popular'; // 'popular' o 'search'
+let currentQuery = '';
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    // 1. Modelo de Datos Simulado
-    // *** URLs actualizadas a fuentes estables (TheMovieDB CDN) ***
-    const allMovies = [
-        // Películas Populares (con URLs estables y públicas)
-        { 
-            title: "NOVOCAINES NO SIENTE DOLOR", 
-            image: "https://m.media-amazon.com/images/M/MV5BNjZhNDdhNGItMGU4NC00NDc1LTgyOTYtMzA4ZjM4ZjBhZWIyXkEyXkFqcGc@._V1_.jpg", 
-            description: "Una historia de terror y acción que te mantendrá al borde del asiento." 
-        },
-        { 
-            title: "NOBODY 2", 
-            image: "https://dx35vtwkllhj9.cloudfront.net/universalstudios/nobody-2/images/regions/us/updates1/onesheet.jpg", 
-            description: "Nadie sabrá nada de su regreso." 
-        },
-        { 
-            title: "THE SMASHING MACHINE", 
-            image: "https://m.media-amazon.com/images/M/MV5BOWYxZTM1ZGMtMjg5MC00NzcyLTk0ZTEtZWI0ZThkNDJiYjZmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", 
-            description: "Pelea por los mejores del ring." 
-        },
-        { 
-            title: "BAILARINA", 
-            image: "https://m.media-amazon.com/images/S/pv-target-images/c22dbf9c379fa8152b72a1d4f27e642cbd21acb0eb6b782343ff2adcfe2db103.jpg", 
-            description: "Acompaña a John Wick en su nueva aventura." 
-        },
-        
-        // Películas del Carrusel (Se mantienen las URLs que tenías para el carrusel)
-        { title: "EL CONTADOR 2", image: "https://portalgeek.co/wp-content/uploads/2025/04/el-contador-2.webp", description: "La acción regresa más intensa que nunca." },
-        { title: "OPPENHEIMER", image: "https://img.pccomponentes.com/pcblog/7571/oppenheimer-portada-pelicula.jpg", description: "El mundo cambiará para siempre." },
-        { title: "THE BATMAN", image: "https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/dfa50804-e6f6-4fa2-a732-693dbc50527b/37082735-6715-11ef-96ad-02805d6a02df?host=wbd-images.prod-vod.h264.io&partner=beamcom&w=500", description: "La venganza llega a Gotham." },
-        { title: "CHAINSAW MAN", image: "https://img.asmedia.epimg.net/resizer/v2/JQICFOMJHJBVTJR4VLEKL655DE.jpg?auth=0ab8fe8c6b795be44361cc7f4d113dbe6d62a02c7ea6555dd8ff35c18053e675&width=1472&height=828&smart=true", description: "El arco de Reze" },
-    ];
-
 
     // 2. Referencias a Elementos DOM
     const searchInput = document.getElementById('searchInput');
     const movieRowContainer = document.getElementById('movieRowContainer');
     const movieSectionTitle = document.getElementById('movieSectionTitle');
 
-    if (!movieRowContainer) {
-        console.error("ERROR CRÍTICO: No se encontró el contenedor de películas (#movieRowContainer).");
-        return; 
-    }
-    if (!movieSectionTitle) {
-        console.warn("ADVERTENCIA: No se encontró el título de la sección (#movieSectionTitle).");
-    }
-
+    // Crear botón "Cargar más"
+    const loadMoreBtn = document.createElement('button');
+    loadMoreBtn.innerText = 'Cargar más películas';
+    loadMoreBtn.className = 'btn btn-primary d-block mx-auto my-4'; // Bootstrap simple classes
+    loadMoreBtn.style.display = 'none'; // Oculto al inicio
+    movieRowContainer.after(loadMoreBtn);
 
     // 3. Función para Crear una Tarjeta de Película
     const createMovieCard = (movie) => {
         const card = document.createElement('div');
-        card.className = 'movie-card'; 
-        
+        card.className = 'movie-card';
+
+        const posterSrc = movie.poster_path ? POSTER_URL + movie.poster_path : 'https://placehold.co/150x220/333333/FFFFFF?text=No+Poster';
+
         card.innerHTML = `
-            <img src="${movie.image}" 
+            <img src="${posterSrc}" 
                  alt="Póster de ${movie.title}" 
-                 
-                 onerror="this.onerror=null;this.src='https://placehold.co/150x220/333333/FFFFFF?text=No+Poster';" >
+                 onerror="this.onerror=null;this.src='https://placehold.co/150x220/333333/FFFFFF?text=Error';" >
             
             <div class="movie-title">${movie.title}</div> 
         `;
 
         card.addEventListener('click', () => {
-            console.log(`Clicked movie: ${movie.title}. Detail page redirection goes here.`);
+            // REDIRECCIÓN CORRECTA A DETALLE
+            window.location.href = `detalle.html?id=${movie.id}`;
         });
-        
+
         return card;
     };
 
 
     // 4. Función para Renderizar la Lista de Películas
-    const renderMovies = (movies, title) => {
-        if (!movieRowContainer) return; 
+    const renderMovies = (movies, title, append = false) => {
+        if (!movieRowContainer) return;
 
-        movieRowContainer.innerHTML = ''; 
-        if (movieSectionTitle) {
-            movieSectionTitle.textContent = title;
+        if (!append) {
+            movieRowContainer.innerHTML = '';
+            if (movieSectionTitle) movieSectionTitle.textContent = title;
+            currentPage = 1;
         }
 
-        if (movies.length === 0) {
-            movieRowContainer.innerHTML = '<p style="color: #f8f8f8; margin-top: 20px; width: 100%; text-align: center;">No se encontraron películas que coincidan con la búsqueda.</p>';
+        if (!movies || movies.length === 0) {
+            if (!append) movieRowContainer.innerHTML = '<p style="color: #f8f8f8; margin-top: 20px; width: 100%; text-align: center;">No se encontraron películas.</p>';
+            loadMoreBtn.style.display = 'none';
         } else {
             movies.forEach(movie => {
-                movieRowContainer.appendChild(createMovieCard(movie));
+                if (movie.poster_path) {
+                    movieRowContainer.appendChild(createMovieCard(movie));
+                }
             });
+            loadMoreBtn.style.display = 'block';
         }
     };
 
+    // 5. Funciones de Fetch Generica
+    async function fetchMovies(url) {
+        try {
+            const res = await fetch(url);
+            const data = await res.json();
+            return data.results;
+        } catch (error) {
+            console.error(error);
+            return [];
+        }
+    }
 
-    // 5. Manejador Principal de la Lógica de Búsqueda
-    const handleSearch = (event) => {
-        const query = event.target.value.toLowerCase().trim();
+    // Cargar Carrusel (Now Playing)
+    async function loadCarousel() {
+        const carouselInner = document.querySelector('.carousel-inner');
+        const carouselIndicators = document.querySelector('.carousel-indicators');
 
-        if (query.length > 0) {
-            const filteredMovies = allMovies.filter(movie =>
-                movie.title.toLowerCase().includes(query)
-            );
-            
-            renderMovies(filteredMovies, `Resultados para: "${query}"`);
+        if (!carouselInner || !carouselIndicators) return;
 
+        const movies = await fetchMovies(NOW_PLAYING_URL);
+        const topMovies = movies.slice(0, 5); // Top 5 para carrusel
+
+        carouselInner.innerHTML = '';
+        carouselIndicators.innerHTML = '';
+
+        topMovies.forEach((movie, index) => {
+            // Indicator
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.dataset.bsTarget = '#carruselCinepuma';
+            btn.dataset.bsSlideTo = index;
+            btn.ariaLabel = `Slide ${index + 1}`;
+            if (index === 0) {
+                btn.className = 'active';
+                btn.ariaCurrent = 'true';
+            }
+            carouselIndicators.appendChild(btn);
+
+            // Item
+            const item = document.createElement('div');
+            item.className = `carousel-item ${index === 0 ? 'active' : ''}`;
+            item.dataset.bsInterval = '4000';
+            item.style.cursor = 'pointer';
+
+            // Redirección al clickar en el slide
+            item.addEventListener('click', () => {
+                window.location.href = `detalle.html?id=${movie.id}`;
+            });
+
+            const backdrop = movie.backdrop_path ? IMG_URL + movie.backdrop_path : 'https://placehold.co/800x400?text=No+Image';
+
+            item.innerHTML = `
+                <img src="${backdrop}" class="d-block w-100 imagen-carrusel" alt="${movie.title}" style="object-fit: cover; height: 500px;">
+                <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 10px;">
+                    <h5>${movie.title}</h5>
+                    <p>${movie.overview ? movie.overview.substring(0, 100) + '...' : '...'}</p>
+                </div>
+            `;
+            carouselInner.appendChild(item);
+        });
+    }
+
+    // Cargar Grilla Principal
+    async function loadMainGrid(page = 1, append = false) {
+        let url = '';
+        if (currentMode === 'popular') {
+            url = `${POPULAR_URL}&page=${page}`;
         } else {
-            renderMovies(allMovies.slice(0, 4), "Películas Populares");
+            url = `${SEARCH_URL}&query=${currentQuery}&page=${page}`;
         }
+
+        const movies = await fetchMovies(url);
+        renderMovies(movies, currentMode === 'popular' ? "Películas Populares" : `Resultados para: "${currentQuery}"`, append);
+    }
+
+    // 6. Manejador de Búsqueda (SUBMIT explícito)
+    const searchForm = document.getElementById('search-form');
+
+    const performSearch = (query) => {
+        currentQuery = query;
+        if (query.length > 0) {
+            currentMode = 'search';
+        } else {
+            currentMode = 'popular';
+        }
+        loadMainGrid(1, false);
     };
-document.querySelector('#login-form').addEventListener('submit', function(e) {
-    const btn = document.querySelector('#btn-login');
-    const text = btn.querySelector('.btn-text');
-    const loader = btn.querySelector('.loader');
 
-    btn.disabled = true;
-    text.style.visibility = 'hidden';
-    loader.style.display = 'block';
-    
-    // El formulario sigue su curso hacia el backend PHP
-});
+    if (searchForm) {
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const query = searchInput.value.trim();
+            performSearch(query);
+        });
+    }
 
-    // 6. Inicialización
-    renderMovies(allMovies.slice(0, 4), "Películas Populares"); 
+    // 7. Inicialización y Chequeo de URL
+    loadCarousel();
 
-    if (searchInput) {
-        searchInput.addEventListener('input', handleSearch);
+    // Revisar si hay búsqueda en la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlQuery = urlParams.get('search');
+
+    if (urlQuery) {
+        if (searchInput) searchInput.value = urlQuery; // Rellenar input
+        performSearch(urlQuery);
     } else {
-        console.error("ERROR CRÍTICO: Elemento #searchInput no encontrado.");
+        loadMainGrid(1, false);
     }
 });

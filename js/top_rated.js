@@ -1,81 +1,126 @@
-
-
 // --- CONSTANTES ---
-const API_KEY = '9b6940210ea6faabd174810c5889f878'; 
+const API_KEY = '9b6940210ea6faabd174810c5889f878';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
-// Endpoint de Mejor Valoradas (¡Verifica que esta línea sea EXACTA!)
 const TOP_RATED_URL = BASE_URL + '/movie/top_rated?language=es-ES&api_key=' + API_KEY;
-const SEARCH_URL = BASE_URL + '/search/movie?language=es-ES&api_key=' + API_KEY;
 
-const main = document.getElementById('main');
-const form = document.getElementById('form');
-const search = document.getElementById('search');
+// Elemento donde se inyectan las pelis (ID estandarizado)
+const container = document.getElementById('movies-container');
+let currentPage = 1;
+let isFetching = false;
 
-// Función principal que se ejecuta al cargar la página
-window.onload = () => {
-    getMovies(TOP_RATED_URL);
-};
-
-async function getMovies(url) {
-    const res = await fetch(url);
-    
-    // Si la respuesta no es OK (ej. 401, 404), mostramos el error:
-    if (!res.ok) {
-        main.innerHTML = `<h2 style="color:red; margin: 20px;">Error al cargar las películas. Código: ${res.status}. (Verifica tu API Key)</h2>`;
-        return;
-    }
-
-    const data = await res.json();
-    showMovies(data.results);
-}
-
-function showMovies(data) {
-    main.innerHTML = '';
-
-    if (!data || data.length === 0) {
-        main.innerHTML = '<h2>No se encontraron películas.</h2>';
-        return;
-    }
-
-    data.forEach(movie => {
-        const { title, poster_path, vote_average, id } = movie;
-        const movieEl = document.createElement('div');
-        movieEl.classList.add('movie');
-        
-        // Verifica la existencia del póster antes de construir el HTML
-        if(poster_path) {
-            movieEl.innerHTML = `
-                <img src="${IMG_URL + poster_path}" alt="${title}">
-                <div class="movie-info">
-                    <h3>${title}</h3>
-                    <span class="${getClassByRate(vote_average)}">${vote_average.toFixed(1)}</span>
-                </div>
-            `;
-            
-            // Navegación a detalle.html
-            movieEl.addEventListener('click', () => {
-                window.location.href = `detalle.html?id=${id}`;
-            });
-            
-            main.appendChild(movieEl);
-        }
-    });
-}
-
-function getClassByRate(vote) {
-    if(vote >= 8) return 'green';
-    else if(vote >= 5) return 'orange';
-    else return 'red';
-}
-
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const searchTerm = search.value;
-    if(searchTerm && searchTerm !== '') {
-        getMovies(SEARCH_URL + '&query=' + searchTerm);
-    } else {
-        getMovies(TOP_RATED_URL);
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    getMovies(TOP_RATED_URL, currentPage);
 });
+
+async function getMovies(url, page = 1) {
+    if (!container) return;
+    if (isFetching) return;
+
+    isFetching = true;
+
+    // Solo mostrar "Cargando" si es la primera página y no hay contenido
+    if (page === 1) {
+        container.innerHTML = '<p style="color:white; text-align:center;">Cargando mejores valoradas...</p>';
+    }
+
+    try {
+        const res = await fetch(`${url}&page=${page}`);
+        if (!res.ok) throw new Error(res.status);
+        const data = await res.json();
+
+        renderMovies(data.results, page);
+    } catch (error) {
+        if (page === 1) {
+            container.innerHTML = `<h2 style="color:white; text-align:center;">Error al cargar las películas.</h2>`;
+        }
+        console.error(error);
+    } finally {
+        isFetching = false;
+    }
+}
+
+function renderMovies(movies, page) {
+    // Si es la primera página, limpiar el contenedor y aplicar estilos
+    if (page === 1) {
+        container.innerHTML = '';
+        container.style.display = 'grid';
+        container.style.gridTemplateColumns = 'repeat(auto-fill, minmax(200px, 1fr))';
+        container.style.gap = '20px';
+        container.style.padding = '20px';
+        container.style.maxWidth = '1200px';
+        container.style.margin = '0 auto';
+
+        if (!movies || movies.length === 0) {
+            container.innerHTML = '<h2>No se encontraron películas.</h2>';
+            return;
+        }
+    }
+
+    movies.forEach(movie => {
+        if (!movie.poster_path) return;
+
+        const card = document.createElement('div');
+        card.className = 'movie-card';
+        card.style.cursor = 'pointer';
+        card.style.transition = 'transform 0.2s';
+
+        card.innerHTML = `
+            <img src="${IMG_URL + movie.poster_path}" 
+                 alt="${movie.title}" 
+                 style="width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+            <h3 style="color: white; font-size: 1rem; margin-top: 10px; text-align: center;">${movie.title}</h3>
+            <p style="color: #ffca2c; text-align: center; margin: 5px 0;">⭐ ${movie.vote_average.toFixed(1)}</p>
+        `;
+
+        card.onmouseover = () => card.style.transform = 'scale(1.05)';
+        card.onmouseout = () => card.style.transform = 'scale(1)';
+
+        card.addEventListener('click', () => {
+            window.location.href = `detalle.html?id=${movie.id}`;
+        });
+
+        container.appendChild(card);
+    });
+
+    // Gestionar botón "Cargar más"
+    inputLoadMoreButton();
+}
+
+function inputLoadMoreButton() {
+    // Eliminar botón existente si lo hay (para moverlo al final)
+    const existingBtn = document.getElementById('load-more-btn');
+    if (existingBtn) existingBtn.remove();
+
+    const btnContainer = document.createElement('div');
+    btnContainer.id = 'load-more-btn'; // ID para fácil referencia
+    btnContainer.style.gridColumn = "1 / -1";
+    btnContainer.style.textAlign = "center";
+    btnContainer.style.marginTop = "30px";
+    btnContainer.style.paddingBottom = "30px";
+
+    const button = document.createElement('button');
+    button.textContent = "Ver más películas";
+    button.style.backgroundColor = "#ff6b35";
+    button.style.color = "white";
+    button.style.border = "none";
+    button.style.padding = "10px 20px";
+    button.style.fontSize = "1rem";
+    button.style.borderRadius = "5px";
+    button.style.cursor = "pointer";
+    button.style.transition = "background-color 0.3s";
+
+    button.onmouseover = () => button.style.backgroundColor = "#e55a2b";
+    button.onmouseout = () => button.style.backgroundColor = "#ff6b35";
+
+    button.onclick = () => {
+        currentPage++;
+        getMovies(TOP_RATED_URL, currentPage);
+        button.textContent = "Cargando...";
+        button.disabled = true;
+    };
+
+    btnContainer.appendChild(button);
+    container.appendChild(btnContainer);
+}

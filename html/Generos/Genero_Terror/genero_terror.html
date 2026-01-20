@@ -19,38 +19,53 @@
             <h1><a href="../../index.html">CinePuma</a></h1>
         </div>
 
-        <!--Barra de búsqueda-->
-        <div class="search-bar">
-            <input type="text" placeholder="Buscar">
-            <img src="../../../img/imagen_lupa-removebg.png" alt="Icono búsqueda" class="icon-search">
-        </div>
-
         <!--Navegador de navegación principal-->
         <nav>
-            <a href="../generos.html" class="nav-boton">G&eacute;neros</a>
-            <a href="../../../html/mejorValoradas.html" class="nav-boton">Mejor valoradas</a>
-            <a href="../../../html/ayuda.html" class="nav-boton help-button">Help</a>
+            <a href="../generos.html">G&eacute;neros</a>
+            <a href="../../../html/mejorValoradas.html">Mejor valoradas</a>
+            <a href="../../../html/ayuda.html">Ayuda</a>
+
+            <!-- Buscador Global -->
+            <form id="global-search-form" style="display:inline-flex; margin-left: 15px;">
+                <input id="global-search-input" type="search" placeholder="Buscar...">
+                <button type="submit">🔍</button>
+            </form>
         </nav>
     </header>
+    <!-- Removed header-search.js to allow contextual search -->
+    <!-- <script src="../../../js/header-search.js"></script> -->
+
     <!--Contenido principal-->
     <main>
-        <h2>G&eacute;nero Terror</h2>
-        <!-- Película 1 -->
-        <div class="pelicula">
-            <h3><a href="pelicula-el-conjuro.html">El Conjuro</a></h3>
-            <img src="../../../img/el-conjuro.jpg" alt="Imagen de la película El Conjuro">
-        </div>
-        <!-- Película 2 -->
-        <div class="pelicula">
-            <h3><a href="pelicula-it.html">It</a></h3>
-            <img src="../../../img/it.jpg" alt="Imagen de la película It">
-        </div>
-        <!-- Película 3 -->
-        <div class="pelicula">
-            <h3><a href="pelicula-hereditary.html">Hereditary</a></h3>
-            <img src="../../../img/hereditary.jpg" alt="Imagen de la película Hereditary">
-        </div>
+        <h2 style="text-align: center; color: #ff6b35; margin: 20px 0;">Terror</h2>
+
+        <!-- Contenedor Dinámico -->
+        <div id="movies-container"></div>
     </main>
+
+    <!-- Script Dynamic Loader -->
+    <script type="module">
+        import { loadMoviesByGenre, searchMoviesInGenre } from "../../../js/genre-loader.js";
+        // ID 27 = Terror
+        const GENRE_ID = 27;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMoviesByGenre(GENRE_ID, 'movies-container');
+
+            // Handle Contextual Search
+            const searchForm = document.getElementById('global-search-form');
+            if (searchForm) {
+                searchForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const input = document.getElementById('global-search-input');
+                    const query = input.value.trim();
+                    if (query) {
+                        searchMoviesInGenre(query, GENRE_ID, 'movies-container');
+                    }
+                });
+            }
+        });
+    </script>
     <footer>
         <ul>
             <li>

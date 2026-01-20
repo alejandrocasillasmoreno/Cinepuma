@@ -1,26 +1,27 @@
 body {
-    background-color: #1E3C72; 
-    font-family: Arial, sans-serif; 
+    background-color: #1E3C72;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    min-height: 100vh; 
-    display: flex; 
+    min-height: 100vh;
+    display: flex;
     flex-direction: column;
 }
 
 * {
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 /* 2. Cabecera (Header) - Consistente */
 header {
-    background-color: #0d274c; 
+    background-color: #0d274c;
     padding: 15px 5%;
-    display: flex; 
-    justify-content: space-between; 
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    border-bottom: 3px solid #0d274c; 
+    border-bottom: 3px solid #0d274c;
 }
+
 .btn-fav {
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
@@ -46,13 +47,13 @@ header {
 .logo img {
     height: 60px;
     width: auto;
-    border: 3px solid #1E3C72; 
-    border-radius: 5px; 
+    border: 3px solid #1E3C72;
+    border-radius: 5px;
 }
 
-.logo span { 
-    color: #ff6b35; 
-    font-size: 24px; 
+.logo span {
+    color: #ff6b35;
+    font-size: 24px;
     font-weight: bold;
     font-family: 'Times New Roman', Times, serif;
 }
@@ -61,11 +62,12 @@ header {
 nav {
     display: flex;
     align-items: center;
-    gap: 15px; 
+    gap: 20px;
+    /* Increased gap for better spacing */
 }
 
 nav a {
-    color: #cccccc; 
+    color: #cccccc;
     text-decoration: none;
     font-weight: 500;
     font-size: 1rem;
@@ -74,8 +76,8 @@ nav a {
 }
 
 /* Enlace activo: 'Reseñas' (cuarto enlace) - ESTO CAMBIA RESPECTO A LA PÁGINA DE GÉNEROS */
-nav a:nth-child(4) { 
-    color: white; 
+nav a:nth-child(4) {
+    color: white;
     font-weight: bold;
     border-bottom: 2px solid white;
 }
@@ -90,7 +92,8 @@ nav a:hover {
     max-width: 1000px;
     margin: 40px auto 20px auto;
     padding: 20px;
-    background-color: #0d274c; /* Fondo de la caja principal */
+    background-color: #0d274c;
+    /* Fondo de la caja principal */
     color: white;
     border-radius: 10px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
@@ -124,7 +127,8 @@ nav a:hover {
 .rating {
     font-size: 1.4rem;
     font-weight: bold;
-    color: #ffc107; /* Amarillo para las estrellas */
+    color: #ffc107;
+    /* Amarillo para las estrellas */
     margin-bottom: 15px;
 }
 
@@ -134,7 +138,8 @@ nav a:hover {
 }
 
 .score {
-    color: white; /* El número de score en blanco */
+    color: white;
+    /* El número de score en blanco */
     font-weight: 900;
 }
 
@@ -150,7 +155,8 @@ nav a:hover {
 }
 
 .synopsis-box h2 {
-    color: #ff6b35; /* Naranja para el subtítulo */
+    color: #ff6b35;
+    /* Naranja para el subtítulo */
     font-size: 1.5rem;
     margin-bottom: 10px;
 }
@@ -170,8 +176,10 @@ nav a:hover {
     text-align: center;
 }
 
-.reviews-section h3, .reviews-section h4 {
-    color: #ff6b35 !important; /* Asegura que los títulos se vean bien */
+.reviews-section h3,
+.reviews-section h4 {
+    color: #ff6b35 !important;
+    /* Asegura que los títulos se vean bien */
     font-size: 1.8rem;
     margin-bottom: 20px;
 }
@@ -189,7 +197,8 @@ nav a:hover {
 }
 
 .reviews-section .rating-label {
-    color: #f0f0f0; /* Color claro para la etiqueta "Tu valoración (1-5)" */
+    color: #f0f0f0;
+    /* Color claro para la etiqueta "Tu valoración (1-5)" */
     display: block;
     margin-bottom: 8px;
     font-size: 1.1rem;
@@ -197,15 +206,17 @@ nav a:hover {
 
 /* Aseguramos que el contenedor del slider y el texto de carga sean visibles */
 #star-rating {
-    display: flex; 
-    justify-content: center; 
+    display: flex;
+    justify-content: center;
     align-items: center;
     margin: 15px auto;
     padding: 10px;
-    background-color: #1E3C72; /* Color de fondo más claro que el principal para diferenciar */
+    background-color: #1E3C72;
+    /* Color de fondo más claro que el principal para diferenciar */
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    color: #f0f0f0; /* Texto claro para "Cargando selector de valoración..." */
+    color: #f0f0f0;
+    /* Texto claro para "Cargando selector de valoración..." */
 }
 
 /* Estilos para el control deslizable (INPUT TYPE=RANGE) inyectado por JS */
@@ -213,9 +224,11 @@ nav a:hover {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    max-width: 300px; /* Limitar el ancho */
+    max-width: 300px;
+    /* Limitar el ancho */
     height: 10px;
-    background: #3c5d88; /* Fondo del track del slider */
+    background: #3c5d88;
+    /* Fondo del track del slider */
     border-radius: 5px;
     outline: none;
     opacity: 1;
@@ -228,7 +241,8 @@ nav a:hover {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: #ff6b35; /* Color naranja del pulgar */
+    background: #ff6b35;
+    /* Color naranja del pulgar */
     cursor: pointer;
     border: 3px solid #f0f0f0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
@@ -238,27 +252,31 @@ nav a:hover {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: #ff6b35; 
+    background: #ff6b35;
     cursor: pointer;
-    border: 3px solid #f0f0f0; 
+    border: 3px solid #f0f0f0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* Estilo para las estrellas visuales que el JS inyecta junto al slider */
 #star-rating .star {
-    font-size: 2rem; /* Estrellas grandes para el input */
+    font-size: 2rem;
+    /* Estrellas grandes para el input */
     margin: 0 4px;
-    color: #4a4a4a; /* Gris por defecto */
+    color: #4a4a4a;
+    /* Gris por defecto */
     transition: color 0.1s;
 }
 
 #star-rating .star.filled {
-    color: #ffc107; /* Amarillo de relleno */
+    color: #ffc107;
+    /* Amarillo de relleno */
 }
 
 
 #user-reviews-list {
-    background-color: #0d274c; /* Fondo similar al header */
+    background-color: #0d274c;
+    /* Fondo similar al header */
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 8px;
@@ -289,11 +307,13 @@ nav a:hover {
 
 .review-rating .star {
     font-size: 1rem;
-    color: #4a4a4a; /* Estrellas pequeñas de la lista de reseñas (vacío) */
+    color: #4a4a4a;
+    /* Estrellas pequeñas de la lista de reseñas (vacío) */
 }
 
 .review-rating .star.filled {
-    color: #ffc107; /* Estrellas pequeñas de la lista de reseñas (relleno) */
+    color: #ffc107;
+    /* Estrellas pequeñas de la lista de reseñas (relleno) */
 }
 
 
@@ -304,7 +324,7 @@ nav a:hover {
     padding: 10px;
     border-radius: 6px;
     border: 2px solid #1E3C72;
-    background-color: #275293; 
+    background-color: #275293;
     color: white;
     resize: vertical;
     font-size: 1rem;
@@ -316,7 +336,8 @@ nav a:hover {
 }
 
 .btn-review {
-    background-color: #ff6b35; /* Botón naranja */
+    background-color: #ff6b35;
+    /* Botón naranja */
     color: white;
     border: none;
     padding: 12px 30px;
@@ -333,18 +354,18 @@ nav a:hover {
 
 /* 6. Pie de Página (Footer) - Consistente */
 footer {
-    background-color: #0d274c; 
+    background-color: #0d274c;
     color: white;
     padding: 20px 5%;
     text-align: left;
-    margin-top: auto; 
-    border-top: none; 
+    margin-top: auto;
+    border-top: none;
 }
 
 .contact-info {
     display: flex;
     flex-direction: column;
-    gap: 5px; 
+    gap: 5px;
 }
 
 .contact-info div {
@@ -372,14 +393,59 @@ footer {
         align-items: center;
         text-align: center;
     }
-    
+
     .poster-img {
         width: 80%;
         max-width: 250px;
         height: auto;
     }
+}
 
-    .movie-info h1 {
-        font-size: 1.8rem;
-    }
+/* --- ESTILOS BUSCADOR UNIVERSAL (Compatible con diseño Index) --- */
+#global-search-form {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+#global-search-input {
+    background-color: #222;
+    color: white;
+    border: 1px solid #444;
+    padding: 6px 12px;
+    border-radius: 4px;
+    outline: none;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    height: 38px;
+}
+
+#global-search-input::placeholder {
+    color: #bbb;
+}
+
+#global-search-input:focus {
+    border-color: #ffca2c;
+    box-shadow: 0 0 5px rgba(255, 202, 44, 0.5);
+}
+
+#global-search-form button {
+    background-color: transparent;
+    border: 1px solid #ffca2c;
+    color: #ffca2c;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-left: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#global-search-form button:hover {
+    background-color: #ffca2c;
+    color: black;
 }
