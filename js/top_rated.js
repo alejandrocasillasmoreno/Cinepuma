@@ -5,28 +5,59 @@ const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
 const TOP_RATED_URL = BASE_URL + '/movie/top_rated?language=es-ES&api_key=' + API_KEY;
 
+const SEARCH_URL = BASE_URL + '/search/movie?language=es-ES&api_key=' + API_KEY;
+
 // Elemento donde se inyectan las pelis (ID estandarizado)
 const container = document.getElementById('movies-container');
 let currentPage = 1;
 let isFetching = false;
+let currentMode = 'top_rated'; // 'top_rated' or 'search'
+let currentQuery = '';
 
 document.addEventListener('DOMContentLoaded', () => {
     getMovies(TOP_RATED_URL, currentPage);
+
+    // Handle Search
+    const searchForm = document.getElementById('global-search-form');
+    if (searchForm) {
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = document.getElementById('global-search-input');
+            const query = input.value.trim();
+            if (query) {
+                currentMode = 'search';
+                currentQuery = query;
+                currentPage = 1; // Reset page for new search
+                // Hide load more during search initially or reset it
+                const btn = document.getElementById('load-more-btn');
+                if (btn) btn.remove();
+
+                getMovies(SEARCH_URL, currentPage, true);
+            }
+        });
+    }
 });
 
-async function getMovies(url, page = 1) {
+async function getMovies(url, page = 1, isSearch = false) {
     if (!container) return;
     if (isFetching) return;
 
     isFetching = true;
 
-    // Solo mostrar "Cargando" si es la primera página y no hay contenido
+    // Solo mostrar "Cargando" si es la primera página
     if (page === 1) {
-        container.innerHTML = '<p style="color:white; text-align:center;">Cargando mejores valoradas...</p>';
+        container.innerHTML = '<p style="color:white; text-align:center;">Cargando...</p>';
     }
 
     try {
-        const res = await fetch(`${url}&page=${page}`);
+        let fetchUrl = url;
+        if (isSearch) {
+            fetchUrl = `${url}&query=${encodeURIComponent(currentQuery)}&page=${page}`;
+        } else {
+            fetchUrl = `${url}&page=${page}`;
+        }
+
+        const res = await fetch(fetchUrl);
         if (!res.ok) throw new Error(res.status);
         const data = await res.json();
 
@@ -116,7 +147,11 @@ function inputLoadMoreButton() {
 
     button.onclick = () => {
         currentPage++;
-        getMovies(TOP_RATED_URL, currentPage);
+        if (currentMode === 'search') {
+            getMovies(SEARCH_URL, currentPage, true);
+        } else {
+            getMovies(TOP_RATED_URL, currentPage, false);
+        }
         button.textContent = "Cargando...";
         button.disabled = true;
     };
