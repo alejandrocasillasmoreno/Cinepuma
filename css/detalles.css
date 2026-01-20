@@ -21,6 +21,20 @@ header {
     align-items: center;
     border-bottom: 3px solid #0d274c; 
 }
+.btn-fav {
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    color: gray;
+}
+
+.btn-fav.active {
+    color: #e74c3c;
+    transform: scale(1.3);
+}
+
+.btn-fav:active {
+    transform: scale(0.9);
+}
 
 /* Logo */
 .logo {

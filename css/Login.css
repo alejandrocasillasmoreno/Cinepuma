@@ -437,3 +437,22 @@ input {
   font-size: 18px; /* Ajusta el tamaño del ojo aquí */
 
 }
+/* Clase que se activará con JS */
+.input-error {
+    border: 2px solid #ff4b2b !important;
+    animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.feedback-text {
+    color: #ff4b2b;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}

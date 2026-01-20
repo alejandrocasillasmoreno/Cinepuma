@@ -105,7 +105,17 @@ document.addEventListener('DOMContentLoaded', () => {
             renderMovies(allMovies.slice(0, 4), "Películas Populares");
         }
     };
+document.querySelector('#login-form').addEventListener('submit', function(e) {
+    const btn = document.querySelector('#btn-login');
+    const text = btn.querySelector('.btn-text');
+    const loader = btn.querySelector('.loader');
 
+    btn.disabled = true;
+    text.style.visibility = 'hidden';
+    loader.style.display = 'block';
+    
+    // El formulario sigue su curso hacia el backend PHP
+});
 
     // 6. Inicialización
     renderMovies(allMovies.slice(0, 4), "Películas Populares"); 

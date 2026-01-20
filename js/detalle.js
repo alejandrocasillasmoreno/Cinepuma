@@ -292,7 +292,15 @@ function alertModal(title, message, type) {
     }, 3000);
 }
 
-
+function toggleFavorite(element) {
+    // Simulamos una petición AJAX a un archivo PHP
+    element.classList.toggle('active');
+    
+    // Feedback visual momentáneo
+    if(element.classList.contains('active')) {
+        console.log("Añadido a favoritos en la base de datos");
+    }
+}
 // 8. ASIGNACIÓN DE EVENTOS
 // Al ser un módulo, este código se ejecuta automáticamente, pero es buena práctica
 // usar DOMContentLoaded para asegurar que todos los elementos HTML existan.
