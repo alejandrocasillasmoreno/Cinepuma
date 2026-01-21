@@ -456,3 +456,17 @@ input {
     opacity: 0;
     transition: opacity 0.3s;
 }
+
+/* Estilo para los enlaces de abajo (Olvidé contraseña / Registrarse) */
+.bottom-link {
+    color: #ff6b35; /* Color naranja igual a los botones */
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+    display: inline-block; /* Para que el margin funcione bien horizontalmente */
+}
+
+.bottom-link:hover {
+    text-decoration: underline;
+    color: #e05c2d;
+}
