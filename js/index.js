@@ -27,6 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
     loadMoreBtn.style.display = 'none'; // Oculto al inicio
     movieRowContainer.after(loadMoreBtn);
 
+    loadMoreBtn.addEventListener('click', () => {
+        currentPage++;
+        loadMainGrid(currentPage, true);
+    });
+
     // 3. Función para Crear una Tarjeta de Película
     const createMovieCard = (movie) => {
         const card = document.createElement('div');
