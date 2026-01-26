@@ -4,46 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="Descripcion" content="Página de géneros de películas en CinePuma">
-    <title>Cinepuma - Terror</title>
+    <meta name="Description" content="Sección de películas de terror en CinePuma. Explora los títulos más escalofriantes de nuestro catálogo.">
+    <title>CinePuma - Terror</title>
     <link rel="stylesheet" href="../../../css/paginas-generos.css">
+    <style>
+        /* Clase para ocultar elementos visualmente pero mantenerlos para lectores de pantalla */
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+    </style>
 </head>
 
 <body>
 
-    <!--Encabezado-->
-    <header>
-        <!--Logo Cinepuma-->
+    <header role="banner">
         <div class="logo">
-            <img src="../../../img/Logo_Cinepuma.png" alt="CinePuma Logo">
+            <img src="../../../img/Logo_Cinepuma.png" alt="Logo de CinePuma">
             <h1><a href="../../index.html">CinePuma</a></h1>
         </div>
 
-        <!--Navegador de navegación principal-->
-        <nav>
-            <a href="../generos.html">G&eacute;neros</a>
-            <a href="../../../html/mejorValoradas.html">Mejor valoradas</a>
-            <a href="../../../html/ayuda.html">Ayuda</a>
-
-            <!-- Buscador Global -->
-            <form id="global-search-form" style="display:inline-flex; margin-left: 15px;">
-                <input id="global-search-input" type="search" placeholder="Buscar...">
-                <button type="submit">🔍</button>
-            </form>
+        <nav aria-label="Navegación principal">
+            <ul style="display: flex; list-style: none; gap: 15px; align-items: center; margin: 0; padding: 0;">
+                <li><a href="../generos.html">Géneros</a></li>
+                <li><a href="../../../html/mejorValoradas.html">Mejor valoradas</a></li>
+                <li><a href="../../../html/ayuda.html">Ayuda</a></li>
+                <li>
+                    <form id="global-search-form" role="search" style="display:inline-flex; margin-left: 15px;">
+                        <label for="global-search-input" class="visually-hidden">Buscar en Terror</label>
+                        <input id="global-search-input" type="search" placeholder="Buscar en Terror...">
+                        <button type="submit" aria-label="Ejecutar búsqueda">🔍</button>
+                    </form>
+                </li>
+            </ul>
         </nav>
     </header>
-    <!-- Removed header-search.js to allow contextual search -->
-    <!-- <script src="../../../js/header-search.js"></script> -->
 
-    <!--Contenido principal-->
-    <main>
-        <h2 style="text-align: center; color: #ff6b35; margin: 20px 0;">Terror</h2>
+    <main id="main-content">
+        <h1 style="text-align: center; color: #ff6b35; margin: 20px 0;">Películas de Terror</h1>
 
-        <!-- Contenedor Dinámico -->
-        <div id="movies-container"></div>
+        <div id="movies-container" aria-live="polite" role="region" aria-label="Lista de películas de terror">
+            </div>
     </main>
 
-    <!-- Script Dynamic Loader -->
     <script type="module">
         import { loadMoviesByGenre, searchMoviesInGenre } from "../../../js/genre-loader.js";
         // ID 27 = Terror
@@ -52,7 +62,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             loadMoviesByGenre(GENRE_ID, 'movies-container');
 
-            // Handle Contextual Search
             const searchForm = document.getElementById('global-search-form');
             if (searchForm) {
                 searchForm.addEventListener('submit', (e) => {
@@ -66,17 +75,20 @@
             }
         });
     </script>
-    <footer>
-        <ul>
+
+    <footer role="contentinfo">
+        <ul style="list-style: none; display: flex; justify-content: center; gap: 40px; padding: 20px 0; margin: 0;">
             <li>
-                <!--Teléfono de contacto-->
-                <img src="../../../img/icono_del_telefono-remove.png" alt="icono telefono" width="36" height="36">
-                <p>Tel&eacute;fono: 123-456-7890</p>
+                <a href="tel:1234567890" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                    <img src="../../../img/icono_del_telefono-remove.png" alt="" role="presentation" width="36" height="36">
+                    <span style="margin-left: 10px;">Teléfono: 123-456-7890</span>
+                </a>
             </li>
             <li>
-                <!--Correo de contacto-->
-                <img src="../../../img/icono_del_correo.png" alt="icono correo" width="36" height="36">
-                <p>Email: CinePuma@gmail.com</p>
+                <a href="mailto:CinePuma@gmail.com" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                    <img src="../../../img/icono_del_correo.png" alt="" role="presentation" width="36" height="36">
+                    <span style="margin-left: 10px;">Email: CinePuma@gmail.com</span>
+                </a>
             </li>
         </ul>
     </footer>
