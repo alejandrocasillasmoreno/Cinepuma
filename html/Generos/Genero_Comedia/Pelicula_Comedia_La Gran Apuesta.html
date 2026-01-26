@@ -1,61 +1,96 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinepuma - La Gran Apuesta</title>
+    <meta name="Description" content="Detalles de la película La Gran Apuesta en CinePuma. Sinopsis y opiniones de los usuarios sobre este drama financiero.">
+    <title>CinePuma - La Gran Apuesta</title>
     <link rel="stylesheet" href="../../../css/peliculas.css">
+    <style>
+        /* Clase para ocultar elementos visualmente pero mantenerlos para lectores de pantalla */
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+    </style>
 </head>
+
 <body>
-    <header>
+
+    <header role="banner">
         <div class="logo">
-            <img src="../../../img/Logo_Cinepuma.png" alt="CinePuma Logo">
+            <img src="../../../img/Logo_Cinepuma.png" alt="Logo de CinePuma">
             <h1><a href="../../index.html">CinePuma</a></h1>
         </div>
+
         <div class="search-bar">
-            <input type="text" placeholder="Buscar" class="search-input">
-            <img src="../../../img/imagen_lupa-removebg.png" alt="Icono búsqueda" class="icon-search">
+            <form role="search">
+                <label for="movie-search" class="visually-hidden">Buscar películas</label>
+                <input type="text" id="movie-search" placeholder="Buscar" class="search-input">
+                <img src="../../../img/imagen_lupa-removebg.png" alt="" role="presentation" class="icon-search">
+            </form>
         </div>
-        <nav>
-            <a href="../generos.html">Géneros</a>
-            <a href="../../../html/mejorValoradas.html">Mejor valoradas</a>
-            <a href="../../../html/ayuda.html">Help</a>
+
+        <nav aria-label="Navegación principal">
+            <ul style="display: flex; list-style: none; gap: 15px; margin: 0; padding: 0;">
+                <li><a href="../generos.html" class="nav-boton">Géneros</a></li>
+                <li><a href="../../../html/mejorValoradas.html" class="nav-boton">Mejor valoradas</a></li>
+                <li><a href="../../../html/ayuda.html" class="nav-boton">Ayuda</a></li>
+            </ul>
         </nav>
     </header>
 
-    <main>
-        <section class="detalle-pelicula">
-            <h2>La Gran Apuesta</h2>
-            <img src="../../../img/PosterLaGranApuesta.png" class="poster-pelicula" alt="Póster La Gran Apuesta">
-        </section>
+    <main id="main-content">
+        <article>
+            <section class="detalle-pelicula">
+                <h1>La Gran Apuesta</h1>
+                <img src="../../../img/PosterLaGranApuesta.png" class="poster-pelicula" alt="Póster oficial de La Gran Apuesta">
+            </section>
 
-        <section class="contenedor-contenido">
-            <h2 class="titulo-seccion">Sinopsis</h2>
-            <p class="texto-sinopsis">
-                Cuatro tipos fuera del sistema descubren que los grandes bancos, los medios de comunicación y el gobierno se niegan a reconocer el colapso de la economía global, tienen una idea: "La Gran Apuesta"… pero sus inversiones de riesgo les conducen al lado oscuro de la banca moderna.
-            </p>
-            
-            <h2 class="titulo-seccion">Opiniones de usuarios</h2>
-            <div class="formulario-wrapper">
-                <form>
-                    <textarea id="cajaComentarios" name="cajaComentarios" class="input-comentario" placeholder="Escribe tu opinión aquí..." required></textarea>
-                    <button type="submit" id="enviarComentario" class="btn-enviar">Enviar</button>
-                </form>
-            </div>
-        </section>
+            <section class="contenedor-contenido" aria-labelledby="sinopsis-title">
+                <h2 id="sinopsis-title" class="titulo-seccion">Sinopsis</h2>
+                <p class="texto-sinopsis">
+                    Cuatro tipos fuera del sistema descubren que los grandes bancos, los medios de comunicación y el gobierno se niegan a reconocer el colapso de la economía global, tienen una idea: "La Gran Apuesta"… pero sus inversiones de riesgo les conducen al lado oscuro de la banca moderna.
+                </p>
+            </section>
+
+            <section aria-labelledby="opiniones-title">
+                <h2 id="opiniones-title" class="titulo-seccion">Opiniones de usuarios</h2>
+                <div class="formulario-wrapper">
+                    <form action="procesar_comentario.php" method="post">
+                        <label for="cajaComentarios" class="form-label">Escribe tu opinión sobre la película:</label>
+                        <textarea id="cajaComentarios" name="cajaComentarios" class="input-comentario" placeholder="¿Qué te pareció esta historia?" required rows="5" style="width: 100%; margin-top: 10px;"></textarea>
+                        <button type="submit" id="enviarComentario" class="btn-enviar">Enviar comentario</button>
+                    </form>
+                </div>
+            </section>
+        </article>
     </main>
 
-    <footer>
-        <ul>
+    <footer role="contentinfo">
+        <ul style="list-style: none; display: flex; justify-content: center; gap: 40px; padding: 20px 0; margin: 0;">
             <li class="contact-item">
-                <img src="../../../img/icono_del_telefono-remove.png" alt="icono telefono" class="contact-icon">
-                <p>Teléfono: 123-456-7890</p>
+                <a href="tel:1234567890" aria-label="Llamar al teléfono de soporte 123-456-7890" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                    <img src="../../../img/icono_del_telefono-remove.png" alt="" role="presentation" class="contact-icon" width="30">
+                    <p style="margin: 0 0 0 10px;">Teléfono: 123-456-7890</p>
+                </a>
             </li>
             <li class="contact-item">
-                <img src="../../../img/icono_del_correo.png" alt="icono correo" class="contact-icon">
-                <p>Email: CinePuma@gmail.com</p>
+                <a href="mailto:CinePuma@gmail.com" aria-label="Enviar un correo electrónico a CinePuma" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                    <img src="../../../img/icono_del_correo.png" alt="" role="presentation" class="contact-icon" width="30">
+                    <p style="margin: 0 0 0 10px;">Email: CinePuma@gmail.com</p>
+                </a>
             </li>
         </ul>
     </footer>
+
 </body>
 </html>
