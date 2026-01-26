@@ -9,6 +9,7 @@
    7. Formulario y Comentarios
    8. Componente: Botones (UI)
    9. Footer
+   10. Utilidades de Accesibilidad (NUEVO)
 /* ==================================================== */
 
 /* ---------------------------------------------------- */
@@ -24,11 +25,18 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    /* Flexbox para Sticky Footer */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     text-align: center;
+    color: white; /* Asegura color base para contraste */
+}
+
+/* --- MEJORA DE FOCO (FASE 3) --- */
+/* Esto permite que usuarios con teclado vean claramente dónde están */
+:focus-visible {
+    outline: 3px solid #ff6b35;
+    outline-offset: 3px;
 }
 
 /* ---------------------------------------------------- */
@@ -36,18 +44,18 @@ body {
 /* ---------------------------------------------------- */
 
 main {
-    flex-grow: 1; /* Ocupa el espacio restante entre header y footer */
-    padding-top: 50px;
+    flex-grow: 1;
+    padding: 50px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
 
-main h1, main h2 {
+main h1 {
     color: white;
     font-size: 2.5rem;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 /* ---------------------------------------------------- */
@@ -63,7 +71,6 @@ header {
     color: white;
 }
 
-/* --- LOGO --- */
 .logo {
     display: flex;
     align-items: center;
@@ -77,10 +84,6 @@ header {
     width: auto;
 }
 
-.logo h1 {
-    margin: 0;
-}
-
 .logo h1 a {
     color: white;
     font-size: 30px;
@@ -88,26 +91,34 @@ header {
     text-decoration: none;
 }
 
-/* --- MENÚ DE NAVEGACIÓN --- */
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 nav a {
-    color: #cccccc;
+    color: #e0e0e0; /* Gris más claro para mejor contraste */
     text-decoration: none;
     font-weight: 500;
     font-size: 1rem;
-    padding: 5px 0;
-    transition: color 0.2s;
-    margin-left: 20px;
+    padding: 8px 12px;
+    transition: all 0.2s;
+    margin-left: 10px;
+    border-radius: 4px;
 }
 
-/* Estado activo (ej: Home/Género) */
-nav a:first-child {
-    color: #ff6b35;
+nav a:hover, nav a:focus {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Estado activo mejorado */
+.nav-active {
+    color: #ff6b35 !important;
     font-weight: bold;
     border-bottom: 2px solid #ff6b35;
-}
-
-nav a:hover {
-    color: white;
 }
 
 /* ---------------------------------------------------- */
@@ -116,50 +127,47 @@ nav a:hover {
 
 .search-bar {
     position: relative;
-    flex-grow: 1;
     max-width: 300px;
     margin: 0 20px;
 }
 
 .search-input {
-    background-color: transparent;
-    border: 2px solid black;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #ffffff; /* Borde más visible */
     border-radius: 20px;
     width: 100%;
-    height: 35px;
+    height: 40px;
     color: white;
-    padding: 5px 10px 5px 35px; /* Padding izquierdo para el icono */
+    padding: 5px 15px 5px 40px;
     font-size: 1rem;
-    outline: none;
 }
 
-.search-input::placeholder {
-    color: #cccccc;
-    font-style: italic;
-    text-align: left;
+.search-input:focus {
+    border-color: #ff6b35;
+    background-color: rgba(255, 255, 255, 0.2);
+    outline: none;
 }
 
 .icon-search {
     position: absolute;
-    left: 10px;
+    left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    width: 20px;
-    height: auto;
-    pointer-events: none;
+    width: 18px;
+    opacity: 0.8;
 }
 
 /* ---------------------------------------------------- */
 /* 5. COMPONENTE: CARDS Y POSTERS */
 /* ---------------------------------------------------- */
 
-.movie-card img, 
 .poster-pelicula {
     height: 350px;
     width: 220px;
-    border-radius: 5px;
+    border-radius: 8px;
     object-fit: cover;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 /* ---------------------------------------------------- */
@@ -167,27 +175,26 @@ nav a:hover {
 /* ---------------------------------------------------- */
 
 .contenedor-contenido {
-    width: 90%;
-    max-width: 800px;
+    width: 95%;
+    max-width: 850px;
     padding: 20px;
-    text-align: center;
 }
 
 .titulo-seccion {
-    color: #ff6b35;
+    color: #ff8c61; /* Color ligeramente más claro para legibilidad */
     font-size: 1.8rem;
     margin-top: 40px;
     margin-bottom: 15px;
     text-align: left;
-    border-bottom: 1px solid #ff6b35;
-    padding-bottom: 5px;
+    border-bottom: 2px solid #ff6b35;
+    padding-bottom: 8px;
 }
 
 .texto-sinopsis {
-    color: #f0f0f0;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    text-align: justify;
+    color: #ffffff;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    text-align: left; /* Alineación izquierda es mejor para dislexia que el justificado */
     margin-bottom: 40px;
 }
 
@@ -199,36 +206,34 @@ nav a:hover {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 20px;
-    border-radius: 10px;
+    gap: 15px;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.formulario-wrapper label {
-    font-size: 1.2rem;
+.form-label {
+    font-size: 1.1rem;
     color: white;
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .input-comentario {
     width: 100%;
-    height: 150px;
+    min-height: 120px;
     padding: 15px;
     border-radius: 8px;
-    border: none;
-    font-family: Arial, sans-serif;
+    border: 2px solid transparent;
     font-size: 1rem;
-    resize: vertical;
+    background-color: white;
+    color: #333;
 }
 
-.comentario-item {
-    text-align: left;
-    margin-top: 20px;
-    padding: 15px;
-    background-color: rgba(255,255,255,0.1);
-    border-radius: 8px;
-    color: white;
+.input-comentario:focus {
+    border-color: #ff6b35;
+    outline: none;
 }
 
 /* ---------------------------------------------------- */
@@ -236,31 +241,22 @@ nav a:hover {
 /* ---------------------------------------------------- */
 
 .btn-enviar {
-    background: linear-gradient(135deg, #ff8c61 0%, #ff6b35 100%);
+    background: #ff6b35; /* Color sólido para mejor soporte */
     color: white;
     border: none;
-    padding: 12px 35px;
+    padding: 12px 30px;
     border-radius: 30px;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: bold;
-    letter-spacing: 0.5px;
     text-transform: uppercase;
     cursor: pointer;
-    align-self: flex-end;
-    margin-top: 15px;
-    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
-    transition: all 0.3s ease;
+    align-self: flex-start;
+    transition: all 0.2s ease;
 }
 
-.btn-enviar:hover {
-    background: linear-gradient(135deg, #ff9e7a 0%, #ff5514 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
-}
-
-.btn-enviar:active {
-    transform: translateY(-1px);
-    box-shadow: 0 3px 10px rgba(255, 107, 53, 0.4);
+.btn-enviar:hover, .btn-enviar:focus {
+    background: #ff8c61;
+    transform: scale(1.05);
 }
 
 /* ---------------------------------------------------- */
@@ -269,28 +265,37 @@ nav a:hover {
 
 footer {
     background-color: #0d274c;
+    padding: 30px 5%;
+    margin-top: 50px;
+}
+
+.contact-item a {
     color: white;
-    padding: 20px 5%;
-    width: 100%;
-    text-align: left;
-    margin-top: auto;
-}
-
-footer ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.contact-item {
+    text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin: 10px 0;
-    font-size: 1.1rem;
+    gap: 12px;
+    padding: 5px;
+    border-radius: 4px;
 }
 
-.contact-icon {
-    width: 30px;
-    height: 30px;
+.contact-item a:hover {
+    text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ---------------------------------------------------- */
+/* 10. UTILIDADES DE ACCESIBILIDAD */
+/* ---------------------------------------------------- */
+
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
 }
