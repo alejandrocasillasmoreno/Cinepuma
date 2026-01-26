@@ -4,73 +4,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="Descripcion" content="Página de películas mejor valoradas de CinePuma">
+    <meta name="Description" content="Página de películas mejor valoradas de CinePuma - Filtro por popularidad y votos.">
     <title>CinePuma - Mejores Valoradas</title>
-    <!-- Usamos el CSS estandarizado de géneros -->
     <link rel="stylesheet" href="../css/paginas-generos.css">
+    <style>
+        /* Clase de utilidad para accesibilidad */
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+    </style>
 </head>
 
 <body>
 
-    <header>
-        <!--Logo Cinepuma-->
+    <header role="banner">
         <div class="logo">
-            <img src="../img/Logo_Cinepuma.png" alt="CinePuma Logo">
+            <img src="../img/Logo_Cinepuma.png" alt="Logo de CinePuma">
             <h1><a href="../html/index.html">CinePuma</a></h1>
         </div>
 
-        <!--Navegador de navegación principal-->
-        <nav>
-            <a href="Generos/generos.html">G&eacute;neros</a>
-            <a href="mejorValoradas.html" style="color:white; font-weight:bold; border-bottom: 2px solid #ff6b35;">Mejor
-                valoradas</a>
-            <a href="ayuda.html">Ayuda</a>
+        <nav aria-label="Navegación principal">
+            <ul style="display: flex; list-style: none; gap: 20px; align-items: center; margin: 0; padding: 0;">
+                <li><a href="Generos/generos.html" style="text-decoration: none; color: inherit;">Géneros</a></li>
+                <li>
+                    <a href="mejorValoradas.html" 
+                       aria-current="page" 
+                       style="color:white; font-weight:bold; border-bottom: 2px solid #ff6b35; text-decoration: none;">
+                       Mejor valoradas
+                    </a>
+                </li>
+                <li><a href="ayuda.html" style="text-decoration: none; color: inherit;">Ayuda</a></li>
+            </ul>
 
-            <!-- Buscador Global -->
-            <form id="global-search-form">
+            <form id="global-search-form" role="search" style="display: flex; align-items: center;">
+                <label for="global-search-input" class="visually-hidden">Buscar películas mejor valoradas</label>
                 <input id="global-search-input" type="search" placeholder="Buscar...">
-                <button type="submit">🔍</button>
+                <button type="submit" aria-label="Buscar">🔍</button>
             </form>
         </nav>
     </header>
 
-    <!-- Script funcionalidad buscador global removido para manejo interno -->
-    <!-- <script src="../js/header-search.js"></script> -->
-
-    <main>
+    <main id="main-content">
         <h2 style="text-align: center; color: #ff6b35; margin: 20px 0;">Mejores Valoradas</h2>
 
-        <!-- Contenedor Dinámico -->
-        <div id="movies-container"></div>
+        <section id="movies-container" 
+                 aria-live="polite" 
+                 aria-label="Listado de películas mejor valoradas"
+                 style="min-height: 200px;">
+            </section>
     </main>
 
-    <footer>
-        <li>
-            <!--Teléfono de contacto-->
-            <a href="tel:+123456789" class="enlace-icono" aria-label="Llamar">
-                <svg class="icono-interactivo icono-telefono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                    width="32" height="32">
-                    <path
-                        d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z" />
-                </svg>
-            </a>
-            </a>
-        </li>
-        <li>
-            <!--Correo de contacto-->
-            <a href="mailto:info@ejemplo.com" class="enlace-icono" aria-label="Enviar correo">
-                <svg class="icono-interactivo icono-email" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                    width="32" height="32">
-                    <path
-                        d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z" />
-                </svg>
-            </a>
-        </li>
+    <footer role="contentinfo">
+        <ul style="list-style: none; display: flex; justify-content: center; gap: 30px; padding: 20px 0;">
+            <li>
+                <a href="tel:+123456789" class="enlace-icono" aria-label="Llamar al servicio de atención al cliente">
+                    <svg class="icono-interactivo icono-telefono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        width="32" height="32" aria-hidden="true" focusable="false">
+                        <path
+                            d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z" />
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="mailto:info@ejemplo.com" class="enlace-icono" aria-label="Enviar un correo electrónico de consulta">
+                    <svg class="icono-interactivo icono-email" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        width="32" height="32" aria-hidden="true" focusable="false">
+                        <path
+                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z" />
+                    </svg>
+                </a>
+            </li>
+        </ul>
     </footer>
 
-    <!-- Script específico para cargar Top Rated con el nuevo diseño -->
     <script type="module" src="../js/top_rated.js"></script>
-    <!-- Detalle bundle si es necesario para login status (opcional, index lo tiene en index.js) -->
 </body>
 
 </html>

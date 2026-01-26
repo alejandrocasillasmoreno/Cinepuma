@@ -4,118 +4,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinepuma - Detalles Pelicula</title>
-    <meta name="Descripcion" content="Detalles de la película y sección de reseñas de la comunidad.">
-    <!-- Usaremos detalle.css -->
+    <title>CinePuma - Detalles de la Película</title>
+    <meta name="Description" content="Detalles detallados de la película, trailer y sección de reseñas de la comunidad de CinePuma.">
     <link rel="stylesheet" href="../css/detalles.css">
+    <style>
+        /* Clase de utilidad para accesibilidad (añadir a tu CSS) */
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- 1. HEADER (CABECERA) - Estructura estándar del proyecto -->
     <header>
         <div class="logo">
-            <img src="../img/Logo_Cinepuma.png" alt="Logo Cinepuma">
+            <img src="../img/Logo_Cinepuma.png" alt="Logo CinePuma">
             <h1><a href="../../html/index.html">CinePuma</a></h1>
         </div>
-        <nav>
-            <a href="../html/Generos/generos.html">Género</a>
-            <a href="mejorValoradas.html">Mejores valoradas</a>
-            <a href="ayuda.html">Ayuda</a>
-            <!-- Buscador Global -->
-            <form id="global-search-form">
+        <nav aria-label="Navegación principal">
+            <ul>
+                <li><a href="../html/Generos/generos.html">Género</a></li>
+                <li><a href="mejorValoradas.html">Mejores valoradas</a></li>
+                <li><a href="ayuda.html">Ayuda</a></li>
+            </ul>
+            <form id="global-search-form" role="search">
+                <label for="global-search-input" class="visually-hidden">Buscar películas</label>
                 <input id="global-search-input" type="search" placeholder="Buscar...">
-                <button type="submit">🔍</button>
+                <button type="submit" aria-label="Buscar">🔍</button>
             </form>
         </nav>
     </header>
 
-    <main id="movie-details" class="detail-container">
-        <!-- Contenido de la Película (Dinámico) -->
-        <div class="movie-header">
-            <img id="movie-poster" src="" alt="Cargando..." class="poster-img">
+    <main id="movie-details" class="detail-container" aria-busy="true" aria-live="polite">
+        <article class="movie-header">
+            <img id="movie-poster" src="" alt="Póster de la película" class="poster-img">
             <div class="movie-info">
                 <h1 id="movie-title">Cargando película...</h1>
-                <p class="rating">
-                    <span class="star-icon">★</span>
-                    <span id="movie-rating" class="score">--</span>/10
-                </p>
+                <div class="rating" aria-label="Calificación de la crítica">
+                    <span class="star-icon" aria-hidden="true">★</span>
+                    <span id="movie-rating" class="score">--</span><span class="visually-hidden">de 10 puntos</span>/10
+                </div>
                 <div class="meta-data">
                     <p><strong>Fecha de estreno:</strong> <span id="movie-date">--</span></p>
                     <p><strong>Géneros:</strong> <span id="movie-genres">--</span></p>
-                    <!-- <p><strong>Duración:</strong> 120 min</p> -->
                 </div>
             </div>
-        </div>
-        <div class="synopsis-box">
-            <h2>Sinopsis</h2>
+        </article>
+
+        <section class="synopsis-box" aria-labelledby="synopsis-title">
+            <h2 id="synopsis-title">Sinopsis</h2>
             <p id="movie-synopsis">
                 Cargando descripción...
             </p>
-        </div>
+        </section>
 
-        <!-- SECCIÓN TRAILER -->
-        <div id="trailer-container" class="trailer-box" style="margin-top: 30px; text-align: center;">
-            <!-- El iframe se cargará aquí -->
-        </div>
+        <section id="trailer-container" class="trailer-box" aria-label="Trailer de la película" style="margin-top: 30px; text-align: center;">
+            </section>
     </main>
 
-    <div class="reviews-section container">
-        <!-- Contenedor para mostrar la valoración media de los usuarios -->
-        <div id="average-rating-display" class="average-rating-display">
-            Cargando valoración media...
+    <section class="reviews-section container" aria-labelledby="reviews-title">
+        <h2 id="reviews-title" class="visually-hidden">Sección de reseñas</h2>
+
+        <div id="average-rating-display" class="average-rating-display" aria-live="polite">
+            Cargando valoración media de usuarios...
         </div>
 
         <h4>Deja tu opinión</h4>
 
-        <!-- Área de valoración con SLIDER (entrada del usuario) -->
-        <!-- El JS inyectará el control <input type="range"> aquí dentro. -->
         <div id="rating-input-container" class="rating-input-container">
-            <span class="rating-label">Tu valoración (1-5):</span>
+            <label for="star-rating-slider" class="rating-label">Tu valoración (1 al 5):</label>
             <div id="star-rating" class="star-rating">
-                <!-- CONTENIDO DEL SLIDER INYECTADO POR JS -->
                 Cargando selector de valoración...
             </div>
         </div>
-        <textarea id="review-input" placeholder="Escribe tu opinión aquí..."></textarea>
-        <button id="send-review-btn" class="btn-review">Enviar Opinión</button>
 
-        <!-- SECCIÓN DONDE SE MUESTRAN LOS COMENTARIOS -->
-        <div class="user-comments-container">
+        <div class="comment-group">
+            <label for="review-input" class="visually-hidden">Escribe tu comentario</label>
+            <textarea id="review-input" placeholder="Escribe tu opinión aquí..."></textarea>
+            <button id="send-review-btn" class="btn-review">Enviar Opinión</button>
+        </div>
+
+        <section class="user-comments-container">
             <h3>Comentarios de la Comunidad</h3>
-            <div id="user-reviews-list" class="reviews-list">
-                <!-- Aquí se insertarán los comentarios dinámicamente -->
+            <div id="user-reviews-list" class="reviews-list" aria-live="polite">
                 <p style="color: #ccc;">Cargando comentarios...</p>
             </div>
-        </div>
-    </div>
+        </section>
+    </section>
 
-    <script src="../js/top_rated.js"></script>
-    <script src="../js/header-search.js"></script>
-    <script type="module" src="../js/detalle.js"></script>
-</body>
-<footer>
-    <li>
-        <!--Teléfono de contacto-->
-        <a href="tel:+123456789" class="enlace-icono" aria-label="Llamar">
-            <svg class="icono-interactivo icono-telefono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                width="32" height="32">
-                <path
-                    d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z" />
-            </svg>
-        </a>
-        </a>
-    </li>
-    <li>
-        <!--Correo de contacto-->
-        <a href="mailto:info@ejemplo.com" class="enlace-icono" aria-label="Enviar correo">
-            <svg class="icono-interactivo icono-email" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32"
-                height="32">
-                <path
-                    d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z" />
-            </svg>
-        </a>
-    </li>
-</footer>
-
-</html>
+    <footer role="contentinfo">
+        <ul class="footer-contact">
+            <li>
+                <a href="tel:+123456789" class="enlace-icono" aria-label="Llamar al soporte técnico">
+                    <svg class="icono-interactivo icono-telefono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" aria-hidden="true">
+                        <path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z" />
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="mailto:info@ejemplo.com" class="enlace-icono" aria-label="Enviar un correo electrónico">
+                    <svg class="icono-interactivo icono-email" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" aria-hidden="true">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1

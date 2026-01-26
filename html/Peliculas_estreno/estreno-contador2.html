@@ -4,89 +4,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="Descripcion" content="Pagina de detalle de la película El Contador 2 en CinePuma">
-    <title>Cinepuma - El Contador 2</title>
+    <meta name="Description" content="Detalles de la película El Contador 2 en CinePuma. Consulta la sinopsis y las opiniones de nuestra comunidad.">
+    <title>CinePuma - El Contador 2</title>
     <link rel="stylesheet" href="../../../css/peliculas.css">
+    <style>
+        /* Clase para ocultar texto visualmente para mantener la estética pero ayudar a lectores de pantalla */
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+    </style>
 </head>
 
 <body>
 
-    <!--Encabezado-->
-    <header>
-        <!--Logo Cinepuma-->
+    <header role="banner">
         <div class="logo">
-            <img src="../../img/Logo_Cinepuma.png" alt="CinePuma Logo">
+            <img src="../../img/Logo_Cinepuma.png" alt="Logo de CinePuma">
             <h1><a href="../index.html">CinePuma</a></h1>
         </div>
 
-        <!--Barra de búsqueda-->
         <div class="search-bar">
-            <input type="text" placeholder="Buscar">
-            <img src="../../img/imagen_lupa-removebg.png" alt="Icono búsqueda" class="icono-busqueda">
+            <form role="search">
+                <label for="search-input" class="visually-hidden">Buscar en el sitio</label>
+                <input type="text" id="search-input" placeholder="Buscar">
+                <img src="../../img/imagen_lupa-removebg.png" alt="" role="presentation" class="icono-busqueda">
+            </form>
         </div>
 
-        <!--Navegador de navegación principal-->
-        <nav>
-            <a href="../Generos/generos.html" class="nav-boton">G&eacute;neros</a>
-            <a href="../../html/mejorValoradas.html" class="nav-boton">Mejor valoradas</a>
-            <a href="../../html/ayuda.html" class="nav-boton help-button">Help</a>
+        <nav aria-label="Navegación principal">
+            <ul style="display: flex; list-style: none; gap: 15px; margin: 0; padding: 0;">
+                <li><a href="../Generos/generos.html" class="nav-boton">Géneros</a></li>
+                <li><a href="../../html/mejorValoradas.html" class="nav-boton">Mejor valoradas</a></li>
+                <li><a href="../../html/ayuda.html" class="nav-boton help-button">Ayuda</a></li>
+            </ul>
         </nav>
     </header>
-    <main>
 
-        <section>
-            <h1>El contador 2</h1>
-            <img src="https://m.media-amazon.com/images/M/MV5BNWYxN2Q3MzktZmYwOS00MWU3LTkyNGUtNGY4MGQ4OTMxZmM2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
-                alt="Poster El Contador 2" width="300">
-        </section>
+    <main id="main-content">
+        <article>
+            <section>
+                <h1>El contador 2</h1>
+                <img src="https://m.media-amazon.com/images/M/MV5BNWYxN2Q3MzktZmYwOS00MWU3LTkyNGUtNGY4MGQ4OTMxZmM2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                    alt="Póster oficial de la película El Contador 2 con Ben Affleck" width="300">
+            </section>
 
-        <section>
-            <h2>Sinopsis</h2>
-            <p>
-                Christian Wolff (Ben Affleck), el genio matemático y letal contable, regresa cuando un antiguo amigo es asesinado.
-                Esta nueva amenaza lo obliga a reclutar a su hermano, Brax (Jon Bernthal), para usar sus habilidades combinadas y desentrañar una conspiración mortal que involucra un cártel y una peligrosa red de asesinos. Mientras 
-                tanto, la directora del Tesoro, Marybeth Medina, se acerca cada vez más a la verdad sobre él.
-            </p>
-        </section>
-        <section>
-            <h2>Opiniones de usuarios</h2>
-            <div>
-                <form> <!--Hay que poner el action="comentarios.php" y method="post" cuando lo tengamos disponible-->
-                    <label for="cajaComentarios">Comenta</label><br>
-                    <textarea id="cajaComentarios" name="cajaComentarios" rows="7" cols="99" required></textarea><br>
-                    <button id="enviarComentario">Enviar</button>
-                </form>
-            </div>
+            <section aria-labelledby="sinopsis-title">
+                <h2 id="sinopsis-title">Sinopsis</h2>
+                <p>
+                    Christian Wolff (Ben Affleck), el genio matemático y letal contable, regresa cuando un antiguo amigo es asesinado.
+                    Esta nueva amenaza lo obliga a reclutar a su hermano, Brax (Jon Bernthal), para usar sus habilidades combinadas y desentrañar una conspiración mortal que involucra un cártel y una peligrosa red de asesinos. Mientras 
+                    tanto, la directora del Tesoro, Marybeth Medina, se acerca cada vez más a la verdad sobre él.
+                </p>
+            </section>
 
-            <!--Estos comentarios son puestos manualmente, nuestro plan es que aquí aparezcan los comentarios cuando alguien
-                usa la caja de texto y pulsa enviar, y que al estar logueado aparezca al lado de su mensaje su nombre-->
-            <article>
-                <p><strong>"¡Mejor que la primera!"</strong></p>
-                <p>¡Brutal! Justo lo que esperaba. La química entre Ben Affleck y Jon Bernthal como hermanos es lo mejor
-                    de la película. Mucha más acción y la trama te mantiene pegado al asiento. 10/10.</p>
-            </article>
-            <article>
-                <p><strong>"Decepcionante"</strong></p>
-                <p>No me ha gustado. La trama es demasiado confusa y no tiene la chispa de la original. La primera era
-                    un thriller inteligente, esta parece solo una película de acción más. Una pena.</p>
-            </article>
-        </section>
+            <section aria-labelledby="opiniones-title">
+                <h2 id="opiniones-title">Opiniones de usuarios</h2>
+                <div class="form-container">
+                    <form action="comentarios.php" method="post">
+                        <label for="cajaComentarios" class="form-label">Escribe tu opinión:</label><br>
+                        <textarea id="cajaComentarios" name="cajaComentarios" rows="7" style="width: 100%; max-width: 600px;" required placeholder="¿Qué te ha parecido la película?"></textarea><br>
+                        <button type="submit" id="enviarComentario" class="btn-enviar">Enviar comentario</button>
+                    </form>
+                </div>
 
+                <div class="comentarios-listado" aria-live="polite">
+                    <article class="comentario-item">
+                        <h3>"¡Mejor que la primera!"</h3>
+                        <p>¡Brutal! Justo lo que esperaba. La química entre Ben Affleck y Jon Bernthal como hermanos es lo mejor
+                            de la película. Mucha más acción y la trama te mantiene pegado al asiento. 10/10.</p>
+                    </article>
+
+                    <article class="comentario-item">
+                        <h3>"Decepcionante"</h3>
+                        <p>No me ha gustado. La trama es demasiado confusa y no tiene la chispa de la original. La primera era
+                            un thriller inteligente, esta parece solo una película de acción más. Una pena.</p>
+                    </article>
+                </div>
+            </section>
+        </article>
     </main>
-    <footer>
-        <ul>
-            <li>
-                <!--Teléfono de contacto-->
-                <img src="../../img/icono_del_telefono-remove.png" alt="icono telefono" width="36" height="36">
-                <p>Tel&eacute;fono: 123-456-7890</p>
-            </li>
 
+    <footer role="contentinfo">
+        <ul style="list-style: none; padding: 20px 0; display: flex; justify-content: center; gap: 40px; margin: 0;">
             <li>
-                <!--Correo de contacto-->
-                <img src="../../img/icono_del_correo.png" alt="icono correo" width="36" height="36">
-                <p>Email: CinePuma@gmail.com</p>
+                <a href="tel:1234567890" aria-label="Llamar al teléfono de contacto 123-456-7890" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                    <img src="../../img/icono_del_telefono-remove.png" alt="" role="presentation" width="30" height="30">
+                    <span style="margin-left: 8px;">Teléfono: 123-456-7890</span>
+                </a>
+            </li>
+            <li>
+                <a href="mailto:CinePuma@gmail.com" aria-label="Enviar un correo a CinePuma@gmail.com" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                    <img src="../../img/icono_del_correo.png" alt="" role="presentation" width="30" height="30">
+                    <span style="margin-left: 8px;">Email: CinePuma@gmail.com</span>
+                </a>
             </li>
         </ul>
     </footer>
 
+</body>
 </html>

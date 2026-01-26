@@ -4,73 +4,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="Descripcion" content=" Página de registro de CinePuma">
+    <meta name="Description" content="Página de registro de CinePuma - Crea tu cuenta para calificar películas.">
     <title>CinePuma - Registrarse</title>
     <link rel="stylesheet" href="../css/Login.css">
-    <!-- Incluimos la lógica de Firebase -->
     <script type="module" src="../js/app.js"></script>
+    <style>
+        /* Clase de utilidad para accesibilidad: oculta el texto visualmente pero lo mantiene para lectores de pantalla */
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+    </style>
 </head>
 
 <body>
-    <header>
+    <header role="banner">
         <div class="logo">
-            <img src="../img/Logo_Cinepuma.png" alt="CinePuma Logo">
+            <img src="../img/Logo_Cinepuma.png" alt="Logo de CinePuma">
             <h1><a href="../../html/index.html">CinePuma</a></h1>
         </div>
-        <!-- Contenedor principal de la barra de búsqueda -->
+
         <div class="search-bar input-group">
-            <!-- Campo de texto (la caja) -->
-            <input type="text" placeholder="Buscar" class="search-input">
-            <!-- Ícono de la lupa (posicionado absolutamente) -->
-            <img src="../img/imagen_lupa-removebg.png" alt="Icono búsqueda" class="icon-search">
+            <form role="search" id="header-search">
+                <label for="search-input" class="visually-hidden">Buscar películas</label>
+                <input type="text" id="search-input" placeholder="Buscar" class="search-input">
+                <img src="../img/imagen_lupa-removebg.png" alt="" role="presentation" class="icon-search">
+            </form>
         </div>
-        <nav>
-            <a href="../html/Generos/generos.html" class="nav-button">Géneros</a>
-            <a href="../html/mejorValoradas.html" class="nav-button">Mejor valoradas</a>
-            <a href="../html/ayuda.html" class="nav-button help-button">Help</a>
+
+        <nav aria-label="Navegación secundaria">
+            <ul style="display: flex; list-style: none; gap: 10px; margin: 0; padding: 0;">
+                <li><a href="../html/Generos/generos.html" class="nav-button">Géneros</a></li>
+                <li><a href="../html/mejorValoradas.html" class="nav-button">Mejor valoradas</a></li>
+                <li><a href="../html/ayuda.html" class="nav-button help-button">Ayuda</a></li>
+            </ul>
         </nav>
     </header>
 
-    <h1>Regístrate</h1>
+    <main id="main-content">
+        <h1 style="text-align: center; margin-top: 20px;">Regístrate</h1>
 
-    <!-- Contenedor para mensajes de Firebase (Modal) -->
-    <div id="auth-ui-messages" class="w-full max-w-sm mx-auto my-4"></div>
+        <div id="auth-ui-messages" aria-live="assertive" class="w-full max-w-sm mx-auto my-4"></div>
 
-    <div class="container">
-        <!-- Añadimos id="auth-form" para que el script lo detecte -->
-        <form id="auth-form">
-            <!-- Campo de Nombre -->
-            <div class="input-group">
-                <input type="text" id="name" placeholder="Escribe tu nombre" required style="text-align: center;">
-            </div>
-            
-            <!-- Campo de Apellidos -->
-            <div class="input-group">
-                <input type="text" id="surname" placeholder="Escribe tus apellidos" required style="text-align: center;">
-            </div>
+        <div class="container">
+            <form id="auth-form">
+                
+                <div class="input-group">
+                    <label for="name" class="visually-hidden">Nombre</label>
+                    <input type="text" id="name" placeholder="Escribe tu nombre" required style="text-align: center;">
+                </div>
+                
+                <div class="input-group">
+                    <label for="surname" class="visually-hidden">Apellidos</label>
+                    <input type="text" id="surname" placeholder="Escribe tus apellidos" required style="text-align: center;">
+                </div>
 
-            <!-- Campo de Correo Electrónico -->
-            <div class="input-group">
-                <input type="email" id="email" placeholder="Correo Electrónico" required style="text-align: center;">
-                <!-- Icono de Correo -->
-                <img src="../img/icono_del_correo.png" alt="Icono correo" class="icon-field icon-email">
-            </div>
+                <div class="input-group">
+                    <label for="email" class="visually-hidden">Correo Electrónico</label>
+                    <input type="email" id="email" placeholder="Correo Electrónico" required style="text-align: center;">
+                    <img src="../img/icono_del_correo.png" alt="" role="presentation" class="icon-field icon-email">
+                </div>
 
-            <!-- Botón de Iniciar Sesión  -->
                 <div class="form-group">
-                    <input type="password" id="password" placeholder="Contraseña">
-                    <button type="button" id="toggleBtn" class="eye-btn">
-                        <span id="eyeIcon">👁️</span>
+                    <label for="password" class="visually-hidden">Contraseña</label>
+                    <input type="password" id="password" placeholder="Contraseña" required>
+                    <button type="button" id="toggleBtn" class="eye-btn" aria-label="Mostrar u ocultar contraseña">
+                        <span id="eyeIcon" aria-hidden="true">👁️</span>
                     </button>
                 </div>
 
-            <!-- Botón de Registrarse (id="register-btn" es esencial para el script) -->
-            <button type="button" id="register-btn" class="submit-button">Registrarme</button>
-        </form>
-    </div>
-    
-    <a href="../html/login.html" class="bottom-link">¿Ya tienes una cuenta? Inicia Sesión</a>
+                <button type="button" id="register-btn" class="submit-button">Registrarme</button>
+            </form>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="../html/login.html" class="bottom-link">¿Ya tienes una cuenta? Inicia Sesión</a>
+        </div>
+    </main>
 
 </body>
-
 </html>

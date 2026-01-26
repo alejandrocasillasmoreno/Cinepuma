@@ -4,79 +4,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="Descripcion" content="Página de géneros de películas en CinePuma">
-    <title>Cinepuma - G&eacute;neros</title>
+    <meta name="Description" content="Detalles de la película Oppenheimer en CinePuma. Sinopsis histórica y opiniones de la comunidad.">
+    <title>CinePuma - Oppenheimer</title>
     <link rel="stylesheet" href="../../../css/peliculas.css">
+    <style>
+        /* Clase para accesibilidad: oculta texto visualmente pero lo mantiene para lectores de pantalla */
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+    </style>
 </head>
 
 <body>
 
-    <!--Encabezado-->
-    <header>
-        <!--Logo Cinepuma-->
+    <header role="banner">
         <div class="logo">
-            <img src="../../img/Logo_Cinepuma.png" alt="CinePuma Logo">
+            <img src="../../img/Logo_Cinepuma.png" alt="Logo de CinePuma">
             <h1><a href="../index.html">CinePuma</a></h1>
         </div>
 
-        <!--Barra de búsqueda-->
         <div class="search-bar">
-            <input type="text" placeholder="Buscar">
-            <img src="../../img/imagen_lupa-removebg.png" alt="Icono búsqueda" class="icono-busqueda">
+            <form role="search">
+                <label for="header-search" class="visually-hidden">Buscar películas</label>
+                <input type="text" id="header-search" placeholder="Buscar">
+                <img src="../../img/imagen_lupa-removebg.png" alt="" role="presentation" class="icono-busqueda">
+            </form>
         </div>
 
-        <!--Navegador de navegación principal-->
-        <nav>
-            <a href="../Generos/generos.html" class="nav-boton">G&eacute;neros</a>
-            <a href="../../html/mejorValoradas.html" class="nav-boton">Mejor valoradas</a>
-            <a href="../../html/ayuda.html" class="nav-boton help-button">Help</a>
+        <nav aria-label="Navegación principal">
+            <ul style="display: flex; list-style: none; gap: 15px; margin: 0; padding: 0;">
+                <li><a href="../Generos/generos.html" class="nav-boton">Géneros</a></li>
+                <li><a href="../../html/mejorValoradas.html" class="nav-boton">Mejor valoradas</a></li>
+                <li><a href="../../html/ayuda.html" class="nav-boton help-button">Ayuda</a></li>
+            </ul>
         </nav>
     </header>
-    <main>
-        <!--Contenido principal-->
-        <section>
-            <h1>Oppenheimer</h1>
-            <img src="../../img/oppenheimer.jpg" alt="Poster Oppenheimer" width="300">
-        </section>
-        <section>
-            <h2>Sinopsis</h2>
-            <p>
-                "Oppenheimer" narra la vida de J. Robert Oppenheimer, el físico teórico conocido como el "padre de la
-                bomba atómica".
-                La película explora su papel crucial en el Proyecto Manhattan durante la Segunda Guerra Mundial, así
-                como las complejidades morales y éticas que enfrentó al desarrollar una de las armas más poderosas de la
-                historia.
-            </p>
-        </section>
-        <section>
-            <h2>Opiniones de usuarios</h2>
-            <div>
-                <form> <!--Hay que poner el action="comentarios.php" y method="post" cuando lo tengamos disponible-->
-                    <label for="cajaComentarios">Comenta</label><br>
-                    <textarea id="cajaComentarios" name="cajaComentarios" rows="7" cols="99" required></textarea><br>
-                    <button id="enviarComentario">Enviar</button>
-                </form>
-            </div>
 
-            <!--Estos comentarios son puestos manualmente, nuestro plan es que aquí aparezcan los comentarios cuando alguien
-                usa la caja de texto y pulsa enviar, y que al estar logueado aparezca al lado de su mensaje su nombre-->
-            <article>
-                <p><strong>"¡Mejor que la primera!"</strong></p>
-                <p></p>
-            </article>
-        </section>
+    <main id="main-content">
+        <article class="movie-detail">
+            <section>
+                <h1>Oppenheimer</h1>
+                <img src="../../img/oppenheimer.jpg" alt="Póster de la película Oppenheimer mostrando a Cillian Murphy" width="300">
+            </section>
+
+            <section aria-labelledby="sinopsis-title">
+                <h2 id="sinopsis-title">Sinopsis</h2>
+                <p>
+                    "Oppenheimer" narra la vida de J. Robert Oppenheimer, el físico teórico conocido como el "padre de la
+                    bomba atómica".
+                    La película explora su papel crucial en el Proyecto Manhattan durante la Segunda Guerra Mundial, así
+                    como las complejidades morales y éticas que enfrentó al desarrollar una de las armas más poderosas de la
+                    historia.
+                </p>
+            </section>
+
+            <section aria-labelledby="reviews-title">
+                <h2 id="reviews-title">Opiniones de usuarios</h2>
+                <div class="comment-form">
+                    <form action="comentarios.php" method="post"> 
+                        <label for="cajaComentarios" class="form-label">Escribe tu opinión sobre Oppenheimer:</label><br>
+                        <textarea id="cajaComentarios" name="cajaComentarios" rows="7" style="width: 100%; max-width: 800px;" required placeholder="¿Qué te pareció la película?"></textarea><br>
+                        <button type="submit" id="enviarComentario" class="btn-submit">Enviar comentario</button>
+                    </form>
+                </div>
+
+                <div class="comments-list" aria-live="polite">
+                    <article class="comment-item">
+                        <h3>"¡Impresionante!"</h3>
+                        <p>Una obra maestra de Christopher Nolan. La tensión se siente en cada escena.</p>
+                    </article>
+                </div>
+            </section>
+        </article>
     </main>
-    <footer>
-        <ul>
+
+    <footer role="contentinfo">
+        <ul style="list-style: none; padding: 20px 0; display: flex; justify-content: center; gap: 40px; margin: 0;">
             <li>
-                <!--Teléfono de contacto-->
-                <img src="../../img/icono_del_telefono-remove.png" alt="icono telefono" width="36" height="36">
-                <p>Tel&eacute;fono: 123-456-7890</p>
+                <a href="tel:1234567890" aria-label="Llamar al soporte técnico de CinePuma" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                    <img src="../../img/icono_del_telefono-remove.png" alt="" role="presentation" width="30" height="30">
+                    <span style="margin-left: 8px;">123-456-7890</span>
+                </a>
             </li>
             <li>
-                <!--Correo de contacto-->
-                <img src="../../img/icono_del_correo.png" alt="icono correo" width="36" height="36">
-                <p>Email: CinePuma@gmail.com</p>
+                <a href="mailto:CinePuma@gmail.com" aria-label="Enviar un correo electrónico a CinePuma" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                    <img src="../../img/icono_del_correo.png" alt="" role="presentation" width="30" height="30">
+                    <span style="margin-left: 8px;">CinePuma@gmail.com</span>
+                </a>
             </li>
         </ul>
     </footer>

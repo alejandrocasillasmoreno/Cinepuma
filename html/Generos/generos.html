@@ -4,105 +4,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="Descripcion" content="Página de géneros de CinePuma">
-    <title>Cinepuma - G&eacute;neros</title>
+    <meta name="Description" content="Explora los diferentes géneros de películas disponibles en CinePuma: Acción, Misterio, Terror, Drama y Comedia.">
+    <title>CinePuma - Géneros</title>
     <link rel="stylesheet" href="../../css/generos.css">
 </head>
 
 <body>
-    <header>
+    <header role="banner">
         <div class="logo">
-            <img src="../../img/Logo_Cinepuma.png" alt="Logo Cinepuma">
+            <img src="../../img/Logo_Cinepuma.png" alt="Logo de CinePuma">
             <h1><a href="../../html/index.html">CinePuma</a></h1>
         </div>
 
-        <nav>
-            <a href="generos.html">G&eacute;nero</a>
-            <a href="../mejorValoradas.html">Mejores valoradas</a>
-            <a href="../ayuda.html">Ayuda</a>
+        <nav aria-label="Navegación principal">
+            <ul style="display: flex; list-style: none; gap: 20px; margin: 0; padding: 0;">
+                <li><a href="generos.html" aria-current="page">Géneros</a></li>
+                <li><a href="../mejorValoradas.html">Mejor valoradas</a></li>
+                <li><a href="../ayuda.html">Ayuda</a></li>
+            </ul>
         </nav>
-
     </header>
 
-    <main>
-        <h2 class="main-title">G&eacute;nero</h2>
+    <main id="main-content">
+        <h1 class="main-title">Géneros de Películas</h1>
 
         <div class="genres-grid">
 
-            <div class="genre-item">
-                <h2><a href="../Generos/Genero_Accion/genero_accion.html">Acci&oacute;n</a></h2>
-
+            <section class="genre-item" aria-labelledby="title-accion">
+                <h2 id="title-accion"><a href="../Generos/Genero_Accion/genero_accion.html">Acción</a></h2>
                 <div class="movie-card">
-                    <a href="../Generos/Genero_Accion/genero_accion.html">
-                        <img src="../../img/Tron_Legacy_poster.jpg" alt="Póster Acción - TRON: Ares">
+                    <a href="../Generos/Genero_Accion/genero_accion.html" aria-label="Ir a películas de Acción">
+                        <img src="../../img/Tron_Legacy_poster.jpg" alt="Póster de la película TRON: Ares representando el género de Acción">
                     </a>
                 </div>
-            </div>
+            </section>
 
-            <!--Género Misterio -->
-            <div class="genre-item">
-                <h2><a href="../Generos/Genero_Misterio/genero_misterio.html">Misterio</a></h2>
-
+            <section class="genre-item" aria-labelledby="title-misterio">
+                <h2 id="title-misterio"><a href="../Generos/Genero_Misterio/genero_misterio.html">Misterio</a></h2>
                 <div class="movie-card">
-                    <a href="../Generos/Genero_Misterio/genero_misterio.html">
-                        <img src="../../img/contable2.jpg" alt="Póster Misterio - El Contable 2">
+                    <a href="../Generos/Genero_Misterio/genero_misterio.html" aria-label="Ir a películas de Misterio">
+                        <img src="../../img/contable2.jpg" alt="Póster de El Contable 2 representando el género de Misterio">
                     </a>
                 </div>
-            </div>
+            </section>
 
-            <!--Género Terror -->
-            <div class="genre-item">
-                <h2><a href="../../html/Generos/Genero_Terror/genero_terror.html">Terror</a></h2>
-
+            <section class="genre-item" aria-labelledby="title-terror">
+                <h2 id="title-terror"><a href="../../html/Generos/Genero_Terror/genero_terror.html">Terror</a></h2>
                 <div class="movie-card">
-                    <a href="../../html/Generos/Genero_Terror/genero_terror.html">
-                        <img src="../../img/LazosDeSangre.jpg" alt="Póster Terror - Lazos de Sangre">
+                    <a href="../../html/Generos/Genero_Terror/genero_terror.html" aria-label="Ir a películas de Terror">
+                        <img src="../../img/LazosDeSangre.jpg" alt="Póster de Lazos de Sangre representando el género de Terror">
                     </a>
                 </div>
-            </div>
+            </section>
 
-            <!--Género Drama -->
-            <div class="genre-item">
-                <h2><a href="../../html/Generos/Genero_Drama/genero_drama.html">Drama</a></h2>
-
+            <section class="genre-item" aria-labelledby="title-drama">
+                <h2 id="title-drama"><a href="../../html/Generos/Genero_Drama/genero_drama.html">Drama</a></h2>
                 <div class="movie-card">
-                    <a href="../../html/Generos/Genero_Drama/genero_drama.html">
-                        <img src="../../img/sirat.jpg" alt="Póster Drama - Sirat">
+                    <a href="../../html/Generos/Genero_Drama/genero_drama.html" aria-label="Ir a películas de Drama">
+                        <img src="../../img/sirat.jpg" alt="Póster de Sirat representando el género de Drama">
                     </a>
                 </div>
-            </div>
+            </section>
 
-            <!--Género Comedia -->
-            <div class="genre-item">
-                <h2><a href="../../html/Generos/Genero_Comedia/genero_comedia.html">Comedia</a></h2>
+            <section class="genre-item" aria-labelledby="title-comedia">
+                <h2 id="title-comedia"><a href="../../html/Generos/Genero_Comedia/genero_comedia.html">Comedia</a></h2>
                 <div class="movie-card">
-                    <a href="../../html/Generos/Genero_Comedia/genero_comedia.html">
-                        <img src="../../img/chinatown.jpg" alt="Póster Comedia - Detective Chinatown">
+                    <a href="../../html/Generos/Genero_Comedia/genero_comedia.html" aria-label="Ir a películas de Comedia">
+                        <img src="../../img/chinatown.jpg" alt="Póster de Detective Chinatown representando el género de Comedia">
                     </a>
                 </div>
-            </div>
+            </section>
         </div>
-        <footer>
-            <li>
-                <!--Teléfono de contacto-->
-                <a href="tel:+123456789" class="enlace-icono" aria-label="Llamar">
-                    <svg class="icono-interactivo icono-telefono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                        width="32" height="32">
-                        <path
-                            d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z" />
-                    </svg>
-                </a>
-                </a>
-            </li>
-            <li>
-                <!--Correo de contacto-->
-                <a href="mailto:info@ejemplo.com" class="enlace-icono" aria-label="Enviar correo">
-                    <svg class="icono-interactivo icono-email" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                        width="32" height="32">
-                        <path
-                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z" />
-                    </svg>
-                </a>
-            </li>
-        </footer>
     </main>
+
+    <footer role="contentinfo">
+        <ul style="list-style: none; padding: 20px 0; display: flex; justify-content: center; gap: 40px; margin: 0;">
+            <li>
+                <a href="tel:+123456789" class="enlace-icono" aria-label="Llamar al teléfono de soporte 123-456-789">
+                    <svg class="icono-interactivo icono-telefono" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
+                        <path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z" />
+                    </svg>
+                    <span>123-456-789</span>
+                </a>
+            </li>
+            <li>
+                <a href="mailto:info@ejemplo.com" class="enlace-icono" aria-label="Enviar correo electrónico a info@ejemplo.com">
+                    <svg class="icono-interactivo icono-email" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z" />
+                    </svg>
+                    <span>info@ejemplo.com</span>
+                </a>
+            </li>
+        </ul>
+    </footer>
+</body>
+</html>

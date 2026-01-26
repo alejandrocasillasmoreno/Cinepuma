@@ -4,20 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="Descripcion" content="Página de recuperación de contraseña de CinePuma">
+    <meta name="Description" content="Página de recuperación de contraseña de CinePuma - Restablece tu acceso mediante correo electrónico.">
     <title>CinePuma - Contraseña Olvidada</title>
     <link rel="stylesheet" href="../css/contraseña_olvidada.css">
+    <style>
+        /* Estilo para accesibilidad: mantiene el texto para lectores de pantalla pero lo oculta visualmente */
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+    </style>
 </head>
 
 <body>
-    <header>
+    <header role="banner">
         <div class="Encabezado">
             <div class="Logo">
                 <img src="../img/Logo_Cinepuma.png" alt="Logo Cinepuma" class="logo-img" width="100">
                 <h1><a href="index.html">CinePuma</a></h1>
             </div>
 
-            <nav>
+            <nav aria-label="Navegación principal">
                 <ul>
                     <li><a href="Generos/generos.html" class="button">Géneros</a></li>
                     <li><a href="mejorValoradas.html" class="button">Mejor valoradas</a></li>
@@ -26,26 +40,28 @@
             </nav>
 
             <div class="search-container">
-                <form id="search-form">
+                <form id="search-form" role="search">
+                    <label for="busqueda" class="visually-hidden">Buscar películas</label>
                     <input type="text" id="busqueda" placeholder="Buscar películas...">
-                    <img src="../img/imagen_lupa-removebg.png" alt="Icono búsqueda" class="icon-search">
+                    <img src="../img/imagen_lupa-removebg.png" alt="" role="presentation" class="icon-search">
                 </form>
             </div>
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <div class="container">
             <h1>Recuperar Contraseña</h1>
             <p class="description">Introduce tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
             
             <form id="recovery-form">
                 <div class="input-group">
+                    <label for="recovery-email" class="visually-hidden">Correo Electrónico para recuperación</label>
                     <input type="email" id="recovery-email" placeholder="Correo Electrónico" required>
-                    <img src="../img/icono_del_correo.png" alt="Icono correo" class="icon-email">
+                    <img src="../img/icono_del_correo.png" alt="" role="presentation" class="icon-email">
                 </div>
 
-                <div id="auth-ui-messages"></div>
+                <div id="auth-ui-messages" aria-live="assertive"></div>
 
                 <button type="submit" class="submit-button">Enviar Instrucciones</button>
             </form>
