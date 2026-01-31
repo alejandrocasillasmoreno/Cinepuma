@@ -288,3 +288,28 @@ footer a:hover svg {
     white-space: nowrap !important;
     border: 0 !important;
 }
+
+/* ---------------------------------------------------- */
+/* 11. BOTÓN "VER MÁS PELÍCULAS" */
+/* ---------------------------------------------------- */
+
+.btn-enviar {
+    background-color: #ff6b35;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: 500;
+}
+
+.btn-enviar:hover {
+    background-color: #e55a2b;
+}
+
+.btn-enviar:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+}

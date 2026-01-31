@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Crear botón "Cargar más"
     const loadMoreBtn = document.createElement('button');
     loadMoreBtn.innerText = 'Cargar más películas';
-    loadMoreBtn.className = 'btn btn-primary d-block mx-auto my-4'; // Bootstrap simple classes
+    loadMoreBtn.className = 'btn-enviar';
     loadMoreBtn.style.display = 'none'; // Oculto al inicio
     movieRowContainer.after(loadMoreBtn);
 

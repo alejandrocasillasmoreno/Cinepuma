@@ -133,17 +133,7 @@ function inputLoadMoreButton() {
 
     const button = document.createElement('button');
     button.textContent = "Ver más películas";
-    button.style.backgroundColor = "#ff6b35";
-    button.style.color = "white";
-    button.style.border = "none";
-    button.style.padding = "10px 20px";
-    button.style.fontSize = "1rem";
-    button.style.borderRadius = "5px";
-    button.style.cursor = "pointer";
-    button.style.transition = "background-color 0.3s";
-
-    button.onmouseover = () => button.style.backgroundColor = "#e55a2b";
-    button.onmouseout = () => button.style.backgroundColor = "#ff6b35";
+    button.className = 'btn-enviar';
 
     button.onclick = () => {
         currentPage++;

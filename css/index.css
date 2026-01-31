@@ -286,3 +286,28 @@ footer li {
     margin-bottom: 10px;
     font-size: 1rem;
 }
+
+/* 7. Botón "Cargar más películas" */
+
+.btn-enviar {
+    background-color: #ff6b35;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: 500;
+    display: block;
+    margin: 20px auto;
+}
+
+.btn-enviar:hover {
+    background-color: #e55a2b;
+}
+
+.btn-enviar:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+}
