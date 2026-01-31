@@ -29,7 +29,8 @@ body {
     display: flex;
     flex-direction: column;
     text-align: center;
-    color: white; /* Asegura color base para contraste */
+    color: white;
+    /* Asegura color base para contraste */
 }
 
 /* --- MEJORA DE FOCO (FASE 3) --- */
@@ -99,7 +100,8 @@ nav ul {
 }
 
 nav a {
-    color: #e0e0e0; /* Gris más claro para mejor contraste */
+    color: #e0e0e0;
+    /* Gris más claro para mejor contraste */
     text-decoration: none;
     font-weight: 500;
     font-size: 1rem;
@@ -109,7 +111,8 @@ nav a {
     border-radius: 4px;
 }
 
-nav a:hover, nav a:focus {
+nav a:hover,
+nav a:focus {
     color: white;
     background-color: rgba(255, 255, 255, 0.1);
 }
@@ -133,7 +136,8 @@ nav a:hover, nav a:focus {
 
 .search-input {
     background-color: rgba(255, 255, 255, 0.1);
-    border: 2px solid #ffffff; /* Borde más visible */
+    border: 2px solid #ffffff;
+    /* Borde más visible */
     border-radius: 20px;
     width: 100%;
     height: 40px;
@@ -181,7 +185,8 @@ nav a:hover, nav a:focus {
 }
 
 .titulo-seccion {
-    color: #ff8c61; /* Color ligeramente más claro para legibilidad */
+    color: #ff8c61;
+    /* Color ligeramente más claro para legibilidad */
     font-size: 1.8rem;
     margin-top: 40px;
     margin-bottom: 15px;
@@ -194,7 +199,8 @@ nav a:hover, nav a:focus {
     color: #ffffff;
     font-size: 1.15rem;
     line-height: 1.7;
-    text-align: left; /* Alineación izquierda es mejor para dislexia que el justificado */
+    text-align: left;
+    /* Alineación izquierda es mejor para dislexia que el justificado */
     margin-bottom: 40px;
 }
 
@@ -241,7 +247,8 @@ nav a:hover, nav a:focus {
 /* ---------------------------------------------------- */
 
 .btn-enviar {
-    background: #ff6b35; /* Color sólido para mejor soporte */
+    background: #ff6b35;
+    /* Color sólido para mejor soporte */
     color: white;
     border: none;
     padding: 12px 30px;
@@ -254,7 +261,8 @@ nav a:hover, nav a:focus {
     transition: all 0.2s ease;
 }
 
-.btn-enviar:hover, .btn-enviar:focus {
+.btn-enviar:hover,
+.btn-enviar:focus {
     background: #ff8c61;
     transform: scale(1.05);
 }

@@ -1,76 +1,125 @@
 /* 1. Estilos Globales y Fondo */
 
 body {
-    background-color: #1E3C72; /* Azul oscuro del fondo */
-    font-family: Arial, sans-serif; 
+    background-color: #1E3C72;
+    /* Azul oscuro del fondo */
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    min-height: 100vh; 
-    display: flex; 
+    min-height: 100vh;
+    display: flex;
     flex-direction: column;
 }
 
 * {
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 /* 2. Cabecera (Header) - Consistente con Mejores Valoradas */
 header {
-    background-color: #0d274c; 
+    background-color: #0d274c;
     padding: 15px 5%;
-    display: flex; 
-    justify-content: space-between; 
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    border-bottom: 3px solid #0d274c; 
+    border-bottom: none;
 }
 
 /* Logo */
 .logo {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 15px;
+    text-decoration: none;
 }
 
 .logo img {
-    height: 60px;
+    height: 50px;
     width: auto;
-    border: 3px solid #1E3C72; 
-    border-radius: 5px; 
+    border: none;
+    border-radius: 0;
 }
 
-.logo span { 
-    color: #ff6b35; 
-    font-size: 24px; 
+.logo h1 a {
+    color: white;
+    font-size: 24px;
     font-weight: bold;
-    font-family: 'Times New Roman', Times, serif;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
 }
 
 /* 3. Navegación */
 nav {
     display: flex;
     align-items: center;
-    gap: 15px; 
+    gap: 20px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 20px;
+    align-items: center;
 }
 
 /* Estilo de los enlaces */
 nav a {
-    color: #cccccc; 
+    color: white;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 1rem;
     padding: 5px 0;
-    transition: color 0.2s;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
 }
 
-/* Enlace activo: 'Ayuda' (tercer enlace) */
-nav a:nth-child(3) { 
-    color: white; 
-    font-weight: bold;
-    border-bottom: 2px solid white;
-}
-
-nav a:hover {
+nav a:hover,
+nav a.nav-active {
     color: white;
+    border-bottom: 2px solid #ff6b35;
+}
+
+/* 4. Estilo de la Caja de Búsqueda */
+#search-form {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.search-input {
+    background-color: white;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    width: 200px;
+    height: 35px;
+    color: #333;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: #888;
+    font-style: normal;
+}
+
+.search-btn {
+    background-color: #ffc107;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    height: 35px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.search-btn:hover {
+    background-color: #e0a800;
 }
 
 /* 4. Contenido Principal - Contenedor de Ayuda */
@@ -85,7 +134,8 @@ nav a:hover {
 }
 
 .help-container h1 {
-    color: #ff6b35; /* Color naranja para el título principal */
+    color: #ff6b35;
+    /* Color naranja para el título principal */
     font-size: 2.5rem;
     margin-bottom: 30px;
     text-align: center;
@@ -97,9 +147,9 @@ nav a:hover {
     max-width: 500px;
     height: auto;
     /* 1. Cambios para centrar */
-    display: block; 
-    margin: 20px auto; 
-    
+    display: block;
+    margin: 20px auto;
+
     /* Otros estilos (se mantienen) */
     border-radius: 8px;
     object-fit: cover;
@@ -108,7 +158,8 @@ nav a:hover {
 
 /* 5. Estilos del Acordeón (Botones de Pregunta) */
 .accordion-header {
-    background-color: #0d274c; /* Fondo oscuro, similar al header */
+    background-color: #0d274c;
+    /* Fondo oscuro, similar al header */
     color: white;
     cursor: pointer;
     padding: 18px;
@@ -125,14 +176,17 @@ nav a:hover {
 }
 
 .accordion-header:hover {
-    background-color: #1a4a8d; /* Un poco más claro al pasar el ratón */
+    background-color: #1a4a8d;
+    /* Un poco más claro al pasar el ratón */
 }
 
 /* Estilos del Contenido del Acordeón (Respuestas) */
 .accordion-content {
     padding: 0 18px;
-    background-color: #275293; /* Un azul ligeramente más claro que el fondo principal */
-    max-height: 0; /* Oculto por defecto */
+    background-color: #275293;
+    /* Un azul ligeramente más claro que el fondo principal */
+    max-height: 0;
+    /* Oculto por defecto */
     overflow: hidden;
     transition: max-height 0.3s ease-out, padding 0.3s ease-out;
     border-radius: 0 0 6px 6px;
@@ -140,11 +194,13 @@ nav a:hover {
 }
 
 .accordion-content h3 {
-    color: #ff6b35; /* Naranja para los subtítulos */
+    color: #ff6b35;
+    /* Naranja para los subtítulos */
     margin-top: 20px;
 }
 
-.accordion-content p, .accordion-content ul {
+.accordion-content p,
+.accordion-content ul {
     color: #e0e0e0;
     line-height: 1.6;
     margin-bottom: 20px;
@@ -162,8 +218,9 @@ nav a:hover {
 }
 
 .accordion-content li:before {
-    content: '▶'; /* Triángulo o punto como marcador */
-    color: #ff6b35; 
+    content: '▶';
+    /* Triángulo o punto como marcador */
+    color: #ff6b35;
     font-size: 0.8rem;
     position: absolute;
     left: 0;
@@ -177,18 +234,18 @@ nav a:hover {
 
 /* 6. Pie de Página (Footer) - Consistente */
 footer {
-    background-color: #0d274c; 
+    background-color: #0d274c;
     color: white;
     padding: 20px 5%;
     text-align: left;
-    margin-top: auto; 
-    border-top: 2px solid #000000; 
+    margin-top: auto;
+    border-top: 2px solid #000000;
 }
 
 .contact-info {
     display: flex;
     flex-direction: column;
-    gap: 5px; 
+    gap: 5px;
 }
 
 .contact-info div {
@@ -226,7 +283,8 @@ footer {
     .cinepuma-image {
         float: none;
         width: 100%;
-        max-width: 300px; /* Limita el ancho en móvil */
+        max-width: 300px;
+        /* Limita el ancho en móvil */
         margin: 20px auto;
         display: block;
     }
@@ -236,13 +294,18 @@ footer {
 /* --- CONTENEDOR PRINCIPAL --- */
 .player-container {
     position: relative;
-    width: 800px; /* Un poco más ancho para aspecto cine */
+    width: 800px;
+    /* Un poco más ancho para aspecto cine */
     max-width: 100%;
-    aspect-ratio: 16/9; /* Mantiene proporción panorámica */
-    background: #000; /* Negro profundo detrás del video */
+    aspect-ratio: 16/9;
+    /* Mantiene proporción panorámica */
+    background: #000;
+    /* Negro profundo detrás del video */
     overflow: hidden;
-    border-radius: 8px; /* Bordes redondeados suaves */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Sombra elegante */
+    border-radius: 8px;
+    /* Bordes redondeados suaves */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    /* Sombra elegante */
     margin: 0 auto;
 }
 
@@ -274,7 +337,8 @@ footer {
     width: 100%;
     /* Degradado oscuro para que se lea bien sobre el video */
     background: linear-gradient(to top, rgba(21, 40, 69, 0.95), transparent);
-    padding: 15px 20px; /* Más espacio para respirar */
+    padding: 15px 20px;
+    /* Más espacio para respirar */
     box-sizing: border-box;
     z-index: 2147483647;
     display: flex;
@@ -289,7 +353,11 @@ footer {
 
 /* --- BOTONES E ICONOS --- */
 /* Estilo base para botones */
-#playPauseBtn, #btnMute, #btnFullScreen, .icono-volumen, .icono-pantalla {
+#playPauseBtn,
+#btnMute,
+#btnFullScreen,
+.icono-volumen,
+.icono-pantalla {
     background: none;
     border: none;
     cursor: pointer;
@@ -300,20 +368,25 @@ footer {
 }
 
 /* Efecto al pulsar botón */
-#playPauseBtn:active, #btnFullScreen:active {
+#playPauseBtn:active,
+#btnFullScreen:active {
     transform: scale(0.9);
 }
 
 /* SVG ICONOS: Color Blanco por defecto */
 svg {
-    fill: #ecf0f1; 
+    fill: #ecf0f1;
     transition: fill 0.2s ease;
-    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5)); /* Sombra para mejor lectura */
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
+    /* Sombra para mejor lectura */
 }
 
 /* HOVER: Color Naranja CinePuma */
-button:hover svg, .icono-volumen:hover svg, .icono-pantalla:hover svg {
-    fill: #FF6B35; /* <--- EL NARANJA DE TU IMAGEN */
+button:hover svg,
+.icono-volumen:hover svg,
+.icono-pantalla:hover svg {
+    fill: #FF6B35;
+    /* <--- EL NARANJA DE TU IMAGEN */
 }
 
 /* --- TEXTO DE TIEMPO --- */
@@ -323,16 +396,18 @@ button:hover svg, .icono-volumen:hover svg, .icono-pantalla:hover svg {
     font-size: 14px;
     margin-left: 15px;
     color: #ecf0f1;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-    min-width: 100px; /* Evita saltos cuando cambian los números */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    min-width: 100px;
+    /* Evita saltos cuando cambian los números */
 }
 
 /* --- SLIDER DE VOLUMEN (Estilo Personalizado) --- */
 #volumenSlider {
-    -webkit-appearance: none; /* Quita estilo por defecto de navegador */
+    -webkit-appearance: none;
+    /* Quita estilo por defecto de navegador */
     width: 80px;
     height: 4px;
-    background: rgba(255,255,255,0.3);
+    background: rgba(255, 255, 255, 0.3);
     border-radius: 2px;
     margin-left: 15px;
     cursor: pointer;
@@ -345,14 +420,16 @@ button:hover svg, .icono-volumen:hover svg, .icono-pantalla:hover svg {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #FF6B35; /* Naranja */
+    background: #FF6B35;
+    /* Naranja */
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
 }
 
 #volumenSlider::-webkit-slider-thumb:hover {
     transform: scale(1.2);
-    background: #fff; /* Se vuelve blanco al tocarlo */
+    background: #fff;
+    /* Se vuelve blanco al tocarlo */
 }
 
 /* La bolita del slider (Firefox) */
@@ -368,27 +445,33 @@ button:hover svg, .icono-volumen:hover svg, .icono-pantalla:hover svg {
 /* --- BARRA DE PROGRESO (LINEA NARANJA) --- */
 .barra-fondo {
     position: absolute;
-    bottom: 60px; /* Ajustada para estar justo encima de los botones */
-    left: 0; /* Que ocupe todo el ancho */
-    width: 100%; 
-    height: 5px; /* Más fina y elegante */
-    background-color: rgba(255,255,255,0.2);
+    bottom: 60px;
+    /* Ajustada para estar justo encima de los botones */
+    left: 0;
+    /* Que ocupe todo el ancho */
+    width: 100%;
+    height: 5px;
+    /* Más fina y elegante */
+    background-color: rgba(255, 255, 255, 0.2);
     cursor: pointer;
-    transition: height 0.1s; /* Animación suave al pasar mouse */
+    transition: height 0.1s;
+    /* Animación suave al pasar mouse */
 }
 
 .barra-fondo:hover {
-    height: 8px; /* Crece un poco al intentar buscar minuto */
+    height: 8px;
+    /* Crece un poco al intentar buscar minuto */
 }
 
 .barra-relleno {
     width: 0%;
     height: 100%;
-    min-height: 5px; 
+    min-height: 5px;
     /* El naranja CinePuma */
-    background-color: #FF6B35; 
-    box-shadow: 0 0 10px rgba(255, 107, 53, 0.5); /* Resplandor naranja neon suave */
-    pointer-events: none; 
+    background-color: #FF6B35;
+    box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+    /* Resplandor naranja neon suave */
+    pointer-events: none;
     position: relative;
     transition: width 0.1s linear;
 }
@@ -404,11 +487,13 @@ button:hover svg, .icono-volumen:hover svg, .icono-pantalla:hover svg {
     height: 12px;
     background: #fff;
     border-radius: 50%;
-    box-shadow: 0 0 5px rgba(0,0,0,0.5);
-    opacity: 0; /* Oculta por defecto */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    /* Oculta por defecto */
     transition: opacity 0.2s;
 }
 
 .barra-fondo:hover .barra-relleno::after {
-    opacity: 1; /* Aparece solo cuando pasas el mouse por la barra */
+    opacity: 1;
+    /* Aparece solo cuando pasas el mouse por la barra */
 }

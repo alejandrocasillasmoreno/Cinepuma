@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="Description" content="Página de películas mejor valoradas de CinePuma - Filtro por popularidad y votos.">
+    <meta name="Description"
+        content="Página de películas mejor valoradas de CinePuma - Filtro por popularidad y votos.">
     <title>CinePuma - Mejores Valoradas</title>
     <link rel="stylesheet" href="../css/paginas-generos.css">
     <style>
@@ -28,38 +29,37 @@
     <header role="banner">
         <div class="logo">
             <img src="../img/Logo_Cinepuma.png" alt="Logo de CinePuma">
-            <h1><a href="../html/index.html">CinePuma</a></h1>
+            <h1><a href="index.html">CinePuma</a></h1>
         </div>
 
         <nav aria-label="Navegación principal">
-            <ul style="display: flex; list-style: none; gap: 20px; align-items: center; margin: 0; padding: 0;">
-                <li><a href="Generos/generos.html" style="text-decoration: none; color: inherit;">Géneros</a></li>
-                <li>
-                    <a href="mejorValoradas.html" 
-                       aria-current="page" 
-                       style="color:white; font-weight:bold; border-bottom: 2px solid #ff6b35; text-decoration: none;">
-                       Mejor valoradas
-                    </a>
-                </li>
-                <li><a href="ayuda.html" style="text-decoration: none; color: inherit;">Ayuda</a></li>
+            <ul>
+                <li><a href="Generos/generos.html">Géneros</a></li>
+                <li><a href="mejorValoradas.html" class="nav-active" aria-current="page">Mejor valoradas</a></li>
+                <li><a href="ayuda.html">Ayuda</a></li>
             </ul>
 
-            <form id="global-search-form" role="search" style="display: flex; align-items: center;">
-                <label for="global-search-input" class="visually-hidden">Buscar películas mejor valoradas</label>
-                <input id="global-search-input" type="search" placeholder="Buscar...">
-                <button type="submit" aria-label="Buscar">🔍</button>
+            <form id="search-form" role="search" action="#" method="get">
+                <label for="searchInput" class="visually-hidden">Buscar películas</label>
+                <input id="searchInput" class="search-input" type="search" placeholder="Buscar...">
+                <button type="submit" class="search-btn" aria-label="Buscar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-search" viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                </button>
             </form>
+            <div id="user-welcome" aria-live="polite" style="margin-left: 15px; color: white;"></div>
         </nav>
     </header>
 
     <main id="main-content">
-        <h2 style="text-align: center; color: #ff6b35; margin: 20px 0;">Mejores Valoradas</h2>
+        <h2 class="main-title">Mejores Valoradas</h2>
 
-        <section id="movies-container" 
-                 aria-live="polite" 
-                 aria-label="Listado de películas mejor valoradas"
-                 style="min-height: 200px;">
-            </section>
+        <section id="movies-container" aria-live="polite" aria-label="Listado de películas mejor valoradas"
+            style="min-height: 200px;">
+        </section>
     </main>
 
     <footer role="contentinfo">
@@ -74,7 +74,8 @@
                 </a>
             </li>
             <li>
-                <a href="mailto:info@ejemplo.com" class="enlace-icono" aria-label="Enviar un correo electrónico de consulta">
+                <a href="mailto:info@ejemplo.com" class="enlace-icono"
+                    aria-label="Enviar un correo electrónico de consulta">
                     <svg class="icono-interactivo icono-email" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                         width="32" height="32" aria-hidden="true" focusable="false">
                         <path

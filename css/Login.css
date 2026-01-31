@@ -1,397 +1,201 @@
-/* 1. Fondo principal y texto base */
-
-
-/* Restablece el fondo de todos los elementos para que no hereden el * { background-color } anterior */
+/* 1. Estilos base y reinicio */
 * {
-    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
+    box-sizing: border-box;
 }
 
-/* 2. Estilo de la Cabecera */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 5%;
-    color: #ffffff; ;
-}
-
-/* --- ESTILOS DEL LOGO --- */
-.logo {
-    display: flex; /* Alinea los elementos internos (imagen y span) horizontalmente */
-    align-items: center; /* Centra verticalmente la imagen y el texto */
-    gap: 8px; /* Espacio entre la imagen y el texto */
-}
-
-.logo img {
-    /* Ajusta el tamaño de la imagen del logo si es necesario */
-    height: 110px; 
-    width: auto;
-}
-
-.logo span {
-    color: #ff6b35; /* Tono Naranja */
-    font-size: 20px; /* Tamaño 20px, alineado con el texto de los botones */
-    font-weight: bold;
-    /* El texto ya estará al lado derecho gracias a 'display: flex' en .logo */
-}
-/* ------------------------ */
-
-
-/* 3. Estilo para los elementos de navegación (ahora son <a> tags estilizados como botones) */
-.nav-button {
-    background-color: #ff6b35;
-    color: white; 
-    border: none;
-    padding: 5px 15px;
-    border-radius: 20px;
-    margin: 0 5px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    text-decoration: none; 
-    display: inline-block; 
-    font-size: 16px; /* Asegura un tamaño consistente, aunque pediste 20px, 16px es más común para botones. */
-    /* Si quieres que los botones tengan 20px de texto, cambia este valor a 20px */
-}
-
-/* 4. Estilo de la Caja de Búsqueda */
-.search-bar {
-    flex-grow: 1; 
-    max-width: 300px;
-    margin: 0 20px;
-}
-
-.search-input {
-    /* 1. Fondo Transparente */
-    background-color: transparent; 
-    
-    /* 2. Borde Negro */
-    border: 2px solid black; 
-    
-    /* 3. Forma Redonda */
-    border-radius: 20px; 
-    
-    /* Ajustes de tamaño y espaciado */
-    width: 100%;
-    height: 35px;
-    color: white; 
-    padding: 5px 10px 5px 35px; /* Más padding izquierdo para dejar espacio a la lupa */
-    font-size: 1rem;
-    outline: none;
-}
-
-/* Estilo del placeholder de búsqueda */
-.search-input::placeholder {
-    color: #cccccc;
-    font-style: italic;
-    text-align: left; 
-}
-
-
-/* 5. Posicionamiento del Ícono de la Lupa */
-.icon-search {
-    position: absolute; 
-    left: 10px; 
-    top: 50%;
-    transform: translateY(-50%); 
-    width: 20px; 
-    height: auto; 
-    pointer-events: none; 
-}
-
-
-/* 6. Estilo del Contenedor del Formulario (Login) */
-div.container {
-    background-color: #ff6b35; 
-    border-radius: 10px;
-    padding: 20px;
-    width: 90%; 
-    max-width: 400px; 
-    margin: 50px auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
-}
-
-/* 7. Estilo del Título Principal */
-h1 {
-    color: white; 
-    font-weight: 700;
-    margin-bottom: 20px;
-    font-size: 1.8rem;
-}
-
-/* 8. Estilos del Input de Login/Contraseña */
-.input-group {
-    position: relative; 
-    margin-bottom: 15px;
-}
-
-input[type="email"], 
-input[type="password"] {
-    width: 100%;
-    padding: 10px 40px 10px 10px; 
-    margin-bottom: 0;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    outline: none;
-    text-align: center; 
-}
-
-/* Estilo del placeholder del Login/Contraseña */
-input::placeholder {
-    color: #999999; 
-    font-style: italic;
-    text-align: center; 
-}
-
-/* Posicionamiento de ícono de Correo */
-.icon-email {
-    position: absolute; 
-    right: 10px; 
-    top: 50%;
-    transform: translateY(-50%); 
-    width: 20px; 
-    height: auto; 
-    pointer-events: none; 
-}
-
-/* Estilo para el botón "Siguiente" */
-.submit-button {
-    background-color: #ff6b35; 
-    color: white;
-    border: 2px solid white; 
-    padding: 12px 0;
-    width: 100%;
-    border-radius: 30px; 
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-/* Estilo para el enlace de contraseña olvidada */
-.forgot-password {
-    color: #ff6b35; 
-    font-size: 0.8rem;
-    margin-top: 15px;
-    text-decoration: none;
-}
-/* 1. Fondo principal y texto base */
 body {
-    /*Fondo azul oscuro global */
-    background-color: #1E3C72; 
+    background-color: #1E3C72;
+    /* Fondo azul oscuro global */
     text-align: center;
-    font-family: Arial, sans-serif; 
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    min-height: 100vh; 
-    display: flex; 
+    min-height: 100vh;
+    display: flex;
     flex-direction: column;
-    color: #ffffff; /* Aseguramos que el texto principal sea blanco */
+    color: #ffffff;
+    /* Texto principal blanco */
 }
 
-
-/* Restablece el fondo de todos los elementos para que no hereden el * { background-color } anterior */
-* {
-    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
-}
-
-/* 2. Estilo de la Cabecera */
+/* 2. Cabecera */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 5%;
-    color: #ffffff; 
+    padding: 20px 5%;
+    /* Aumentado para mejor área de toque */
+    color: #ffffff;
 }
 
-/* --- ESTILOS DEL LOGO --- */
 .logo {
-    display: flex; /* Alinea los elementos internos (imagen y span) horizontalmente */
-    align-items: center; /* Centra verticalmente la imagen y el texto */
-    gap: 8px; /* Espacio entre la imagen y el texto */
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .logo img {
-    /* Ajusta el tamaño de la imagen del logo si es necesario */
-    height: 60px; /* Reducido a 60px para que encaje mejor en la cabecera */
+    height: 80px;
+    /* Tamaño consistente */
     width: auto;
 }
 
-.logo span {
-    color: #ff6b35; /* Tono Naranja */
-    font-size: 20px; 
+.logo h1 a {
+    color: #FFA852;
+    /* Nuevo color naranja para mejor contraste (WCAG AA) */
+    text-decoration: none;
+    font-size: 24px;
     font-weight: bold;
 }
-/* ------------------------ */
 
-
-/* 3. Estilo para los elementos de navegación (ahora son <a> tags estilizados como botones) */
-.nav-button {
-    /* Botones de navegación con el color naranja FF6B35 */
-    background-color: #ff6b35;
-    color: white; 
-    border: none;
-    padding: 5px 15px;
-    border-radius: 20px;
-    margin: 0 5px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    text-decoration: none; 
-    display: inline-block; 
-    font-size: 16px; 
-    transition: background-color 0.2s;
+/* 3. Contenedor principal (Recuadro de Login) */
+main.container {
+    background-color: #FFA852;
+    /* Color naranja actualizado para accesibilidad */
+    border-radius: 12px;
+    padding: 30px;
+    width: 90%;
+    max-width: 420px;
+    margin: 60px auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    color: #1E3C72;
+    /* Contraste oscuro para el texto dentro del naranja */
 }
 
-.nav-button:hover {
-    background-color: #e05c2d;
-}
-
-/* 4. Estilo de la Caja de Búsqueda */
-.search-bar {
-    position: relative; /* CRÍTICO para posicionar la lupa */
-    flex-grow: 1; 
-    max-width: 300px;
-    margin: 0 20px;
-}
-
-.search-input {
-    background-color: transparent; 
-    border: 2px solid white; /* Borde blanco para mayor contraste */
-    border-radius: 20px; 
-    width: 100%;
-    height: 35px;
-    color: white; 
-    padding: 5px 10px 5px 35px; /* Padding izquierdo para la lupa */
-    font-size: 1rem;
-    outline: none;
-}
-
-/* Estilo del placeholder de búsqueda */
-.search-input::placeholder {
-    color: #cccccc;
-    font-style: italic;
-    text-align: left; 
-}
-
-
-/* 5. Posicionamiento del Ícono de la Lupa */
-.icon-search {
-    position: absolute; 
-    left: 10px; 
-    top: 50%;
-    transform: translateY(-50%); 
-    width: 20px; 
-    height: auto; 
-    pointer-events: none; 
-}
-
-
-/* 6. Estilo del Contenedor del Formulario (Login) */
-div.container {
-    /*Fondo del recuadro naranja */
-    background-color: #ff6b35; 
-    border-radius: 10px;
-    padding: 20px;
-    width: 90%; 
-    max-width: 400px; 
-    margin: 50px auto 20px auto; /* Más margen inferior para separarlo del enlace */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
-}
-
-/* 7. Estilo del Título Principal */
 h1 {
-    color: white; 
+    color: #1E3C72;
+    /* Título oscuro dentro del fondo naranja */
     font-weight: 700;
+    margin-bottom: 25px;
+    font-size: 2rem;
+}
+
+/* 4. Formulario y Entradas */
+.input-group,
+.form-group {
+    position: relative;
     margin-bottom: 20px;
-    font-size: 1.8rem;
+    text-align: left;
 }
 
-/* 8. Estilos del Input de Login/Contraseña */
-.input-group {
-    position: relative; 
-    margin-bottom: 15px;
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #1E3C72;
 }
 
-input[type="email"], 
-input[type="password"] {
+input[type="email"],
+input[type="password"],
+input[type="text"] {
     width: 100%;
-    padding: 10px 40px 10px 10px; 
-    margin-bottom: 0;
-    border: none;
-    border-radius: 5px;
+    height: 48px;
+    /* Altura mínima recomendada para accesibilidad (48px) */
+    padding: 0 45px 0 15px;
+    border: 2px solid transparent;
+    border-radius: 8px;
     font-size: 1rem;
     outline: none;
-    text-align: left; /* Alineación a la izquierda por convención, aunque la imagen sugiere centrado */
+    background-color: white;
+    color: #333;
 }
 
-/* Posicionamiento de ícono de Correo */
-.icon-email {
-    position: absolute; 
-    right: 10px; 
-    top: 50%;
-    transform: translateY(-50%); 
-    width: 20px; 
-    height: auto; 
-    pointer-events: none; 
+input:focus {
+    border-color: #1E3C72;
 }
 
-/* Estilo para el botón "Siguiente" */
+.icon-field {
+    position: absolute;
+    right: 12px;
+    top: 42px;
+    /* Alineado con el input */
+    width: 24px;
+    height: auto;
+    pointer-events: none;
+}
+
+/* 5. Botón de mostrar/ocultar contraseña */
+.eye-btn {
+    position: absolute;
+    right: 8px;
+    top: 38px;
+    width: 40px;
+    height: 48px;
+    /* Área de toque accesible */
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eye-btn span {
+    font-size: 20px;
+}
+
+/* 6. Botón de Iniciar Sesión */
 .submit-button {
-    background: linear-gradient(to bottom, #ff9660, #ff6b35); 
+    background: #1E3C72;
+    /* Color oscuro para contrastar con el naranja */
     color: white;
-    border: none; /* Quitamos el borde blanco para que se vea el degradado */
-    padding: 12px 0;
+    border: none;
+    height: 52px;
+    /* Área de toque amplia */
     width: 100%;
-    border-radius: 30px; 
+    border-radius: 26px;
     font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: all 0.2s;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s, transform 0.2s;
 }
 
-.submit-button:hover {
-    /* Sutil cambio al pasar el ratón */
-    background: linear-gradient(to bottom, #ffb38e, #e05c2d);
-    transform: translateY(-1px);
+.submit-button:hover,
+.submit-button:focus {
+    background: #162d56;
+    transform: translateY(-2px);
+    outline: none;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilo para el enlace de contraseña olvidada */
-.forgot-password {
-    /*Centrado automático (ya estaba en el body pero lo forzamos con display block) */
-    display: block; 
-    text-align: center;
-    /*Color blanco para contrastar con el fondo azul */
-    color: #ff6b35; 
-    font-size: 0.8rem;
-    margin-top: 15px;
-}
-/* Estilo para el estado de carga del botón */
-.submit-button {
-    position: relative;
-    transition: all 0.3s ease;
+/* 7. Enlaces inferiores */
+.auth-links {
+    margin-top: 25px;
 }
 
-/* Cuando el botón tiene la clase 'loading' */
+.bottom-link {
+    color: #1E3C72;
+    /* Oscuro sobre naranja */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin: 0 10px;
+    padding: 10px 5px;
+    /* Aumenta el área clickable */
+    display: inline-block;
+}
+
+.bottom-link:hover,
+.bottom-link:focus {
+    text-decoration: underline;
+}
+
+/* 8. Estados y Animaciones */
 .submit-button.loading {
-    color: transparent !important; /* Esconde el texto "Iniciar Sesión" */
-    pointer-events: none;         /* Evita clics dobles */
+    color: transparent !important;
+    pointer-events: none;
     opacity: 0.8;
 }
 
-/* El círculo del spinner */
 .submit-button.loading::after {
     content: "";
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     top: 50%;
     left: 50%;
-    margin: -12px 0 0 -12px; /* Centrado exacto */
+    margin: -12px 0 0 -12px;
     border: 3px solid rgba(255, 255, 255, 0.3);
     border-top: 3px solid #fff;
     border-radius: 50%;
@@ -399,74 +203,44 @@ input[type="password"] {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-/* Contenedor relativo para que el ojo sepa dónde "pegarse" */
-.form-group {
-  position: relative;
-  width: 100%;
-  max-width: 350px; /* Ajusta según tu diseño */
-  margin-bottom: 15px;
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
-input {
-  width: 100%;
-  padding: 12px 45px 12px 15px; /* Dejamos 45px a la derecha para que el texto no tape el ojo */
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
-/* El botón del ojo */
-.eye-btn {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%); /* Centrado vertical perfecto */
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-}
-
-.eye-btn span {
-  font-size: 18px; /* Ajusta el tamaño del ojo aquí */
-
-}
-/* Clase que se activará con JS */
 .input-error {
-    border: 2px solid #ff4b2b !important;
+    border: 2px solid #d32f2f !important;
     animation: shake 0.4s ease-in-out;
 }
 
 @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
 }
 
-.feedback-text {
-    color: #ff4b2b;
-    font-size: 0.8rem;
-    margin-top: 5px;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-/* Estilo para los enlaces de abajo (Olvidé contraseña / Registrarse) */
-.bottom-link {
-    color: #ff6b35; /* Color naranja igual a los botones */
-    text-decoration: none;
-    font-weight: bold;
-    margin: 0 10px;
-    display: inline-block; /* Para que el margin funcione bien horizontalmente */
-}
-
-.bottom-link:hover {
-    text-decoration: underline;
-    color: #e05c2d;
+/* Visibilidad para lectores de pantalla */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }

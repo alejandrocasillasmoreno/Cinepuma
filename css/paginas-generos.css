@@ -39,27 +39,36 @@ main {
 }
 
 /* Título de la página */
-main h1, main h2 {
+main h1,
+main h2 {
     width: 100%;
     font-size: 2.5rem;
-    color: #ff8c61; /* Ajustado para mejor contraste sobre azul */
+    color: #ff6b35;
+    /* Orange color */
     border-bottom: 2px solid #ff6b35;
+    /* Orange underline */
     padding-bottom: 10px;
     margin-bottom: 30px;
-    text-align: left;
+    text-align: center;
+    /* Centered */
+    font-weight: bold;
 }
 
 /* ---------------------------------------------------- */
 /* 3. HEADER Y NAVEGACIÓN */
 /* ---------------------------------------------------- */
 
+/* ---------------------------------------------------- */
+/* 3. HEADER Y NAVEGACIÓN */
+/* ---------------------------------------------------- */
+
 header {
+    background-color: #0d274c;
+    padding: 15px 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 5%;
-    background-color: #0d274c;
-    color: white;
+    border-bottom: none;
 }
 
 .logo {
@@ -67,73 +76,99 @@ header {
     align-items: center;
     gap: 15px;
     text-decoration: none;
-    color: inherit;
 }
 
 .logo img {
-    height: 60px;
+    height: 50px;
 }
 
 .logo h1 a {
     color: white;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: bold;
     text-decoration: none;
+    font-family: Arial, sans-serif;
 }
 
 nav {
     display: flex;
     align-items: center;
+    gap: 20px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 20px;
+    align-items: center;
 }
 
 nav a {
-    color: #e0e0e0; /* Gris más claro para WCAG */
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1rem;
-    padding: 8px 12px;
-    transition: color 0.2s;
-    margin-left: 15px;
-    border-radius: 4px;
-}
-
-nav a:hover, nav a:focus {
     color: white;
-    background-color: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 5px 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
 }
 
-/* Estado activo */
-nav a:first-child {
-    color: #ffca2c; /* Color de contraste alto */
-    font-weight: bold;
-    border-bottom: 2px solid #ffca2c;
+nav a:hover,
+nav a.nav-active {
+    color: white;
+    border-bottom: 2px solid #ff6b35;
 }
 
 /* ---------------------------------------------------- */
 /* 4. BUSCADOR GLOBAL (REMEDIADO) */
 /* ---------------------------------------------------- */
 
-#global-search-form {
+#search-form {
     display: flex;
     align-items: center;
     margin-left: 15px;
 }
 
-#global-search-input {
-    background-color: #ffffff; /* Fondo claro para máximo contraste de texto */
-    color: #000000;
-    border: 2px solid #444;
-    padding: 8px 12px;
-    border-radius: 4px;
-    font-size: 1rem;
-    height: 40px;
+.search-input {
+    background-color: white;
+    border: none;
+    border-radius: 4px 0 0 4px;
     width: 200px;
+    height: 35px;
+    color: #333;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    outline: none;
 }
 
-#global-search-input:focus {
+.search-input::placeholder {
+    color: #888;
+    font-style: normal;
+}
+
+.search-input:focus {
     border-color: #ffca2c;
     outline: none;
     box-shadow: 0 0 0 3px rgba(255, 202, 44, 0.4);
+}
+
+.search-btn {
+    background-color: #ffc107;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    height: 35px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.search-btn:hover {
+    background-color: #e0a800;
 }
 
 #global-search-form button {
@@ -149,7 +184,7 @@ nav a:first-child {
     transition: all 0.2s;
 }
 
-#global-search-form button:hover, 
+#global-search-form button:hover,
 #global-search-form button:focus {
     background-color: #e5b627;
     border-color: #e5b627;
@@ -176,10 +211,11 @@ nav a:first-child {
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.movie-card:hover, .movie-card:focus-within {
+.movie-card:hover,
+.movie-card:focus-within {
     transform: translateY(-8px);
     background-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
 .movie-card img {

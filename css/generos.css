@@ -1,108 +1,167 @@
-
 /* 1. Estilos Globales y Fondo  */
 
 body {
-    background-color: #1E3C72; /* Azul oscuro del fondo */
-    font-family: Arial, sans-serif; 
+    background-color: #1E3C72;
+    /* Azul oscuro del fondo */
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    display: flex; 
+    display: flex;
     flex-direction: column;
 }
 
 * {
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 /* 2. Estructura y Estilo de la Cabecera */
 header {
-    background-color: #0d274c; /* Azul oscuro de la barra superior */
+    background-color: #0d274c;
     padding: 15px 5%;
     display: flex;
-    justify-content: space-between; /* Espacio entre logo y nav */
+    justify-content: space-between;
     align-items: center;
-    border-bottom: 3px solid #0d274c; /* Separador naranja */
+    border-bottom: none;
 }
 
-/* Estilos del logo*/
+/* Estilos del logo */
 .logo {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 15px;
+    text-decoration: none;
 }
 
 .logo img {
-    height: 60px;
+    height: 50px;
     width: auto;
-    /* Aplicar el borde azul del mockup alrededor del logo */
-    border: 3px solid #1E3C72; 
-    border-radius: 5px; 
+    border: none;
+    border-radius: 0;
 }
 
-/* El <h1> se usa en el HTML, lo tratamos como el texto del logo */
-.logo span {
-    color: #ff6b35; 
-    font-size: 24px; 
+.logo h1 a {
+    color: white;
+    font-size: 24px;
     font-weight: bold;
-    font-family: 'Times New Roman', Times, serif;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
 }
 
 /* 3. Estilos del Menú de Navegación */
 nav {
     display: flex;
     align-items: center;
-    /* Ajustamos el espaciado para que se vea más condensado como en el mockup */
-    gap: 15px; 
+    gap: 20px;
 }
 
-/* Estilo para todos los enlaces de la navegación */
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 20px;
+    align-items: center;
+}
+
 nav a {
-    color: #cccccc; /* Gris claro para los enlaces no seleccionados */
+    color: white;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 1rem;
     padding: 5px 0;
-    transition: color 0.2s;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
 }
 
-/* Estilo para el enlace activo: 'Género' (primer enlace) */
-nav a:first-child { 
-    color: #ff6b35; /* Color naranja para el elemento 'Género' */
-    font-weight: bold;
+nav a:hover,
+nav a.nav-active {
+    color: white;
     border-bottom: 2px solid #ff6b35;
 }
 
-nav a:hover {
-    color: white;
+/* 4. Estilo de la Caja de Búsqueda */
+#search-form {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.search-input {
+    background-color: white;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    width: 200px;
+    height: 35px;
+    color: #333;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: #888;
+    font-style: normal;
+}
+
+.search-btn {
+    background-color: #ffc107;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    height: 35px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.search-btn:hover {
+    background-color: #e0a800;
 }
 
 /* 4. Sección Principal (Main) - Título y Contenido de Géneros */
 main {
-    flex-grow: 1; 
+    flex-grow: 1;
     padding: 30px 5% 50px;
-    background-color: #1E3C72; 
-    text-align: center; /* Centrar el título de main */
+    background-color: #1E3C72;
+    text-align: center;
+    /* Centrar el título de main */
 }
 
 /* Estilo del Título Principal "Género" */
-h2.main-title {
-    color: #ff6b35; /* Naranja */
-    font-size: 2rem;
+.main-title {
+    color: #ff6b35;
+    /* Orange color requested */
+    font-size: 2.5rem;
+    /* Increased size for prominence */
     margin-bottom: 40px;
     font-weight: bold;
+    text-align: center;
+    /* Ensure centered */
+    border: none;
+    /* Removed border as it looked like extended underline in previous edit, user image is clean */
+    /* If user wants underline like "Mejor Valoradas", keep it. But image shows clean title. Let's keep it clean or minimal. */
+    /* Wait, previous "Mejor Valoradas" had underline. The user said "pon los titulos estos en naranja". */
+    /* Let's follow the style of specific genre pages which I updated to have underline. */
+    /* But for the main Genres page, the provided image layout has the title separated. */
+    /* I will use the same style as specific genre pages for consistency, but centered. */
+    text-decoration: none;
 }
 
 /* 5. Estructura de Rejilla para los Géneros */
 .genres-grid {
     display: grid;
     /* 3 columnas de igual ancho con un espacio de 20px */
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 30px 20px; 
-    max-width: 900px; /* Ancho máximo para el contenedor de la rejilla */
-    margin: 0 auto; /* Centrar la rejilla */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px 20px;
+    max-width: 900px;
+    /* Ancho máximo para el contenedor de la rejilla */
+    margin: 0 auto;
+    /* Centrar la rejilla */
 }
 
-/* Contenedor de cada género (Título h3 + Tarjeta) */
+/* Contenedor de cada género (Título h2 + Tarjeta) */
 .genre-item {
     display: flex;
     flex-direction: column;
@@ -110,24 +169,37 @@ h2.main-title {
     text-align: center;
 }
 
-.genre-item h3 {
-    color: white; 
-    font-size: 1.2rem;
+.genre-item h2 {
+    font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 15px;
+}
+
+.genre-item h2 a {
+    color: #ff6b35;
+    /* Orange color */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.genre-item h2 a:hover {
+    color: #ff8c61;
+    /* Lighter orange on hover */
+    text-decoration: underline;
 }
 
 /* 6. Estilo de las Tarjetas de Película */
 .movie-card {
     position: relative;
-    width: 150px; /* Tamaño del mockup */
-    height: 220px; 
-    margin: 0; 
+    width: 150px;
+    /* Tamaño del mockup */
+    height: 220px;
+    margin: 0;
     border-radius: 5px;
-    overflow: hidden; 
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6); 
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
     transition: transform 0.3s ease;
-    background-color: #2c2c2c; 
+    background-color: #2c2c2c;
     cursor: pointer;
 }
 
@@ -140,7 +212,7 @@ h2.main-title {
 
 /* Efecto hover */
 .movie-card:hover {
-    transform: scale(1.05); 
+    transform: scale(1.05);
     z-index: 10;
 }
 
@@ -150,18 +222,18 @@ h2.main-title {
 /* ---------------------------------------------------- */
 
 footer {
-    background-color: #0d274c; 
-    color: white; 
+    background-color: #0d274c;
+    color: white;
     padding: 20px 5%;
     width: 100%;
-    text-align: left; 
-    margin-top: auto; 
+    text-align: left;
+    margin-top: auto;
 }
 
 .contact-info {
     max-width: 1200px;
     margin: 0 auto;
-    padding-left: 10%; 
+    padding-left: 10%;
 }
 
 /* Ajuste para mantener <ul> y <li> en el footer */
@@ -172,8 +244,8 @@ footer ul {
 }
 
 .contact-item {
-    display: flex; 
-    align-items: center; 
+    display: flex;
+    align-items: center;
     gap: 10px;
     margin: 10px 0;
     font-size: 1.1rem;
@@ -181,7 +253,7 @@ footer ul {
 
 /* Estilo para los iconos de contacto (para las imágenes) */
 .contact-icon {
-    width: 30px; 
+    width: 30px;
     height: 30px;
     /* Asegúrate de que los íconos de tu HTML tengan la clase "contact-icon" */
 }

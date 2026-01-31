@@ -77,6 +77,8 @@ async function loadMovieDetails(id) {
         if (movieGenres) movieGenres.textContent = data.genres.map(g => g.name).join(', ');
         if (movieSynopsis) movieSynopsis.textContent = data.overview || "Sin descripción disponible.";
 
+
+
     } catch (error) {
         console.error("Error al cargar película:", error);
         if (movieTitle) movieTitle.textContent = "Error al cargar película";
