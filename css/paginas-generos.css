@@ -239,8 +239,23 @@ nav a.nav-active {
 footer {
     background-color: #0d274c;
     color: white;
-    padding: 30px 5%;
+    padding: 20px 5%;
+    text-align: left;
     margin-top: auto;
+    border-top: 2px solid #000000;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+footer svg {
+    fill: #ecf0f1;
+    transition: fill 0.2s ease;
+}
+
+footer a:hover svg {
+    fill: #FF6B35;
 }
 
 .contact-item a {

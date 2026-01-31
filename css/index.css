@@ -259,8 +259,21 @@ footer {
     color: white;
     padding: 20px 5%;
     text-align: left;
-    margin-top: 30px;
+    margin-top: auto;
     border-top: 2px solid #000000;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+footer svg {
+    fill: #ecf0f1;
+    transition: fill 0.2s ease;
+}
+
+footer a:hover svg {
+    fill: #FF6B35;
 }
 
 footer ul {
