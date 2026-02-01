@@ -23,7 +23,7 @@
                 <li><a href="ayuda.html" class="nav-active" aria-current="page">Ayuda</a></li>
             </ul>
 
-            <form id="search-form" role="search" action="#" method="get">
+            <!--<form id="search-form" role="search" action="#" method="get">
                 <label for="searchInput" class="visually-hidden">Buscar películas</label>
                 <input id="searchInput" class="search-input" type="search" placeholder="Buscar...">
                 <button type="submit" class="search-btn" aria-label="Buscar">
@@ -33,7 +33,7 @@
                             d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                     </svg>
                 </button>
-            </form>
+            </form> Esto es la barra de búsqueda que no hace falta en ayuda-->
             <div id="user-welcome" aria-live="polite" style="margin-left: 15px; color: white;"></div>
         </nav>
     </header>
@@ -119,28 +119,29 @@
         </div>
     </main>
 
-    <footer>
-        <li>
-            <!--Teléfono de contacto-->
-            <a href="tel:+123456789" class="enlace-icono" aria-label="Llamar">
-                <svg class="icono-interactivo icono-telefono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                    width="32" height="32">
-                    <path
-                        d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z" />
-                </svg>
-            </a>
-            </a>
-        </li>
-        <li>
-            <!--Correo de contacto-->
-            <a href="mailto:info@ejemplo.com" class="enlace-icono" aria-label="Enviar correo">
-                <svg class="icono-interactivo icono-email" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                    width="32" height="32">
-                    <path
-                        d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z" />
-                </svg>
-            </a>
-        </li>
+    <footer role="contentinfo">
+        <ul style="list-style: none; padding: 0; margin: 0;">
+            <li>
+                <!--Teléfono de contacto-->
+                <a href="tel:+123456789" class="enlace-icono" aria-label="Llamar">
+                    <svg class="icono-interactivo icono-telefono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        width="32" height="32">
+                        <path
+                            d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z" />
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <!--Correo de contacto-->
+                <a href="mailto:info@ejemplo.com" class="enlace-icono" aria-label="Enviar correo">
+                    <svg class="icono-interactivo icono-email" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        width="32" height="32">
+                        <path
+                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z" />
+                    </svg>
+                </a>
+            </li>
+        </ul>
     </footer>
     <script src="../js/ayuda.js"></script>
 </body>

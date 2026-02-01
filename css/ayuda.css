@@ -242,28 +242,28 @@ footer {
     border-top: 2px solid #000000;
 }
 
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+footer a {
+    text-decoration: none;
 }
 
-.contact-info div {
-    display: flex;
-    align-items: center;
+footer svg {
+    fill: #ecf0f1;
+    transition: fill 0.2s ease;
+}
+
+footer a:hover svg {
+    fill: #FF6B35;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer li {
+    margin-bottom: 10px;
     font-size: 1rem;
-}
-
-.contact-info img {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-    vertical-align: middle;
-}
-
-.contact-info span {
-    font-size: 1.1rem;
-    font-weight: 500;
 }
 
 /* Media Queries para Responsividad */
