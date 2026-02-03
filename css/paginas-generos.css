@@ -16,6 +16,8 @@ body {
     flex-direction: column;
     text-align: center;
     color: white;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 /* --- MEJORA DE FOCO (FASE 3) --- */
@@ -314,4 +316,48 @@ footer a:hover svg {
 .btn-enviar:disabled {
     background-color: #999;
     cursor: not-allowed;
+}
+
+@media screen and (max-width: 768px) {
+    
+    header {
+        flex-direction: column; 
+        height: auto;
+        padding: 10px;
+    }
+
+    nav {
+        flex-direction: column; 
+        width: 100%;
+        gap: 15px;
+    }
+
+    nav ul {
+        flex-wrap: wrap; 
+        justify-content: center;
+        width: 100%;
+        padding: 0;
+    }
+
+    #search-form {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .movie-list, 
+    #movies-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important; 
+        width: 100%;
+        gap: 20px;
+        padding: 0 10px; 
+        box-sizing: border-box;
+    }
+
+    main {
+        padding: 20px 10px;
+        width: 100%;
+        overflow: hidden; 
+    }
 }

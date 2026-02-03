@@ -531,42 +531,46 @@ button:hover svg,
    DISEÑO RESPONSIVE (MÓVIL Y TABLET)
    ========================================= */
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
+    
     header {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
+        flex-direction: column; 
+        height: auto;
         padding: 10px;
     }
 
-
     nav {
+        flex-direction: column; 
         width: 100%;
+        gap: 15px;
+    }
+
+    nav ul {
+        flex-wrap: wrap; 
+        justify-content: center;
+        width: 100%;
+        padding: 0;
+    }
+
+    #search-form {
+        width: 100%;
+        display: flex;
         justify-content: center;
     }
-    
-    nav ul {
-        flex-direction: column;
+
+    .movie-list, 
+    #movies-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important; 
         width: 100%;
-        gap: 10px;
-        text-align: center;
+        gap: 20px;
+        padding: 0 10px; 
+        box-sizing: border-box;
     }
 
-    nav a {
-        display: block;
-        padding: 10px; /* Más fácil de tocar con el dedo */
-        background-color: rgba(255, 255, 255, 0.1); /* Fondo sutil para distinguir botones */
-        border-radius: 5px;
-    }
-
-    .cinepuma-image {
+    main {
+        padding: 20px 10px;
         width: 100%;
-        margin: 20px 0;
-    }
-    
-
-    .help-container {
-        margin: 20px auto;
-        padding: 0 15px; 
+        overflow: hidden; 
     }
 }

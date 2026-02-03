@@ -9,6 +9,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 * {
@@ -310,4 +311,53 @@ footer li {
 .btn-enviar:disabled {
     background-color: #999;
     cursor: not-allowed;
+}
+
+@media screen and (max-width: 900px) {
+    header {
+        flex-direction: column;
+        padding: 10px;
+        gap: 15px;
+        height: auto;
+    }
+
+    .logo {
+        justify-content: center;
+        width: 100%;
+    }
+
+
+    nav {
+        flex-direction: column; 
+        width: 100%;
+        gap: 15px;
+    }
+
+    nav ul {
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 15px;
+        width: 100%;
+    }
+
+    nav a {
+        font-size: 0.9rem; 
+    }
+
+    #search-form {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .search-input {
+        width: 70%; 
+        max-width: 250px;
+    }
+    
+    #user-welcome {
+        margin-left: 0;
+        margin-top: 10px;
+        text-align: center;
+    }
 }
