@@ -497,3 +497,24 @@ button:hover svg,
     opacity: 1;
     /* Aparece solo cuando pasas el mouse por la barra */
 }
+/* =========================================
+   CORRECCIÓN DE ACCESIBILIDAD (PÁGINA AYUDA)
+   ========================================= */
+
+/* Solución al error "Very Low Contrast" detectado por WAVE.
+   Sustituimos el naranja corporativo (#ff6b35) por un Naranja Pastel (#FFCC80)
+   solo en los textos sobre fondo oscuro para cumplir WCAG AAA. */
+
+.help-container h1,          /* Título principal de Ayuda */
+.accordion-content h3,       /* Títulos dentro de las respuestas */
+.accordion-content a,        /* Enlaces dentro del texto */
+.accordion-content li:before /* Los triangulitos de la lista */
+{
+    color: #FFCC80 !important; /* Ratio 10.4:1 sobre el fondo azul */
+}
+
+/* Mejora de feedback visual en enlaces de ayuda */
+.accordion-content a:hover {
+    color: #ffffff !important;
+    text-decoration: none; /* Opcional: quita el subrayado al pasar el ratón */
+}
