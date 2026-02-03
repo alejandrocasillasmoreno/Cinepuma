@@ -292,9 +292,19 @@ function renderReviews(reviews) {
 function initRatingSlider() {
     starRatingContainer.innerHTML = '';
 
+    // Crear label para el slider
+    const label = document.createElement('label');
+    label.setAttribute('for', 'rating-slider');
+    label.textContent = 'Selecciona tu valoración: ';
+    label.style.color = '#ff6b35';
+    label.style.fontWeight = 'bold';
+    label.style.display = 'block';
+    label.style.marginBottom = '10px';
+
     const slider = document.createElement('input');
     slider.type = 'range';
     slider.id = 'rating-slider';
+    slider.setAttribute('aria-label', 'Valoración de la película del 1 al 5');
     slider.min = "1";
     slider.max = "5";
     slider.step = "1";
@@ -314,6 +324,7 @@ function initRatingSlider() {
 
     slider.addEventListener('input', (e) => updateDisplay(e.target.value));
 
+    starRatingContainer.appendChild(label);
     starRatingContainer.appendChild(slider);
     starRatingContainer.appendChild(display);
     updateDisplay(0); // init empty
