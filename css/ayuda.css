@@ -292,21 +292,17 @@ footer li {
 
 /* CSS PARA EL VIDEO DE FONDO DE AYUDA.CSS*/
 /* --- CONTENEDOR PRINCIPAL --- */
+/* Busca .player-container en tu CSS y déjalo así: */
 .player-container {
     position: relative;
-    width: 800px;
-    /* Un poco más ancho para aspecto cine */
-    max-width: 100%;
-    aspect-ratio: 16/9;
-    /* Mantiene proporción panorámica */
+    width: 100%;          /* CAMBIO IMPORTANTE: Ocupa el ancho disponible */
+    max-width: 800px;     /* CAMBIO IMPORTANTE: No crece más de 800px en PC */
+    aspect-ratio: 16/9;   /* Mantiene la forma rectangular perfecta */
     background: #000;
-    /* Negro profundo detrás del video */
     overflow: hidden;
     border-radius: 8px;
-    /* Bordes redondeados suaves */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    /* Sombra elegante */
-    margin: 0 auto;
+    margin: 0 auto;       /* Centrado */
 }
 
 /* Pantalla completa */
@@ -529,4 +525,48 @@ button:hover svg,
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+
+/* =========================================
+   DISEÑO RESPONSIVE (MÓVIL Y TABLET)
+   ========================================= */
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 10px;
+    }
+
+
+    nav {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        text-align: center;
+    }
+
+    nav a {
+        display: block;
+        padding: 10px; /* Más fácil de tocar con el dedo */
+        background-color: rgba(255, 255, 255, 0.1); /* Fondo sutil para distinguir botones */
+        border-radius: 5px;
+    }
+
+    .cinepuma-image {
+        width: 100%;
+        margin: 20px 0;
+    }
+    
+
+    .help-container {
+        margin: 20px auto;
+        padding: 0 15px; 
+    }
 }
