@@ -294,7 +294,8 @@ footer a:hover svg {
 /* ---------------------------------------------------- */
 
 .btn-enviar {
-    background-color: #ff6b35;
+    background-color: #c24b00;
+    /* Darker orange for better contrast (WCAG AA: 4.9:1) */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -306,7 +307,8 @@ footer a:hover svg {
 }
 
 .btn-enviar:hover {
-    background-color: #e55a2b;
+    background-color: #a13e00;
+    /* Darker shade for hover feedback */
 }
 
 .btn-enviar:disabled {
