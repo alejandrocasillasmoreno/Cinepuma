@@ -42,8 +42,11 @@
         <h1>¿Podemos ayudarte?</h1>
 
         <section class="player-container" id="videoPlayer" aria-label="Video de presentación">
-            <video id="miVideo" src="../img/videoplayback.mp4" preload="metadata"
-                aria-label="Video de ayuda CinePuma"></video>
+            <video id="miVideo" src="../img/videoplayback.mp4" preload="metadata" aria-label="Video de ayuda CinePuma">
+                <source src="tu-video.mp4" type="video/mp4">
+
+                <track kind="captions" label="Español" srclang="es" src="subtitulos.vtt" default>
+            </video>
             <div class="controles">
                 <button id="playPauseBtn" aria-label="Reproducir o pausar"></button>
                 <span id="tiempoTexto" aria-live="polite">00:00 / 00:00</span>
@@ -60,7 +63,7 @@
         <button class="accordion-header">1. ¿Qu&eacute; somos? </button>
         <!--Pregunta 1-->
         <div class="accordion-content">
-            <h3>CinePuma</h3>
+            <h2>CinePuma</h2>
             <div>
                 <p>
                     En CinePuma podr&aacute;s encontrar innumerables pel&iacute;culas catalogadas por g&eacute;neros ,
@@ -77,7 +80,7 @@
         <button class="accordion-header">2. ¿Que te puedes encontrar?</button>
 
         <div class="accordion-content">
-            <h3>En la aplicación web CinePuma, los usuarios se podrán encontrar con lo siguiente:</h3>
+            <h2>En la aplicación web CinePuma, los usuarios se podrán encontrar con lo siguiente:</h2>
             <ul>
                 <li>Pel&iacute;culas catalogadas por g&eacute;neros: Una amplia variedad de pel&iacute;culas organizadas
                     por categor&iacute;as.</li>
@@ -108,7 +111,7 @@
         <!--Pregunta 4-->
         <button class="accordion-header">4. ¿Cu&aacute;l es nuestro objetivo?</button>
         <div class="accordion-content">
-            <h3>Nuestros objetivos son:</h3>
+            <h2>Nuestros objetivos son:</h2>
             <ul>
                 <li>Crear una interfaz que no solo sea atractiva a la vista, sino que tambi&eacute;n sea muy
                     pr&aacute;ctica y sencilla de manejar, para asegurar el triunfo del proyecto.</li>
