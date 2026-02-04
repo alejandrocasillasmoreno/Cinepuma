@@ -42,7 +42,7 @@ Para probar el proyecto en tu entorno local:
     Abre la carpeta del proyecto en **Visual Studio Code**.
 3.  **Ejecutar:**
     Utiliza la extensión **Live Server** de VS Code para lanzar la aplicación.
-    * *Click derecho en `index.html` -> "Open with Live Server".*
+    * *Click derecho en `login.html` -> "Open with Live Server".*
 
 > **Nota:** No es necesaria la instalación de dependencias npm ya que se usan librerías vía CDN.
 
