@@ -6,41 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Description" content="Cinepuma: Estrenos y películas populares.">
     <title>Cinepuma</title>
-    <link rel="stylesheet" href="../css/index.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Clase para ocultar elementos visualmente pero mantenerlos para lectores de pantalla */
-        .visually-hidden {
-            position: absolute !important;
-            width: 1px !important;
-            height: 1px !important;
-            padding: 0 !important;
-            margin: -1px !important;
-            overflow: hidden !important;
-            clip: rect(0, 0, 0, 0) !important;
-            white-space: nowrap !important;
-            border: 0 !important;
-        }
 
-        #user-welcome {
-            color: white;
-            font-size: 0.9rem;
-            margin-left: 20px;
-        }
+    <link rel="stylesheet" href="../css/index.css">
 
-        #logout-link {
-            color: #ff4b2b;
-            text-decoration: none;
-            cursor: pointer;
-            margin-left: 10px;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/global.css">
+
 </head>
 
 <body>
 
-    <header role="banner">
+    <header>
         <div class="logo">
             <img src="../img/Logo_Cinepuma.png" alt="Logo de CinePuma">
             <h1><a href="index.html">CinePuma</a></h1>
@@ -59,16 +36,16 @@
                 <button type="submit" class="search-btn" aria-label="Buscar">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-search" viewBox="0 0 16 16">
-                        <path
-                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                     </svg>
                 </button>
             </form>
-            <div id="user-welcome" aria-live="polite" style="margin-left: 15px; color: white;">Cargando...</div>
+            <div id="user-welcome" aria-live="polite" style="margin-left: 15px; font-weight: bold;">Cargando...</div>
         </nav>
     </header>
 
     <main class="container-fluid mt-4">
+        
         <h2 class="text-center mb-4 main-title">Estrenos Destacados</h2>
 
         <section id="carruselCinepuma" class="carousel slide" data-bs-ride="carousel"
@@ -90,8 +67,7 @@
                     <img src="https://portalgeek.co/wp-content/uploads/2025/04/el-contador-2.webp"
                         class="d-block w-100 imagen-carrusel" alt="Poster de la película El Contador 2">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>El Contador 2</h5>
-                        <p>La acción regresa más intensa que nunca.</p>
+                        <h3>El Contador 2</h3> <p>La acción regresa más intensa que nunca.</p>
                     </div>
                 </div>
 
@@ -99,7 +75,7 @@
                     <img src="https://img.pccomponentes.com/pcblog/7571/oppenheimer-portada-pelicula.jpg"
                         class="d-block w-100 imagen-carrusel" alt="Poster de la película Oppenheimer">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Oppenheimer</h5>
+                        <h3>Oppenheimer</h3>
                         <p>El mundo cambiará para siempre.</p>
                     </div>
                 </div>
@@ -108,7 +84,7 @@
                     <img src="https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/dfa50804-e6f6-4fa2-a732-693dbc50527b/37082735-6715-11ef-96ad-02805d6a02df?host=wbd-images.prod-vod.h264.io&partner=beamcom&w=500"
                         class="d-block w-100 imagen-carrusel" alt="Poster de la película The Batman">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>The Batman</h5>
+                        <h3>The Batman</h3>
                         <p>La venganza llega a Gotham.</p>
                     </div>
                 </div>
@@ -117,8 +93,8 @@
                     <img src="https://img.asmedia.epimg.net/resizer/v2/JQICFOMJHJBVTJR4VLEKL655DE.jpg?auth=0ab8fe8c6b795be44361cc7f4d113dbe6d62a02c7ea6555dd8ff35c18053e675&width=1472&height=828&smart=true"
                         class="d-block w-100 imagen-carrusel" alt="Poster de Chainsaw Man El arco de Reze">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Chainsawman El arco de Reze</h5>
-                        <p>El amor fugaz de Deji y la lucha contra el demonio bomba</p>
+                        <h3>Chainsaw Man: Arco de Reze</h3>
+                        <p>El amor fugaz de Denji y la lucha contra el demonio bomba</p>
                     </div>
                 </div>
             </div>
@@ -134,77 +110,53 @@
         </section>
 
         <section class="movie-section" aria-labelledby="movieSectionTitle">
-            <h2 id="movieSectionTitle">Películas Populares</h2>
+            <h2 id="movieSectionTitle" class="mt-5 mb-4 main-title">Películas Populares</h2>
             <div class="movie-row-container" id="movieRowContainer" aria-live="polite">
             </div>
         </section>
     </main>
 
-    <footer role="contentinfo">
-        <ul style="list-style: none; padding: 0; margin: 0;">
-            <li>
-                <!--Teléfono de contacto-->
-                <a href="tel:+123456789" class="enlace-icono" aria-label="Llamar">
-                    <svg class="icono-interactivo icono-telefono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                        width="32" height="32">
-                        <path
-                            d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z" />
-                    </svg>
-                </a>
-            </li>
-            <li>
-                <!--Correo de contacto-->
-                <a href="mailto:info@ejemplo.com" class="enlace-icono" aria-label="Enviar correo">
-                    <svg class="icono-interactivo icono-email" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                        width="32" height="32">
-                        <path
-                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z" />
-                    </svg>
-                </a>
-            </li>
-        </ul>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-logo">CinePuma</h3>
+                <p>Tu rincón favorito para el cine.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <ul class="contact-list">
+                    <li>
+                        <a href="tel:+123456789" class="enlace-icono" aria-label="Llamar">
+                            <svg class="icono-interactivo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                width="30" height="30">
+                                <path fill="currentColor"
+                                    d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z" />
+                            </svg>
+                            <span>+34 123 456 789</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:info@cinepuma.com" class="enlace-icono" aria-label="Enviar correo">
+                            <svg class="icono-interactivo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                width="30" height="30">
+                                <path fill="currentColor"
+                                    d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z" />
+                            </svg>
+                            <span>info@cinepuma.com</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 CinePuma - Todos los derechos reservados.
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyChKzHT4ZT-z6156HacMYDdImWFrq98174",
-            authDomain: "cinepuma-2026.firebaseapp.com",
-            projectId: "cinepuma-2026",
-            storageBucket: "cinepuma-2026.firebasestorage.app",
-            messagingSenderId: "628367090771",
-            appId: "1:628367090771:web:4394f16d34a7ba130992a6"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const welcomeElement = document.getElementById('user-welcome');
-
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                const userDoc = await getDoc(doc(db, "usuarios", user.uid));
-                if (userDoc.exists()) {
-                    const userData = userDoc.data();
-                    welcomeElement.innerHTML = `Hola, <strong>${userData.nombre_usuario}</strong> | <button id="logout-link" style="background:none; border:none; padding:0;">Cerrar Sesión</button>`;
-
-                    document.getElementById('logout-link').addEventListener('click', () => {
-                        signOut(auth).then(() => window.location.reload());
-                    });
-                }
-            } else {
-                welcomeElement.innerHTML = `<a href="login.html" style="color:white; text-decoration:none;">Iniciar Sesión</a>`;
-            }
-        });
-    </script>
-
+    <script type="module" src="../js/auth.js"></script>
     <script type="module" src="../js/index.js"></script>
 
 </body>
-
 </html>
