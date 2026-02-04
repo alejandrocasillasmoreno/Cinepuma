@@ -1,230 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CinePuma - Detalle de Película</title>
-    <link rel="stylesheet" href="../css/index.css">
-    <style>
-        /* =========================================
-           PREMIUM DETAIL PAGE STYLES (SIMPLIFIED)
-           ========================================= */
-
-        body {
-            background-color: #1E3C72;
-            /* Standard App Blue */
-            color: #ecf0f1;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* Container Limit */
-        main {
-            flex-grow: 1;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* --- Details Card Layout --- */
-        .glass-panel {
-            background: rgba(13, 39, 76, 0.5);
-            /* Semi-transparent Dark Blue instead of white glass */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 50px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-        }
-
-        .movie-detail-grid {
-            display: grid;
-            grid-template-columns: 350px 1fr;
-            gap: 50px;
-            align-items: start;
-        }
-
-        /* Poster */
-        .poster-wrapper {
-            position: relative;
-        }
-
-        .poster-wrapper img {
-            width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease;
-        }
-
-        .poster-wrapper img:hover {
-            transform: scale(1.02);
-        }
-
-        /* Info Side */
-        .info-content h1 {
-            font-size: 3.5rem;
-            margin: 0 0 10px 0;
-            line-height: 1.1;
-            background: linear-gradient(90deg, #ff6b35, #ffa500);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 10px rgba(255, 107, 53, 0.3);
-        }
-
-        .info-meta {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 25px;
-            align-items: center;
-        }
-
-        .meta-tag {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 12px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            color: #ddd;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .rating-badge {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-weight: bold;
-            color: #ffd700;
-            font-size: 1.1rem;
-        }
-
-        .synopsis-box h3 {
-            color: #ff6b35;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            border-left: 3px solid #ff6b35;
-            padding-left: 10px;
-        }
-
-        .synopsis-box p {
-            line-height: 1.8;
-            color: #ccc;
-            font-size: 1.05rem;
-        }
-
-        /* Trailer Container */
-        .trailer-box {
-            margin-top: 40px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Reviews Section */
-        .reviews-container {
-            margin-top: 20px;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            color: white;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #ff6b35;
-            padding-bottom: 10px;
-            display: inline-block;
-        }
-
-        .review-input-area {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 40px;
-        }
-
-        .user-reviews-grid {
-            display: grid;
-            gap: 20px;
-        }
-
-        .review-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 3px solid #ff6b35;
-        }
-
-        /* Form Elements */
-        textarea {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 15px;
-            color: white;
-            font-family: inherit;
-            margin: 15px 0;
-            resize: vertical;
-        }
-
-        textarea:focus {
-            outline: none;
-            border-color: #ff6b35;
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, #ff6b35, #ff8c61);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .movie-detail-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .poster-wrapper {
-                max-width: 300px;
-                margin: 0 auto;
-            }
-
-            .info-content h1 {
-                font-size: 2.5rem;
-                text-align: center;
-            }
-
-            .info-meta {
-                justify-content: center;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../css/detalles.css">
+    <link rel="stylesheet" href="../css/global.css">
 </head>
 
+
 <body>
+
 
     <header role="banner">
         <div class="logo">
@@ -232,32 +20,32 @@
             <h1><a href="index.html">CinePuma</a></h1>
         </div>
 
+
         <nav aria-label="Navegación principal">
             <ul>
                 <li><a href="Generos/generos.html">Géneros</a></li>
                 <li><a href="mejorValoradas.html">Mejor valoradas</a></li>
                 <li><a href="ayuda.html">Ayuda</a></li>
             </ul>
-
-            <!--<form id="search-form" role="search" action="#" method="get">
-                <input id="searchInput" class="search-input" type="search" placeholder="Buscar...">
-                <button type="submit" class="search-btn" aria-label="Buscar">🔍</button>
-            </form> Barra de busqueda que no hace falta en detalle-->
         </nav>
     </header>
+
 
     <main>
         <!-- Glassmorphism Card for Details -->
         <article class="glass-panel movie-detail-grid">
+
 
             <!-- Left Column: Poster -->
             <div class="poster-wrapper">
                 <img id="movie-poster" src="" alt="Cargando póster..." loading="lazy">
             </div>
 
+
             <!-- Right Column: Info -->
             <div class="info-content">
                 <h1 id="movie-title">Cargando...</h1>
+
 
                 <div class="info-meta">
                     <span class="meta-tag" id="movie-date">Año</span>
@@ -268,10 +56,12 @@
                     </div>
                 </div>
 
+
                 <div class="synopsis-box">
-                    <h3>Sinopsis</h3>
+                    <h2>Sinopsis</h2>
                     <p id="movie-synopsis">Cargando descripción...</p>
                 </div>
+
 
                 <div id="trailer-container" class="trailer-box">
                     <!-- Iframe injected by JS -->
@@ -279,28 +69,35 @@
             </div>
         </article>
 
+
         <!-- Reviews Section -->
         <section class="glass-panel reviews-container">
             <h2 class="section-title">Comentarios de la Comunidad</h2>
 
+
             <p id="average-rating-display" style="margin-bottom: 20px; font-size: 1.2rem; color: #ddd;">Cargando
                 opiniones...</p>
+
 
             <div class="review-input-area">
                 <h3 style="margin-top: 0; color: #ff6b35;">Escribe tu opinión</h3>
 
+
                 <div style="margin: 20px 0;" id="star-rating">
                     <!-- Slider injected by JS -->
                 </div>
+
 
                 <label for="review-input" style="display: block; color: #ddd; margin-bottom: 10px; font-weight: 500;">Tu
                     comentario:</label>
                 <textarea id="review-input"
                     placeholder="¿Qué te pareció esta película? Comparte tu opinión..."></textarea>
 
+
                 <button id="send-review-btn" class="btn-primary"
                     aria-label="Publicar comentario sobre la película">Publicar Comentario</button>
             </div>
+
 
             <div id="user-reviews-list" class="user-reviews-grid">
                 <!-- User reviews injected by JS -->
@@ -308,27 +105,45 @@
         </section>
     </main>
 
-    <footer role="contentinfo">
-        <ul style="list-style: none; display: flex; justify-content: center; gap: 30px; padding: 20px 0; margin: 0;">
-            <li>
-                <a href="tel:1234567890"
-                    style="display: flex; align-items: center; text-decoration: none; color: inherit;">
-                    <img src="../img/icono_del_telefono-remove.png" alt="" width="36" height="36">
-                    <span style="margin-left: 10px;">Teléfono: 123-456-7890</span>
-                </a>
-            </li>
-            <li>
-                <a href="mailto:CinePuma@gmail.com"
-                    style="display: flex; align-items: center; text-decoration: none; color: inherit;">
-                    <img src="../img/icono_del_correo.png" alt="" width="36" height="36">
-                    <span style="margin-left: 10px;">Email: CinePuma@gmail.com</span>
-                </a>
-            </li>
-        </ul>
-    </footer>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3 class="footer-logo">CinePuma</h3>
+            <p>Tu rincón favorito para el cine.</p>
+        </div>
+       
+        <div class="footer-section">
+            <h3>Contacto</h3>
+            <ul class="contact-list">
+                <li>
+                    <a href="tel:+123456789" class="enlace-icono" aria-label="Llamar">
+                        <svg class="icono-interactivo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30">
+                            <path fill="currentColor" d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z" />
+                        </svg>
+                        <span>+34 123 456 789</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:info@cinepuma.com" class="enlace-icono" aria-label="Enviar correo">
+                        <svg class="icono-interactivo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30">
+                            <path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z" />
+                        </svg>
+                        <span>info@cinepuma.com</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 CinePuma - Todos los derechos reservados.
+    </div>
+</footer>
+
 
     <!-- Scripts -->
     <script type="module" src="../js/detalle.js"></script>
 </body>
+
 
 </html>

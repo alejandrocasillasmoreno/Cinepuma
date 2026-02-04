@@ -1,451 +1,471 @@
+/* =========================================
+   1. CONFIGURACIÓN BASE
+   ========================================= */
+/* El body y fuentes ya vienen de global.css, aquí solo ajustes extra */
 body {
-    background-color: #1E3C72;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    background-color: var(--brand-blue);
+    /* Asegura el fondo azul de la marca */
 }
 
-* {
-    box-sizing: border-box;
-}
-
-/* 2. Cabecera (Header) - Consistente */
-header {
-    background-color: #0d274c;
-    padding: 15px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 3px solid #0d274c;
-}
-
-.btn-fav {
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: pointer;
-    color: gray;
-}
-
-.btn-fav.active {
-    color: #e74c3c;
-    transform: scale(1.3);
-}
-
-.btn-fav:active {
-    transform: scale(0.9);
-}
-
-/* Logo */
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.logo img {
-    height: 60px;
-    width: auto;
-    border: 3px solid #1E3C72;
-    border-radius: 5px;
-}
-
-.logo span {
-    color: #ff6b35;
-    font-size: 24px;
-    font-weight: bold;
-    font-family: 'Times New Roman', Times, serif;
-}
-
-/* 3. Navegación */
-nav {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    /* Increased gap for better spacing */
-}
-
-nav a {
-    color: #cccccc;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1rem;
-    padding: 5px 0;
-    transition: color 0.2s;
-}
-
-/* Enlace activo: 'Reseñas' (cuarto enlace) - ESTO CAMBIA RESPECTO A LA PÁGINA DE GÉNEROS */
-nav a:nth-child(4) {
-    color: white;
-    font-weight: bold;
-    border-bottom: 2px solid white;
-}
-
-nav a:hover {
-    color: white;
-}
-
-/* 4. Contenido Principal - Detalles de Película (NUEVO) */
-.detail-container {
+/* Limitar el ancho del contenido principal */
+main {
     flex-grow: 1;
-    max-width: 1000px;
-    margin: 40px auto 20px auto;
-    padding: 20px;
-    background-color: #0d274c;
-    /* Fondo de la caja principal */
-    color: white;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1;
 }
 
-/* Encabezado y Poster (Flexbox) */
-.movie-header {
+/* =========================================
+   2. TARJETA PRINCIPAL (ESTILO CRISTAL/GLASS)
+   ========================================= */
+.glass-panel {
+    background: rgba(13, 39, 76, 0.5); /* Azul muy oscuro semitransparente */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 50px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+.movie-detail-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 50px;
+    align-items: start;
+}
+
+/* --- Poster --- */
+.poster-wrapper {
+    position: relative;
+}
+
+.poster-wrapper img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.poster-wrapper img:hover {
+    transform: scale(1.02);
+}
+
+/* --- Información de la Película --- */
+.info-content h1 {
+    font-size: 3.5rem;
+    margin: 0 0 10px 0;
+    line-height: 1.1;
+    /* Efecto degradado en el texto del título usando tus colores */
+    background: linear-gradient(90deg, var(--brand-orange), #ffa500);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* Fallback por si acaso */
+    color: var(--brand-orange);
+    text-shadow: 0 2px 10px rgba(255, 107, 53, 0.3);
+    font-family: var(--font-heading); /* Usa Oswald */
+}
+
+.info-meta {
     display: flex;
-    gap: 30px;
-    align-items: flex-start;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #1E3C72;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+    align-items: center;
 }
 
-.poster-img {
-    width: 200px;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
-
-.movie-info h1 {
-    color: white;
-    font-size: 2.2rem;
-    margin-top: 0;
-    margin-bottom: 10px;
-}
-
-/* Estilo de Puntuación de TMDB */
-.rating {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #ffc107;
-    /* Amarillo para las estrellas */
-    margin-bottom: 15px;
-}
-
-.star-icon {
-    font-size: 1.6rem;
-    margin-right: 5px;
-}
-
-.score {
-    color: white;
-    /* El número de score en blanco */
-    font-weight: 900;
-}
-
-.meta-data p {
+.meta-tag {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 12px;
+    border-radius: 50px;
     font-size: 0.9rem;
-    color: #cccccc;
-    margin: 5px 0;
+    color: #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Sinopsis */
-.synopsis-box {
-    padding-top: 20px;
-}
-
-.synopsis-box h2 {
-    color: #ff6b35;
-    /* Naranja para el subtítulo */
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.synopsis-box p {
-    color: #e0e0e0;
-    line-height: 1.6;
-}
-
-/* --- SECCIÓN DE VALORACIÓN Y RESEÑAS (Input del usuario) --- */
-
-/* 5. Sección de Reseñas (NUEVO) */
-.reviews-section {
-    max-width: 1000px;
-    margin: 20px auto 50px auto;
-    padding: 20px;
-    text-align: center;
-}
-
-.reviews-section h3,
-.reviews-section h4 {
-    color: #ff6b35 !important;
-    /* Asegura que los títulos se vean bien */
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-}
-
-#average-rating-display {
-    color: white;
-    font-size: 1.2rem;
+.rating-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.rating-input-container {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.reviews-section .rating-label {
-    color: #f0f0f0;
-    /* Color claro para la etiqueta "Tu valoración (1-5)" */
-    display: block;
-    margin-bottom: 8px;
+    color: #ffd700; /* Oro para estrellas */
     font-size: 1.1rem;
 }
 
-/* Aseguramos que el contenedor del slider y el texto de carga sean visibles */
+/* Sinopsis */
+.synopsis-box h3 {
+    color: var(--brand-orange);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    border-left: 3px solid var(--brand-orange);
+    padding-left: 10px;
+}
+
+.synopsis-box p {
+    line-height: 1.8;
+    color: #ccc;
+    font-size: 1.05rem;
+}
+
+/* Trailer */
+.trailer-box {
+    margin-top: 40px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================================
+   3. SECCIÓN DE RESEÑAS
+   ========================================= */
+.reviews-container {
+    margin-top: 20px;
+}
+
+.section-title {
+    font-size: 2rem;
+    color: var(--text-white);
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--brand-orange);
+    padding-bottom: 10px;
+    display: inline-block;
+    font-family: var(--font-heading);
+}
+
+/* Área de input de reseña */
+.review-input-area {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+}
+
+/* Slider de Estrellas (Estilos traídos de tu CSS original) */
 #star-rating {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 15px auto;
     padding: 10px;
-    background-color: #1E3C72;
-    /* Color de fondo más claro que el principal para diferenciar */
+    background-color: rgba(30, 60, 114, 0.5);
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    color: #f0f0f0;
-    /* Texto claro para "Cargando selector de valoración..." */
 }
 
-/* Estilos para el control deslizable (INPUT TYPE=RANGE) inyectado por JS */
-#rating-slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    max-width: 300px;
-    /* Limitar el ancho */
-    height: 10px;
-    background: #3c5d88;
-    /* Fondo del track del slider */
-    border-radius: 5px;
-    outline: none;
-    opacity: 1;
-    transition: opacity .2s;
-}
-
-#rating-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #ff6b35;
-    /* Color naranja del pulgar */
-    cursor: pointer;
-    border: 3px solid #f0f0f0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-#rating-slider::-moz-range-thumb {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #ff6b35;
-    cursor: pointer;
-    border: 3px solid #f0f0f0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-/* Estilo para las estrellas visuales que el JS inyecta junto al slider */
 #star-rating .star {
     font-size: 2rem;
-    /* Estrellas grandes para el input */
     margin: 0 4px;
     color: #4a4a4a;
-    /* Gris por defecto */
     transition: color 0.1s;
 }
 
 #star-rating .star.filled {
     color: #ffc107;
-    /* Amarillo de relleno */
 }
 
-
-#user-reviews-list {
-    background-color: #0d274c;
-    /* Fondo similar al header */
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    text-align: left;
-    min-height: 100px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-.user-review {
-    padding: 10px 0;
-    border-bottom: 1px dashed #1E3C72;
-    color: white;
-}
-
-.user-review:last-child {
-    border-bottom: none;
-}
-
-.user-review strong {
-    color: #ff6b35;
-    margin-right: 8px;
-}
-
-.initial-message span {
-    color: #cccccc;
-    font-style: italic;
-}
-
-.review-rating .star {
-    font-size: 1rem;
-    color: #4a4a4a;
-    /* Estrellas pequeñas de la lista de reseñas (vacío) */
-}
-
-.review-rating .star.filled {
-    color: #ffc107;
-    /* Estrellas pequeñas de la lista de reseñas (relleno) */
-}
-
-
-/* Formulario de envío de opinión */
-#review-input {
+/* Slider Input */
+#rating-slider {
     width: 100%;
-    min-height: 100px;
-    padding: 10px;
-    border-radius: 6px;
-    border: 2px solid #1E3C72;
-    background-color: #275293;
+    max-width: 300px;
+    height: 10px;
+    border-radius: 5px;
+    outline: none;
+    accent-color: var(--brand-orange); /* Color moderno para sliders */
+}
+
+/* Textarea y Botones */
+textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 15px;
     color: white;
+    font-family: var(--font-body);
+    margin: 15px 0;
     resize: vertical;
-    font-size: 1rem;
-    margin-bottom: 10px;
 }
 
-#review-input::placeholder {
-    color: #cccccc;
+textarea:focus {
+    outline: none;
+    border-color: var(--brand-orange);
+    background: rgba(255, 255, 255, 0.15);
 }
 
-.btn-review {
-    background-color: #ff6b35;
-    /* Botón naranja */
+.btn-primary {
+    background: linear-gradient(45deg, var(--brand-orange), #ff8c61);
     color: white;
     border: none;
     padding: 12px 30px;
-    border-radius: 6px;
-    font-size: 1.1rem;
+    border-radius: 50px;
     font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn-review:hover {
-    background-color: #e05c2e;
-}
-
-/* 6. Pie de Página (Footer) - Consistente */
-footer {
-    background-color: #0d274c;
-    color: white;
-    padding: 20px 5%;
-    text-align: left;
-    margin-top: auto;
-    border-top: none;
-}
-
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.contact-info div {
-    display: flex;
-    align-items: center;
     font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.contact-info img {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-    vertical-align: middle;
+.btn-primary:hover {
+    transform: translateY(-2px);
+    background: var(--btn-hover); /* Variable global de hover */
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
 }
 
-.contact-info span {
+/* Lista de Reseñas de usuarios */
+.user-reviews-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.review-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 3px solid var(--brand-orange);
+}
+
+.review-card strong {
+    color: var(--brand-orange);
     font-size: 1.1rem;
-    font-weight: 500;
 }
 
-/* Media Queries para Responsividad */
-@media (max-width: 768px) {
-    .movie-header {
-        flex-direction: column;
-        align-items: center;
+/* Responsive */
+@media (max-width: 900px) {
+    .movie-detail-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .poster-wrapper {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .info-content h1 {
+        font-size: 2.5rem;
         text-align: center;
     }
 
-    .poster-img {
-        width: 80%;
-        max-width: 250px;
-        height: auto;
+    .info-meta {
+        justify-content: center;
     }
 }
+        /* =========================================
+           PREMIUM DETAIL PAGE STYLES (SIMPLIFIED)
+           ========================================= */
 
-/* --- ESTILOS BUSCADOR UNIVERSAL (Compatible con diseño Index) --- */
-#global-search-form {
-    display: flex;
-    align-items: center;
-    margin-left: 15px;
-}
+        body {
+            background-color: #1E3C72;
+            /* Standard App Blue */
+            color: #ecf0f1;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-#global-search-input {
-    background-color: #222;
-    color: white;
-    border: 1px solid #444;
-    padding: 6px 12px;
-    border-radius: 4px;
-    outline: none;
-    font-size: 1rem;
-    transition: border-color 0.2s;
-    height: 38px;
-}
+        /* Container Limit */
+        main {
+            flex-grow: 1;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
 
-#global-search-input::placeholder {
-    color: #bbb;
-}
+        /* --- Details Card Layout --- */
+        .glass-panel {
+            background: rgba(13, 39, 76, 0.5);
+            /* Semi-transparent Dark Blue instead of white glass */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
 
-#global-search-input:focus {
-    border-color: #ffca2c;
-    box-shadow: 0 0 5px rgba(255, 202, 44, 0.5);
-}
+        .movie-detail-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 50px;
+            align-items: start;
+        }
 
-#global-search-form button {
-    background-color: transparent;
-    border: 1px solid #ffca2c;
-    color: #ffca2c;
-    padding: 6px 12px;
-    border-radius: 4px;
-    margin-left: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        /* Poster */
+        .poster-wrapper {
+            position: relative;
+        }
 
-#global-search-form button:hover {
-    background-color: #ffca2c;
-    color: black;
-}
+        .poster-wrapper img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .poster-wrapper img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Info Side */
+        .info-content h1 {
+            font-size: 3.5rem;
+            margin: 0 0 10px 0;
+            line-height: 1.1;
+            background: linear-gradient(90deg, #ff6b35, #ffa500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(255, 107, 53, 0.3);
+        }
+
+        .info-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            align-items: center;
+        }
+
+        .meta-tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: #ddd;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .rating-badge {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: bold;
+            color: #ffd700;
+            font-size: 1.1rem;
+        }
+
+        .synopsis-box h3 {
+            color: #ff6b35;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            border-left: 3px solid #ff6b35;
+            padding-left: 10px;
+        }
+
+        .synopsis-box p {
+            line-height: 1.8;
+            color: #ccc;
+            font-size: 1.05rem;
+        }
+
+        /* Trailer Container */
+        .trailer-box {
+            margin-top: 40px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Reviews Section */
+        .reviews-container {
+            margin-top: 20px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #ff6b35;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .review-input-area {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        .user-reviews-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .review-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 3px solid #ff6b35;
+        }
+
+        /* Form Elements */
+        textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            color: white;
+            font-family: inherit;
+            margin: 15px 0;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #ff6b35;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b35, #ff8c61);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .movie-detail-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .poster-wrapper {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .info-content h1 {
+                font-size: 2.5rem;
+                text-align: center;
+            }
+
+            .info-meta {
+                justify-content: center;
+            }
+        }
